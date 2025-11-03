@@ -42,14 +42,19 @@
         </taskproperties>
     </tasks>
     <resources>
-        <resource id="0" name="Thao Dujardin" function="SoftwareDevelopment:2" contacts="thao.dujardin@etu.univ-lehavre.fr" phone="0768189020"/>
-        <resource id="1" name="Julien Oyer" function="SoftwareDevelopment:2" contacts="julien.oyer@etu.univ-lehavre.fr" phone="0785504998"/>
-        <resource id="3" name="Théo Harel" function="SoftwareDevelopment:2" contacts="theo.harel@etu.univ-lehavre.fr" phone=""/>
-        <resource id="4" name="Thibault Mangeant" function="Default:0" contacts="thibault.mangeant@etu.univ-lehavre.fr" phone=""/>
+        <resource id="0" name="Thao Dujardin" function="1" contacts="thao.dujardin@etu.univ-lehavre.fr" phone="0768189020"/>
+        <resource id="1" name="Julien Oyer" function="3" contacts="julien.oyer@etu.univ-lehavre.fr" phone="0785504998"/>
+        <resource id="3" name="Théo Harel" function="1" contacts="theo.harel@etu.univ-lehavre.fr" phone=""/>
+        <resource id="4" name="Thibault Mangeant" function="1" contacts="thibault.mangeant@etu.univ-lehavre.fr" phone=""/>
         <resource id="2" name="Louis Thomazeau-Agullo" function="Default:1" contacts="louis.thomazeau--agullo@etu.univ-lehavre.fr" phone="0609450010"/>
     </resources>
     <allocations/>
     <vacations/>
     <previous/>
     <roles roleset-name="Default"/>
+    <roles>
+        <role id="1" name="Developpeur"/>
+        <role id="2" name="Chef de projet"/>
+        <role id="3" name="Developpeur et redacteur de documentation"/>
+    </roles>
 </project>
