@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2025-11-03" view-index="1" gantt-divider-location="351" resource-divider-location="465" version="3.3.3316" locale="fr_FR">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2025-10-31" view-index="0" gantt-divider-location="351" resource-divider-location="465" version="3.3.3316" locale="fr_FR">
     <description/>
     <view zooming-state="default:2" id="gantt-chart">
         <field id="tpd3" name="Nom" width="200" order="0"/>
@@ -11,6 +11,7 @@
         <option id="filter.dueTodayTasks" value="false"/>
         <option id="filter.overdueTasks" value="false"/>
         <option id="filter.inProgressTodayTasks" value="false"/>
+        <option id="color.recent"><![CDATA[#ffcc99 #9999ff #cc99ff #00cccc #ff0066 #0066ff #660033 #333333 #99ff66 #00ff99]]></option>
     </view>
     <view id="resource-table">
         <field id="0" name="Nom" width="292" order="0"/>
@@ -40,6 +41,44 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
+        <task id="12" uid="b0acb7ba6c5b416fb246cac786f20378" name="Réalisation du diagramme de gantt" color="#0066ff" meeting="false" start="2025-11-03" duration="2" complete="0" expand="true"/>
+        <task id="0" uid="81e1da053ef7495898f79361e9e76095" name="Rédaction du rapport de conception" color="#333333" meeting="false" start="2025-11-04" duration="4" complete="0" priority="2" expand="true">
+            <task id="3" uid="e258652d372e4243bb478d5963b08af8" name="Modification de la maquette fournie" color="#00ff99" meeting="false" start="2025-11-04" duration="2" complete="0" expand="true">
+                <depend id="15" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="9" uid="c602fee9d7144c2780aea43644ffc33f" name="Rédaction des fonctionnalités" color="#660033" meeting="false" start="2025-11-04" duration="1" complete="0" expand="true">
+                <depend id="4" type="2" difference="0" hardness="Strong"/>
+                <depend id="15" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="11" uid="ce609fad1f104537a1d6da02c71505e2" name="Modélisation des données" color="#9999ff" meeting="false" start="2025-11-04" duration="3" complete="0" expand="true">
+                <depend id="15" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="8" uid="93feb01467b74ffa8c8828e4f7824baf" name="Conception des tests" color="#cc99ff" meeting="false" start="2025-11-05" duration="1" complete="0" expand="true">
+                <depend id="15" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="10" uid="2e644b1f6daf4febb6653164de7fe021" name="Choix techniques" color="#00cccc" meeting="false" start="2025-11-04" duration="1" complete="0" expand="true">
+                <depend id="15" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="4" uid="62ec962dab924d188b195c1ad8fee04b" name="Conception de l'organisation du site" color="#ff0066" meeting="false" start="2025-11-05" duration="1" complete="0" expand="true">
+                <depend id="15" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="15" uid="4600a68fb7c34e8fa3d410120f9c7a49" name="finalisation du rapport" meeting="false" start="2025-11-07" duration="1" complete="0" expand="true"/>
+        </task>
+        <task id="6" uid="53fd064ad94249a393cbd64fb7a3010f" name="Premiers développements" color="#ffcc99" meeting="false" start="2025-11-06" duration="2" complete="0" expand="true"/>
+        <task id="1" uid="7193d6400ea948889ae9b8815e9cc87e" name="Rédaction du guide d'installation" color="#cc6600" meeting="false" start="2025-12-11" duration="2" complete="0" expand="true"/>
+        <task id="13" uid="663b960e07a64206b81e33c98c9fe653" name="Développement Front" meeting="false" start="2025-12-01" duration="2" complete="0" expand="true">
+            <task id="16" uid="ec8e5b7e714149ce8f6e5a72b4aceffd" name="Creation vue acceuil" meeting="false" start="2025-12-01" duration="2" complete="0" expand="true"/>
+        </task>
+        <task id="14" uid="413f2e35862d4141b6224bc671f63f37" name="Développement Back End" meeting="false" start="2025-10-31" duration="23" complete="0" expand="true">
+            <task id="18" uid="f7bfbee175dc43ecac854251c26d6933" name="Création Seeders" meeting="false" start="2025-12-01" duration="1" complete="0" expand="true">
+                <depend id="19" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="17" uid="6c0013ae2c404809818f83506a0a1904" name="Création Migrations" meeting="false" start="2025-12-01" duration="1" complete="0" expand="true">
+                <depend id="19" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="19" uid="4cfeb1bc31d34f2b81bf993498568ae2" name="Créations Models" meeting="false" start="2025-12-02" duration="1" complete="0" expand="true"/>
+            <task id="20" uid="308ca0cf3bad4afaabb02ff0562b6cbd" name="tâche_20" meeting="false" start="2025-10-31" duration="1" complete="0" expand="true"/>
+        </task>
     </tasks>
     <resources>
         <resource id="0" name="Thao Dujardin" function="1" contacts="thao.dujardin@etu.univ-lehavre.fr" phone="0768189020"/>
@@ -48,7 +87,22 @@
         <resource id="4" name="Thibault Mangeant" function="1" contacts="thibault.mangeant@etu.univ-lehavre.fr" phone=""/>
         <resource id="2" name="Louis Thomazeau-Agullo" function="Default:1" contacts="louis.thomazeau--agullo@etu.univ-lehavre.fr" phone="0609450010"/>
     </resources>
-    <allocations/>
+    <allocations>
+        <allocation task-id="11" resource-id="0" function="1" responsible="true" load="33.3"/>
+        <allocation task-id="4" resource-id="0" function="1" responsible="false" load="33.3"/>
+        <allocation task-id="13" resource-id="0" function="1" responsible="true" load="75.0"/>
+        <allocation task-id="11" resource-id="1" function="3" responsible="true" load="33.3"/>
+        <allocation task-id="8" resource-id="1" function="3" responsible="true" load="33.3"/>
+        <allocation task-id="4" resource-id="1" function="3" responsible="true" load="33.3"/>
+        <allocation task-id="12" resource-id="1" function="3" responsible="true" load="33.3"/>
+        <allocation task-id="1" resource-id="1" function="3" responsible="true" load="25.0"/>
+        <allocation task-id="11" resource-id="3" function="1" responsible="true" load="33.3"/>
+        <allocation task-id="4" resource-id="3" function="1" responsible="false" load="33.3"/>
+        <allocation task-id="9" resource-id="4" function="1" responsible="true" load="50.0"/>
+        <allocation task-id="10" resource-id="4" function="1" responsible="true" load="50.0"/>
+        <allocation task-id="9" resource-id="2" function="Default:1" responsible="false" load="50.0"/>
+        <allocation task-id="10" resource-id="2" function="Default:1" responsible="false" load="50.0"/>
+    </allocations>
     <vacations/>
     <previous/>
     <roles roleset-name="Default"/>
