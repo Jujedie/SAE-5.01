@@ -124,6 +124,16 @@ CREATE TABLE HEBERGER
 	FOREIGN KEY (id_destination) REFERENCES DESTINATION(id) ON DELETE CASCADE
 );
 
+-- Table RESERVER (relation N:N entre UTILISATEUR et VOYAGE)
+CREATE TABLE RESERVER
+(
+    id_utilisateur  INT NOT NULL,
+    id_voyage       INT NOT NULL,
+    PRIMARY KEY (id_utilisateur, id_voyage),
+    FOREIGN KEY (id_utilisateur) REFERENCES UTILISATEUR(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_voyage) REFERENCES VOYAGE(id) ON DELETE CASCADE
+);
+
 -- Index pour améliorer les performances
 CREATE INDEX idx_destination_pays      ON DESTINATION(id_pays);
 CREATE INDEX idx_journaux_utilisateur  ON JOURNAUX   (id_utilisateur);
@@ -131,6 +141,8 @@ CREATE INDEX idx_posteblog_utilisateur ON POSTEBLOG  (id_utilisateur);
 CREATE INDEX idx_avis_utilisateur      ON AVIS       (id_utilisateur);
 CREATE INDEX idx_voyage_utilisateur    ON VOYAGE     (id_utilisateur);
 CREATE INDEX idx_heberger_destination  ON HEBERGER   (id_destination);
+CREATE INDEX idx_reserver_utilisateur  ON RESERVER   (id_utilisateur);
+CREATE INDEX idx_reserver_voyage       ON RESERVER   (id_voyage);
 
 -- Insertion de données de test
 -- Pays
