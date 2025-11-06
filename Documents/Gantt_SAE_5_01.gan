@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2025-11-18" view-index="0" gantt-divider-location="351" resource-divider-location="465" version="3.3.3316" locale="fr_FR">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2025-11-18" view-index="1" gantt-divider-location="461" resource-divider-location="465" version="3.3.3316" locale="fr_FR">
     <description/>
-    <view zooming-state="default:1" id="gantt-chart">
-        <field id="tpd3" name="Nom" width="200" order="0"/>
-        <field id="tpd4" name="Date de début" width="75" order="1"/>
-        <field id="tpd5" name="Date de fin" width="75" order="2"/>
+    <view zooming-state="default:3" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="284" order="0"/>
+        <field id="tpd4" name="Date de début" width="77" order="1"/>
+        <field id="tpd5" name="Date de fin" width="84" order="2"/>
         <field id="tpd15" name="Notes" width="20" order="3"/>
         <option id="taskLabelUp" value="name"/>
         <option id="taskLabelDown" value="length"/>
@@ -11,7 +11,7 @@
         <option id="filter.dueTodayTasks" value="false"/>
         <option id="filter.overdueTasks" value="false"/>
         <option id="filter.inProgressTodayTasks" value="false"/>
-        <option id="color.recent"><![CDATA[#ffcc99 #9999ff #cc99ff #00cccc #ff0066 #0066ff #660033 #333333 #99ff66 #00ff99]]></option>
+        <option id="color.recent"><![CDATA[#00ffcc #00cc00 #ffcc99 #9999ff #cc99ff #00cccc #ff0066 #0066ff #660033 #333333]]></option>
     </view>
     <view id="resource-table">
         <field id="0" name="Nom" width="292" order="0"/>
@@ -42,7 +42,7 @@
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
         <task id="12" uid="b0acb7ba6c5b416fb246cac786f20378" name="Réalisation du diagramme de gantt" color="#0066ff" meeting="false" start="2025-11-03" duration="2" complete="0" expand="true"/>
-        <task id="0" uid="81e1da053ef7495898f79361e9e76095" name="Rédaction du rapport de conception" color="#333333" meeting="false" start="2025-11-04" duration="4" complete="0" priority="2" expand="true">
+        <task id="0" uid="81e1da053ef7495898f79361e9e76095" name="Rédaction du rapport de conception" color="#333333" meeting="false" start="2025-11-04" duration="4" complete="0" priority="2" expand="false">
             <task id="3" uid="e258652d372e4243bb478d5963b08af8" name="Modification de la maquette fournie" color="#00ff99" meeting="false" start="2025-11-04" duration="2" complete="0" expand="true">
                 <depend id="15" type="2" difference="0" hardness="Strong"/>
             </task>
@@ -66,33 +66,54 @@
         </task>
         <task id="6" uid="53fd064ad94249a393cbd64fb7a3010f" name="Premiers développements" color="#ffcc99" meeting="false" start="2025-11-06" duration="2" complete="0" expand="true"/>
         <task id="1" uid="7193d6400ea948889ae9b8815e9cc87e" name="Rédaction du guide d'installation" color="#cc6600" meeting="false" start="2025-12-11" duration="2" complete="0" expand="true"/>
-        <task id="13" uid="663b960e07a64206b81e33c98c9fe653" name="Développement Front" meeting="false" start="2025-12-01" duration="8" complete="0" expand="true">
-            <task id="16" uid="ec8e5b7e714149ce8f6e5a72b4aceffd" name="Creation vue acceuil" meeting="false" start="2025-12-01" duration="2" complete="0" expand="true">
-                <depend id="24" type="2" difference="0" hardness="Strong"/>
+        <task id="29" uid="d0754f4d5154469981688a593640f6cc" name="Vérifications du fonctionnement du site" color="#00ffcc" meeting="false" start="2025-12-08" duration="5" complete="0" expand="true"/>
+        <task id="13" uid="663b960e07a64206b81e33c98c9fe653" name="Développement Front" meeting="false" start="2025-12-01" duration="9" complete="0" expand="false">
+            <task id="33" uid="c6c285ece0f04a2dbc4472952c7f5b2c" name="Création layout" meeting="false" start="2025-12-01" duration="1" complete="0" expand="true">
+                <depend id="16" type="2" difference="0" hardness="Strong"/>
+                <depend id="22" type="2" difference="0" hardness="Strong"/>
+                <depend id="31" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="24" uid="85df491fd26643dca41654ee4b4583b5" name="Création des vu destinations" meeting="false" start="2025-12-03" duration="2" complete="0" expand="true"/>
-            <task id="25" uid="e0e875bdac1e43dbaaf3d20a76aa8bef" name="Création des vues voyages" meeting="false" start="2025-12-01" duration="1" complete="0" expand="true"/>
-            <task id="22" uid="5bbb8ab763634f3b8b5f4dec0f5f1ecd" name="Création vue Connexion" meeting="false" start="2025-12-01" duration="1" complete="0" expand="true">
+            <task id="16" uid="ec8e5b7e714149ce8f6e5a72b4aceffd" name="Creation vue acceuil" meeting="false" start="2025-12-02" duration="2" complete="0" expand="true">
+                <depend id="24" type="2" difference="0" hardness="Strong"/>
+                <depend id="28" type="2" difference="0" hardness="Strong"/>
+                <depend id="35" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="24" uid="85df491fd26643dca41654ee4b4583b5" name="Création des vues destinations" meeting="false" start="2025-12-04" duration="2" complete="0" expand="true">
+                <depend id="25" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="28" uid="f9e5593f822541499f8e140c4a4245bd" name="Création vue témoignages/avis" meeting="false" start="2025-12-04" duration="1" complete="0" expand="true"/>
+            <task id="25" uid="e0e875bdac1e43dbaaf3d20a76aa8bef" name="Création des vues voyages" meeting="false" start="2025-12-08" duration="1" complete="0" expand="true">
+                <depend id="27" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="27" uid="f8dbcde1be3244df958ddb1c897e0f79" name="Création vue voyage personnalisé" meeting="false" start="2025-12-09" duration="2" complete="0" expand="true"/>
+            <task id="35" uid="98ad48bcad3c46d9947428ff357a226b" name="Créations des vues autres" meeting="false" start="2025-12-04" duration="3" complete="0" expand="true"/>
+            <task id="22" uid="5bbb8ab763634f3b8b5f4dec0f5f1ecd" name="Création vue Connexion" meeting="false" start="2025-12-02" duration="1" complete="0" expand="true">
                 <depend id="23" type="2" difference="0" hardness="Strong"/>
                 <depend id="26" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="26" uid="8e67f702c3b343ebb18a69d8d1ddbd32" name="Création vue compte" meeting="false" start="2025-12-02" duration="1" complete="0" expand="true"/>
-            <task id="23" uid="a0b157396b194b51bb2ad8039097653d" name="Création vues admin" meeting="false" start="2025-12-02" duration="7" complete="0" expand="true"/>
+            <task id="26" uid="8e67f702c3b343ebb18a69d8d1ddbd32" name="Création vue compte" meeting="false" start="2025-12-03" duration="1" complete="0" expand="true">
+                <depend id="30" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="30" uid="5a7fbb2b8007468298f288ec4e69dc49" name="Création vue de paiement réservations" meeting="false" start="2025-12-04" duration="1" complete="0" expand="true"/>
+            <task id="23" uid="a0b157396b194b51bb2ad8039097653d" name="Création vues admin" meeting="false" start="2025-12-03" duration="7" complete="0" expand="true"/>
+            <task id="31" uid="45a39dae395f42469aa6144aab710ded" name="Modification vues d'erreurs" meeting="false" start="2025-12-02" duration="2" complete="0" expand="true"/>
         </task>
-        <task id="14" uid="413f2e35862d4141b6224bc671f63f37" name="Développement Back End" meeting="false" start="2025-12-01" duration="5" complete="0" expand="true">
+        <task id="14" uid="413f2e35862d4141b6224bc671f63f37" name="Développement Back End" meeting="false" start="2025-12-01" duration="10" complete="0" expand="true">
             <task id="18" uid="f7bfbee175dc43ecac854251c26d6933" name="Création Seeders" meeting="false" start="2025-12-01" duration="1" complete="0" expand="true">
                 <depend id="19" type="2" difference="0" hardness="Strong"/>
             </task>
             <task id="17" uid="6c0013ae2c404809818f83506a0a1904" name="Création Migrations" meeting="false" start="2025-12-01" duration="1" complete="0" expand="true">
                 <depend id="19" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="19" uid="4cfeb1bc31d34f2b81bf993498568ae2" name="Créations Models" meeting="false" start="2025-12-02" duration="1" complete="0" expand="true">
+            <task id="19" uid="4cfeb1bc31d34f2b81bf993498568ae2" name="Créations Models" meeting="false" start="2025-12-02" duration="2" complete="0" expand="true">
                 <depend id="21" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="21" uid="c39646d8b161431fa16ca03ed826107b" name="Création Controllers" meeting="false" start="2025-12-03" duration="2" complete="0" expand="true">
+            <task id="21" uid="c39646d8b161431fa16ca03ed826107b" name="Création Controllers" meeting="false" start="2025-12-04" duration="2" complete="0" expand="true">
                 <depend id="20" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="20" uid="308ca0cf3bad4afaabb02ff0562b6cbd" name="Création Routes" meeting="false" start="2025-12-05" duration="1" complete="0" expand="true"/>
+            <task id="20" uid="308ca0cf3bad4afaabb02ff0562b6cbd" name="Création Routes" meeting="false" start="2025-12-08" duration="1" complete="0" expand="true"/>
+            <task id="32" uid="c71e618ebb7e46f3bdf409e868d6c2f9" name="Création système de mail" meeting="false" start="2025-12-01" duration="4" complete="0" expand="true"/>
+            <task id="34" uid="2c53612ffe39496d93fec58d754dd77d" name="Implémenter la certification TSL/HTTPS via nginx" meeting="false" start="2025-12-11" duration="2" complete="0" expand="true"/>
         </task>
     </tasks>
     <resources>
@@ -106,17 +127,27 @@
         <allocation task-id="11" resource-id="0" function="1" responsible="true" load="33.3"/>
         <allocation task-id="4" resource-id="0" function="1" responsible="false" load="33.3"/>
         <allocation task-id="13" resource-id="0" function="1" responsible="true" load="75.0"/>
+        <allocation task-id="29" resource-id="0" function="1" responsible="true" load="10.0"/>
+        <allocation task-id="3" resource-id="0" function="1" responsible="true" load="50.0"/>
         <allocation task-id="11" resource-id="1" function="3" responsible="true" load="33.3"/>
-        <allocation task-id="8" resource-id="1" function="3" responsible="true" load="33.3"/>
         <allocation task-id="4" resource-id="1" function="3" responsible="true" load="33.3"/>
         <allocation task-id="12" resource-id="1" function="3" responsible="true" load="33.3"/>
         <allocation task-id="1" resource-id="1" function="3" responsible="true" load="25.0"/>
+        <allocation task-id="3" resource-id="1" function="3" responsible="false" load="50.0"/>
+        <allocation task-id="32" resource-id="1" function="3" responsible="true" load="50.0"/>
         <allocation task-id="11" resource-id="3" function="1" responsible="true" load="33.3"/>
         <allocation task-id="4" resource-id="3" function="1" responsible="false" load="33.3"/>
+        <allocation task-id="29" resource-id="3" function="1" responsible="false" load="10.0"/>
+        <allocation task-id="8" resource-id="3" function="1" responsible="true" load="50.0"/>
+        <allocation task-id="15" resource-id="3" function="1" responsible="false" load="33.3"/>
+        <allocation task-id="9" resource-id="3" function="1" responsible="false" load="33.3"/>
         <allocation task-id="9" resource-id="4" function="1" responsible="true" load="50.0"/>
         <allocation task-id="10" resource-id="4" function="1" responsible="true" load="50.0"/>
+        <allocation task-id="6" resource-id="4" function="1" responsible="true" load="100.0"/>
+        <allocation task-id="17" resource-id="4" function="1" responsible="true" load="50.0"/>
         <allocation task-id="9" resource-id="2" function="Default:1" responsible="false" load="50.0"/>
         <allocation task-id="10" resource-id="2" function="Default:1" responsible="false" load="50.0"/>
+        <allocation task-id="15" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
     </allocations>
     <vacations/>
     <previous/>
