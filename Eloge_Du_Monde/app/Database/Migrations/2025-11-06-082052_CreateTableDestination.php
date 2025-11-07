@@ -13,18 +13,20 @@ class CreateTableDestination extends Migration
 				'type'           => 'SERIAL',
 				'unsigned'       => true,
 				'auto_increment' => true,
+				'unique'         => true,
 			],
 			'nom' => [
-				'type'=> 'TEXT',
-				'nullable'=> false,
+				'type' => 'TEXT',
+				'null' => false,
 			],
 			'cout' => [
-				'type'=> 'INT',
-				'nullable'=> false,
+				'type' => 'INT',
+				'null' => false,
+				'constraint' => 'CHECK (cout >= 0)',
 			],
 			'id_pays' => [
-				'type'=> 'INT',
-				'nullable'=> false,
+				'type' => 'INT',
+				'null' => false,
 			],
 		]);
 

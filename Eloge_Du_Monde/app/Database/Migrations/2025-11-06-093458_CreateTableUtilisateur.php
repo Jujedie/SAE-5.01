@@ -13,41 +13,48 @@ class CreateTableUtilisateur extends Migration
 				'type'           => 'SERIAL',
 				'unsigned'       => true,
 				'auto_increment' => true,
+				'unique'         => true,
 			],
 			'nom' => [
 				'type'       => 'TEXT',
-				'nullable'   => false,
+				'null'       => false,
 			],
 			'prenom' => [
 				'type'       => 'TEXT',
-				'nullable'   => false,
+				'null'       => false,
 			],
 			'telephone' => [
 				'type'       => 'VARCHAR',
 				'constraint' => '10',
-				'nullable'   => false,
+				'null'       => false,
 			],
 			'email' => [
 				'type'       => 'TEXT',
-				'nullable'   => false,
+				'null'       => false,
 			],
 			'role' => [
 				'type'       => 'VARCHAR',
 				'constraint' => '8',
-				'nullable'   => false,
+				'null'       => false,
 			],
 			'mdp' => [
 				'type'       => 'VARCHAR',
 				'constraint' => '32',
+				'null'       => false,
+			],
+			'estAbonne' => [
+				'type'       => 'BOOLEAN',
+				'null'       => false,
+				'default'    => false,
 			],
 			'resetToken' => [
 				'type'       => 'VARCHAR',
 				'constraint' => '255',
-				'nullable'   => true,
+				'null'       => true,
 			],
 			'resetTokenExpiration'=> [
 				'type'       => 'TIMESTAMP',
-				'nullable'   => true,
+				'null'       => true,
 			],
 		]);
 

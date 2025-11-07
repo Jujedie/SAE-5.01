@@ -13,6 +13,7 @@ class CreateTablePays extends Migration
 				'type'           => 'SERIAL',
 				'unsigned'       => true,
 				'auto_increment' => true,
+				'unique'         => true,
 			],
 			'nom' => [
 				'type'=> 'VARCHAR',

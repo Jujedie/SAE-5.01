@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use \CodeIgniter\Database\RawSql;
 
 class CreateTableJourneaux extends Migration
 {
@@ -10,28 +11,31 @@ class CreateTableJourneaux extends Migration
 	{
 		$this->forge->addField([
 			'id' => [
-				'type'=> 'SERIAL',
-				'unsigned'=> true,
-				'auto_increment'=> true,
+				'type'           => 'SERIAL',
+				'unsigned'       => true,
+				'auto_increment' => true,
+				'unique'         => true,
 			],
 			'message'=> [
-				'type'=> 'VARCHAR',
-				'constraint'=> 255,
-				'nullable' => false,
+				'type'       => 'VARCHAR',
+				'constraint' => 255,
+				'null'       => false,
 			],
 			'date' => [
-				'type'=> 'TIMESTAMP',
-				'nullable'=> true,
-				'default' => 'CURRENT_TIMESTAMP',
+				'type'     => 'TIMESTAMP',
+				'null'     => true,
 			],
 			'id_utilisateur' => [
-				'type'=> 'INT',
-				'nullable'=> false,
+				'type'     => 'INT',
+				'null'     => false,
 			]
 		]);
 
 		$this->forge->addKey('id');
+		$this->forge->addForeignKey('id_utilisateur', 'utilisateur', 'id', 'CASCADE', 'CASCADE');
 		$this->forge->createTable('journeaux');
+
+		$this->db->query('ALTER TABLE journeaux ALTER COLUMN date SET DEFAULT CURRENT_TIMESTAMP;');
 	}
 
 	public function down()
