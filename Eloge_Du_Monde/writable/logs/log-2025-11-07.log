@@ -239,3 +239,19 @@ Stack trace:
 #12 C:\Users\thiba\Desktop\Programmes\Pro\SAEs\SAE-5.01\Eloge_Du_Monde\system\Boot.php(133): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
 #13 C:\Users\thiba\Desktop\Programmes\Pro\SAEs\SAE-5.01\Eloge_Du_Monde\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
 #14 {main}
+ERROR - 2025-11-07 09:57:27 --> ErrorException: pg_query(): Query failed: ERREUR:  la relation « journaux » n'existe pas in C:\Users\thiba\Desktop\Programmes\Pro\SAEs\SAE-5.01\Eloge_Du_Monde\system\Database\Postgre\Connection.php:206
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'pg_query(): Que...', 'C:\\Users\\thiba\\...', 206)
+#1 C:\Users\thiba\Desktop\Programmes\Pro\SAEs\SAE-5.01\Eloge_Du_Monde\system\Database\Postgre\Connection.php(206): pg_query(Object(PgSql\Connection), '\r\n\t\tCREATE INDE...')
+#2 C:\Users\thiba\Desktop\Programmes\Pro\SAEs\SAE-5.01\Eloge_Du_Monde\system\Database\BaseConnection.php(729): CodeIgniter\Database\Postgre\Connection->execute('\r\n\t\tCREATE INDE...')
+#3 C:\Users\thiba\Desktop\Programmes\Pro\SAEs\SAE-5.01\Eloge_Du_Monde\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('\r\n\t\tCREATE INDE...')
+#4 C:\Users\thiba\Desktop\Programmes\Pro\SAEs\SAE-5.01\Eloge_Du_Monde\app\Database\Migrations\2025-11-07-095637_CreateIndexs.php(11): CodeIgniter\Database\BaseConnection->query('\r\n\t\tCREATE INDE...')
+#5 C:\Users\thiba\Desktop\Programmes\Pro\SAEs\SAE-5.01\Eloge_Du_Monde\system\Database\MigrationRunner.php(876): App\Database\Migrations\CreateIndexs->up()
+#6 C:\Users\thiba\Desktop\Programmes\Pro\SAEs\SAE-5.01\Eloge_Du_Monde\system\Database\MigrationRunner.php(182): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+#7 C:\Users\thiba\Desktop\Programmes\Pro\SAEs\SAE-5.01\Eloge_Du_Monde\system\Commands\Database\Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 C:\Users\thiba\Desktop\Programmes\Pro\SAEs\SAE-5.01\Eloge_Du_Monde\system\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run(Array)
+#9 C:\Users\thiba\Desktop\Programmes\Pro\SAEs\SAE-5.01\Eloge_Du_Monde\system\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', Array)
+#10 C:\Users\thiba\Desktop\Programmes\Pro\SAEs\SAE-5.01\Eloge_Du_Monde\system\Boot.php(388): CodeIgniter\CLI\Console->run()
+#11 C:\Users\thiba\Desktop\Programmes\Pro\SAEs\SAE-5.01\Eloge_Du_Monde\system\Boot.php(133): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#12 C:\Users\thiba\Desktop\Programmes\Pro\SAEs\SAE-5.01\Eloge_Du_Monde\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#13 {main}

@@ -3,9 +3,8 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
-use \CodeIgniter\Database\RawSql;
 
-class CreateTableJourneaux extends Migration
+class CreateTableJournaux extends Migration
 {
 	public function up()
 	{
@@ -33,13 +32,13 @@ class CreateTableJourneaux extends Migration
 
 		$this->forge->addKey('id');
 		$this->forge->addForeignKey('id_utilisateur', 'utilisateur', 'id', 'CASCADE', 'CASCADE');
-		$this->forge->createTable('journeaux');
+		$this->forge->createTable('journaux');
 
-		$this->db->query('ALTER TABLE journeaux ALTER COLUMN date SET DEFAULT CURRENT_TIMESTAMP;');
+		$this->db->query('ALTER TABLE journaux ALTER COLUMN date SET DEFAULT CURRENT_TIMESTAMP;');
 	}
 
 	public function down()
 	{
-		$this->forge->dropTable('journeaux');
+		$this->forge->dropTable('journaux');
 	}
 }
