@@ -16,19 +16,19 @@ class CreateTableAvis extends Migration
 				'unique'         => true,
 			],
 			'note' => [
-				'type'=> 'INT',
-				'constraint'=> 'CHECK (note >= 1 AND note <= 5)',
+				'type'       => 'INT',
+				'constraint' => 'CHECK (note >= 1 AND note <= 5)',
 			],
 			'date' => [
-				'type'=> 'TIMESTAMP',
+				'type' => 'TIMESTAMP',
 				'null' => true,
 			],
 			'contenu' => [
-				'type'=> 'TEXT',
+				'type' => 'TEXT',
 				'null' => false,
 			],
 			'id_utilisateur' => [
-				'type'=> 'INT',
+				'type' => 'INT',
 				'null' => false,
 			],
 		]);
