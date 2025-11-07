@@ -8,6 +8,7 @@ class CreateIndexs extends Migration
 {
 	public function up()
 	{
+		// Index pour améliorer les performances des requêtes fréquentes
 		$this->db->query("
 		CREATE INDEX idx_destination_pays      ON DESTINATION(id_pays);
 		CREATE INDEX idx_journaux_utilisateur  ON JOURNAUX   (id_utilisateur);
