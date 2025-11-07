@@ -39,7 +39,7 @@ class CreateTableUtilisateur extends Migration
 			],
 			'mdp' => [
 				'type'       => 'VARCHAR',
-				'constraint' => '32',
+				'constraint' => '255',
 				'null'       => false,
 			],
 			'estAbonne' => [
