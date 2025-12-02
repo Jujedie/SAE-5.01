@@ -16,3 +16,13 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 /vendor/
+
+/.env
+
+/app/Config/Database.php
+/app/Config/Email.php
+
+/writable/logs/*
+/writable/debugbar/*
+/writable/cache/*
+/writable/session/*
