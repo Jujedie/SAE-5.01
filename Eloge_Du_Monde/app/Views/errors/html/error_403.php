@@ -9,7 +9,7 @@
 			<p class="lead mb-4">Vous n'avez pas les permissions nécessaires pour accéder à cette page.</p>
 
 			<div class="mb-4">
-				<img src="<?= base_url('assets/images/logo-img403.png') ?>" alt="403 - Accès interdit" class="img-fluid" style="max-height:320px;">
+				<img src="<?= base_url('assets/images/logo-error403.png') ?>" alt="403 - Accès interdit" class="img-fluid" style="max-height:320px;">
 			</div>
 
 			<p class="text-muted">Si vous pensez que c'est une erreur, contactez l'administrateur du site.</p>
