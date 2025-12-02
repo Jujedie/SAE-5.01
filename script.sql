@@ -27,7 +27,7 @@ CREATE TABLE DESTINATION
 (
 	id      SERIAL PRIMARY KEY,
 	nom     TEXT NOT NULL,
-	cout    INT  NOT NULL,
+	cout    INT  NOT NULL CHECK (cout >= 0),
 	id_pays INT  NOT NULL,
 	FOREIGN KEY (id_pays) REFERENCES PAYS(id) ON DELETE CASCADE
 );
@@ -35,12 +35,16 @@ CREATE TABLE DESTINATION
 -- Table UTILISATEUR
 CREATE TABLE UTILISATEUR
 (
-	id        SERIAL      PRIMARY KEY,
-	nom       TEXT        NOT NULL,
-	prenom    TEXT        NOT NULL,
-	telephone VARCHAR(20) NOT NULL,
-	email     TEXT        NOT NULL,
-	role      TEXT        NOT NULL
+	id                   SERIAL       PRIMARY KEY,
+	nom                  TEXT         NOT NULL,
+	prenom               TEXT         NOT NULL,
+	telephone            VARCHAR(10)  NOT NULL,
+	email                TEXT         NOT NULL,
+	role                 TEXT         NOT NULL,
+	mdp                  VARCHAR(32)  NOT NULL,
+	estAbonne            BOOLEAN      NOT NULL DEFAULT FALSE,
+	resetToken           VARCHAR(255),
+	resetTokenExpiration TIMESTAMP,
 );
 
 -- Table JOURNAUX
