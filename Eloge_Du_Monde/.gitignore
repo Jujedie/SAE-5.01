@@ -17,7 +17,7 @@ application/logs/*
 !application/logs/.htaccess
 /vendor/
 
-.env
+/.env
 
 /app/Config/Database.php
 /app/Config/Email.php
