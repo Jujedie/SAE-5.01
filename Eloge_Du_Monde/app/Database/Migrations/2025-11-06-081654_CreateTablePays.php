@@ -9,7 +9,7 @@ class CreateTablePays extends Migration
 	public function up()
 	{
 		$this->forge->addField([
-			'id'          => [
+			'idPays'          => [
 				'type'           => 'SERIAL',
 				'unsigned'       => true,
 				'auto_increment' => true,
@@ -31,12 +31,12 @@ class CreateTablePays extends Migration
 			],
 		]);
 
-		$this->forge->addKey('id', true);
-		$this->forge->createTable('pays');
+		$this->forge->addKey('idPays', true);
+		$this->forge->createTable('pays', true);
 	}
 
 	public function down()
 	{
-		$this->forge->dropTable('pays');
+		$this->forge->dropTable('pays', true, true);
 	}
 }

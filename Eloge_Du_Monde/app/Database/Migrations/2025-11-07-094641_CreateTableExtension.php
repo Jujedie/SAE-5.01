@@ -20,6 +20,6 @@ class CreateTableExtension extends Migration
 
 	public function down()
 	{
-		$this->forge->dropTable('extension');
+		$this->forge->dropTable('extension', true, true);
 	}
 }

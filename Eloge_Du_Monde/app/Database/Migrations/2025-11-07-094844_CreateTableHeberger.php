@@ -9,11 +9,11 @@ class CreateTableHeberger extends Migration
 	public function up()
 	{
 		$this->forge->addField([
-			'id_voyage' => [
+			'idVoyage' => [
 				'type' => 'INT',
 				'null' => false,
 			],
-			'id_destination' => [
+			'idEtapeVoyage' => [
 				'type' => 'INT',
 				'null' => false,
 			],
@@ -27,14 +27,14 @@ class CreateTableHeberger extends Migration
 			],
 		]);
 
-		$this->forge->addKey(['id_voyage', 'id_destination'], true);
-		$this->forge->addForeignKey('id_voyage', 'voyage', 'id', 'CASCADE', 'CASCADE');
-		$this->forge->addForeignKey('id_destination', 'destination', 'id', 'CASCADE', 'CASCADE');
-		$this->forge->createTable('heberger');
+		$this->forge->addKey(['idVoyage', 'idEtapeVoyage'], true);
+		$this->forge->addForeignKey('idVoyage', 'voyage', 'idVoyage', 'CASCADE', 'CASCADE');
+		$this->forge->addForeignKey('idEtapeVoyage', 'etapeVoyage', 'idEtapeVoyage', 'CASCADE', 'CASCADE');
+		$this->forge->createTable('heberger', true);
 	}
 
 	public function down()
 	{
-		$this->forge->dropTable('heberger');
+		$this->forge->dropTable('heberger', true, true);
 	}
 }

@@ -4,12 +4,12 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateTableDestination extends Migration
+class CreateTableEtapeVoyage extends Migration
 {
 	public function up()
 	{
 		$this->forge->addField([
-			'id'          => [
+			'idEtapeVoyage'          => [
 				'type'           => 'SERIAL',
 				'unsigned'       => true,
 				'auto_increment' => true,
@@ -24,19 +24,19 @@ class CreateTableDestination extends Migration
 				'null' => false,
 				'constraint' => 'CHECK (cout >= 0)',
 			],
-			'id_pays' => [
+			'idPays' => [
 				'type' => 'INT',
 				'null' => false,
 			],
 		]);
 
-		$this->forge->addKey('id', true);
-		$this->forge->addForeignKey('id_pays', 'pays', 'id', 'CASCADE', 'CASCADE');
-		$this->forge->createTable('destination');
+		$this->forge->addKey('idEtapeVoyage', true);
+		$this->forge->addForeignKey('idPays', 'pays', 'idPays', 'CASCADE', 'CASCADE');
+		$this->forge->createTable('etapeVoyage', true);
 	}
 
 	public function down()
 	{
-		$this->forge->dropTable('destination');
+		$this->forge->dropTable('etapeVoyage', true, true);
 	}
 }

@@ -9,7 +9,7 @@ class CreateTablePosteblog extends Migration
 	public function up()
 	{
 		$this->forge->addField([
-			'id' => [
+			'idPoste' => [
 				'type'           => 'SERIAL',
 				'unsigned'       => true,
 				'auto_increment' => true,
@@ -36,21 +36,21 @@ class CreateTablePosteblog extends Migration
 				'type'=> 'TEXT',
 				'null' => false,
 			],
-			'id_utilisateur' => [
+			'idUtilisateur' => [
 				'type'=> 'INT',
 				'null' => false,
 			],
 		]);
 
-		$this->forge->addKey('id', true);
-		$this->forge->addForeignKey('id_utilisateur', 'utilisateur', 'id', 'CASCADE', 'CASCADE');
-		$this->forge->createTable('posteblog');
+		$this->forge->addKey('idPoste', true);
+		$this->forge->addForeignKey('idUtilisateur', 'utilisateur', 'idUtil', 'CASCADE', 'CASCADE');
+		$this->forge->createTable('posteblog', true);
 
 		$this->db->query('ALTER TABLE posteblog ALTER COLUMN date SET DEFAULT CURRENT_TIMESTAMP;');
 	}
 
 	public function down()
 	{
-		$this->forge->dropTable('posteblog');
+		$this->forge->dropTable('posteblog', true, true);
 	}
 }

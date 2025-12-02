@@ -9,7 +9,7 @@ class CreateTableAvis extends Migration
 	public function up()
 	{
 		$this->forge->addField([
-			'id' => [
+			'idAvis' => [
 				'type'           => 'SERIAL',
 				'unsigned'       => true,
 				'auto_increment' => true,
@@ -27,21 +27,26 @@ class CreateTableAvis extends Migration
 				'type' => 'TEXT',
 				'null' => false,
 			],
-			'id_utilisateur' => [
+			'verified' => [
+				'type'    => 'BOOLEAN',
+				'null'    => false,
+				'default' => false,
+			],
+			'idUtilisateur' => [
 				'type' => 'INT',
 				'null' => false,
 			],
 		]);
 
-		$this->forge->addKey('id', true);
-		$this->forge->addForeignKey('id_utilisateur', 'utilisateur', 'id', 'CASCADE', 'CASCADE');
-		$this->forge->createTable('avis');
+		$this->forge->addKey('idAvis', true);
+		$this->forge->addForeignKey('idUtilisateur', 'utilisateur', 'idUtil', 'CASCADE', 'CASCADE');
+		$this->forge->createTable('avis', true);
 
 		$this->db->query('ALTER TABLE avis ALTER COLUMN date SET DEFAULT CURRENT_TIMESTAMP;');
 	}
 
 	public function down()
 	{
-		$this->forge->dropTable('avis');
+		$this->forge->dropTable('avis', true, true);
 	}
 }

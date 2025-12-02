@@ -25,6 +25,6 @@ class CreateTableVoyagePrefait extends Migration
 
 	public function down()
 	{
-		$this->forge->dropTable('voyage_prefait');
+		$this->forge->dropTable('voyage_prefait', true, true);
 	}
 }

@@ -9,7 +9,7 @@ class CreateTableUtilisateur extends Migration
 	public function up()
 	{
 		$this->forge->addField([
-			'id' => [
+			'idUtil' => [
 				'type'           => 'SERIAL',
 				'unsigned'       => true,
 				'auto_increment' => true,
@@ -58,12 +58,12 @@ class CreateTableUtilisateur extends Migration
 			],
 		]);
 
-		$this->forge->addKey('id');
-		$this->forge->createTable('utilisateur');
+		$this->forge->addKey('idUtil', true);
+		$this->forge->createTable('utilisateur', true);
 	}
 
 	public function down()
 	{
-		$this->forge->dropTable("utilisateur");
+		$this->forge->dropTable("utilisateur", true, true);
 	}
 }
