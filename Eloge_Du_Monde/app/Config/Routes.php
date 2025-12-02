@@ -28,3 +28,8 @@ $routes->match(['GET', 'POST']            , 'ReinitialiserMdpController/majMdp',
 
 // Accueil
 $routes->get('accueil'  , 'AccueilController::index' , ['filter' => 'authGuard']);
+
+// Utilisateur
+$routes->get('profil'   , 'UtilisateurController::profil', ['filter' => 'authGuard']);
+$routes->match(['GET', 'POST'], 'profil/edit', 'UtilisateurController::maj', ['filter' => 'authGuard']);
+$routes->match(['POST', 'DELETE'], 'profil/delete', 'UtilisateurController::supprimer', ['filter' => 'authGuard']);
