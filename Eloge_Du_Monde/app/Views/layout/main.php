@@ -17,6 +17,7 @@
     
     <?= $this->include('layout/footer') ?>
     
+    <script src="<?= base_url('assets/js/home.js') ?>"></script>
     <?= $this->renderSection('scripts') ?>
 </body>
 </html>
