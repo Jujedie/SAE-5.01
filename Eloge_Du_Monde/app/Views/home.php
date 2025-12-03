@@ -9,19 +9,19 @@
 <section id="accueil">
 	<div class="hero-slideshow">
 		<div class="hero-slide active">
-			<img src="<?= base_url('assets/images/accueil1.jpeg') ?>" alt="Destination de voyage de luxe">
+			<img src="<?= base_url('assets/images/hero1.jpeg') ?>" alt="Destination de voyage de luxe">
 		</div>
 		<div class="hero-slide">
-			<img src="<?= base_url('assets/images/accueil2.jpeg') ?>" alt="Maldives plage de luxe">
+			<img src="<?= base_url('assets/images/hero2.jpeg') ?>" alt="Maldives plage de luxe">
 		</div>
 		<div class="hero-slide">
-			<img src="<?= base_url('assets/images/accueil3.jpeg') ?>" alt="Santorin coucher de soleil">
+			<img src="<?= base_url('assets/images/hero3.jpeg') ?>" alt="Santorin coucher de soleil">
 		</div>
 		<div class="hero-slide">
-			<img src="<?= base_url('assets/images/accueil4.jpeg') ?>" alt="Dubai skyline">
+			<img src="<?= base_url('assets/images/hero4.jpeg') ?>" alt="Dubai skyline">
 		</div>
 		<div class="hero-slide">
-			<img src="<?= base_url('assets/images/accueil5.jpeg') ?>" alt="Temple japonais">
+			<img src="<?= base_url('assets/images/hero5.jpeg') ?>" alt="Temple japonais">
 		</div>
 		<div class="hero-overlay"></div>
 	</div>
