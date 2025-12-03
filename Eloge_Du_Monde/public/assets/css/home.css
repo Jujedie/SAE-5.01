@@ -467,9 +467,13 @@ section {
     padding: 6rem 1rem;
 }
 
-.container {
+.section-container {
     max-width: 75rem;
     margin: 0 auto;
+}
+
+.section-text-center {
+    text-align: center;
 }
 
 .section-badge {
@@ -500,11 +504,11 @@ section {
     line-height: 1.75;
 }
 
-.bg-white {
+.section-white {
     background: white;
 }
 
-.bg-secondary {
+.section-gray {
     background: #f9fafb;
 }
 
@@ -913,10 +917,6 @@ section {
 .hours-row {
     display: flex;
     justify-content: space-between;
-}
-
-.text-center {
-    text-align: center;
 }
 
 /* Responsive */

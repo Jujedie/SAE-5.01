@@ -57,9 +57,9 @@
 </section>
 
 <!-- About Section -->
-<section id="about" class="bg-white">
-    <div class="container">
-        <div class="text-center">
+<section id="about" class="section-white">
+    <div class="section-container">
+        <div class="section-text-center">
             <div class="section-badge fade-in">
                 <span>QUI SOMMES-NOUS ?</span>
             </div>
@@ -129,9 +129,9 @@
 </section>
 
 <!-- Destinations Section -->
-<section id="destinations" class="bg-secondary">
-    <div class="container">
-        <div class="text-center">
+<section id="destinations" class="section-gray">
+    <div class="section-container">
+        <div class="section-text-center">
             <div class="section-badge fade-in">
                 <span>NOS DESTINATIONS</span>
             </div>
@@ -144,7 +144,7 @@
 
         <div class="destinations-grid">
             <div class="destination-card fade-in">
-                <img src="https://images.unsplash.com/photo-1431274172761-fca41d930114?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Europe">
+                <img src="<?= base_url('assets/images/destinations1.jpeg') ?>" alt="Europe">
                 <div class="destination-overlay"></div>
                 <div class="destination-content">
                     <div class="destination-highlight">15 pays</div>
@@ -159,7 +159,7 @@
             </div>
 
             <div class="destination-card fade-in">
-                <img src="https://images.unsplash.com/photo-1610338732118-09d3b6fd030c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Asie">
+                <img src="<?= base_url('assets/images/destinations2.jpeg') ?>" alt="Asie">
                 <div class="destination-overlay"></div>
                 <div class="destination-content">
                     <div class="destination-highlight">12 pays</div>
@@ -174,7 +174,7 @@
             </div>
 
             <div class="destination-card fade-in">
-                <img src="https://images.unsplash.com/photo-1535082623926-b39352a03fb7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Afrique">
+                <img src="<?= base_url('assets/images/destinations3.jpeg') ?>" alt="Afrique">
                 <div class="destination-overlay"></div>
                 <div class="destination-content">
                     <div class="destination-highlight">8 pays</div>
@@ -189,16 +189,16 @@
             </div>
         </div>
 
-        <div class="text-center fade-in">
+        <div class="section-text-center fade-in">
             <a href="<?= base_url('destinations') ?>" class="btn btn-primary">Voir toutes nos destinations</a>
         </div>
     </div>
 </section>
 
 <!-- Thematic Travel Section -->
-<section id="themes" class="bg-white">
-    <div class="container">
-        <div class="text-center">
+<section id="themes" class="section-white">
+    <div class="section-container">
+        <div class="section-text-center">
             <div class="section-badge fade-in">
                 <span>VOYAGES À THÈME</span>
             </div>
@@ -211,7 +211,7 @@
 
         <div class="themes-grid">
             <div class="theme-card fade-in">
-                <img src="https://images.unsplash.com/photo-1667235195726-a7c440bca9bd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1000" alt="Bien-être & Spa">
+                <img src="<?= base_url('assets/images/thematique1.jpeg') ?>" alt="Bien-être & Spa">
                 <div class="theme-overlay"></div>
                 <div class="theme-content">
                     <div class="theme-line"></div>
@@ -222,7 +222,7 @@
             </div>
 
             <div class="theme-card fade-in">
-                <img src="https://images.unsplash.com/photo-1502041374972-8fcbf8a930c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1000" alt="Aventure & Nature">
+                <img src="<?= base_url('assets/images/thematique2.jpeg') ?>" alt="Aventure & Nature">
                 <div class="theme-overlay"></div>
                 <div class="theme-content">
                     <div class="theme-line"></div>
@@ -233,7 +233,7 @@
             </div>
 
             <div class="theme-card fade-in">
-                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1000" alt="Gastronomie">
+                <img src="<?= base_url('assets/images/thematique3.jpeg') ?>" alt="Gastronomie">
                 <div class="theme-overlay"></div>
                 <div class="theme-content">
                     <div class="theme-line"></div>
@@ -244,7 +244,7 @@
             </div>
 
             <div class="theme-card fade-in">
-                <img src="https://images.unsplash.com/photo-1648026141691-96be4a41b687?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1000" alt="Culture & Art">
+                <img src="<?= base_url('assets/images/thematique4.jpeg') ?>" alt="Culture & Art">
                 <div class="theme-overlay"></div>
                 <div class="theme-content">
                     <div class="theme-line"></div>
@@ -258,9 +258,9 @@
 </section>
 
 <!-- Testimonials Section -->
-<section id="temoignages" class="bg-secondary">
-    <div class="container">
-        <div class="text-center">
+<section id="temoignages" class="section-gray">
+    <div class="section-container">
+        <div class="section-text-center">
             <div class="section-badge fade-in">
                 <span>TÉMOIGNAGES</span>
             </div>
@@ -337,9 +337,9 @@
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="bg-white">
-    <div class="container">
-        <div class="text-center">
+<section id="contact" class="section-white">
+    <div class="section-container">
+        <div class="section-text-center">
             <div class="section-badge fade-in">
                 <span>CONTACT</span>
             </div>
