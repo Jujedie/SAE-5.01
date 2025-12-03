@@ -12,7 +12,7 @@ class PrebuiltTripModel extends Model
 	protected $returnType       = 'array';
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
-	protected $allowedFields    = ['idTrip', 'departureDate', 'type', 'idUser', 'title', 'programDesc', 'accommodationDesc', 'conditionDesc', 'formalitiesDesc', 'thematic', 'amount', 'attachment'];
+	protected $allowedFields    = ['idTrip', 'departureDate', 'type', 'idUser', 'title', 'programDesc', 'hostingDesc', 'conditionDesc', 'formalitiesDesc', 'thematic', 'amount', 'attachment'];
 
 	protected bool $allowEmptyInserts = false;
 	protected bool $updateOnlyChanged = true;
