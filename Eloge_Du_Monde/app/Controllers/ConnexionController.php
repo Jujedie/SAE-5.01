@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Utilisateur;
+use App\Models\Journal;
 
 class ConnexionController extends BaseController
 {
@@ -26,6 +27,7 @@ class ConnexionController extends BaseController
 		$session = session();
 
 		$utilisateurModel = new Utilisateur();
+		$logModel = new Journal();
 
 		$email = $this->request->getVar('email');
 		$password = $this->request->getVar('mdp');
@@ -50,6 +52,8 @@ class ConnexionController extends BaseController
 				$session->set($ses_data);
 
 				$session->setFlashdata('success', 'Connexion réussie !');
+
+				$logModel->addLogEntry('Utilisateur connecté : ' . $data['email'], $data['idUtil']);
 				return redirect()->to('accueil');
 			}
 			else
