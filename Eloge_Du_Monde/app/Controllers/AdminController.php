@@ -40,11 +40,6 @@ class AdminController extends BaseController
 		return null;
 	}
 
-	public function dashboard()
-	{
-		return $this->index();
-	}
-
 	// Gestion des réservations
 	public function bookings()
 	{
