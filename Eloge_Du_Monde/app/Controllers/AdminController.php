@@ -79,8 +79,8 @@ class AdminController extends BaseController
 
 		return view('admin/reservations/detail',
 		[
-			'trip' => $voyage,
-			'user' => $utilisateur
+			'trip' => $trip,
+			'user' => $user
 		]);
 	}
 
