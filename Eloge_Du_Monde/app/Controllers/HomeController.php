@@ -19,6 +19,11 @@ class HomeController extends BaseController
 		return view('blog');
 	}
 
+	public function reviews()
+	{
+		return view('reviews');
+	}
+
 	public function error403()
 	{
 		return view('errors/html/error_403');

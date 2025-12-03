@@ -1,7 +1,7 @@
 <?= $this->extend('layout/default') ?>
 
 <?= $this->section('styles') ?>
-<link rel="stylesheet" href="<?= base_url('assets/css/review.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/reviews.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -569,5 +569,5 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<script src="<?= base_url('assets/js/review.js') ?>"></script>
+<script src="<?= base_url('assets/js/reviews.js') ?>"></script>
 <?= $this->endSection() ?>

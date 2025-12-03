@@ -11,6 +11,7 @@ $routes->get('/', 'HomeController::index');
 
 // Pages principales
 $routes->get('blog', 'HomeController::blog');
+$routes->get('reviews', 'HomeController::reviews');
 
 // Connexion
 $routes->get('signin'  , 'SigninController::index'  );
