@@ -52,14 +52,14 @@ class OublieMdpController extends BaseController
 						</div>
 						<div class='content'>
 							<p>Bonjour,</p>
-							<p>Vous avez demandé à réinitialiser votre mot de passe pour votre compte sur le Gestionnaire de Rattrapage de DS.</p>
+							<p>Vous avez demandé à réinitialiser votre mot de passe pour votre compte sur Eloge du monde.</p>
 							<p>Pour créer un nouveau mot de passe, cliquez sur le bouton ci-dessous :</p>
 							<p style='text-align: center;'>
 								<a href='$resetLink' style='color: #ffffffff;' class='button'>Réinitialiser mon mot de passe</a>
 							</p>
 							<p><strong>Important :</strong> Ce lien est valable pendant 1 heure seulement.</p>
 							<p>Si vous n'avez pas demandé cette réinitialisation, vous pouvez ignorer cet email en toute sécurité.</p>
-							<p>Cordialement,<br>L'équipe GRDS</p>
+							<p>Cordialement,<br>L'équipe Eloge Du Monde</p>
 						</div>
 						<div class='footer'>
 							<p>Département Informatique - IUT du Havre - Groupe 1<br>&copy; " . date('Y') . " - Tous droits réservés</p>
@@ -77,7 +77,7 @@ class OublieMdpController extends BaseController
 
 			//envoi du mail
 			$emailService->setTo($email);
-			$emailService->setFrom($from, 'Gestionnaire de Rattrapage de DS');
+			$emailService->setFrom($from, 'Eloge Du Monde');
 			$emailService->setSubject('Réinitialisation de votre mot de passe');
 			$emailService->setMailType('html');
 			$emailService->setMessage($message);
