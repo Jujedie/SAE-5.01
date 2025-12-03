@@ -36,34 +36,66 @@ header.scrolled {
 }
 
 .header-container {
-    max-width: 1200px;
+    max-width: 1300px;
+	max-height: 115px;
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    position: relative;
+    justify-content: center;
 }
 
 .logo {
-    width: 4rem;
-    height: 4rem;
+    width: 12rem;
+    height: 12rem;
     border-radius: 50%;
-    background: #C9A96E;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.3s;
     text-decoration: none;
+    left: 50%;
+    z-index: 10;
+    margin: 0;
+	margin-top: 2rem;
 }
 
 .logo:hover {
     transform: scale(1.05);
 }
 
-.logo span {
-    color: white;
-    font-size: 1.5rem;
-    font-family: 'Playfair Display', serif;
+.logo img {
+    width: 85%;
+    height: 85%;
+    border-radius: 40%;
+}
+
+.nav-left {
+    display: flex;
+    position: absolute;
+    left: 2rem;
+    right: 50%;
+    justify-content: flex-end;
+    padding-right: 6.5rem;
+}
+
+.nav-right {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    right: 2rem;
+    justify-content: flex-start;
+    padding-left: 6.5rem;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+    position: absolute;
+    right: 2rem;
 }
 
 .nav-links {
@@ -71,6 +103,7 @@ header.scrolled {
     gap: 2rem;
     align-items: center;
     list-style: none;
+    margin: 0;
 }
 
 a {
@@ -83,6 +116,7 @@ a {
     font-size: 0.875rem;
     letter-spacing: 0.05em;
     transition: color 0.3s;
+    white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -134,6 +168,7 @@ a {
     display: flex;
     align-items: center;
     gap: 1rem;
+    justify-self: end;
 }
 
 .account-icon {
