@@ -15,7 +15,7 @@ class AuthGuard implements FilterInterface
 		{
 			log_message('info', 'Cookie trouvé, connexion automatique de l\'utilisateur ID : ' . get_cookie('user_id_cookie'));
 			session()->set('isLoggedIn', true);
-			session()->set('idUtil', get_cookie('user_id_cookie'));
+			session()->set('idUser', get_cookie('user_id_cookie'));
 		}
 
 		if (!session()->get('isLoggedIn'))
