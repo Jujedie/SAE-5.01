@@ -10,7 +10,7 @@ class HomeController extends BaseController
 		$session = session();
 
 		$utilisateur = new Utilisateur();
-		return view('home', ["estAdmin" => $utilisateur->estAdmin($session->get('idUtil'))]);
+		return view('home', ["estAdmin" => $utilisateur->estAdmin($session->get('idUser'))]);
 	}
 
 	public function error403()
