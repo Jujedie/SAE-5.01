@@ -29,7 +29,7 @@ $routes->get('resetPassword/(:segment)', 'ResetPasswordController::index/$1');
 $routes->match(['GET', 'POST']         , 'resetPassword/updatePassword', 'ResetPasswordController::updatePassword');
 
 // Utilisateur
-$routes->get('profile'   , 'UserController::profil', ['filter' => 'authGuard']);
+$routes->get('profile'   , 'UserController::profile', ['filter' => 'authGuard']);
 $routes->match(['GET', 'POST'], 'profile/updateUser', 'UserController::updateUser', ['filter' => 'authGuard']);
 $routes->match(['POST', 'DELETE'], 'profile/deleteUser', 'UserController::deleteUser', ['filter' => 'authGuard']);
 
