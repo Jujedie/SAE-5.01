@@ -41,7 +41,7 @@ $routes->get('admin/dashboard' , 'AdminController::dashboard', ['filter' => 'aut
 
 // Admin - Réservations
 $routes->get('admin/reservations'           , 'AdminController::reservations'      , ['filter' => 'authGuard']);
-$routes->get('admin/reservations/(:num)'    , 'AdminController::reservationDetail/$1', ['filter' => 'authGuard']);
+$routes->get('admin/reservations/(:num)/(:num)', 'AdminController::reservationDetail/$1/$2', ['filter' => 'authGuard']);
 
 // Admin - Utilisateurs
 $routes->get('admin/utilisateurs'           , 'AdminController::utilisateurs'     , ['filter' => 'authGuard']);
@@ -56,3 +56,10 @@ $routes->post('admin/destinations/delete/(:num)', 'AdminController::destinationD
 
 // Admin - Voyages
 $routes->get('admin/voyages'                , 'AdminController::voyages'          , ['filter' => 'authGuard']);
+$routes->match(['GET', 'POST'], 'admin/voyages/edit/(:num)', 'AdminController::voyageEdit/$1', ['filter' => 'authGuard']);
+$routes->post('admin/voyages/delete/(:num)', 'AdminController::voyageDelete/$1', ['filter' => 'authGuard']);
+
+// Admin - Témoignages
+$routes->get('admin/temoignages'            , 'AdminController::temoignages'      , ['filter' => 'authGuard']);
+$routes->post('admin/temoignages/verifier/(:num)', 'AdminController::temoignageVerifier/$1', ['filter' => 'authGuard']);
+$routes->post('admin/temoignages/delete/(:num)', 'AdminController::temoignageDelete/$1', ['filter' => 'authGuard']);

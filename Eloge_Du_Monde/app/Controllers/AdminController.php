@@ -5,6 +5,8 @@ use App\Models\Utilisateur;
 use App\Models\Reserver;
 use App\Models\Pays;
 use App\Models\Voyage;
+use App\Models\VoyagePrefait;
+use App\Models\Avis;
 
 class AdminController extends BaseController
 {
@@ -18,8 +20,8 @@ class AdminController extends BaseController
 		}
 
 		// Vérifier si l'utilisateur est administrateur
-		$utilisateur = new Utilisateur();
-		if (!$utilisateur->estAdmin($session->get('idUtil'))) {
+		$utilisateurModel = new Utilisateur();
+		if (!$utilisateurModel->estAdmin($session->get('idUtil'))) {
 			return redirect()->to('/accueil')->with('error', 'Accès refusé. Cette page est réservée aux administrateurs.');
 		}
 		
@@ -47,27 +49,32 @@ class AdminController extends BaseController
 		if ($check) return $check;
 
 		$reserverModel = new Reserver();
-		$reservations = $reserverModel->findAll();
+		$reservations = $reserverModel->getAllReservations();
 
 		return view('admin/reservations/liste', [
 			'reservations' => $reservations
 		]);
 	}
 
-	public function reservationDetail($id)
+	public function reservationDetail($idVoyage, $idUtil)
 	{
 		$check = $this->checkAdmin();
 		if ($check) return $check;
 
 		$reserverModel = new Reserver();
-		$reservation = $reserverModel->find($id);
+		$voyageModel = new Voyage();
+		$utilisateurModel = new Utilisateur();
 
-		if (!$reservation) {
+		$voyage = $voyageModel->getVoyageById($idVoyage);
+		$utilisateur = $utilisateurModel->getUtilisateurById($idUtil);
+
+		if (!$voyage || !$utilisateur) {
 			return redirect()->to('/admin/reservations')->with('error', 'Réservation non trouvée.');
 		}
 
 		return view('admin/reservations/detail', [
-			'reservation' => $reservation
+			'voyage' => $voyage,
+			'utilisateur' => $utilisateur
 		]);
 	}
 
@@ -78,7 +85,7 @@ class AdminController extends BaseController
 		if ($check) return $check;
 
 		$utilisateurModel = new Utilisateur();
-		$utilisateurs = $utilisateurModel->findAll();
+		$utilisateurs = $utilisateurModel->getAllUtilisateurs();
 
 		return view('admin/utilisateurs/liste', [
 			'utilisateurs' => $utilisateurs
@@ -91,7 +98,7 @@ class AdminController extends BaseController
 		if ($check) return $check;
 
 		$utilisateurModel = new Utilisateur();
-		$utilisateur = $utilisateurModel->find($id);
+		$utilisateur = $utilisateurModel->getUtilisateurById($id);
 
 		if (!$utilisateur) {
 			return redirect()->to('/admin/utilisateurs')->with('error', 'Utilisateur non trouvé.');
@@ -99,7 +106,15 @@ class AdminController extends BaseController
 
 		if ($this->request->getMethod() === 'post') {
 			$data = $this->request->getPost();
-			$utilisateurModel->update($id, $data);
+			
+			// Ne pas mettre à jour le mot de passe s'il est vide
+			if (empty($data['mdp'])) {
+				unset($data['mdp']);
+			} else {
+				$data['mdp'] = password_hash($data['mdp'], PASSWORD_DEFAULT);
+			}
+			
+			$utilisateurModel->updateUtilisateur($id, $data);
 			return redirect()->to('/admin/utilisateurs')->with('success', 'Utilisateur mis à jour avec succès.');
 		}
 
@@ -114,7 +129,7 @@ class AdminController extends BaseController
 		if ($check) return $check;
 
 		$utilisateurModel = new Utilisateur();
-		$utilisateurModel->delete($id);
+		$utilisateurModel->deleteUtilisateur($id);
 
 		return redirect()->to('/admin/utilisateurs')->with('success', 'Utilisateur supprimé avec succès.');
 	}
@@ -126,7 +141,7 @@ class AdminController extends BaseController
 		if ($check) return $check;
 
 		$paysModel = new Pays();
-		$destinations = $paysModel->findAll();
+		$destinations = $paysModel->getAllPays();
 
 		return view('admin/destinations/liste', [
 			'destinations' => $destinations
@@ -141,7 +156,7 @@ class AdminController extends BaseController
 		if ($this->request->getMethod() === 'post') {
 			$paysModel = new Pays();
 			$data = $this->request->getPost();
-			$paysModel->insert($data);
+			$paysModel->addPays($data);
 			return redirect()->to('/admin/destinations')->with('success', 'Destination ajoutée avec succès.');
 		}
 
@@ -154,7 +169,7 @@ class AdminController extends BaseController
 		if ($check) return $check;
 
 		$paysModel = new Pays();
-		$destination = $paysModel->find($id);
+		$destination = $paysModel->getPaysById($id);
 
 		if (!$destination) {
 			return redirect()->to('/admin/destinations')->with('error', 'Destination non trouvée.');
@@ -162,7 +177,7 @@ class AdminController extends BaseController
 
 		if ($this->request->getMethod() === 'post') {
 			$data = $this->request->getPost();
-			$paysModel->update($id, $data);
+			$paysModel->updatePays($id, $data);
 			return redirect()->to('/admin/destinations')->with('success', 'Destination mise à jour avec succès.');
 		}
 
@@ -177,7 +192,7 @@ class AdminController extends BaseController
 		if ($check) return $check;
 
 		$paysModel = new Pays();
-		$paysModel->delete($id);
+		$paysModel->deletePays($id);
 
 		return redirect()->to('/admin/destinations')->with('success', 'Destination supprimée avec succès.');
 	}
@@ -189,10 +204,89 @@ class AdminController extends BaseController
 		if ($check) return $check;
 
 		$voyageModel = new Voyage();
-		$voyages = $voyageModel->findAll();
+		$voyagePrefaitModel = new VoyagePrefait();
+		
+		$voyages = $voyageModel->getAllVoyages();
+		$voyagesPrefaits = $voyagePrefaitModel->getAllVoyagesPrefaits();
 
 		return view('admin/voyages/liste', [
-			'voyages' => $voyages
+			'voyages' => $voyages,
+			'voyagesPrefaits' => $voyagesPrefaits
 		]);
+	}
+
+	public function voyageEdit($id)
+	{
+		$check = $this->checkAdmin();
+		if ($check) return $check;
+
+		$voyageModel = new Voyage();
+		$voyage = $voyageModel->getVoyageById($id);
+
+		if (!$voyage) {
+			return redirect()->to('/admin/voyages')->with('error', 'Voyage non trouvé.');
+		}
+
+		if ($this->request->getMethod() === 'post') {
+			$data = $this->request->getPost();
+			$voyageModel->updateVoyage($id, $data);
+			return redirect()->to('/admin/voyages')->with('success', 'Voyage mis à jour avec succès.');
+		}
+
+		return view('admin/voyages/edit', [
+			'voyage' => $voyage
+		]);
+	}
+
+	public function voyageDelete($id)
+	{
+		$check = $this->checkAdmin();
+		if ($check) return $check;
+
+		$voyageModel = new Voyage();
+		$voyageModel->deleteVoyage($id);
+
+		return redirect()->to('/admin/voyages')->with('success', 'Voyage supprimé avec succès.');
+	}
+
+	// Gestion des témoignages (avis)
+	public function temoignages()
+	{
+		$check = $this->checkAdmin();
+		if ($check) return $check;
+
+		$avisModel = new Avis();
+		$temoignages = $avisModel->getAllAvis();
+
+		return view('admin/temoignages/liste', [
+			'temoignages' => $temoignages
+		]);
+	}
+
+	public function temoignageVerifier($id)
+	{
+		$check = $this->checkAdmin();
+		if ($check) return $check;
+
+		$avisModel = new Avis();
+		$avis = $avisModel->getAvisById($id);
+
+		if (!$avis) {
+			return redirect()->to('/admin/temoignages')->with('error', 'Témoignage non trouvé.');
+		}
+
+		$avisModel->updateAvis($id, ['verified' => 1]);
+		return redirect()->to('/admin/temoignages')->with('success', 'Témoignage vérifié avec succès.');
+	}
+
+	public function temoignageDelete($id)
+	{
+		$check = $this->checkAdmin();
+		if ($check) return $check;
+
+		$avisModel = new Avis();
+		$avisModel->deleteAvisById($id);
+
+		return redirect()->to('/admin/temoignages')->with('success', 'Témoignage supprimé avec succès.');
 	}
 }
