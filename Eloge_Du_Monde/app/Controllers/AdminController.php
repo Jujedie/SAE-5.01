@@ -81,10 +81,7 @@ class AdminController extends BaseController
 	// Gestion des utilisateurs
 	public function utilisateurs()
 	{
-		$check = $this->checkAdmin();
-		if ($check) return $check;
-
-		$utilisateurModel = new Utilisateur();
+				$utilisateurModel = new Utilisateur();
 		$utilisateurs = $utilisateurModel->getAllUtilisateurs();
 
 		return view('admin/utilisateurs/liste', [
