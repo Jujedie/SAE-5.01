@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/default') ?>
+<?= $this->extend('layout/default') ?>
 
 <?= $this->section('title') ?>Mot de passe oublié<?= $this->endSection() ?>
 

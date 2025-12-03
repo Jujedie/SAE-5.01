@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/default') ?>
+<?= $this->extend('layout/default') ?>
 
 <?= $this->section('title') ?>Réinitialisation du mot de passe<?= $this->endSection() ?>
 
