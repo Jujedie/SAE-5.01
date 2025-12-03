@@ -9,6 +9,9 @@ use CodeIgniter\Router\RouteCollection;
 // Route par defaut
 $routes->get('/', 'HomeController::index');
 
+// Pages principales
+$routes->get('/blog', 'AccueilController::blog');
+
 // Connexion
 $routes->get('connexion'      , 'ConnexionController::index'      );
 $routes->get('deconnexion'    , 'ConnexionController::deconnexion');

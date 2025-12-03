@@ -7,7 +7,7 @@
 <?= $this->section('content') ?>
 
 <!-- Hero Section -->
-<section class="blog-hero">
+<section class="blog-hero" style="margin-top: 5rem;">
 	<div class="blog-hero-overlay">
 		<div class="blog-hero-decoration top-left"></div>
 		<div class="blog-hero-decoration bottom-right"></div>
