@@ -38,3 +38,21 @@ $routes->match(['POST', 'DELETE'], 'profil/delete', 'UtilisateurController::supp
 // Admin
 $routes->get('admin'           , 'AdminController::index'    , ['filter' => 'authGuard']);
 $routes->get('admin/dashboard' , 'AdminController::dashboard', ['filter' => 'authGuard']);
+
+// Admin - Réservations
+$routes->get('admin/reservations'           , 'AdminController::reservations'      , ['filter' => 'authGuard']);
+$routes->get('admin/reservations/(:num)'    , 'AdminController::reservationDetail/$1', ['filter' => 'authGuard']);
+
+// Admin - Utilisateurs
+$routes->get('admin/utilisateurs'           , 'AdminController::utilisateurs'     , ['filter' => 'authGuard']);
+$routes->match(['GET', 'POST'], 'admin/utilisateurs/edit/(:num)', 'AdminController::utilisateurEdit/$1', ['filter' => 'authGuard']);
+$routes->post('admin/utilisateurs/delete/(:num)', 'AdminController::utilisateurDelete/$1', ['filter' => 'authGuard']);
+
+// Admin - Destinations
+$routes->get('admin/destinations'           , 'AdminController::destinations'     , ['filter' => 'authGuard']);
+$routes->match(['GET', 'POST'], 'admin/destinations/ajouter', 'AdminController::destinationAjouter', ['filter' => 'authGuard']);
+$routes->match(['GET', 'POST'], 'admin/destinations/edit/(:num)', 'AdminController::destinationEdit/$1', ['filter' => 'authGuard']);
+$routes->post('admin/destinations/delete/(:num)', 'AdminController::destinationDelete/$1', ['filter' => 'authGuard']);
+
+// Admin - Voyages
+$routes->get('admin/voyages'                , 'AdminController::voyages'          , ['filter' => 'authGuard']);
