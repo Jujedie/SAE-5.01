@@ -2,15 +2,10 @@
 
 <?= $this->section('title') ?>Connexion<?= $this->endSection() ?>
 
-<?= $this->section('styles') ?>
-<link rel="stylesheet" href="<?= base_url('assets/css/connexion.css') ?>">
-<?= $this->endSection() ?>
-
 <?= $this->section('content') ?>
 
-<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center">
-	<div class="row w-100 justify-content-center">
-		<div class="col-lg-5 col-md-7">
+<div class="row justify-content-center" style="padding-top: 7rem;">
+	<div class="col-lg-5 col-md-7">
 		<div class="card shadow-sm">
 			<div class="card-body">
 				<h2 class="h4 mb-4 fw-bold">Se connecter</h2>
@@ -24,7 +19,7 @@
 						<label for="mdp" class="form-label">Mot de passe</label>
 						<input type="password" id="mdp" name="mdp" class="form-control" required>
 					</div>
-					<button type="submit" class="btn btn-primary w-100">Connexion</button>
+					<button type="submit" class="btn btn-success w-100 btn-connexion">Connexion</button>
 				</form>
 				<div class="text-center mt-3">
 					<a href="<?= site_url('oublieMdp') ?>">Mot de passe oublié ?</a>
@@ -33,7 +28,6 @@
 					<a href="<?= site_url('inscription') ?>">Créer un compte</a>
 				</div>
 			</div>
-		</div>
 	</div>
 </div>
 
