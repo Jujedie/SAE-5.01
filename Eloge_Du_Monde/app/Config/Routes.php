@@ -24,7 +24,7 @@ $routes->match(['GET', 'POST'], 'OublieMdpController/envoyerLienReinitialisation
 
 // Reinitialisation mot de passe
 $routes->get('reinitialiserMdp/(:segment)', 'ReinitialiserMdpController::index/$1');
-$routes->match(['GET', 'POST']            , 'ReinitialiserMdpController/majMdp', 'ReinitialiserMdpController::majMdp');
+$routes->match(['GET', 'POST']            , 'reinitialiserMdp/majMdp', 'ReinitialiserMdpController::majMdp');
 
 // Accueil
 $routes->get('accueil'  , 'AccueilController::index' , ['filter' => 'authGuard']);

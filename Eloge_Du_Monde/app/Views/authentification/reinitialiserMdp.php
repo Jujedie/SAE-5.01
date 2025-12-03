@@ -10,10 +10,10 @@
 			<div class="card-body">
 				<h2 class="h4 mb-4 fw-bold">Réinitialisation du mot de passe</h2>
 				<p class="text-muted mb-4">Choisissez un nouveau mot de passe pour votre compte.</p>
-				<form action="<?= site_url('ReinitialiserMdpController/majMdp') ?>" method="POST" novalidate>
+				<form action="<?= site_url('reinitialiserMdp/majMdp') ?>" method="POST" novalidate>
 					<?= csrf_field() ?>
 					<input type="hidden" name="token" value="<?= esc($token ?? '') ?>">
-					
+
 					<div class="mb-3">
 						<label for="mdp" class="form-label">Nouveau mot de passe</label>
 						<input type="password" id="mdp" name="mdp" class="form-control" required>
