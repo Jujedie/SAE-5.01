@@ -63,7 +63,7 @@ class InscriptionController extends BaseController
 			$session->set('isLoggedIn', true);
 
 			$session->setFlashdata('success', 'Inscription réussie !');
-			return redirect()->to('accueil');
+			return redirect()->to('/');
 		}
 		else
 		{

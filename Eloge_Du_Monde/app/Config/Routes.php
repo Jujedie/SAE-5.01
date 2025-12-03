@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 // Route par defaut
-$routes->get('/', 'ConnexionController::index');
+$routes->get('/', 'HomeController::index');
 
 // Connexion
 $routes->get('connexion'      , 'ConnexionController::index'      );
@@ -25,10 +25,6 @@ $routes->match(['GET', 'POST'], 'oublieMdp/envoyerLienReinitialisation', 'Oublie
 // Reinitialisation mot de passe
 $routes->get('reinitialiserMdp/(:segment)', 'ReinitialiserMdpController::index/$1');
 $routes->match(['GET', 'POST']            , 'reinitialiserMdp/majMdp', 'ReinitialiserMdpController::majMdp');
-
-// Accueil
-$routes->get('accueil'  , 'HomeController::index' , ['filter' => 'authGuard']);
-$routes->get('home'     , 'HomeController::home');
 
 // Utilisateur
 $routes->get('profil'   , 'UtilisateurController::profil', ['filter' => 'authGuard']);

@@ -22,7 +22,7 @@ class AdminController extends BaseController
 		// Vérifier si l'utilisateur est administrateur
 		$utilisateurModel = new Utilisateur();
 		if (!$utilisateurModel->estAdmin($session->get('idUtil'))) {
-			return redirect()->to('/accueil')->with('error', 'Accès refusé. Cette page est réservée aux administrateurs.');
+			return redirect()->to('/')->with('error', 'Accès refusé. Cette page est réservée aux administrateurs.');
 		}
 		
 		return null;

@@ -14,7 +14,7 @@ class ConnexionController extends BaseController
 
 		if ($session->get('isLoggedIn'))
 		{
-			return redirect()->to('accueil');
+			return redirect()->to('/');
 		}
 		else
 		{
@@ -54,7 +54,7 @@ class ConnexionController extends BaseController
 				$session->setFlashdata('success', 'Connexion réussie !');
 
 				$logModel->addLogEntry('Utilisateur connecté : ' . $data['email'], $data['idUtil']);
-				return redirect()->to('accueil');
+				return redirect()->to('/');
 			}
 			else
 			{
