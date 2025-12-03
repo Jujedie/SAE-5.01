@@ -71,6 +71,11 @@ class Utilisateur extends Model
 					->first();
 	}
 
+	public function estAdmin($idUtil)
+	{
+		return $this->where('idUtil', $idUtil)->where('role', 'admin')->first() !== null;
+	}
+
 	public function addUtilisateur($data)
 	{
 		return $this->insert($data);

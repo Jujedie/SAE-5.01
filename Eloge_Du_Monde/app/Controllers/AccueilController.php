@@ -10,7 +10,7 @@ class AccueilController extends BaseController
 		$session = session();
 
 		$utilisateur = new Utilisateur();
-		return view('accueil', ["estDirecteur" => $utilisateur->estDirecteur($session->get('idUtil'))]);
+		return view('accueil', ["estDirecteur" => $utilisateur->estAdmin($session->get('idUtil'))]);
 	}
 
 	public function home()

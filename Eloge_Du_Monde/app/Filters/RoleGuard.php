@@ -16,7 +16,7 @@ class RoleGuard implements FilterInterface
 		$utilisateurModel = new Utilisateur();
 		$idUtil = session()->get('idUtil');
 
-		if (!$idUtil || $utilisateurModel->estDirecteur($idUtil) === false)
+		if (!$idUtil || $utilisateurModel->estAdmin($idUtil) === false)
 		{
 			return redirect()->to('/errors/html/error_403')->with('error', 'Accès refusé : vous devez être directeur pour accéder à cette page.');
 		}

@@ -16,11 +16,11 @@ $routes->match(['GET', 'POST'], 'ConnexionController/connexion', 'ConnexionContr
 
 // Inscription
 $routes->get('inscription'    , 'InscriptionController::index');
-$routes->match(['GET', 'POST'], 'InscriptionController/enregistrer', 'InscriptionController::enregistrer');
+$routes->match(['GET', 'POST'], 'inscription/enregistrer', 'InscriptionController::enregistrer');
 
 // Mot de passe oublie
 $routes->get('oublieMdp'      , 'OublieMdpController::index');
-$routes->match(['GET', 'POST'], 'OublieMdpController/envoyerLienReinitialisation', 'OublieMdpController::envoyerLienReinitialisation');
+$routes->match(['GET', 'POST'], 'oublieMdp/envoyerLienReinitialisation', 'OublieMdpController::envoyerLienReinitialisation');
 
 // Reinitialisation mot de passe
 $routes->get('reinitialiserMdp/(:segment)', 'ReinitialiserMdpController::index/$1');

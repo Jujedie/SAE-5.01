@@ -10,7 +10,7 @@
 			<div class="card-body">
 				<h2 class="h4 mb-4 fw-bold">Mot de passe oublié</h2>
 				<p class="text-muted mb-4">Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.</p>
-				<form action="<?= site_url('OublieMdpController/envoyerLienReinitialisation') ?>" method="POST">
+				<form action="<?= site_url('oublieMdp/envoyerLienReinitialisation') ?>" method="POST">
 					<?= csrf_field() ?>
 					<div class="mb-4">
 						<label for="email" class="form-label">Adresse e-mail</label>

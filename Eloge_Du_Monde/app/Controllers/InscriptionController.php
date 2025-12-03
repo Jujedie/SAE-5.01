@@ -29,6 +29,7 @@ class InscriptionController extends BaseController
 			'nom' => 'required|min_length[2]|max_length[50]',
 			'prenom' => 'required|min_length[2]|max_length[50]',
 			'email' => 'required|min_length[4]|max_length[100]|valid_email|is_unique[utilisateur.email]',
+			'telephone' => 'required|min_length[10]|max_length[15]',
 			'mdp' => 'required|min_length[4]|max_length[50]',
 			'confirmationMdp' => 'matches[mdp]',
 		];
@@ -43,11 +44,13 @@ class InscriptionController extends BaseController
 				'nom' => $this->request->getVar('nom'),
 				'prenom' => $this->request->getVar('prenom'),
 				'email' => $this->request->getVar('email'),
+				'telephone' => $this->request->getVar('telephone'),
 				'mdp' => password_hash($this->request->getVar('mdp'),
 				PASSWORD_DEFAULT),
+				'role' => 'user',
 			];
 
-			$utilisateurModel->ajouterUtilisateur($data);
+			$utilisateurModel->addUtilisateur($data);
 
 			$session->set('idUtil', $utilisateurModel->getUtilisateurByEmail($data['email'])['idUtil']);
 			$session->set('nom', $data['nom']);

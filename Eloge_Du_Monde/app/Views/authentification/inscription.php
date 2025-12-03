@@ -18,7 +18,7 @@
 						</ul>
 					</div>
 				<?php endif; ?>
-				<form action="<?= site_url('InscriptionController/enregistrer') ?>" method="POST" novalidate>
+				<form action="<?= site_url('inscription/enregistrer') ?>" method="POST" novalidate>
 					<?= csrf_field() ?>
 					<div class="mb-3">
 						<label for="nom" class="form-label">Nom</label>
@@ -31,6 +31,10 @@
 					<div class="mb-3">
 						<label for="email" class="form-label">Email</label>
 						<input type="email" id="email" name="email" class="form-control" value="<?= set_value('email') ?>" required>
+					</div>
+					<div class="mb-3">
+						<label for="telephone" class="form-label">Téléphone</label>
+						<input type="tel" id="telephone" name="telephone" class="form-control" value="<?= set_value('telephone') ?>" required>
 					</div>
 					<div class="mb-3">
 						<label for="mdp" class="form-label">Mot de passe</label>
