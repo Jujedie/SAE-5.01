@@ -27,8 +27,8 @@ $routes->get('reinitialiserMdp/(:segment)', 'ReinitialiserMdpController::index/$
 $routes->match(['GET', 'POST']            , 'reinitialiserMdp/majMdp', 'ReinitialiserMdpController::majMdp');
 
 // Accueil
-$routes->get('accueil'  , 'AccueilController::index' , ['filter' => 'authGuard']);
-$routes->get('home'     , 'AccueilController::home');
+$routes->get('accueil'  , 'HomeController::index' , ['filter' => 'authGuard']);
+$routes->get('home'     , 'HomeController::home');
 
 // Utilisateur
 $routes->get('profil'   , 'UtilisateurController::profil', ['filter' => 'authGuard']);

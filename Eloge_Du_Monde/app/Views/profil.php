@@ -32,8 +32,8 @@
 						</div>
 						<h4 class="mb-1"><?= esc(session()->get('prenom') . ' ' . session()->get('nom')) ?></h4>
 						<p class="mb-2"><i class="bi bi-envelope me-1"></i><?= esc(session()->get('email')) ?></p>
-						<span class="badge <?= ($estDirecteur ?? false) ? 'bg-danger' : 'bg-primary' ?>">
-							<?= ($estDirecteur ?? false) ? 'Directeur des Études' : 'Enseignant' ?>
+						<span class="badge <?= ($estAdmin ?? false) ? 'bg-danger' : 'bg-primary' ?>">
+							<?= ($estAdmin ?? false) ? 'Administrateur' : 'Utilisateur' ?>
 						</span>
 					</div>
 				</div>
@@ -55,8 +55,8 @@
 				</div>
 			</div>
 
-			<!-- Ressources (enseignants uniquement) -->
-			<?php if (!$estDirecteur): ?>
+			<!-- Ressources (utilisateurs uniquement) -->
+			<?php if (!$estAdmin): ?>
 			<div class="card shadow-sm border-0">
 				<div class="card-header bg-white">
 					<h5 class="mb-0"><i class="bi bi-journal-code me-2"></i>Mes Ressources</h5>

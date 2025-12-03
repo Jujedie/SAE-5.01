@@ -12,7 +12,7 @@
 	<h1 class="welcome-title text-center mb-5">Bienvenue sur votre espace</h1>
 	
 	<div class="cards-container" style="margin-top:130px;">
-		<?php if ($estDirecteur): ?>
+		<?php if ($estAdmin): ?>
 		<div class="card app-card p-4 shadow-sm">
 			<a href="/gestionRattrapages" class="text-decoration-none">
 				<div class="text-center">
@@ -25,7 +25,7 @@
 		</div>
 		<?php endif; ?>
 
-		<?php if (!$estDirecteur): ?>
+		<?php if (!$estAdmin): ?>
 		<div class="card app-card p-4 shadow-sm">
 			<a href="/rattrapages/planification" class="text-decoration-none">
 				<div class="text-center">
@@ -38,7 +38,7 @@
 		</div>
 		<?php endif; ?>
 
-		<?php if ($estDirecteur): ?>
+		<?php if ($estAdmin): ?>
 		<div class="card app-card p-4 shadow-sm">
 			<a href="/gestionEtudiants" class="text-decoration-none">
 				<div class="text-center">
@@ -51,7 +51,7 @@
 		</div>
 		<?php endif; ?>
 
-		<?php if ($estDirecteur): ?>
+		<?php if ($estAdmin): ?>
 		<div class="card app-card p-4 shadow-sm">
 			<a href="/gestionRessources" class="text-decoration-none">
 				<div class="text-center">

@@ -3,14 +3,14 @@ namespace App\Controllers;
 
 use App\Models\Utilisateur;
 
-class AccueilController extends BaseController
+class HomeController extends BaseController
 {
 	public function index()
 	{
 		$session = session();
 
 		$utilisateur = new Utilisateur();
-		return view('accueil', ["estDirecteur" => $utilisateur->estAdmin($session->get('idUtil'))]);
+		return view('accueil', ["estAdmin" => $utilisateur->estAdmin($session->get('idUtil'))]);
 	}
 
 	public function home()
