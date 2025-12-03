@@ -2,6 +2,9 @@
 
 <?= $this->section('title') ?>Connexion<?= $this->endSection() ?>
 
+<?= $this->section('styles') ?>
+<link rel="stylesheet" href="<?= base_url('assets/css/connexion.css') ?>">
+<?= $this->endSection() ?>
 <?= $this->section('content') ?>
 
 <div class="row justify-content-center" style="padding-top: 7rem;">
