@@ -34,3 +34,7 @@ $routes->get('home'     , 'HomeController::home');
 $routes->get('profil'   , 'UtilisateurController::profil', ['filter' => 'authGuard']);
 $routes->match(['GET', 'POST'], 'profil/edit', 'UtilisateurController::maj', ['filter' => 'authGuard']);
 $routes->match(['POST', 'DELETE'], 'profil/delete', 'UtilisateurController::supprimer', ['filter' => 'authGuard']);
+
+// Admin
+$routes->get('admin'           , 'AdminController::index'    , ['filter' => 'authGuard']);
+$routes->get('admin/dashboard' , 'AdminController::dashboard', ['filter' => 'authGuard']);
