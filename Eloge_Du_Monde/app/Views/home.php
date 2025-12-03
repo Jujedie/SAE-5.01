@@ -1,6 +1,7 @@
 <?= $this->extend('layout/default') ?>
 
-<?= $this->section('mainClass') ?>
+<?= $this->section('styles') ?>
+	<link rel="stylesheet" href="<?= base_url('assets/css/home.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

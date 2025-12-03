@@ -7,7 +7,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 	<script src="https://cdn.tailwindcss.com"></script>
 	<link rel="stylesheet" href="<?= base_url('assets/css/default.css') ?>">
-	<link rel="stylesheet" href="<?= base_url('assets/css/home.css') ?>">
 	<?= $this->renderSection('styles') ?>
 </head>
 
@@ -96,7 +95,7 @@
 </header>
 
 <!-- Main Content -->
-<main>
+<main >
 	<?= $this->renderSection('content') ?>
 </main>
 
