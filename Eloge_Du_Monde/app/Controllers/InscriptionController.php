@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Utilisateur;
+use App\Models\Journal;
 
 class InscriptionController extends BaseController
 {
@@ -39,6 +40,8 @@ class InscriptionController extends BaseController
 			$session = session();
 
 			$utilisateurModel = new Utilisateur();
+			$logModel = new Journal();
+
 			$data =
 			[
 				'nom' => $this->request->getVar('nom'),
@@ -51,6 +54,7 @@ class InscriptionController extends BaseController
 			];
 
 			$utilisateurModel->addUtilisateur($data);
+			$logModel->addLogEntry('Nouvelle utilisateur inscrit : ' . $data['email'], $utilisateurModel->getUtilisateurByEmail($data['email'])['idUtil']);
 
 			$session->set('idUtil', $utilisateurModel->getUtilisateurByEmail($data['email'])['idUtil']);
 			$session->set('nom', $data['nom']);

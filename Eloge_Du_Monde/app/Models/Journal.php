@@ -44,17 +44,17 @@ class Journal extends Model
 	protected $beforeDelete   = [];
 	protected $afterDelete    = [];
 
-	public function getAllJournalEntries()
+	public function getAllLogEntries()
 	{
 		return $this->findAll();
 	}
 
-	public function getJournalEntriesByUser($idUtilisateur)
+	public function getLogEntriesByUser($idUtilisateur)
 	{
 		return $this->where('idUtilisateur', $idUtilisateur)->findAll();
 	}
 	
-	public function addJournalEntry($message, $idUtilisateur)
+	public function addLogEntry($message, $idUtilisateur)
 	{
 		$data = [
 			'message' => $message,
@@ -65,12 +65,12 @@ class Journal extends Model
 		return $this->insert($data);
 	}
 
-	public function updateJournalEntry($idJournaux, $data)
+	public function updateLogEntry($idJournaux, $data)
 	{
 		return $this->update($idJournaux, $data);
 	}
 
-	public function deleteJournalEntry($idJournaux)
+	public function deleteLogEntry($idJournaux)
 	{
 		return $this->delete($idJournaux);
 	}
