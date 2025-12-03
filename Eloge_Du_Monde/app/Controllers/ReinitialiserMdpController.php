@@ -10,7 +10,7 @@ class ReinitialiserMdpController extends BaseController
 	{
 		helper(['form']);
 		$utilisateurModel = new Utilisateur();
-		$utilisateur = $utilisateurModel->getByResetToken($token);
+		$utilisateur = $utilisateurModel->getUtilisateurByResetToken($token);
 		
 		if ($utilisateur)
 		{
@@ -34,7 +34,7 @@ class ReinitialiserMdpController extends BaseController
 
 		// Valider et traiter les données du formulaire
 		$utilisateurModel = new Utilisateur();
-			$utilisateur = $utilisateurModel->getByResetToken($token);
+			$utilisateur = $utilisateurModel->getUtilisateurByResetToken($token);
 
 		if ($utilisateur && $mdp === $confirmationMdp)
 		{

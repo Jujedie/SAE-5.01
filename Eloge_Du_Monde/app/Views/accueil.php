@@ -10,6 +10,8 @@
 
 <div class="container py-5">
 	<h1 class="welcome-title text-center mb-5">Bienvenue sur votre espace</h1>
+
+	<a href="<?= site_url('deconnexion') ?>" class="btn btn-primary mb-4">Déconnexion</a>
 	
 	<div class="cards-container" style="margin-top:130px;">
 		<?php if ($estAdmin): ?>
