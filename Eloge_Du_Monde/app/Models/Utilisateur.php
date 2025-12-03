@@ -64,6 +64,13 @@ class Utilisateur extends Model
 		return $this->where('role', $role)->findAll();
 	}
 
+	public function getUtilisateurByResetToken($token)
+	{
+		return $this->where('resetToken', $token)
+					->where('resetTokenExpiration >=', date('Y-m-d H:i:s'))
+					->first();
+	}
+
 	public function addUtilisateur($data)
 	{
 		return $this->insert($data);
@@ -72,6 +79,11 @@ class Utilisateur extends Model
 	public function updateUtilisateur($idUtil, $data)
 	{
 		return $this->update($idUtil, $data);
+	}
+
+	public function updatePasswordUtilisateur($idUtil, $newPassword)
+	{
+		return $this->update($idUtil, ['mdp' => $newPassword]);
 	}
 
 	public function deleteUtilisateur($idUtil)

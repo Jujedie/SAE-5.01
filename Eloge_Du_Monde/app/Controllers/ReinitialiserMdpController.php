@@ -40,7 +40,7 @@ class ReinitialiserMdpController extends BaseController
 		{
 			// Mettre à jour le mot de passe et réinitialiser le jeton
 			$hashedPassword = password_hash($mdp, PASSWORD_DEFAULT);
-			$utilisateurModel->modifierMdpUtilisateur($utilisateur['idUtil'], $hashedPassword);
+			$utilisateurModel->updatePasswordUtilisateur($utilisateur['idUtil'], $hashedPassword);
 
 			$session->setFlashdata('success', 'Votre mot de passe a été réinitialisé avec succès.');
 			return redirect()->to('connexion');
