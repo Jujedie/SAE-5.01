@@ -33,6 +33,7 @@ $routes->match(['GET', 'POST']         , 'resetPassword/updatePassword', 'ResetP
 $routes->get('profile'   , 'UserController::profile', ['filter' => 'authGuard']);
 $routes->match(['GET', 'POST'], 'profile/updateUser', 'UserController::updateUser', ['filter' => 'authGuard']);
 $routes->match(['POST', 'DELETE'], 'profile/deleteUser', 'UserController::deleteUser', ['filter' => 'authGuard']);
+$routes->match(['GET', 'POST'], 'newsletter/toggle', 'UserController::toggleNewsletter', ['filter' => 'authGuard']);
 
 // Admin
 $routes->get('admin'           , 'AdminController::index'    , ['filter' => 'authGuard']);
