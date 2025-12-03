@@ -2,9 +2,13 @@
 
 <?= $this->section('title') ?>Inscription<?= $this->endSection() ?>
 
+<?= $this->section('styles') ?>
+<link rel="stylesheet" href="<?= base_url('assets/css/connexion.css') ?>">
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
-<div class="row justify-content-center" style="padding-top: 1rem;">
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center">
 	<div class="col-lg-5 col-md-7">
 		<div class="card shadow-sm">
 			<div class="card-body">

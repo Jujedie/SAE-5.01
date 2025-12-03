@@ -1,0 +1,13 @@
+/* Styles pour la page de connexion */
+
+/* Conteneur principal : garde au moins la hauteur de la fenêtre */
+.container-fluid.min-vh-100 {
+    min-height: 100vh; /* fallback si la classe utilitaire n'est pas chargée */
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* La card occupe la largeur de la colonne et garde une largeur max */
+.card {
+    width: 100%;
+}

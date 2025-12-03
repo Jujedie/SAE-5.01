@@ -73,6 +73,10 @@ header.scrolled {
     list-style: none;
 }
 
+a {
+	color: #4c4b48;
+}
+
 .nav-links a {
     text-decoration: none;
     color: #1a1a1a;
