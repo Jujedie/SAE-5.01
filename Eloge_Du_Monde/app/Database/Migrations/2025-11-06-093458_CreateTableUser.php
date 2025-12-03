@@ -4,66 +4,77 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateTableUtilisateur extends Migration
+class CreateTableUser extends Migration
 {
 	public function up()
 	{
-		$this->forge->addField([
-			'idUtil' => [
+		$this->forge->addField
+		([
+			'idUser'             =>
+			[
 				'type'           => 'SERIAL',
 				'unsigned'       => true,
 				'auto_increment' => true,
 				'unique'         => true,
 			],
-			'nom' => [
+			'lastName'       =>
+			[
 				'type'       => 'TEXT',
 				'null'       => false,
 			],
-			'prenom' => [
+			'firstName'      =>
+			[
 				'type'       => 'TEXT',
 				'null'       => false,
 			],
-			'telephone' => [
+			'phone'          =>
+			[
 				'type'       => 'VARCHAR',
 				'constraint' => '10',
 				'null'       => false,
 			],
-			'email' => [
+			'email'          =>
+			[
 				'type'       => 'TEXT',
 				'null'       => false,
 			],
-			'role' => [
+			'role'           =>
+			[
 				'type'       => 'VARCHAR',
 				'constraint' => '8',
 				'null'       => false,
 			],
-			'mdp' => [
+			'password'       =>
+			[
 				'type'       => 'VARCHAR',
 				'constraint' => '255',
 				'null'       => false,
 			],
-			'estAbonne' => [
+			'isSubscribed'   =>
+			[
 				'type'       => 'BOOLEAN',
 				'null'       => false,
 				'default'    => false,
 			],
-			'resetToken' => [
+			'resetToken'     =>
+			[
 				'type'       => 'VARCHAR',
 				'constraint' => '255',
 				'null'       => true,
 			],
-			'resetTokenExpiration'=> [
-				'type'       => 'TIMESTAMP',
-				'null'       => true,
+			'resetTokenExpiration' =>
+			[
+				'type'             => 'TIMESTAMP',
+				'null'             => true,
 			],
 		]);
 
-		$this->forge->addKey('idUtil', true);
-		$this->forge->createTable('utilisateur', true);
+		$this->forge->addKey('idUser', true);
+		$this->forge->createTable('user', true);
 	}
 
 	public function down()
 	{
-		$this->forge->dropTable("utilisateur", true, true);
+		$this->forge->dropTable("user", true, true);
 	}
 }

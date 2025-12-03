@@ -4,20 +4,20 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Avis extends Model
+class TripModel extends Model
 {
-	protected $table            = 'avis';
-	protected $primaryKey       = 'idAvis';
+	protected $table            = 'trip';
+	protected $primaryKey       = 'idTrip';
 	protected $useAutoIncrement = true;
 	protected $returnType       = 'array';
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
-	protected $allowedFields    = ['idAvis', 'note', 'date', 'contenu', 'verified', 'idUtilisateur'];
+	protected $allowedFields    = ['idTrip', 'departureDate', 'type', 'idUser'];
 
 	protected bool $allowEmptyInserts = false;
 	protected bool $updateOnlyChanged = true;
 
-	protected array $casts = [];
+	protected array $casts        = [];
 	protected array $castHandlers = [];
 
 	// Dates
@@ -44,45 +44,38 @@ class Avis extends Model
 	protected $beforeDelete   = [];
 	protected $afterDelete    = [];
 
-	public function getAllAvis()
+	public function getAllTrips()
 	{
 		return $this->findAll();
 	}
 
-	public function getAvisById($idAvis)
+	public function getTripsByUser($idUser)
 	{
-		return $this->where('idAvis', $idAvis)->first();
+		return $this->where('idUser', $idUser)->findAll();
 	}
 
-	public function getAvisByIdUtilisateur($idUtilisateur)
+	public function getTripById($idTrip)
 	{
-		return $this->where('idUtilisateur', $idUtilisateur)->findAll();
+		return $this->where('idTrip', $idTrip)->first();
 	}
 
-	public function getAverageNote()
+	public function getTripsByType($type)
 	{
-		return $this->selectAvg('note')->first();
+		return $this->where('type', $type)->findAll();
 	}
 
-	public function getCertifiedAvis()
-	{
-		return $this->where('verified', 1)->findAll();
-	}
-
-	public function addAvis($data)
+	public function addTrip($data)
 	{
 		return $this->insert($data);
 	}
 
-	public function updateAvis($idAvis, $data)
+	public function updateTrip($idTrip, $data)
 	{
-		return $this->where('idAvis', $idAvis)->set($data)->update();
+		return $this->where('idTrip', $idTrip)->set($data)->update();
 	}
 
-	public function deleteAvisById($idAvis)
+	public function deleteTrip($idTrip)
 	{
-		return $this->where('idAvis', $idAvis)->delete();
+		return $this->delete($idTrip);
 	}
-
-
 }

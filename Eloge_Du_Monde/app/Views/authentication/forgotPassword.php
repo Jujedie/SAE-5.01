@@ -10,7 +10,7 @@
 			<div class="p-6">
 				<h2 class="text-2xl font-semibold mb-4">Mot de passe oublié</h2>
 				<p class="text-gray-500 mb-4">Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.</p>
-				<form action="<?= site_url('oublieMdp/envoyerLienReinitialisation') ?>" method="POST">
+				<form action="<?= site_url('forgotpassword/sendResetLink') ?>" method="POST">
 					<?= csrf_field() ?>
 					<div class="mb-4">
 						<label for="email" class="block text-sm font-medium text-gray-700">Adresse e-mail</label>
@@ -19,7 +19,7 @@
 					<button type="submit" class="w-full btn-primary font-medium py-2 rounded-md">Envoyer le lien de réinitialisation</button>
 				</form>
 				<div class="text-center mt-3">
-					<a href="<?= site_url('connexion') ?>" class="text-sm text-gray-600 hover:underline">Retour à la connexion</a>
+					<a href="<?= site_url('signin') ?>" class="text-sm text-gray-600 hover:underline">Retour à la connexion</a>
 				</div>
 			</div>
 		</div>

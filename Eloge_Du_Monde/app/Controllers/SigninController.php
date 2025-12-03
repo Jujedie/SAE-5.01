@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Models\Utilisateur;
-use App\Models\Journal;
+use App\Models\UserModel;
+use App\Models\LogModel;
 
-class ConnexionController extends BaseController
+class SigninController extends BaseController
 {
 	public function index()
 	{
@@ -18,33 +18,33 @@ class ConnexionController extends BaseController
 		}
 		else
 		{
-			echo view('authentification/connexion');
+			echo view('authentication/signin');
 		}
 	}
 
-	public function connexion()
+	public function signin()
 	{
 		$session = session();
 
-		$utilisateurModel = new Utilisateur();
-		$logModel = new Journal();
+		$userModel = new UserModel();
+		$logModel = new LogModel();
 
 		$email = $this->request->getVar('email');
-		$password = $this->request->getVar('mdp');
+		$password = $this->request->getVar('password');
 
-		$data = $utilisateurModel->getUtilisateurByEmail($email);
+		$data = $userModel->getUserByEmail($email);
 
 		if($data)
 		{
-			$pass = $data['mdp'];
+			$pass = $data['password'];
 			$authenticatePassword = password_verify($password, $pass);
 			if ($authenticatePassword)
 			{
 				$ses_data =
 				[
-					'idUtil' => $data['idUtil'],
-					'nom' => $data['nom'],
-					'prenom' => $data['prenom'],
+					'idUser' => $data['idUser'],
+					'lastName' => $data['lastName'],
+					'firstName' => $data['firstName'],
 					'email' => $data['email'],
 					'isLoggedIn' => TRUE
 				];
@@ -53,26 +53,26 @@ class ConnexionController extends BaseController
 
 				$session->setFlashdata('success', 'Connexion réussie !');
 
-				$logModel->addLogEntry('Utilisateur connecté : ' . $data['email'], $data['idUtil']);
+				$logModel->addLogEntry('Utilisateur connecté : ' . $data['email'], $data['idUser']);
 				return redirect()->to('/');
 			}
 			else
 			{
 				$session->setFlashdata('error', 'L\'adresse email ou le mot de passe est incorrect.');
-				return redirect()->to('connexion');
+				return redirect()->to('signin');
 			}
 		}
 		else
 		{
 			$session->setFlashdata('error', 'L\'adresse email ou le mot de passe est incorrect.');
-			return redirect()->to('connexion');
+			return redirect()->to('signin');
 		}
 	}
 
-	public function deconnexion()
+	public function signout()
 	{
 		$session = session();
 		$session->destroy();
-		return redirect()->to('connexion');
+		return redirect()->to('signin');
 	}
 }

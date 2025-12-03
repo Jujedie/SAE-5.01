@@ -14,7 +14,7 @@
 
 			<p class="text-muted">Si vous pensez que c'est une erreur, contactez l'administrateur du site.</p>
 
-			<a href="<?= site_url('accueil') ?>" class="btn btn-primary mt-3">Retour à l'accueil</a>
+			<a href="<?= site_url('/') ?>" class="btn btn-primary mt-3">Retour à l'accueil</a>
 		</div>
 	</div>
 </div>

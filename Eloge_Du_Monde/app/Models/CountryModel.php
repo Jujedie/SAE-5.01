@@ -4,20 +4,20 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Pays extends Model
+class CountryModel extends Model
 {
-	protected $table            = 'pays';
-	protected $primaryKey       = 'id';
+	protected $table            = 'country';
+	protected $primaryKey       = 'idCountry';
 	protected $useAutoIncrement = true;
 	protected $returnType       = 'array';
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
-	protected $allowedFields    = [];
+	protected $allowedFields    = ['idCountry', 'name', 'continent', 'cost'];
 
 	protected bool $allowEmptyInserts = false;
 	protected bool $updateOnlyChanged = true;
 
-	protected array $casts = [];
+	protected array $casts        = [];
 	protected array $castHandlers = [];
 
 	// Dates
@@ -44,38 +44,38 @@ class Pays extends Model
 	protected $beforeDelete   = [];
 	protected $afterDelete    = [];
 
-	public function getAllPays()
+	public function getAllCountries()
 	{
 		return $this->findAll();
 	}
 
-	public function getPaysById($id)
+	public function getCountryById($idCountry)
 	{
-		return $this->where('id', $id)->first();
+		return $this->where('idCountry', $idCountry)->first();
 	}
 
-	public function getPaysByNom($nom)
+	public function getCountryByName($name)
 	{
-		return $this->where('nom', $nom)->first();
+		return $this->where('name', $name)->first();
 	}
 
-	public function getPaysByContinent($continent)
+	public function getCountriesByContinent($continent)
 	{
 		return $this->where('continent', $continent)->findAll();
 	}
 	
-	public function addPays($data)
+	public function addCountry($data)
 	{
 		return $this->insert($data);
 	}
 
-	public function updatePays($id, $data)
+	public function updateCountry($idCountry, $data)
 	{
-		return $this->update($id, $data);
+		return $this->update($idCountry, $data);
 	}
 
-	public function deletePays($id)
+	public function deleteCountry($idCountry)
 	{
-		return $this->delete($id);
+		return $this->delete($idCountry);
 	}
 }

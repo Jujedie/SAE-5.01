@@ -20,7 +20,7 @@ class AuthGuard implements FilterInterface
 
 		if (!session()->get('isLoggedIn'))
 		{
-			return redirect()->to('connexion');
+			return redirect()->to('signin')->with('error', 'Vous devez être connecté pour accéder à cette page.');
 		}
 	}
 

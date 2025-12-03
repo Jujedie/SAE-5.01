@@ -1,24 +1,24 @@
 <?php
+
 namespace App\Controllers;
 
-use App\Models\Utilisateur;
+use App\Models\UserModel;
 
 class UserController extends BaseController
 {
-	public function profil()
+	public function profile()
 	{
 		$session = session();
 
 		// Vérifier si l'utilisateur est connecté
-		if (!$session->get('isLoggedIn')) {
-			return redirect()->to('/connexion')->with('error', 'Vous devez être connecté pour accéder à cette page.');
+		if (!$session->get('isLoggedIn'))
+		{
+			return redirect()->to('/signin')->with('error', 'Vous devez être connecté pour accéder à cette page.');
 		}
 
-		$utilisateurModel = new Utilisateur();
-		$utilisateur = $utilisateurModel->find($session->get('idUser'));
+		$userModel = new UserModel();
+		$user = $userModel->find($session->get('idUser'));
 
-		return view('profil', [
-			'utilisateur' => $utilisateur
-		]);
+		return view('profile', ['user' => $user]);
 	}
 }

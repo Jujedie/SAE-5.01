@@ -60,17 +60,17 @@
 						<a href="<?= base_url('destinations?filter=continent&value=oceanie') ?>">Océanie</a>
 					</div>
 				</li>
-				<li><a href="<?= base_url('creer-voyage') ?>">Créer votre voyage</a></li>
+				<li><a href="<?= base_url('createTrip') ?>">Créer votre voyage</a></li>
 			</ul>
 		</nav>
 
-		<a href="<?= base_url('/home') ?>" class="logo">
+		<a href="<?= base_url('/') ?>" class="logo">
 			<img src="<?= base_url('assets/images/elogedumonde-logo.png') ?>" alt="Éloge du Monde">
 		</a>
 
 		<nav class="nav-right">
 			<ul class="nav-links">
-				<li><a href="<?= base_url('temoignages') ?>">Témoignages</a></li>
+				<li><a href="<?= base_url('reviews') ?>">Témoignages</a></li>
 				<li><a href="<?= base_url('blog') ?>">Blog</a></li>
 			</ul>
 		</nav>
@@ -84,7 +84,7 @@
 				</svg>
 			</a>
 			<?php else: ?>
-			<a href="<?= base_url('connexion') ?>" class="btn-connexion">Connexion</a>
+			<a href="<?= base_url('signin') ?>" class="btn-connexion">Connexion</a>
 			<?php endif; ?>
 		</div>
 
@@ -163,7 +163,7 @@
 					<li><a href="#destinations">Voyages sur mesure</a></li>
 					<li><a href="#themes">Voyages thématiques</a></li>
 					<li><a href="#destinations">Destinations</a></li>
-					<li><a href="#temoignages">Témoignages</a></li>
+					<li><a href="#reviews">Témoignages</a></li>
 				</ul>
 			</div>
 

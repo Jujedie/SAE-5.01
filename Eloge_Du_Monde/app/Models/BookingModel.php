@@ -4,20 +4,20 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Reserver extends Model
+class BookingModel extends Model
 {
-	protected $table            = 'reserver';
-	protected $primaryKey       = ['idVoyage', 'idUtil'];
+	protected $table            = 'booking';
+	protected $primaryKey       = ['idTrip', 'idUser'];
 	protected $useAutoIncrement = true;
 	protected $returnType       = 'array';
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
-	protected $allowedFields    = ['idVoyage', 'idUtil'];
+	protected $allowedFields    = ['idTrip', 'idUser'];
 
 	protected bool $allowEmptyInserts = false;
 	protected bool $updateOnlyChanged = true;
 
-	protected array $casts = [];
+	protected array $casts        = [];
 	protected array $castHandlers = [];
 
 	// Dates
@@ -44,38 +44,39 @@ class Reserver extends Model
 	protected $beforeDelete   = [];
 	protected $afterDelete    = [];
 
-	public function getAllReservations()
+	public function getAllBookings()
 	{
 		return $this->findAll();
 	}
 
-	public function getReservationsByVoyage($idVoyage)
+	public function getBookingsByTrip($idTrip)
 	{
-		return $this->where('idVoyage', $idVoyage)->findAll();
+		return $this->where('idTrip', $idTrip)->findAll();
 	}
 
-	public function getReservationsByUtilisateur($idUtil)
+	public function getBookingsByUser($idUser)
 	{
-		return $this->where('idUtil', $idUtil)->findAll();
+		return $this->where('idUser', $idUser)->findAll();
 	}
 
-	public function addReservation($idVoyage, $idUtil)
+	public function addBooking($idTrip, $idUser)
 	{
-		$data = [
-			'idVoyage' => $idVoyage,
-			'idUtil' => $idUtil,
+		$data =
+		[
+			'idTrip' => $idTrip,
+			'idUser' => $idUser,
 		];
 
 		return $this->insert($data);
 	}
 
-	public function updateReservation($idVoyage, $idUtil, $data)
+	public function updateBooking($idTrip, $idUser, $data)
 	{
-		return $this->update(['idVoyage' => $idVoyage, 'idUtil' => $idUtil], $data);
+		return $this->update(['idTrip' => $idTrip, 'idUser' => $idUser], $data);
 	}
 
-	public function deleteReservation($idVoyage, $idUtil)
+	public function deleteBooking($idTrip, $idUser)
 	{
-		return $this->delete(['idVoyage' => $idVoyage, 'idUtil' => $idUtil]);
+		return $this->delete(['idTrip' => $idTrip, 'idUser' => $idUser]);
 	}
 }

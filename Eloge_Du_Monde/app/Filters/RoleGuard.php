@@ -6,17 +6,17 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 
-use App\Models\Utilisateur;
+use App\Models\UserModel;
 
 class RoleGuard implements FilterInterface
 {
 	public function before(RequestInterface $request, $arguments = null)
 	{
 
-		$utilisateurModel = new Utilisateur();
-		$idUtil = session()->get('idUtil');
+		$userModel = new UserModel();
+		$idUser = session()->get('idUser');
 
-		if (!$idUtil || $utilisateurModel->estAdmin($idUtil) === false)
+		if (!$idUser || $userModel->isAdmin($idUser) === false)
 		{
 			return redirect()->to('/errors/html/error_403')->with('error', 'Accès refusé : vous devez être directeur pour accéder à cette page.');
 		}

@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Controllers;
 
-use App\Models\Utilisateur;
+use App\Models\UserModel;
 
 class HomeController extends BaseController
 {
@@ -9,8 +10,13 @@ class HomeController extends BaseController
 	{
 		$session = session();
 
-		$utilisateur = new Utilisateur();
-		return view('home', ["estAdmin" => $utilisateur->estAdmin($session->get('idUser'))]);
+		$userModel = new UserModel();
+		return view('home', ["isAdmin" => $userModel->isAdmin($session->get('idUser'))]);
+	}
+
+	public function blog()
+	{
+		return view('blog');
 	}
 
 	public function error403()

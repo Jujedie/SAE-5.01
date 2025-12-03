@@ -4,20 +4,20 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Utilisateur extends Model
+class UserModel extends Model
 {
-	protected $table            = 'utilisateur';
-	protected $primaryKey       = 'idUtil';
+	protected $table            = 'user';
+	protected $primaryKey       = 'idUser';
 	protected $useAutoIncrement = true;
 	protected $returnType       = 'array';
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
-	protected $allowedFields    = ['idUtil', 'nom', 'prenom', 'telephone', 'email', 'role', 'mdp', 'estAbonne', 'resetToken', 'resetTokenExpiration'];
+	protected $allowedFields    = ['idUser', 'lastName', 'firstName', 'phone', 'email', 'role', 'password', 'isSubscribed', 'resetToken', 'resetTokenExpiration'];
 
 	protected bool $allowEmptyInserts = false;
 	protected bool $updateOnlyChanged = true;
 
-	protected array $casts = [];
+	protected array $casts        = [];
 	protected array $castHandlers = [];
 
 	// Dates
@@ -44,55 +44,53 @@ class Utilisateur extends Model
 	protected $beforeDelete   = [];
 	protected $afterDelete    = [];
 
-	public function getAllUtilisateurs()
+	public function getAllUsers()
 	{
 		return $this->findAll();
 	}
 
-	public function getUtilisateurById($idUtil)
+	public function getUserById($idUser)
 	{
-		return $this->where('idUtil', $idUtil)->first();
+		return $this->where('idUser', $idUser)->first();
 	}
 
-	public function getUtilisateurByEmail($email)
+	public function getUserByEmail($email)
 	{
 		return $this->where('email', $email)->first();
 	}
 
-	public function getUtilisateursByRole($role)
+	public function getUsersByRole($role)
 	{
 		return $this->where('role', $role)->findAll();
 	}
 
-	public function getUtilisateurByResetToken($token)
+	public function getUserByResetToken($token)
 	{
-		return $this->where('resetToken', $token)
-					->where('resetTokenExpiration >=', date('Y-m-d H:i:s'))
-					->first();
+		return $this->where('resetToken', $token)->where('resetTokenExpiration >=', date('Y-m-d H:i:s'))->first();
 	}
 
-	public function estAdmin($idUtil)
+	public function isAdmin($idUser)
 	{
-		return $this->where('idUtil', $idUtil)->where('role', 'admin')->first() !== null;
+		return $this->where('idUser', $idUser)->where('role', 'admin')->first() !== null;
 	}
 
-	public function addUtilisateur($data)
+	public function addUser($data)
 	{
 		return $this->insert($data);
 	}
 
-	public function updateUtilisateur($idUtil, $data)
+	public function updateUser($idUser, $data)
 	{
-		return $this->update($idUtil, $data);
+		return $this->update($idUser, $data);
 	}
 
-	public function updatePasswordUtilisateur($idUtil, $newPassword)
+	public function updatePassword($idUser, $newPassword)
 	{
-		return $this->update($idUtil, ['mdp' => $newPassword]);
+		return $this->update($idUser, ['password' => $newPassword]);
 	}
 
-	public function deleteUtilisateur($idUtil)
+	public function deleteUser($idUser)
 	{
-		return $this->delete($idUtil);
+		return $this->delete($idUser);
 	}
 }

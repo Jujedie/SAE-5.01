@@ -2,33 +2,33 @@
 
 namespace App\Controllers;
 
-use App\Models\Utilisateur;
+use App\Models\UserModel;
 
-class OublieMdpController extends BaseController
+class ForgotPasswordController extends BaseController
 {
 	public function index()
 	{
 		helper(['form']);
-		return view('authentification/oublieMdp');
+		return view('authentication/forgotPassword');
 	}
 
-	public function envoyerLienReinitialisation()
+	public function sendResetLink()
 	{
 		$session = session();
 		$email = $this->request->getPost('email');
 
-		$utilisateurModel = new Utilisateur();
-		$utilisateur = $utilisateurModel->getUtilisateurByEmail($email);
+		$userModel = new UserModel();
+		$user = $userModel->getUserByEmail($email);
 
-		if ($utilisateur)
+		if ($user)
 		{
 			// Générer un jeton de réinitialisation de MDP et enregistrer-le dans BD
 			$token = bin2hex(random_bytes(16));
 			$expiration = date('Y-m-d H:i:s', strtotime('+1 hour'));
-			$utilisateurModel->set('resetToken', $token)->set('resetTokenExpiration', $expiration)->update($utilisateur['idUtil']);
+			$userModel->set('resetToken', $token)->set('resetTokenExpiration', $expiration)->update($user['idUser']);
 
 			// Envoyer l'e-mail avec le lien de réinitialisation
-			$resetLink = site_url("reinitialiserMdp/$token");
+			$resetLink = site_url("resetPassword/$token");
 
 			// Message HTML
 			$message = "
@@ -85,18 +85,18 @@ class OublieMdpController extends BaseController
 			if (!$emailService->send())
 			{
 				$session->setFlashdata('error', 'Erreur lors de l\'envoi de l\'email.');
-				return redirect()->to('oublieMdp');
+				return redirect()->to('forgotPassword');
 			}
 			else
 			{
 				$session->setFlashdata('success', 'Si l\'email inscrit est correct, un email de réinitialisation a été envoyé.');
-				return redirect()->to('connexion');
+				return redirect()->to('signin');
 			}
 		}
 		else
 		{
 			$session->setFlashdata('success', 'Si l\'email inscrit est correct, un email de réinitialisation a été envoyé.');
-			return redirect()->to('connexion');
+			return redirect()->to('signin');
 		}
 	}
 }

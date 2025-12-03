@@ -10,29 +10,28 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'HomeController::index');
 
 // Pages principales
-$routes->get('/blog', 'AccueilController::blog');
+$routes->get('blog', 'HomeController::blog');
 
 // Connexion
-$routes->get('connexion'      , 'ConnexionController::index'      );
-$routes->get('deconnexion'    , 'ConnexionController::deconnexion');
-$routes->match(['GET', 'POST'], 'ConnexionController/connexion', 'ConnexionController::connexion');
+$routes->get('signin'  , 'SigninController::index'  );
+$routes->get('signout' , 'SigninController::signout');
+$routes->match(['GET', 'POST'], 'signin/signin', 'SigninController::signin');
 
 // Inscription
-$routes->get('inscription'    , 'InscriptionController::index');
-$routes->match(['GET', 'POST'], 'inscription/enregistrer', 'InscriptionController::enregistrer');
-
+$routes->get('signup'    , 'SignupController::index');
+$routes->match(['GET', 'POST'], 'signup/register', 'SignupController::register');
 // Mot de passe oublie
-$routes->get('oublieMdp'      , 'OublieMdpController::index');
-$routes->match(['GET', 'POST'], 'oublieMdp/envoyerLienReinitialisation', 'OublieMdpController::envoyerLienReinitialisation');
+$routes->get('forgotPassword'      , 'ForgotPasswordController::index');
+$routes->match(['GET', 'POST'], 'forgotPassword/sendResetLink', 'ForgotPasswordController::sendResetLink');
 
 // Reinitialisation mot de passe
-$routes->get('reinitialiserMdp/(:segment)', 'ReinitialiserMdpController::index/$1');
-$routes->match(['GET', 'POST']            , 'reinitialiserMdp/majMdp', 'ReinitialiserMdpController::majMdp');
+$routes->get('resetPassword/(:segment)', 'ResetPasswordController::index/$1');
+$routes->match(['GET', 'POST']         , 'resetPassword/updatePassword', 'ResetPasswordController::updatePassword');
 
 // Utilisateur
-$routes->get('profil'   , 'UtilisateurController::profil', ['filter' => 'authGuard']);
-$routes->match(['GET', 'POST'], 'profil/edit', 'UtilisateurController::maj', ['filter' => 'authGuard']);
-$routes->match(['POST', 'DELETE'], 'profil/delete', 'UtilisateurController::supprimer', ['filter' => 'authGuard']);
+$routes->get('profile'   , 'UserController::profil', ['filter' => 'authGuard']);
+$routes->match(['GET', 'POST'], 'profile/updateUser', 'UserController::updateUser', ['filter' => 'authGuard']);
+$routes->match(['POST', 'DELETE'], 'profile/deleteUser', 'UserController::deleteUser', ['filter' => 'authGuard']);
 
 // Admin
 $routes->get('admin'           , 'AdminController::index'    , ['filter' => 'authGuard']);
@@ -43,22 +42,22 @@ $routes->get('admin/reservations'           , 'AdminController::reservations'   
 $routes->get('admin/reservations/(:num)/(:num)', 'AdminController::reservationDetail/$1/$2', ['filter' => 'authGuard']);
 
 // Admin - Utilisateurs
-$routes->get('admin/utilisateurs'           , 'AdminController::utilisateurs'     , ['filter' => 'authGuard']);
-$routes->match(['GET', 'POST'], 'admin/utilisateurs/edit/(:num)', 'AdminController::utilisateurEdit/$1', ['filter' => 'authGuard']);
-$routes->post('admin/utilisateurs/delete/(:num)', 'AdminController::utilisateurDelete/$1', ['filter' => 'authGuard']);
+$routes->get('admin/users'           , 'AdminController::users'     , ['filter' => 'authGuard']);
+$routes->match(['GET', 'POST'], 'admin/users/edit/(:num)', 'AdminController::editUser/$1', ['filter' => 'authGuard']);
+$routes->post('admin/users/delete/(:num)', 'AdminController::deleteUser/$1', ['filter' => 'authGuard']);
 
 // Admin - Destinations
 $routes->get('admin/destinations'           , 'AdminController::destinations'     , ['filter' => 'authGuard']);
-$routes->match(['GET', 'POST'], 'admin/destinations/ajouter', 'AdminController::destinationAjouter', ['filter' => 'authGuard']);
-$routes->match(['GET', 'POST'], 'admin/destinations/edit/(:num)', 'AdminController::destinationEdit/$1', ['filter' => 'authGuard']);
-$routes->post('admin/destinations/delete/(:num)', 'AdminController::destinationDelete/$1', ['filter' => 'authGuard']);
+$routes->match(['GET', 'POST'], 'admin/destinations/add', 'AdminController::addDestination', ['filter' => 'authGuard']);
+$routes->match(['GET', 'POST'], 'admin/destinations/edit/(:num)', 'AdminController::editDestination/$1', ['filter' => 'authGuard']);
+$routes->post('admin/destinations/delete/(:num)', 'AdminController::deleteDestination/$1', ['filter' => 'authGuard']);
 
 // Admin - Voyages
-$routes->get('admin/voyages'                , 'AdminController::voyages'          , ['filter' => 'authGuard']);
-$routes->match(['GET', 'POST'], 'admin/voyages/edit/(:num)', 'AdminController::voyageEdit/$1', ['filter' => 'authGuard']);
-$routes->post('admin/voyages/delete/(:num)', 'AdminController::voyageDelete/$1', ['filter' => 'authGuard']);
+$routes->get('admin/trips'                , 'AdminController::trips'          , ['filter' => 'authGuard']);
+$routes->match(['GET', 'POST'], 'admin/trips/edit/(:num)', 'AdminController::editTrip/$1', ['filter' => 'authGuard']);
+$routes->post('admin/trips/delete/(:num)', 'AdminController::deleteTrip/$1', ['filter' => 'authGuard']);
 
 // Admin - Témoignages
-$routes->get('admin/temoignages'            , 'AdminController::temoignages'      , ['filter' => 'authGuard']);
-$routes->post('admin/temoignages/verifier/(:num)', 'AdminController::temoignageVerifier/$1', ['filter' => 'authGuard']);
-$routes->post('admin/temoignages/delete/(:num)', 'AdminController::temoignageDelete/$1', ['filter' => 'authGuard']);
+$routes->get('admin/reviews'            , 'AdminController::reviews'      , ['filter' => 'authGuard']);
+$routes->post('admin/reviews/verify/(:num)', 'AdminController::verifyReview/$1', ['filter' => 'authGuard']);
+$routes->post('admin/reviews/delete/(:num)', 'AdminController::deleteReview/$1', ['filter' => 'authGuard']);

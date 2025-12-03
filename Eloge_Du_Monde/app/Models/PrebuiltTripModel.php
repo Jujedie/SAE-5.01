@@ -4,20 +4,20 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class VoyagePrefait extends Model
+class PrebuiltTripModel extends Model
 {
-	protected $table            = 'voyage_prefait';
-	protected $primaryKey       = 'idVoyage';
+	protected $table            = 'prebuiltTrip';
+	protected $primaryKey       = 'idTrip';
 	protected $useAutoIncrement = true;
 	protected $returnType       = 'array';
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
-	protected $allowedFields    = ['idVoyage', 'datedepart', 'type', 'idUtilisateur', 'titre', 'programmeDesc', 'hebergementDesc', 'conditionDesc', 'formalitésDesc', 'thematique', 'montant', 'pieceJointe'];
+	protected $allowedFields    = ['idTrip', 'departureDate', 'type', 'idUser', 'title', 'programDesc', 'accommodationDesc', 'conditionDesc', 'formalitiesDesc', 'thematic', 'amount', 'attachment'];
 
 	protected bool $allowEmptyInserts = false;
 	protected bool $updateOnlyChanged = true;
 
-	protected array $casts = [];
+	protected array $casts        = [];
 	protected array $castHandlers = [];
 
 	// Dates
@@ -44,33 +44,33 @@ class VoyagePrefait extends Model
 	protected $beforeDelete   = [];
 	protected $afterDelete    = [];
 
-	public function getAllVoyagesPrefaits()
+	public function getAllPrebuiltTrips()
 	{
 		return $this->findAll();
 	}
 
-	public function getVoyagePrefaitById($idVoyage)
+	public function getPrebuiltTripById($idTrip)
 	{
-		return $this->where('idVoyage', $idVoyage)->first();
+		return $this->where('idTrip', $idTrip)->first();
 	}
 
-	public function getVoyagesPrefaitsByUtilisateur($idUtilisateur)
+	public function getPrebuiltTripsByUser($idUser)
 	{
-		return $this->where('idUtilisateur', $idUtilisateur)->findAll();
+		return $this->where('idUser', $idUser)->findAll();
 	}
 
-	public function addVoyagePrefait($data)
+	public function addPrebuiltTrip($data)
 	{
 		return $this->insert($data);
 	}
 
-	public function updateVoyagePrefait($idVoyage, $data)
+	public function updatePrebuiltTrip($idTrip, $data)
 	{
-		return $this->update($idVoyage, $data);
+		return $this->update($idTrip, $data);
 	}
 
-	public function deleteVoyagePrefait($idVoyage)
+	public function deletePrebuiltTrip($idTrip)
 	{
-		return $this->delete($idVoyage);
+		return $this->delete($idTrip);
 	}
 }

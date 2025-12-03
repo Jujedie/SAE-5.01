@@ -4,20 +4,20 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class EtapeVoyage extends Model
+class LogModel extends Model
 {
-	protected $table            = 'etapeVoyage';
-	protected $primaryKey       = 'idEtapeVoyage';
+	protected $table            = 'log';
+	protected $primaryKey       = 'idLog';
 	protected $useAutoIncrement = true;
 	protected $returnType       = 'array';
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
-	protected $allowedFields    = ['idEtapeVoyage', 'nom', 'cout', 'idPays'];
+	protected $allowedFields    = ['idLog', 'message', 'date', 'idUser'];
 
 	protected bool $allowEmptyInserts = false;
 	protected bool $updateOnlyChanged = true;
 
-	protected array $casts = [];
+	protected array $casts        = [];
 	protected array $castHandlers = [];
 
 	// Dates
@@ -44,33 +44,35 @@ class EtapeVoyage extends Model
 	protected $beforeDelete   = [];
 	protected $afterDelete    = [];
 
-	public function getAllEtapes()
+	public function getAllLogEntries()
 	{
 		return $this->findAll();
 	}
 
-	public function getEtapeById($idEtapeVoyage)
+	public function getLogEntriesByUser($idUser)
 	{
-		return $this->where('idEtapeVoyage', $idEtapeVoyage)->first();
+		return $this->where('idUser', $idUser)->findAll();
 	}
-
-	public function getEtapesByPays($idPays)
+	
+	public function addLogEntry($message, $idUser)
 	{
-		return $this->where('idPays', $idPays)->findAll();
-	}
+		$data =
+		[
+			'message' => $message,
+			'date'    => date('Y-m-d H:i:s'),
+			'idUser'  => $idUser
+		];
 
-	public function addEtape($data)
-	{
 		return $this->insert($data);
 	}
 
-	public function updateEtape($idEtapeVoyage, $data)
+	public function updateLogEntry($idLog, $data)
 	{
-		return $this->update($idEtapeVoyage, $data);
+		return $this->update($idLog, $data);
 	}
 
-	public function deleteEtape($idEtapeVoyage)
+	public function deleteLogEntry($idLog)
 	{
-		return $this->delete($idEtapeVoyage);
+		return $this->delete($idLog);
 	}
 }

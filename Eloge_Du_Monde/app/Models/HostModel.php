@@ -4,20 +4,20 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Journal extends Model
+class HostModel extends Model
 {
-	protected $table            = 'journaux';
-	protected $primaryKey       = 'idJournaux';
+	protected $table            = 'host';
+	protected $primaryKey       = ['idTrip', 'idTripStep'];
 	protected $useAutoIncrement = true;
 	protected $returnType       = 'array';
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
-	protected $allowedFields    = ['idJournaux', 'message', 'date', 'idUtilisateur'];
+	protected $allowedFields    = ['idTrip', 'idTripStep', 'nbDays', 'nbNights'];
 
 	protected bool $allowEmptyInserts = false;
 	protected bool $updateOnlyChanged = true;
 
-	protected array $casts = [];
+	protected array $casts        = [];
 	protected array $castHandlers = [];
 
 	// Dates
@@ -44,34 +44,38 @@ class Journal extends Model
 	protected $beforeDelete   = [];
 	protected $afterDelete    = [];
 
-	public function getAllLogEntries()
+	public function getAllHosts()
 	{
 		return $this->findAll();
 	}
 
-	public function getLogEntriesByUser($idUtilisateur)
+	public function getHostsByTrip($idTrip)
 	{
-		return $this->where('idUtilisateur', $idUtilisateur)->findAll();
+		return $this->where('idTrip', $idTrip)->findAll();
 	}
-	
-	public function addLogEntry($message, $idUtilisateur)
-	{
-		$data = [
-			'message' => $message,
-			'date' => date('Y-m-d H:i:s'),
-			'idUtilisateur' => $idUtilisateur
-		];
 
+	public function getHostsByStep($idTripStep)
+	{
+		return $this->where('idTripStep', $idTripStep)->findAll();
+	}
+
+	public function getHost($idTrip, $idTripStep)
+	{
+		return $this->where(['idTrip' => $idTrip, 'idTripStep' => $idTripStep])->first();
+	}
+
+	public function addHost($data)
+	{
 		return $this->insert($data);
 	}
 
-	public function updateLogEntry($idJournaux, $data)
+	public function updateHost($idTrip, $idTripStep, $data)
 	{
-		return $this->update($idJournaux, $data);
+		return $this->where(['idTrip' => $idTrip, 'idTripStep' => $idTripStep])->set($data)->update();
 	}
 
-	public function deleteLogEntry($idJournaux)
+	public function deleteHost($idTrip, $idTripStep)
 	{
-		return $this->delete($idJournaux);
+		return $this->where(['idTrip' => $idTrip, 'idTripStep' => $idTripStep])->delete();
 	}
 }
