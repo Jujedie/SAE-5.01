@@ -9,19 +9,19 @@
 <section id="accueil">
     <div class="hero-slideshow">
         <div class="hero-slide active">
-            <img src="https://images.unsplash.com/photo-1761134342227-a94e55c59cef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" alt="Destination de voyage de luxe">
+            <img src="<?= base_url('assets/images/accueil1.jpeg') ?>" alt="Destination de voyage de luxe">
         </div>
         <div class="hero-slide">
-            <img src="https://images.unsplash.com/photo-1673912441324-9ee3bd0b6e82?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" alt="Maldives plage de luxe">
+            <img src="<?= base_url('assets/images/accueil2.jpeg') ?>" alt="Maldives plage de luxe">
         </div>
         <div class="hero-slide">
-            <img src="https://images.unsplash.com/photo-1669203408570-4140ee21f211?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" alt="Santorin coucher de soleil">
+            <img src="<?= base_url('assets/images/accueil3.jpeg') ?>" alt="Santorin coucher de soleil">
         </div>
         <div class="hero-slide">
-            <img src="https://images.unsplash.com/photo-1743819458014-f5cf74f175e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" alt="Dubai skyline">
+            <img src="<?= base_url('assets/images/accueil4.jpeg') ?>" alt="Dubai skyline">
         </div>
         <div class="hero-slide">
-            <img src="https://images.unsplash.com/photo-1610338732118-09d3b6fd030c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" alt="Temple japonais">
+            <img src="<?= base_url('assets/images/accueil5.jpeg') ?>" alt="Temple japonais">
         </div>
         <div class="hero-overlay"></div>
     </div>
