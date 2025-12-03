@@ -236,6 +236,21 @@
 	margin-bottom: 1rem;
 }
 
+.post-full-content {
+	color: #6b7280;
+	line-height: 1.75;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+.post-full-content p {
+	margin-bottom: 1rem;
+}
+
+.post-full-content p:last-child {
+	margin-bottom: 0;
+}
+
 .read-more-btn {
 	background: none;
 	border: none;

@@ -41,19 +41,18 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	readMoreButtons.forEach(button => {
 		button.addEventListener('click', function() {
-			const postId = this.getAttribute('data-post');
 			const postContent = this.closest('.post-content');
-			const excerpt = postContent.querySelector('.post-excerpt');
+			const fullContent = postContent.querySelector('.post-full-content');
 			
 			// Toggle expanded state
-			if (postContent.classList.contains('expanded')) {
-				postContent.classList.remove('expanded');
+			if (fullContent.style.display === 'none') {
+				fullContent.style.display = 'block';
+				this.textContent = 'Voir moins';
+			} else {
+				fullContent.style.display = 'none';
 				this.textContent = 'Lire la suite';
 				// Scroll back to post
 				this.closest('.blog-post').scrollIntoView({ behavior: 'smooth', block: 'start' });
-			} else {
-				postContent.classList.add('expanded');
-				this.textContent = 'Voir moins';
 			}
 		});
 	});
