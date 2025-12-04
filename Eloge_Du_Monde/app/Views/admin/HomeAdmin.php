@@ -35,8 +35,8 @@
 	<!-- Statistics Grid -->
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-		<!-- Pays Card -->
-		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('/admin/pays')">
+		<!-- Countries Card -->
+		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('admin/countries')">
 			<div class="flex items-start justify-between mb-4">
 				<div class="icon-wrapper bg-green-100">
 					<svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -55,7 +55,7 @@
 		</div>
 
 		<!-- Continents Card -->
-		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('/admin/continents')">
+		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('admin/continents')">
 			<div class="flex items-start justify-between mb-4">
 				<div class="icon-wrapper bg-purple-100">
 					<svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,8 +73,8 @@
 			</div>
 		</div>
 
-		<!-- Utilisateurs Card -->
-		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('/admin/utilisateurs')">
+		<!-- Users Card -->
+		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('admin/users')">
 			<div class="flex items-start justify-between mb-4">
 				<div class="icon-wrapper bg-orange-100">
 					<svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -92,8 +92,8 @@
 			</div>
 		</div>
 
-		<!-- Témoignages Card -->
-		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('/admin/temoignages')">
+		<!-- Reviews Card -->
+		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('admin/reviews')">
 			<div class="flex items-start justify-between mb-4">
 				<div class="icon-wrapper bg-pink-100">
 					<svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -111,8 +111,8 @@
 			</div>
 		</div>
 
-		<!-- Voyages Card -->
-		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('/admin/voyages')">
+		<!-- Trips Card -->
+		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('admin/trips')">
 			<div class="flex items-start justify-between mb-4">
 				<div class="icon-wrapper bg-yellow-100">
 					<svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -130,8 +130,8 @@
 			</div>
 		</div>
 
-		<!-- Réservations Card -->
-		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('/admin/reservations')">
+		<!-- Bookings Card -->
+		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('admin/bookings')">
 			<div class="flex items-start justify-between mb-4">
 				<div class="icon-wrapper bg-teal-100">
 					<svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -155,33 +155,33 @@
 	<div class="mt-12">
 		<h2 class="text-2xl font-bold text-gray-800 mb-6">Actions rapides</h2>
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-			<button onclick="navigateTo('/admin/destinations/ajouter')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center space-x-2">
+			<a href="<?= site_url('admin/destinations/ajouter') ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center space-x-2">
 				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
 				</svg>
 				<span>Ajouter une destination</span>
-			</button>
+			</a>
 			
-			<button onclick="navigateTo('/admin/voyages/ajouter')" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center space-x-2">
+			<a href="<?= site_url('admin/trips') ?>" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center space-x-2">
 				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
 				</svg>
-				<span>Créer un voyage</span>
-			</button>
-			
-			<button onclick="navigateTo('/admin/utilisateurs/gestion')" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center space-x-2">
+				<span>Gérer les voyages</span>
+			</a>
+
+			<a href="<?= site_url('admin/users') ?>" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center space-x-2">
 				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
 				</svg>
 				<span>Gérer les utilisateurs</span>
-			</button>
+			</a>
 			
-			<button onclick="navigateTo('/admin/rapports')" class="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center space-x-2">
+			<a href="<?= site_url('admin/reports') ?>" class="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center space-x-2">
 				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
 				</svg>
 				<span>Voir les rapports</span>
-			</button>
+			</a>
 		</div>
 	</div>
 </div>
@@ -191,51 +191,6 @@
 	function navigateTo(url) {
 		window.location.href = '<?= base_url() ?>' + url;
 	}
-
-	// Animate numbers on page load
-	document.addEventListener('DOMContentLoaded', function() {
-		const stats = document.querySelectorAll('.stat-card p.text-4xl');
-		
-		stats.forEach(stat => {
-			const target = parseInt(stat.textContent.replace(/,/g, ''));
-			const duration = 2000; // 2 seconds
-			const step = target / (duration / 16); // 60fps
-			let current = 0;
-			
-			const timer = setInterval(() => {
-				current += step;
-				if (current >= target) {
-					current = target;
-					clearInterval(timer);
-				}
-				
-				// Format number with comma separator
-				const formatted = Math.floor(current).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-				stat.textContent = formatted;
-			}, 16);
-		});
-
-		// Add hover effect sound (optional)
-		const cards = document.querySelectorAll('.stat-card');
-		cards.forEach(card => {
-			card.addEventListener('mouseenter', function() {
-				this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.15)';
-			});
-			
-			card.addEventListener('mouseleave', function() {
-				this.style.boxShadow = '';
-			});
-		});
-	});
-
-	// Auto-hide notifications after 5 seconds
-	setTimeout(() => {
-		const toasts = document.querySelectorAll('.toast');
-		toasts.forEach(toast => {
-			const bsToast = new bootstrap.Toast(toast);
-			bsToast.hide();
-		});
-	}, 5000);
 </script>
 
 <?= $this->endSection() ?>

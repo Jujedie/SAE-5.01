@@ -41,8 +41,8 @@ $routes->get('admin'           , 'AdminController::index'    , ['filter' => ['au
 $routes->get('admin/dashboard' , 'AdminController::dashboard', ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Réservations
-$routes->get('admin/reservations'           , 'AdminController::reservations'      , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->get('admin/reservations/(:num)/(:num)', 'AdminController::reservationDetail/$1/$2', ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/bookings'           , 'AdminController::bookings'      , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/bookings/(:num)/(:num)', 'AdminController::bookingDetail/$1/$2', ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Utilisateurs
 $routes->get('admin/users'           , 'AdminController::users'     , ['filter' => ['authGuard', 'roleGuard']]);
