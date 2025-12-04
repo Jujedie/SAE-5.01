@@ -14,18 +14,24 @@ class AdminController extends BaseController
 	public function index()
 	{
 		// Afficher le tableau de bord admin
+		$countryModel = new CountryModel();
+		$userModel    = new UserModel();
+		$bookingModel = new BookingModel();
+		$tripModel    = new TripModel();
+		$reviewModel  = new ReviewModel();
+
 		$data =
 		[
-			'destinationsCount' => new CountryModel()->countAllResults(),
-			'usersCount'        => new UserModel   ()->getUsersCount(),
-			'bookingsCount'     => new BookingModel()->getBookingsCount(),
-			'tripsCount'        => new TripModel   ()->getTripsCount(),
-			'reviewsCount'      => new ReviewModel ()->getReviewsCount(),
-			'countriesCount'    => new CountryModel()->getCountriesCount(),
-			'continentsCount'   => new CountryModel()->getContinentsCount(),
+			'destinationsCount' => $countryModel->countAllResults(),
+			'usersCount'        => $userModel->getUsersCount(),
+			'bookingsCount'     => $bookingModel->getBookingsCount(),
+			'tripsCount'        => $tripModel->getTripsCount(),
+			'reviewsCount'      => $reviewModel->getReviewsCount(),
+			'countriesCount'    => $countryModel->getCountriesCount(),
+			'continentsCount'   => $countryModel->getContinentsCount(),
 		];
 
-		return view('admin/panel', $data);
+		return view('admin/HomeAdmin', $data);
 	}
 
 	// Gestion des réservations
