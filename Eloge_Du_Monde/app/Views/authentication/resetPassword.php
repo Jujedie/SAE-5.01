@@ -19,11 +19,11 @@
 					<input type="hidden" name="token" value="<?= esc($token ?? '') ?>">
 
 					<div class="mb-3">
-						<label for="password" class="block text-sm font-medium text-gray-700">Nouveau mot de passe</label>
+						<label for="password" class="block text-sm font-medium text-gray-700">Nouveau mot de passe <span class="text-red-500">*</span></label>
 						<input type="password" id="password" name="password" class="block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600" required>
 					</div>
 					<div class="mb-4">
-						<label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmer le mot de passe</label>
+						<label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmer le mot de passe <span class="text-red-500">*</span></label>
 						<input type="password" id="confirmPassword" name="confirmPassword" class="block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600" required>
 					</div>
 					<button type="submit" class="w-full btn-primary font-medium py-2 rounded-md">Réinitialiser le mot de passe</button>

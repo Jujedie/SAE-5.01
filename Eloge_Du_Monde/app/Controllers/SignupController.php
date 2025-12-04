@@ -30,7 +30,7 @@ class SignupController extends BaseController
 			'lastName'        => 'required|min_length[2]|max_length[50]',
 			'firstName'       => 'required|min_length[2]|max_length[50]',
 			'email'           => 'required|min_length[4]|max_length[100]|valid_email|is_unique[user.email]',
-			'phone'           => 'required|min_length[10]|max_length[15]',
+			'phone'           => 'min_length[10]|max_length[15]',
 			'password'        => 'required|min_length[4]|max_length[50]',
 			'confirmPassword' => 'matches[password]',
 		];

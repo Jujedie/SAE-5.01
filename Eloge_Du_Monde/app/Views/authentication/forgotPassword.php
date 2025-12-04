@@ -13,7 +13,7 @@
 				<form action="<?= site_url('forgotpassword/sendResetLink') ?>" method="POST">
 					<?= csrf_field() ?>
 					<div class="mb-4">
-						<label for="email" class="block text-sm font-medium text-gray-700">Adresse e-mail</label>
+						<label for="email" class="block text-sm font-medium text-gray-700">Adresse e-mail <span class="text-red-500">*</span></label>
 						<input type="email" id="email" name="email" class="block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600" value="<?= set_value('email') ?>" required>
 					</div>
 					<button type="submit" class="w-full btn-primary font-medium py-2 rounded-md">Envoyer le lien de réinitialisation</button>

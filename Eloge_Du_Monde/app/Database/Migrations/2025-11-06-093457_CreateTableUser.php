@@ -31,7 +31,7 @@ class CreateTableUser extends Migration
 			[
 				'type'       => 'VARCHAR',
 				'constraint' => '10',
-				'null'       => false,
+				'null'       => true,
 			],
 			'email'          =>
 			[

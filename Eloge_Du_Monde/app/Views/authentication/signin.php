@@ -12,17 +12,17 @@
 				<form action="<?= site_url('signin/signin') ?>" method="POST" novalidate>
 					<?= csrf_field() ?>
 					<div class="mb-3">
-						<label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+						<label for="email" class="block text-sm font-medium text-gray-700">Email <span class="text-red-500">*</span></label>
 						<input type="email" id="email" name="email" class="block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600" value="<?= set_value('email') ?>" required>
 					</div>
 					<div class="mb-4">
-						<label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+						<label for="password" class="block text-sm font-medium text-gray-700">Mot de passe <span class="text-red-500">*</span></label>
 						<input type="password" id="password" name="password" class="block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600" required>
 					</div>
 					<button type="submit" class="w-full btn-primary font-medium py-2 rounded-md">Connexion</button>
 				</form>
 				<div class="text-center mt-4">
-					<a href="<?= site_url('forgotpassword') ?>" class="text-sm text-gray-600 hover:underline">Mot de passe oublié ?</a>
+					<a href="<?= site_url('forgotPassword') ?>" class="text-sm text-gray-600 hover:underline">Mot de passe oublié ?</a>
 				</div>
 				<div class="text-center mt-3">
 					<a href="<?= site_url('signup') ?>" class="text-sm text-gray-600 hover:underline">Créer un compte</a>
