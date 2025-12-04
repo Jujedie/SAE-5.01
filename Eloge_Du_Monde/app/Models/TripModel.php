@@ -64,6 +64,11 @@ class TripModel extends Model
 		return $this->where('type', $type)->findAll();
 	}
 
+	public function getTripsCount()
+	{
+		return $this->countAllResults();
+	}
+
 	public function addTrip($data)
 	{
 		return $this->insert($data);

@@ -59,6 +59,11 @@ class BookingModel extends Model
 		return $this->where('idUser', $idUser)->findAll();
 	}
 
+	public function getBookingsCount()
+	{
+		return $this->countAllResults();
+	}
+
 	public function addBooking($idTrip, $idUser)
 	{
 		$data =

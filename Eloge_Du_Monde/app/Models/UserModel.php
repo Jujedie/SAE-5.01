@@ -69,6 +69,11 @@ class UserModel extends Model
 		return $this->where('resetToken', $token)->where('resetTokenExpiration >=', date('Y-m-d H:i:s'))->first();
 	}
 
+	public function getUsersCount()
+	{
+		return $this->countAllResults();
+	}
+
 	public function isAdmin($idUser)
 	{
 		return $this->where('idUser', $idUser)->where('role', 'admin')->first() !== null;

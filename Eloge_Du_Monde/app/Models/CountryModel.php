@@ -63,6 +63,16 @@ class CountryModel extends Model
 	{
 		return $this->where('continent', $continent)->findAll();
 	}
+
+	public function getCountriesCount()
+	{
+		return $this->countAllResults();
+	}
+
+	public function getContinentsCount()
+	{
+		return $this->select('continent')->distinct()->countAllResults();
+	}
 	
 	public function addCountry($data)
 	{

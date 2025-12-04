@@ -34,26 +34,6 @@
 
 	<!-- Statistics Grid -->
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-		
-		<!-- Destinations Card -->
-		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('/admin/destinations')">
-			<div class="flex items-start justify-between mb-4">
-				<div class="icon-wrapper bg-blue-100">
-					<svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-					</svg>
-				</div>
-				<svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-				</svg>
-			</div>
-			<div>
-				<p class="text-gray-600 text-sm mb-1">Destinations</p>
-				<p class="text-4xl font-bold text-gray-800 mb-1">156</p>
-				<p class="text-gray-500 text-sm">destinations uniques</p>
-			</div>
-		</div>
 
 		<!-- Pays Card -->
 		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('/admin/pays')">
@@ -69,7 +49,7 @@
 			</div>
 			<div>
 				<p class="text-gray-600 text-sm mb-1">Pays</p>
-				<p class="text-4xl font-bold text-gray-800 mb-1">45</p>
+				<p class="text-4xl font-bold text-gray-800 mb-1"><?= $countriesCount ?></p>
 				<p class="text-gray-500 text-sm">pays couverts</p>
 			</div>
 		</div>
@@ -88,7 +68,7 @@
 			</div>
 			<div>
 				<p class="text-gray-600 text-sm mb-1">Continents</p>
-				<p class="text-4xl font-bold text-gray-800 mb-1">6</p>
+				<p class="text-4xl font-bold text-gray-800 mb-1"><?= $continentsCount ?></p>
 				<p class="text-gray-500 text-sm">continents explorés</p>
 			</div>
 		</div>
@@ -107,7 +87,7 @@
 			</div>
 			<div>
 				<p class="text-gray-600 text-sm mb-1">Utilisateurs</p>
-				<p class="text-4xl font-bold text-gray-800 mb-1">2,847</p>
+				<p class="text-4xl font-bold text-gray-800 mb-1"><?= $usersCount ?></p>
 				<p class="text-gray-500 text-sm">utilisateurs inscrits</p>
 			</div>
 		</div>
@@ -126,7 +106,7 @@
 			</div>
 			<div>
 				<p class="text-gray-600 text-sm mb-1">Témoignages</p>
-				<p class="text-4xl font-bold text-gray-800 mb-1">324</p>
+				<p class="text-4xl font-bold text-gray-800 mb-1"><?= $reviewsCount ?></p>
 				<p class="text-gray-500 text-sm">témoignages clients</p>
 			</div>
 		</div>
@@ -145,7 +125,7 @@
 			</div>
 			<div>
 				<p class="text-gray-600 text-sm mb-1">Voyages</p>
-				<p class="text-4xl font-bold text-gray-800 mb-1">1,523</p>
+				<p class="text-4xl font-bold text-gray-800 mb-1"><?= $tripsCount ?></p>
 				<p class="text-gray-500 text-sm">voyages créés</p>
 			</div>
 		</div>
@@ -164,7 +144,7 @@
 			</div>
 			<div>
 				<p class="text-gray-600 text-sm mb-1">Réservations</p>
-				<p class="text-4xl font-bold text-gray-800 mb-1">487</p>
+				<p class="text-4xl font-bold text-gray-800 mb-1"><?= $bookingsCount ?></p>
 				<p class="text-gray-500 text-sm">réservations actives</p>
 			</div>
 		</div>

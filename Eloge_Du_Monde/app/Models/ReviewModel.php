@@ -69,6 +69,11 @@ class ReviewModel extends Model
 		return $this->where('verified', 1)->findAll();
 	}
 
+	public function getReviewsCount()
+	{
+		return $this->countAllResults();
+	}
+
 	public function addReview($data)
 	{
 		return $this->insert($data);
