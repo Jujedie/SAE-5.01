@@ -24,8 +24,6 @@ class ResetPasswordController extends BaseController
 
 	public function updatePassword()
 	{
-		$session = session();
-
 		$token           = $this->request->getPost('token');
 		$password        = $this->request->getPost('password');
 		$confirmPassword = $this->request->getPost('confirmPassword');

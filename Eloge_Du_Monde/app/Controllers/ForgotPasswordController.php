@@ -14,7 +14,6 @@ class ForgotPasswordController extends BaseController
 
 	public function sendResetLink()
 	{
-		$session = session();
 		$email = $this->request->getPost('email');
 
 		$userModel = new UserModel();
@@ -69,15 +68,10 @@ class ForgotPasswordController extends BaseController
 				</html>
 			";
 
-			// Utilisez la classe Email de CodeIgniter pour envoyer l'e-mail
-			$emailService = \Config\Services::email();
+			$emailService = service('email');
 
-			//paramètres du mail
-			$from ='louisagullo.05@gmail.com';
-
-			//envoi du mail
 			$emailService->setTo($email);
-			$emailService->setFrom($from, 'Eloge Du Monde');
+			$emailService->setFrom('louisagullo.05@gmail.com', 'Eloge Du Monde');
 			$emailService->setSubject('Réinitialisation de votre mot de passe');
 			$emailService->setMailType('html');
 			$emailService->setMessage($message);

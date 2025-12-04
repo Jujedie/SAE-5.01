@@ -14,18 +14,18 @@ class AdminController extends BaseController
 	public function index()
 	{
 		// Afficher le tableau de bord admin
-
 		$data =
 		[
 			'destinationsCount' => new CountryModel()->countAllResults(),
-			'usersCount' => new UserModel()->getUsersCount(),
-			'bookingsCount' => new BookingModel()->getBookingsCount(),
-			'tripsCount' => new TripModel()->getTripsCount(),
-			'reviewsCount' => new ReviewModel()->getReviewsCount(),
-			'countriesCount' => new CountryModel()->getCountriesCount(),
-			'continentsCount' => new CountryModel()->getContinentsCount(),
+			'usersCount'        => new UserModel   ()->getUsersCount(),
+			'bookingsCount'     => new BookingModel()->getBookingsCount(),
+			'tripsCount'        => new TripModel   ()->getTripsCount(),
+			'reviewsCount'      => new ReviewModel ()->getReviewsCount(),
+			'countriesCount'    => new CountryModel()->getCountriesCount(),
+			'continentsCount'   => new CountryModel()->getContinentsCount(),
 		];
-		return view('admin/HomeAdmin', $data);
+
+		return view('admin/panel', $data);
 	}
 
 	// Gestion des réservations
@@ -83,7 +83,7 @@ class AdminController extends BaseController
 		if ($this->request->getMethod() === 'POST')
 		{
 			$data = $this->request->getPost();
-			
+
 			// Ne pas mettre à jour le mot de passe s'il est vide
 			if (empty($data['password']))
 			{
@@ -162,7 +162,7 @@ class AdminController extends BaseController
 	// Gestion des voyages
 	public function trips()
 	{
-		$tripModel = new TripModel();
+		$tripModel         = new TripModel();
 		$prebuiltTripModel = new PrebuiltTripModel();
 		
 		$trips = $tripModel->getAllTrips();
