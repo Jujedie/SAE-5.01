@@ -681,7 +681,6 @@ section {
 
 .destination-card {
     position: relative;
-    aspect-ratio: 3/4;
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.3s;
