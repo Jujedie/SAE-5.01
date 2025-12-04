@@ -18,10 +18,11 @@ class UserController extends BaseController
 
 		$userModel = new UserModel();
 		$user = $userModel->find($session->get('idUser'));
-		
+
 		if (!$user)
 		{
-			return redirect()->to('/signin')->with('error', 'Utilisateur non trouvé.');
+			session()->destroy();
+			return redirect()->to('/signin')->with('error', 'Utilisateur non trouvé. Veuillez
 		}
 
 		return view('profile', ['user' => $user]);
