@@ -12,7 +12,7 @@ class TripStepModel extends Model
 	protected $returnType       = 'array';
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
-	protected $allowedFields    = ['idTripStep', 'name', 'cost', 'idCountry'];
+	protected $allowedFields    = ['name', 'cost', 'idCountry'];
 
 	protected bool $allowEmptyInserts = false;
 	protected bool $updateOnlyChanged = true;

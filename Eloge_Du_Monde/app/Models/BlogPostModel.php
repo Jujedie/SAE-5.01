@@ -12,7 +12,7 @@ class BlogPostModel extends Model
 	protected $returnType       = 'array';
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
-	protected $allowedFields    = ['idBlogPost', 'title', 'type', 'content', 'image', 'idUser'];
+	protected $allowedFields    = ['title', 'type', 'content', 'image', 'idUser'];
 
 	protected bool $allowEmptyInserts = false;
 	protected bool $updateOnlyChanged = true;

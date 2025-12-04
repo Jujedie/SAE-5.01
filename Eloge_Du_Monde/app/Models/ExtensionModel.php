@@ -12,7 +12,7 @@ class ExtensionModel extends Model
 	protected $returnType       = 'array';
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
-	protected $allowedFields    = ['idTrip', 'departureDate', 'type', 'idUser', 'title', 'amount', 'attachment'];
+	protected $allowedFields    = ['departureDate', 'type', 'idUser', 'title', 'amount', 'attachment'];
 
 	protected bool $allowEmptyInserts = false;
 	protected bool $updateOnlyChanged = true;
