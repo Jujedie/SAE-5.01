@@ -1,9 +1,9 @@
-<?= $this->extend('layouts/default') ?>
+<?= $this->extend('layout/default') ?>
 <?= $this->section('title') ?>403 - Accès interdit<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 <div class="container text-center py-5">
-	<div class="row justify-content-center">
+	<div class="row justify-content-center" style="margin-top:7rem;">
 		<div class="col-md-8">
 			<h1 class="display-5 mb-4">403 — Accès interdit</h1>
 			<p class="lead mb-4">Vous n'avez pas les permissions nécessaires pour accéder à cette page.</p>

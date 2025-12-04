@@ -13,39 +13,13 @@ class AdminController extends BaseController
 {
 	public function index()
 	{
-		$check = $this->checkAdmin();
-		if ($check) return $check;
-
 		// Afficher le tableau de bord admin
-		return view('admin/HomeAdmin');
-	}
 
-	private function checkAdmin()
-	{
-		$session = session();
-		
-		// Vérifier si l'utilisateur est connecté
-		if (!$session->get('isLoggedIn'))
-			{
-			return redirect()->to('/signin')->with('error', 'Vous devez être connecté pour accéder à cette page.');
-		}
-
-		// Vérifier si l'utilisateur est administrateur
-		$userModel = new UserModel();
-		if (!$userModel->isAdmin($session->get('idUser')))
-		{
-			return redirect()->to('/')->with('error', 'Accès refusé. Cette page est réservée aux administrateurs.');
-		}
-
-		return null;
 	}
 
 	// Gestion des réservations
 	public function bookings()
 	{
-		$check = $this->checkAdmin();
-		if ($check) return $check;
-
 		$bookingModel = new BookingModel();
 		$bookings = $bookingModel->getAllBookings();
 
@@ -57,9 +31,6 @@ class AdminController extends BaseController
 
 	public function bookingDetail($idTrip, $idUser)
 	{
-		$check = $this->checkAdmin();
-		if ($check) return $check;
-
 		$bookingModel = new BookingModel();
 		$tripModel    = new TripModel();
 		$userModel    = new UserModel();
@@ -90,9 +61,6 @@ class AdminController extends BaseController
 
 	public function editUser($id)
 	{
-		$check = $this->checkAdmin();
-		if ($check) return $check;
-
 		$userModel = new UserModel();
 		$user = $userModel->getUserById($id);
 
@@ -124,9 +92,6 @@ class AdminController extends BaseController
 
 	public function deleteUser($id)
 	{
-		$check = $this->checkAdmin();
-		if ($check) return $check;
-
 		$userModel = new UserModel();
 		$userModel->deleteUser($id);
 
@@ -136,9 +101,6 @@ class AdminController extends BaseController
 	// Gestion des destinations
 	public function countries()
 	{
-		$check = $this->checkAdmin();
-		if ($check) return $check;
-
 		$countryModel = new CountryModel();
 		$countries = $countryModel->getAllCountries();
 
@@ -147,9 +109,6 @@ class AdminController extends BaseController
 
 	public function addCountry()
 	{
-		$check = $this->checkAdmin();
-		if ($check) return $check;
-
 		if ($this->request->getMethod() === 'POST')
 		{
 			$countryModel = new CountryModel();
@@ -163,9 +122,6 @@ class AdminController extends BaseController
 
 	public function editCountry($id)
 	{
-		$check = $this->checkAdmin();
-		if ($check) return $check;
-
 		$countryModel = new CountryModel();
 		$country = $countryModel->getCountryById($id);
 
@@ -186,9 +142,6 @@ class AdminController extends BaseController
 
 	public function deleteCountry($id)
 	{
-		$check = $this->checkAdmin();
-		if ($check) return $check;
-
 		$countryModel = new CountryModel();
 		$countryModel->deleteCountry($id);
 
@@ -198,9 +151,6 @@ class AdminController extends BaseController
 	// Gestion des voyages
 	public function trips()
 	{
-		$check = $this->checkAdmin();
-		if ($check) return $check;
-
 		$tripModel = new TripModel();
 		$prebuiltTripModel = new PrebuiltTripModel();
 		
@@ -212,9 +162,6 @@ class AdminController extends BaseController
 
 	public function editTrip($id)
 	{
-		$check = $this->checkAdmin();
-		if ($check) return $check;
-
 		$tripModel = new TripModel();
 		$trip = $tripModel->getTripById($id);
 
@@ -235,9 +182,6 @@ class AdminController extends BaseController
 
 	public function deleteTrip($id)
 	{
-		$check = $this->checkAdmin();
-		if ($check) return $check;
-
 		$tripModel = new TripModel();
 		$tripModel->deleteTrip($id);
 
@@ -247,9 +191,6 @@ class AdminController extends BaseController
 	// Gestion des témoignages (avis)
 	public function reviews()
 	{
-		$check = $this->checkAdmin();
-		if ($check) return $check;
-
 		$reviewModel = new ReviewModel();
 		$reviews = $reviewModel->getAllReviews();
 
@@ -258,9 +199,6 @@ class AdminController extends BaseController
 
 	public function verifyReview($id)
 	{
-		$check = $this->checkAdmin();
-		if ($check) return $check;
-
 		$reviewModel = new ReviewModel();
 		$review = $reviewModel->getReviewById($id);
 
@@ -275,9 +213,6 @@ class AdminController extends BaseController
 
 	public function deleteReview($id)
 	{
-		$check = $this->checkAdmin();
-		if ($check) return $check;
-
 		$reviewModel = new ReviewModel();
 		$reviewModel->deleteReviewById($id);
 
