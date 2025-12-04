@@ -46,6 +46,7 @@ class SigninController extends BaseController
 					'lastName' => $data['lastName'],
 					'firstName' => $data['firstName'],
 					'email' => $data['email'],
+					'isAdmin' => ($data['role'] === 'admin') ? true : false,
 					'isLoggedIn' => TRUE
 				];
 

@@ -88,6 +88,14 @@
 			<?php endif; ?>
 		</div>
 
+		<div class="header-actions mr-20">
+			<?php if (session()->get('isAdmin')): ?>
+			<a href="<?= base_url('admin') ?>" class="admin-panel-link" aria-label="Panneau d'administration">
+				Panneau d'administration
+			</a>
+			<?php endif; ?>
+		</div>
+
 		<button class="mobile-menu-btn" aria-label="Menu mobile">
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 				<line x1="3" y1="12" x2="21" y2="12"></line>
