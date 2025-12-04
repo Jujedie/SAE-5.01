@@ -22,7 +22,7 @@ class UserController extends BaseController
 		if (!$user)
 		{
 			session()->destroy();
-			return redirect()->to('/signin')->with('error', 'Utilisateur non trouvé. Veuillez
+			return redirect()->to('/signin')->with('error', 'Utilisateur non trouvé. Veuillez vous reconnecter.');
 		}
 
 		return view('profile', ['user' => $user]);
