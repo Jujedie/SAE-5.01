@@ -28,7 +28,7 @@
 
 <?= $this->section('content') ?>
 
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-4 py-8" style="margin-top:6rem;">
 	<!-- Header with back button -->
 	<div class="mb-8">
 		<a href="<?= base_url('admin') ?>" class="inline-flex items-center text-gray-600 hover:text-gray-800 mb-4">
