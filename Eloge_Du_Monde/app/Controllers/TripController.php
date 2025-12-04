@@ -25,5 +25,35 @@ class TripController extends BaseController
 		return view('trips', ["user" => ((new UserModel())->getUserById($session->get('idUser'))), "listTrips" => $trips]);
 	}
 
-	
+	public function createPersonalTrip()
+	{
+		$session = session();
+
+		// Vérifier si l'utilisateur est connecté
+		if (!$session->get('isLoggedIn'))
+		{
+			return redirect()->to('/signin')->with('error', 'Vous devez être connecté pour créer un voyage personnalisé.');
+		}
+
+		return view('trip/create_trip', ["isAdmin" => ((new UserModel())->isAdmin($session->get('idUser')))]);
+	}
+
+	public function creationPersonalTrip()
+	{
+
+	}
+
+	public function viewTrip($idTrip)
+	{
+		$session   = session();
+		$tripModel = new TripModel();
+
+		$trip = $tripModel->getTripById($idTrip);
+		if (!$trip)
+		{
+			return redirect()->to('/trips')->with('error', 'Le voyage demandé n\'existe pas.');
+		}
+
+		return view('trip/view_trip', ["isAdmin" => ((new UserModel())->isAdmin($session->get('idUser'))), "trip" => $trip]);
+	}
 }
