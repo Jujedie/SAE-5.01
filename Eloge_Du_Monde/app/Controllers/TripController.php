@@ -24,4 +24,6 @@ class TripController extends BaseController
 
 		return view('trips', ["user" => ((new UserModel())->getUserById($session->get('idUser'))), "listTrips" => $trips]);
 	}
+
+	
 }
