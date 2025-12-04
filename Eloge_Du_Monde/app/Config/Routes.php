@@ -38,8 +38,7 @@ $routes->match(['POST', 'DELETE'], 'profile/deleteUser'     , 'UserController::d
 $routes->match(['GET', 'POST']   , 'newsletter/toggle'      , 'UserController::toggleNewsletter', ['filter' => 'authGuard']);
 
 // Admin
-$routes->get('admin'          , 'AdminController::index'    , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->get('admin/dashboard', 'AdminController::dashboard', ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin', 'AdminController::index', ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Réservations
 $routes->get('admin/bookings'              , 'AdminController::bookings'           , ['filter' => ['authGuard', 'roleGuard']]);
