@@ -52,11 +52,6 @@ class ReviewController extends BaseController
 
 		if (! $session->get('isLoggedIn'))
 		{
-			if ($this->request->isAJAX())
-			{
-				return $this->response->setJSON(['status' => false, 'message' => 'Vous devez être connecté pour laisser un avis.']);
-			}
-
 			return redirect()->to('signin')->with('error', 'Vous devez être connecté pour laisser un avis.');
 		}
 
@@ -73,10 +68,6 @@ class ReviewController extends BaseController
 		if (! $this->validate($rules))
 		{
 			$errors = $this->validator->getErrors();
-			if ($this->request->isAJAX())
-			{
-				return $this->response->setJSON(['status' => false, 'errors' => $errors]);
-			}
 
 			return redirect()->back()->withInput()->with('error', array_values($errors)[0]);
 		}
@@ -95,17 +86,7 @@ class ReviewController extends BaseController
 		if ($insertId)
 		{
 			$message = 'Merci, votre avis a été soumis et sera publié après vérification.';
-			if ($this->request->isAJAX())
-			{
-				return $this->response->setJSON(['status' => true, 'message' => $message]);
-			}
-
 			return redirect()->to('reviews')->with('success', $message);
-		}
-
-		if ($this->request->isAJAX())
-		{
-			return $this->response->setJSON(['status' => false, 'message' => 'Impossible d\'enregistrer l\'avis.']);
 		}
 
 		return redirect()->back()->withInput()->with('error', 'Impossible d\'enregistrer l\'avis.');
