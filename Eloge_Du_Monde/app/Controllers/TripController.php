@@ -40,7 +40,7 @@ class TripController extends BaseController
 
 	public function creationPersonalTrip()
 	{
-
+		
 	}
 
 	public function viewTrip($idTrip)

@@ -18,6 +18,11 @@ class UserController extends BaseController
 
 		$userModel = new UserModel();
 		$user = $userModel->find($session->get('idUser'));
+		
+		if (!$user)
+		{
+			return redirect()->to('/signin')->with('error', 'Utilisateur non trouvé.');
+		}
 
 		return view('profile', ['user' => $user]);
 	}
@@ -71,24 +76,44 @@ class UserController extends BaseController
 			return redirect()->to('/signin')->with('error', 'Vous devez être connecté pour accéder à cette page.');
 		}
 
-		$userModel = new UserModel();
-		$user = $userModel->find($session->get('idUser'));
-
-		// Récupérer les données du formulaire
-		$lastName  = $this->request->getPost('lastName');
-		$firstName = $this->request->getPost('firstName');
-		$email     = $this->request->getPost('email');
-		$phone     = $this->request->getPost('phone');
-
-		// Mettre à jour les informations de l'utilisateur
-		$userModel->update($user['idUser'],
+		helper(['form']);
+		$rules =
 		[
-			'lastName'  => $lastName,
-			'firstName' => $firstName,
-			'email'     => $email,
-			'phone'     => $phone,
-		]);
+			'lastName'        => 'required|min_length[2]|max_length[50]',
+			'firstName'       => 'required|min_length[2]|max_length[50]',
+			'email'           => 'required|min_length[4]|max_length[100]|valid_email|is_unique[user.email]',
+			'phone'           => 'min_length[10]|max_length[15]',
+			'password'        => 'min_length[4]|max_length[50]',
+			'confirmPassword' => 'matches[password]',
+		];
+		
+		if ($this->validate($rules))
+		{
 
-		return redirect()->to('/profile')->with('success', 'Votre profil a été mis à jour avec succès.');
+			$userModel = new UserModel();
+			$user = $userModel->find($session->get('idUser'));
+
+			// Récupérer les données du formulaire
+			$lastName  = $this->request->getPost('lastName');
+			$firstName = $this->request->getPost('firstName');
+			$email     = $this->request->getPost('email');
+			$phone     = $this->request->getPost('phone');
+
+			// Mettre à jour les informations de l'utilisateur
+			$userModel->update($user['idUser'],
+			[
+				'lastName'  => $lastName,
+				'firstName' => $firstName,
+				'email'     => $email,
+				'phone'     => $phone,
+			]);
+
+			return redirect()->to('/profile/updateUser')->with('success', 'Votre profil a été mis à jour avec succès.');
+		}
+		else
+		{
+			$data['validation'] = $this->validator;
+			echo view('authentication/signup', $data);
+		}
 	}
 }
