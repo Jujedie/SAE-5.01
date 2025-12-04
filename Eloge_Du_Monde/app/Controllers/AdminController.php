@@ -23,15 +23,15 @@ class AdminController extends BaseController
 		$data =
 		[
 			'destinationsCount' => $countryModel->countAllResults(),
-			'usersCount'        => $userModel->getUsersCount(),
+			'usersCount'        => $userModel   ->getUsersCount(),
 			'bookingsCount'     => $bookingModel->getBookingsCount(),
-			'tripsCount'        => $tripModel->getTripsCount(),
-			'reviewsCount'      => $reviewModel->getReviewsCount(),
+			'tripsCount'        => $tripModel   ->getTripsCount(),
+			'reviewsCount'      => $reviewModel ->getReviewsCount(),
 			'countriesCount'    => $countryModel->getCountriesCount(),
 			'continentsCount'   => $countryModel->getContinentsCount(),
 		];
 
-		return view('admin/HomeAdmin', $data);
+		return view('admin/homeAdmin', $data);
 	}
 
 	// Gestion des réservations
