@@ -81,7 +81,8 @@ class UserController extends BaseController
 		$phone     = $this->request->getPost('phone');
 
 		// Mettre à jour les informations de l'utilisateur
-		$userModel->update($user['idUser'], [
+		$userModel->update($user['idUser'],
+		[
 			'lastName'  => $lastName,
 			'firstName' => $firstName,
 			'email'     => $email,

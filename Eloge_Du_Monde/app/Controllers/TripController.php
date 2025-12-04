@@ -9,15 +9,15 @@ class TripController extends BaseController
 {
 	public function index($filter = [])
 	{
-		$session = session();
+		$session   = session();
 		$tripModel = new TripModel();
 
 		$trips = [];
-		if (!empty($filter)) 
+		if (!empty($filter))
 		{
 			$trips = $tripModel->getTripsByFilter($filter);
-		} 
-		else 
+		}
+		else
 		{
 			$trips = $tripModel->getAllTrips();
 		}

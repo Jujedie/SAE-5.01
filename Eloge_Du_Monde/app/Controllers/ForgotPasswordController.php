@@ -84,19 +84,16 @@ class ForgotPasswordController extends BaseController
 
 			if (!$emailService->send())
 			{
-				$session->setFlashdata('error', 'Erreur lors de l\'envoi de l\'email.');
-				return redirect()->to('forgotPassword');
+				return redirect()->to('forgotPassword')->with('error', 'Erreur lors de l\'envoi de l\'email.');
 			}
 			else
 			{
-				$session->setFlashdata('success', 'Si l\'email inscrit est correct, un email de réinitialisation a été envoyé.');
-				return redirect()->to('signin');
+				return redirect()->to('signin')->with('success', 'Si l\'email inscrit est correct, un email de réinitialisation a été envoyé.');
 			}
 		}
 		else
 		{
-			$session->setFlashdata('success', 'Si l\'email inscrit est correct, un email de réinitialisation a été envoyé.');
-			return redirect()->to('signin');
+			return redirect()->to('signin')->with('success', 'Si l\'email inscrit est correct, un email de réinitialisation a été envoyé.');
 		}
 	}
 }

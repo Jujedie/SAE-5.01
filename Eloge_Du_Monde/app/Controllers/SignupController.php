@@ -14,7 +14,7 @@ class SignupController extends BaseController
 
 		if ($session->get('isLoggedIn'))
 		{
-			return redirect()->to('/');
+			return redirect()->to('/')->with('info', 'Vous êtes déjà connecté.');
 		}
 		else
 		{
@@ -27,11 +27,11 @@ class SignupController extends BaseController
 		helper(['form']);
 		$rules =
 		[
-			'lastName' => 'required|min_length[2]|max_length[50]',
-			'firstName' => 'required|min_length[2]|max_length[50]',
-			'email' => 'required|min_length[4]|max_length[100]|valid_email|is_unique[user.email]',
-			'phone' => 'required|min_length[10]|max_length[15]',
-			'password' => 'required|min_length[4]|max_length[50]',
+			'lastName'        => 'required|min_length[2]|max_length[50]',
+			'firstName'       => 'required|min_length[2]|max_length[50]',
+			'email'           => 'required|min_length[4]|max_length[100]|valid_email|is_unique[user.email]',
+			'phone'           => 'required|min_length[10]|max_length[15]',
+			'password'        => 'required|min_length[4]|max_length[50]',
 			'confirmPassword' => 'matches[password]',
 		];
 
@@ -40,16 +40,16 @@ class SignupController extends BaseController
 			$session = session();
 
 			$userModel = new UserModel();
-			$logModel = new LogModel();
+			$logModel  = new LogModel();
 
 			$data =
 			[
-				'lastName' => $this->request->getVar('lastName'),
+				'lastName'  => $this->request->getVar('lastName'),
 				'firstName' => $this->request->getVar('firstName'),
-				'email' => $this->request->getVar('email'),
-				'phone' => $this->request->getVar('phone'),
-				'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-				'role' => 'user',
+				'email'     => $this->request->getVar('email'),
+				'phone'     => $this->request->getVar('phone'),
+				'password'  => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+				'role'      => 'user',
 			];
 
 			$userModel->addUser($data);
@@ -61,8 +61,7 @@ class SignupController extends BaseController
 			$session->set('email', $data['email']);
 			$session->set('isLoggedIn', true);
 
-			$session->setFlashdata('success', 'Inscription réussie !');
-			return redirect()->to('/');
+			return redirect()->to('/')->with('success', 'Inscription réussie !');
 		}
 		else
 		{

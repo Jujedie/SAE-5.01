@@ -14,7 +14,7 @@ class SigninController extends BaseController
 
 		if ($session->get('isLoggedIn'))
 		{
-			return redirect()->to('/');
+			return redirect()->to('/')->with('info', 'Vous êtes déjà connecté.');
 		}
 		else
 		{
@@ -27,10 +27,10 @@ class SigninController extends BaseController
 		$session = session();
 
 		$userModel = new UserModel();
-		$logModel = new LogModel();
+		$logModel  = new LogModel();
 
-		$email = $this->request->getVar('email');
-		$password = $this->request->getVar('password');
+		$email     = $this->request->getVar('email');
+		$password  = $this->request->getVar('password');
 
 		$data = $userModel->getUserByEmail($email);
 
@@ -42,31 +42,27 @@ class SigninController extends BaseController
 			{
 				$ses_data =
 				[
-					'idUser' => $data['idUser'],
-					'lastName' => $data['lastName'],
-					'firstName' => $data['firstName'],
-					'email' => $data['email'],
-					'isAdmin' => ($data['role'] === 'admin') ? true : false,
+					'idUser'     => $data['idUser'],
+					'lastName'   => $data['lastName'],
+					'firstName'  => $data['firstName'],
+					'email'      => $data['email'],
+					'isAdmin'    => ($data['role'] === 'admin') ? true : false,
 					'isLoggedIn' => TRUE
 				];
 
 				$session->set($ses_data);
 
-				$session->setFlashdata('success', 'Connexion réussie !');
-
 				$logModel->addLogEntry('Utilisateur connecté : ' . $data['email'], $data['idUser']);
-				return redirect()->to('/');
+				return redirect()->to('/')->with('success', 'Connexion réussie !');
 			}
 			else
 			{
-				$session->setFlashdata('error', 'L\'adresse email ou le mot de passe est incorrect.');
-				return redirect()->to('signin');
+				return redirect()->to('signin')->with('error', 'L\'adresse email ou le mot de passe est incorrect.');
 			}
 		}
 		else
 		{
-			$session->setFlashdata('error', 'L\'adresse email ou le mot de passe est incorrect.');
-			return redirect()->to('signin');
+			return redirect()->to('signin')->with('error', 'L\'adresse email ou le mot de passe est incorrect.');
 		}
 	}
 
@@ -74,6 +70,6 @@ class SigninController extends BaseController
 	{
 		$session = session();
 		$session->destroy();
-		return redirect()->to('signin');
+		return redirect()->to('signin')->with('success', 'Vous avez été déconnecté avec succès.');
 	}
 }

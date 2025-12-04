@@ -18,9 +18,7 @@ class ResetPasswordController extends BaseController
 		}
 		else
 		{
-			$session = session();
-			$session->setFlashdata('error', 'Le lien de réinitialisation est invalide ou a expiré.');
-			return redirect()->to('forgotPassword');
+			return redirect()->to('forgotPassword')->with('error', 'Le lien de réinitialisation est invalide ou a expiré.');
 		}
 	}
 
@@ -28,8 +26,8 @@ class ResetPasswordController extends BaseController
 	{
 		$session = session();
 
-		$token = $this->request->getPost('token');
-		$password = $this->request->getPost('password');
+		$token           = $this->request->getPost('token');
+		$password        = $this->request->getPost('password');
 		$confirmPassword = $this->request->getPost('confirmPassword');
 
 		// Valider et traiter les données du formulaire
@@ -42,13 +40,11 @@ class ResetPasswordController extends BaseController
 			$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 			$userModel->updatePassword($user['idUser'], $hashedPassword);
 
-			$session->setFlashdata('success', 'Votre mot de passe a été réinitialisé avec succès.');
-			return redirect()->to('signin');
+			return redirect()->to('signin')->with('success', 'Votre mot de passe a été réinitialisé avec succès.');
 		}
 		else
 		{
-			$session->setFlashdata('error', 'Les mots de passe ne correspondent pas ou le lien est invalide.');
-			return redirect()->to('resetPassword/' . $token);
+			return redirect()->to('resetPassword/' . $token)->with('error', 'Les mots de passe ne correspondent pas ou le lien est invalide.');
 		}
 	}
 }
