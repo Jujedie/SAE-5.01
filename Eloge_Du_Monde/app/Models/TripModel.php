@@ -64,6 +64,15 @@ class TripModel extends Model
 		return $this->where('type', $type)->findAll();
 	}
 
+	public function getTripsByFilter($filter)
+	{
+		foreach ($filter as $key => $value)
+		{
+			$this->where($key, $value);
+		}
+		return $this->findAll();
+	}
+
 	public function getTripsCount()
 	{
 		return $this->countAllResults();
