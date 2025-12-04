@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class PrebuiltTripModel extends Model
 {
-	protected $table            = 'prebuiltTrip';
+	protected $table            = 'prebuilttrip';
 	protected $primaryKey       = 'idTrip';
 	protected $useAutoIncrement = true;
 	protected $returnType       = 'array';
