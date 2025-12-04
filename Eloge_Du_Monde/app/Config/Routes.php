@@ -51,10 +51,10 @@ $routes->match(['GET', 'POST'], 'admin/users/edit/(:num)'       , 'AdminControll
 $routes->post('admin/users/delete/(:num)'                       , 'AdminController::deleteUser/$1', ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Destinations
-$routes->get('admin/destinations'                               , 'AdminController::destinations'        , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->match(['GET', 'POST'], 'admin/destinations/add'        , 'AdminController::addDestination'      , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->match(['GET', 'POST'], 'admin/destinations/edit/(:num)', 'AdminController::editDestination/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->post('admin/destinations/delete/(:num)'                , 'AdminController::deleteDestination/$1', ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/destinations'                               , 'AdminController::countries'        , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->match(['GET', 'POST'], 'admin/destinations/add'        , 'AdminController::addCountry'      , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->match(['GET', 'POST'], 'admin/destinations/edit/(:num)', 'AdminController::editCountry/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->post('admin/destinations/delete/(:num)'                , 'AdminController::deleteCountry/$1', ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Voyages
 $routes->get('admin/trips'                                      , 'AdminController::trips'        , ['filter' => ['authGuard', 'roleGuard']]);
