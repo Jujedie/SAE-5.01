@@ -132,7 +132,9 @@ class AdminController extends BaseController
 		{
 			$countryModel = new CountryModel();
 			$data = $this->request->getPost();
+
 			$countryModel->addCountry($data);
+
 			return redirect()->to('/admin/destinations')->with('success', 'Destination ajoutée avec succès.');
 		}
 
