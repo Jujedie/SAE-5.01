@@ -38,7 +38,7 @@
 			Retour au menu admin
 		</a>
 		<h1 class="text-3xl font-bold text-gray-800 mb-2">Gestion des utilisateurs</h1>
-		<p class="text-gray-600">4 utilisateurs inscrits</p>
+		<p class="text-gray-600"><?= count($users) ?> utilisateurs inscrits</p>
 	</div>
 
 	<!-- Search Box -->
