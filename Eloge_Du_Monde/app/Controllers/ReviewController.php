@@ -29,20 +29,18 @@ class ReviewController extends BaseController
 			}
 		}
 
-		$data = [
+		$data =
+		[
 			'reviews' => $reviews,
 			'average' => $average,
-			'count'   => is_array($reviews) ? count($reviews) : 0,
+			'count'   => $reviewModel->getReviewsCount()
 		];
 
 		return view('reviews', $data);
 	}
 
 	/**
-	 * Enregistre un nouvel avis (POST).
-	 * - Utilisateur doit être connecté (session 'isLoggedIn').
-	 * - Valide `rating` (1-5) et `content` (min 10).
-	 * Retourne JSON si requête AJAX, sinon redirige avec flashdata.
+	 * Enregistre un nouvel avis
 	 */
 	public function store()
 	{
@@ -50,22 +48,23 @@ class ReviewController extends BaseController
 
 		$session = session();
 
-		if (! $session->get('isLoggedIn'))
+		if (!$session->get('isLoggedIn'))
 		{
 			return redirect()->to('signin')->with('error', 'Vous devez être connecté pour laisser un avis.');
 		}
 
-		if ($this->request->getMethod() !== 'post')
+		if ($this->request->getMethod() !== 'POST')
 		{
 			return redirect()->to('reviews');
 		}
 
-		$rules = [
+		$rules =
+		[
 			'rating'  => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[5]',
 			'content' => 'required|min_length[10]|max_length[2000]',
 		];
 
-		if (! $this->validate($rules))
+		if (!$this->validate($rules))
 		{
 			$errors = $this->validator->getErrors();
 
@@ -74,7 +73,8 @@ class ReviewController extends BaseController
 
 		$reviewModel = new ReviewModel();
 
-		$data = [
+		$data =
+		[
 			'rating'  => (int) $this->request->getPost('rating'),
 			'content' => $this->request->getPost('content'),
 			'verified' => 0,
