@@ -66,7 +66,7 @@ class ReviewModel extends Model
 
 	public function getVerifiedReviews()
 	{
-		return $this->where('verified', 1)->findAll();
+		return $this->where('verified', 't')->findAll();
 	}
 
 	public function getReviewsCount()
