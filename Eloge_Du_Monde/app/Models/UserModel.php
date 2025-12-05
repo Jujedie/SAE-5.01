@@ -94,7 +94,7 @@ class UserModel extends Model
 		return $this->update($idUser, ['password' => $newPassword]);
 	}
 
-	public function deleteUser($idUser)
+	public function deleteUserById($idUser)
 	{
 		return $this->delete($idUser);
 	}

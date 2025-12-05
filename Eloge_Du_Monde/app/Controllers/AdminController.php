@@ -78,41 +78,10 @@ class AdminController extends BaseController
 		return view('admin/users/list', ['users' => $users]);
 	}
 
-	public function editUser($id)
-	{
-		$userModel = new UserModel();
-		$user = $userModel->getUserById($id);
-
-		if (!$user)
-		{
-			return redirect()->to('/admin/users')->with('error', 'Utilisateur non trouvé.');
-		}
-
-		if ($this->request->getMethod() === 'POST')
-		{
-			$data = $this->request->getPost();
-
-			// Ne pas mettre à jour le mot de passe s'il est vide
-			if (empty($data['password']))
-			{
-				unset($data['password']);
-			}
-			else
-			{
-				$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-			}
-			
-			$userModel->updateUser($id, $data);
-			return redirect()->to('/admin/users')->with('success', 'Utilisateur mis à jour avec succès.');
-		}
-
-		return view('admin/users/edit', ['user' => $user]);
-	}
-
 	public function deleteUser($id)
 	{
 		$userModel = new UserModel();
-		$userModel->deleteUser($id);
+		$userModel->deleteUserById($id);
 
 		return redirect()->to('/admin/users')->with('success', 'Utilisateur supprimé avec succès.');
 	}

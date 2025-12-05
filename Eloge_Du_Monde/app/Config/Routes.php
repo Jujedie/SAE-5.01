@@ -48,7 +48,7 @@ $routes->get('admin/bookings/(:num)/(:num)', 'AdminController::bookingDetail/$1/
 // Admin - Utilisateurs
 $routes->get('admin/users'                                      , 'AdminController::users'        , ['filter' => ['authGuard', 'roleGuard']]);
 $routes->match(['GET', 'POST'], 'admin/users/edit/(:num)'       , 'AdminController::editUser/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->post('admin/users/delete/(:num)'                       , 'AdminController::deleteUser/$1', ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/users/delete/(:num)'                       , 'AdminController::deleteUser/$1', ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Voyages
 $routes->get('admin/trips'                                      , 'AdminController::trips'        , ['filter' => ['authGuard', 'roleGuard']]);
