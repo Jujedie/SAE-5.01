@@ -209,6 +209,60 @@ class AdminController extends BaseController
 		return redirect()->to('/admin/trips')->with('success', 'Voyage supprimé avec succès.');
 	}
 
+	// Gestion des voyages préfaits
+	public function prebuiltTrips()
+	{
+		$prebuiltTripModel = new PrebuiltTripModel();
+		$prebuiltTrips = $prebuiltTripModel->getAllPrebuiltTrips();
+
+		return view('admin/prebuiltTrips/list', ['prebuiltTrips' => $prebuiltTrips]);
+	}
+
+	public function addPrebuiltTrip()
+	{
+		if ($this->request->getMethod() === 'POST')
+		{
+			$prebuiltTripModel = new PrebuiltTripModel();
+			$data = $this->request->getPost();
+			
+			// Ajouter l'ID de l'utilisateur connecté
+			$data['idUser'] = session()->get('idUser');
+			
+			$prebuiltTripModel->addPrebuiltTrip($data);
+			return redirect()->to('/admin/prebuiltTrips')->with('success', 'Voyage préfait ajouté avec succès.');
+		}
+
+		return view('admin/prebuiltTrips/add');
+	}
+
+	public function editPrebuiltTrip($id)
+	{
+		$prebuiltTripModel = new PrebuiltTripModel();
+		$prebuiltTrip = $prebuiltTripModel->getPrebuiltTripById($id);
+
+		if (!$prebuiltTrip)
+		{
+			return redirect()->to('/admin/prebuiltTrips')->with('error', 'Voyage préfait non trouvé.');
+		}
+
+		if ($this->request->getMethod() === 'POST')
+		{
+			$data = $this->request->getPost();
+			$prebuiltTripModel->updatePrebuiltTrip($id, $data);
+			return redirect()->to('/admin/prebuiltTrips')->with('success', 'Voyage préfait mis à jour avec succès.');
+		}
+
+		return view('admin/prebuiltTrips/edit', ['prebuiltTrip' => $prebuiltTrip]);
+	}
+
+	public function deletePrebuiltTrip($id)
+	{
+		$prebuiltTripModel = new PrebuiltTripModel();
+		$prebuiltTripModel->deletePrebuiltTrip($id);
+
+		return redirect()->to('/admin/prebuiltTrips')->with('success', 'Voyage préfait supprimé avec succès.');
+	}
+
 	// Gestion des témoignages (avis)
 	public function reviews()
 	{

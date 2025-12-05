@@ -50,16 +50,16 @@ $routes->get('admin/users'                                      , 'AdminControll
 $routes->match(['GET', 'POST'], 'admin/users/edit/(:num)'       , 'AdminController::editUser/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
 $routes->post('admin/users/delete/(:num)'                       , 'AdminController::deleteUser/$1', ['filter' => ['authGuard', 'roleGuard']]);
 
-// Admin - Destinations
-$routes->get('admin/destinations'                               , 'AdminController::countries'        , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->match(['GET', 'POST'], 'admin/destinations/add'        , 'AdminController::addCountry'      , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->match(['GET', 'POST'], 'admin/destinations/edit/(:num)', 'AdminController::editCountry/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->post('admin/destinations/delete/(:num)'                , 'AdminController::deleteCountry/$1', ['filter' => ['authGuard', 'roleGuard']]);
-
 // Admin - Voyages
 $routes->get('admin/trips'                                      , 'AdminController::trips'        , ['filter' => ['authGuard', 'roleGuard']]);
 $routes->match(['GET', 'POST'], 'admin/trips/edit/(:num)'       , 'AdminController::editTrip/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
 $routes->post('admin/trips/delete/(:num)'                       , 'AdminController::deleteTrip/$1', ['filter' => ['authGuard', 'roleGuard']]);
+
+// Admin - Voyages préfaits
+$routes->get('admin/prebuiltTrips'                                     , 'AdminController::prebuiltTrips'       , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->match(['GET', 'POST'], 'admin/prebuiltTrips/add'              , 'AdminController::addPrebuiltTrip'     , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->match(['GET', 'POST'], 'admin/prebuiltTrips/edit/(:num)'      , 'AdminController::editPrebuiltTrip/$1' , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->post('admin/prebuiltTrips/delete/(:num)'                      , 'AdminController::deletePrebuiltTrip/$1', ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Témoignages
 $routes->get('admin/reviews'               , 'AdminController::reviews'        , ['filter' => ['authGuard', 'roleGuard']]);
