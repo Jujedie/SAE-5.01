@@ -6,6 +6,7 @@ use App\Models\UserModel;
 use App\Models\BookingModel;
 use App\Models\CountryModel;
 use App\Models\TripModel;
+use App\Models\TripStepModel;
 use App\Models\PrebuiltTripModel;
 use App\Models\ReviewModel;
 
@@ -86,13 +87,13 @@ class AdminController extends BaseController
 		return redirect()->to('/admin/users')->with('success', 'Utilisateur supprimé avec succès.');
 	}
 
-	// Gestion des destinations
+	// Gestion des pays
 	public function countries()
 	{
 		$countryModel = new CountryModel();
 		$countries = $countryModel->getAllCountries();
 
-		return view('admin/destinations/list', ['destinations' => $countries]);
+		return view('admin/countries/list', ['countries' => $countries]);
 	}
 
 	public function addCountry()
@@ -103,11 +104,10 @@ class AdminController extends BaseController
 			$data = $this->request->getPost();
 
 			$countryModel->addCountry($data);
-
-			return redirect()->to('/admin/destinations')->with('success', 'Destination ajoutée avec succès.');
+			return redirect()->to('/admin/countries')->with('success', 'Pays ajouté avec succès.');
 		}
 
-		return view('admin/destinations/add');
+		return view('admin/countries/add');
 	}
 
 	public function editCountry($id)
@@ -117,17 +117,17 @@ class AdminController extends BaseController
 
 		if (!$country)
 		{
-			return redirect()->to('/admin/destinations')->with('error', 'Destination non trouvée.');
+			return redirect()->to('/admin/countries')->with('error', 'Pays non trouvé.');
 		}
 
 		if ($this->request->getMethod() === 'POST')
 		{
 			$data = $this->request->getPost();
 			$countryModel->updateCountry($id, $data);
-			return redirect()->to('/admin/destinations')->with('success', 'Destination mise à jour avec succès.');
+			return redirect()->to('/admin/countries')->with('success', 'Pays mis à jour avec succès.');
 		}
 
-		return view('admin/destinations/edit', ['destination' => $country]);
+		return view('admin/countries/edit', ['country' => $country]);
 	}
 
 	public function deleteCountry($id)
@@ -135,7 +135,85 @@ class AdminController extends BaseController
 		$countryModel = new CountryModel();
 		$countryModel->deleteCountry($id);
 
-		return redirect()->to('/admin/destinations')->with('success', 'Destination supprimée avec succès.');
+		return redirect()->to('/admin/countries')->with('success', 'Pays supprimé avec succès.');
+	}
+
+	// Gestion des destinations d'un pays
+	public function countryDestinations($idCountry)
+	{
+		$countryModel = new CountryModel();
+		$tripStepModel = new TripStepModel();
+		
+		$country = $countryModel->getCountryById($idCountry);
+		
+		if (!$country)
+		{
+			return redirect()->to('/admin/countries')->with('error', 'Pays non trouvé.');
+		}
+		
+		$destinations = $tripStepModel->getStepsByCountry($idCountry);
+
+		return view('admin/countries/destinations', [
+			'country' => $country,
+			'destinations' => $destinations
+		]);
+	}
+
+	public function addDestination($idCountry)
+	{
+		$countryModel = new CountryModel();
+		$country = $countryModel->getCountryById($idCountry);
+		
+		if (!$country)
+		{
+			return redirect()->to('/admin/countries')->with('error', 'Pays non trouvé.');
+		}
+
+		if ($this->request->getMethod() === 'POST')
+		{
+			$tripStepModel = new TripStepModel();
+			$data = $this->request->getPost();
+			$data['idCountry'] = $idCountry;
+
+			$tripStepModel->addStep($data);
+			return redirect()->to('/admin/countries/' . $idCountry . '/destinations')->with('success', 'Destination ajoutée avec succès.');
+		}
+
+		return view('admin/countries/addDestination', ['country' => $country]);
+	}
+
+	public function editDestination($idCountry, $idDestination)
+	{
+		$countryModel = new CountryModel();
+		$tripStepModel = new TripStepModel();
+		
+		$country = $countryModel->getCountryById($idCountry);
+		$destination = $tripStepModel->getStepById($idDestination);
+
+		if (!$country || !$destination)
+		{
+			return redirect()->to('/admin/countries')->with('error', 'Pays ou destination non trouvé.');
+		}
+
+		if ($this->request->getMethod() === 'POST')
+		{
+			$data = $this->request->getPost();
+			$tripStepModel->updateStep($idDestination, $data);
+			return redirect()->to('/admin/countries/' . $idCountry . '/destinations')->with('success', 'Destination mise à jour avec succès.');
+		}
+
+		return view('admin/countries/editDestination', [
+			'country' => $country,
+			'destination' => $destination
+		]);
+	}
+
+	public function deleteDestination($idCountry, $idDestination)
+	{
+		$tripStepModel = new TripStepModel();
+		$tripStepModel->deleteStep($idDestination);
+
+		return redirect()->to('/admin/countries/' . $idCountry . '/destinations')->with('success', 'Destination supprimée avec succès.');
 	}
 
 	// Gestion des voyages
