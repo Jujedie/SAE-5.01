@@ -14,21 +14,23 @@ class AdminController extends BaseController
 	public function index()
 	{
 		// Afficher le tableau de bord admin
-		$countryModel = new CountryModel();
-		$userModel    = new UserModel();
-		$bookingModel = new BookingModel();
-		$tripModel    = new TripModel();
-		$reviewModel  = new ReviewModel();
+		$countryModel       = new CountryModel();
+		$userModel          = new UserModel();
+		$bookingModel       = new BookingModel();
+		$tripModel          = new TripModel();
+		$reviewModel        = new ReviewModel();
+		$prebuiltTripModel  = new PrebuiltTripModel();
 
 		$data =
 		[
-			'destinationsCount' => $countryModel->countAllResults(),
-			'usersCount'        => $userModel   ->getUsersCount(),
-			'bookingsCount'     => $bookingModel->getBookingsCount(),
-			'tripsCount'        => $tripModel   ->getTripsCount(),
-			'reviewsCount'      => $reviewModel ->getReviewsCount(),
-			'countriesCount'    => $countryModel->getCountriesCount(),
-			'continentsCount'   => $countryModel->getContinentsCount(),
+			'destinationsCount'  => $countryModel->countAllResults(),
+			'usersCount'         => $userModel->getUsersCount(),
+			'bookingsCount'      => $bookingModel->getBookingsCount(),
+			'tripsCount'         => $tripModel->getTripsCount(),
+			'reviewsCount'       => $reviewModel->getReviewsCount(),
+			'countriesCount'     => $countryModel->getCountriesCount(),
+			'continentsCount'    => $countryModel->getContinentsCount(),
+			'prebuiltTripsCount' => $prebuiltTripModel->countAllResults(),
 		];
 
 		return view('admin/homeAdmin', $data);
@@ -114,43 +116,7 @@ class AdminController extends BaseController
 
 		return redirect()->to('/admin/users')->with('success', 'Utilisateur supprimé avec succès.');
 	}
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
-	// RIEN NE VA UN COUNTRY NEST PAS UNE DESTINATION
+
 	// Gestion des destinations
 	public function countries()
 	{
