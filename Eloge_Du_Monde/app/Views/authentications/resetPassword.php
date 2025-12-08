@@ -3,7 +3,7 @@
 <?= $this->section('title') ?>Réinitialisation du mot de passe<?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
-<link rel="stylesheet" href="<?= base_url('assets/css/signin.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/authentifications.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

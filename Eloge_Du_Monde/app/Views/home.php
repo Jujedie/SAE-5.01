@@ -1,6 +1,7 @@
 <?= $this->extend('layouts/default') ?>
 
 <?= $this->section('styles') ?>
+<link rel="stylesheet" href="<?= base_url('assets/css/home.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -142,10 +143,10 @@
 			</p>
 		</div>
 
-		<div class="destinations-grid">
-			<div class="destination-card fade-in">
-				<img src="<?= base_url('assets/images/destinations1.jpeg') ?>" alt="Europe">
-				<div class="destination-overlay"></div>
+	<div class="destinations-grid">
+		<div class="destination-card fade-in">
+			<img src="<?= base_url('assets/images/destination1.jpeg') ?>" alt="Europe">
+			<div class="destination-overlay"></div>
 				<div class="destination-content">
 					<div class="destination-highlight">15 pays</div>
 					<h3 class="destination-title playfair">Europe</h3>
@@ -158,9 +159,9 @@
 				</div>
 			</div>
 
-			<div class="destination-card fade-in">
-				<img src="<?= base_url('assets/images/destinations2.jpeg') ?>" alt="Asie">
-				<div class="destination-overlay"></div>
+		<div class="destination-card fade-in">
+			<img src="<?= base_url('assets/images/destination2.jpeg') ?>" alt="Asie">
+			<div class="destination-overlay"></div>
 				<div class="destination-content">
 					<div class="destination-highlight">12 pays</div>
 					<h3 class="destination-title playfair">Asie</h3>
@@ -173,9 +174,9 @@
 				</div>
 			</div>
 
-			<div class="destination-card fade-in">
-				<img src="<?= base_url('assets/images/destinations3.jpeg') ?>" alt="Afrique">
-				<div class="destination-overlay"></div>
+		<div class="destination-card fade-in">
+			<img src="<?= base_url('assets/images/destination3.jpeg') ?>" alt="Afrique">
+			<div class="destination-overlay"></div>
 				<div class="destination-content">
 					<div class="destination-highlight">8 pays</div>
 					<h3 class="destination-title playfair">Afrique</h3>
@@ -209,10 +210,10 @@
 			</p>
 		</div>
 
-		<div class="themes-grid">
-			<div class="theme-card fade-in">
-				<img src="<?= base_url('assets/images/thematique1.jpeg') ?>" alt="Bien-être & Spa">
-				<div class="theme-overlay"></div>
+	<div class="themes-grid">
+		<div class="theme-card fade-in">
+			<img src="<?= base_url('assets/images/thematic1.jpeg') ?>" alt="Bien-être & Spa">
+			<div class="theme-overlay"></div>
 				<div class="theme-content">
 					<div class="theme-line"></div>
 					<h3 class="theme-title playfair">Bien-être & Spa</h3>
@@ -221,9 +222,9 @@
 				</div>
 			</div>
 
-			<div class="theme-card fade-in">
-				<img src="<?= base_url('assets/images/thematique2.jpeg') ?>" alt="Aventure & Nature">
-				<div class="theme-overlay"></div>
+		<div class="theme-card fade-in">
+			<img src="<?= base_url('assets/images/thematic2.jpeg') ?>" alt="Aventure & Nature">
+			<div class="theme-overlay"></div>
 				<div class="theme-content">
 					<div class="theme-line"></div>
 					<h3 class="theme-title playfair">Aventure & Nature</h3>
@@ -232,9 +233,9 @@
 				</div>
 			</div>
 
-			<div class="theme-card fade-in">
-				<img src="<?= base_url('assets/images/thematique3.jpeg') ?>" alt="Gastronomie">
-				<div class="theme-overlay"></div>
+		<div class="theme-card fade-in">
+			<img src="<?= base_url('assets/images/thematic3.jpeg') ?>" alt="Gastronomie">
+			<div class="theme-overlay"></div>
 				<div class="theme-content">
 					<div class="theme-line"></div>
 					<h3 class="theme-title playfair">Gastronomie</h3>
@@ -243,9 +244,9 @@
 				</div>
 			</div>
 
-			<div class="theme-card fade-in">
-				<img src="<?= base_url('assets/images/thematique4.jpeg') ?>" alt="Culture & Art">
-				<div class="theme-overlay"></div>
+		<div class="theme-card fade-in">
+			<img src="<?= base_url('assets/images/thematic4.jpeg') ?>" alt="Culture & Art">
+			<div class="theme-overlay"></div>
 				<div class="theme-content">
 					<div class="theme-line"></div>
 					<h3 class="theme-title playfair">Culture & Art</h3>

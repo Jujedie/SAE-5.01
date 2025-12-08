@@ -1,0 +1,23 @@
+.btn-primary
+{
+	background: #C9A96E;
+	color: white;
+	transition: all 0.3s;
+}
+
+.btn-primary:hover
+{
+	background: #b89857;
+}
+
+input:focus
+{
+	outline: none;
+	border-color: #C9A96E !important;
+	box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.1) !important;
+}
+
+.focus\:ring-green-600:focus
+{
+	--tw-ring-color: #C9A96E !important;
+}

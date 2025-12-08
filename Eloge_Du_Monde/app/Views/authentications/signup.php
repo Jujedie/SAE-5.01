@@ -2,6 +2,10 @@
 
 <?= $this->section('title') ?>Inscription<?= $this->endSection() ?>
 
+<?= $this->section('styles') ?>
+<link rel="stylesheet" href="<?= base_url('assets/css/authentifications.css') ?>">
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <div class="min-h-screen flex items-center justify-center pt-4 bg-white">

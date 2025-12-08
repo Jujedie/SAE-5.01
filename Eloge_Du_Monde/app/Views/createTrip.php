@@ -159,5 +159,5 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<script src="<?= base_url('assets/js/create_trip.js') ?>"></script>
+<script src="<?= base_url('assets/js/createTrip.js') ?>"></script>
 <?= $this->endSection() ?>

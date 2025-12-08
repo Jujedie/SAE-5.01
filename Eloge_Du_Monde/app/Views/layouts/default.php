@@ -64,7 +64,7 @@
 		</nav>
 
 		<a href="<?= base_url('/') ?>" class="logo">
-			<img src="<?= base_url('assets/images/elogedumonde-logo.png') ?>" alt="Éloge du Monde">
+			<img src="<?= base_url('assets/images/logo-eloge-du-monde.png') ?>" alt="Éloge du Monde">
 		</a>
 
 		<nav class="nav-right">
