@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/default') ?>
 <?= $this->section('title') ?>403 - Accès interdit<?= $this->endSection() ?>
-
 <?= $this->section('content') ?>
+
 <div class="container text-center py-5">
 	<div class="row justify-content-center" style="margin-top:7rem;">
 		<div class="col-md-8">

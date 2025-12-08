@@ -21,7 +21,7 @@ class HomeController extends BaseController
 
 	public function createTrip()
 	{
-		return view('create_trip');
+		return view('createTrip');
 	}
 
 	public function error403()
