@@ -73,4 +73,18 @@ class TripStepModel extends Model
 	{
 		return $this->delete($idTripStep);
 	}
+
+	public function stepsExists($steps)
+	{
+		$existingSteps = [];
+		foreach ($steps as $stepId)
+		{
+			$step = $this->getStepById($stepId);
+			if (!$step)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 }
