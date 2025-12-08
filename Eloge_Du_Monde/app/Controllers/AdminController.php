@@ -8,7 +8,9 @@ use App\Models\CountryModel;
 use App\Models\TripModel;
 use App\Models\TripStepModel;
 use App\Models\PrebuiltTripModel;
+use App\Models\ExtensionModel;
 use App\Models\ReviewModel;
+use App\Models\LogModel;
 
 class AdminController extends BaseController
 {
@@ -260,9 +262,18 @@ class AdminController extends BaseController
 	public function prebuiltTrips()
 	{
 		$prebuiltTripModel = new PrebuiltTripModel();
+		$extensionModel = new ExtensionModel();
+		
 		$prebuiltTrips = $prebuiltTripModel->getAllPrebuiltTrips();
+		
+		// Récupérer les extensions pour chaque voyage
+		$tripsWithExtensions = [];
+		foreach ($prebuiltTrips as $trip) {
+			$trip['extensions'] = $extensionModel->getExtensionsByPrebuiltTrip($trip['idTrip'], $trip['idUser']);
+			$tripsWithExtensions[] = $trip;
+		}
 
-		return view('admin/prebuiltTrips/list', ['prebuiltTrips' => $prebuiltTrips]);
+		return view('admin/prebuiltTrips/list', ['prebuiltTrips' => $tripsWithExtensions]);
 	}
 
 	public function addPrebuiltTrip()
@@ -314,14 +325,17 @@ class AdminController extends BaseController
 	public function reviews()
 	{
 		$reviewModel = new ReviewModel();
+		$userModel   = new UserModel();
 		$reviews = $reviewModel->getAllReviews();
 
-		return view('admin/reviews/list', ['reviews' => $reviews]);
+		return view('admin/reviews/list', ['reviews' => $reviews, 'users' => $userModel->getUserByReviews()]);
 	}
 
 	public function verifyReview($id)
 	{
 		$reviewModel = new ReviewModel();
+		$logModel = new LogModel();
+
 		$review = $reviewModel->getReviewById($id);
 
 		if (!$review)
@@ -329,13 +343,39 @@ class AdminController extends BaseController
 			return redirect()->to('/admin/reviews')->with('error', 'Témoignage non trouvé.');
 		}
 
-		$reviewModel->updateReview($id, ['verified' => 1]);
+		$logModel->addLogEntry('Approuvement du témoignage ID ' . $id, session()->get('idUser'));
+		$reviewModel->updateReview($id, ['verified' => 't']);
 		return redirect()->to('/admin/reviews')->with('success', 'Témoignage vérifié avec succès.');
+	}
+
+	public function unverifyReview($id)
+	{
+		$reviewModel = new ReviewModel();
+		$logModel = new LogModel();
+		$review = $reviewModel->getReviewById($id);
+
+		if (!$review)
+		{
+			return redirect()->to('/admin/reviews')->with('error', 'Témoignage non trouvé.');
+		}
+
+		$logModel->addLogEntry('Désapprouvement du témoignage ID ' . $id, session()->get('idUser'));
+		$reviewModel->updateReview($id, ['verified' => 'f']);
+		return redirect()->to('/admin/reviews')->with('success', 'Témoignage non vérifié avec succès.');
 	}
 
 	public function deleteReview($id)
 	{
 		$reviewModel = new ReviewModel();
+		$logModel = new LogModel();
+		$review = $reviewModel->getReviewById($id);
+
+		if (!$review)
+		{
+			return redirect()->to('/admin/reviews')->with('error', 'Témoignage non trouvé.');
+		}
+
+		$logModel->addLogEntry('Suppression du témoignage ID ' . $id, session()->get('idUser'));
 		$reviewModel->deleteReviewById($id);
 
 		return redirect()->to('/admin/reviews')->with('success', 'Témoignage supprimé avec succès.');

@@ -69,6 +69,15 @@ class UserModel extends Model
 		return $this->where('resetToken', $token)->where('resetTokenExpiration >=', date('Y-m-d H:i:s'))->first();
 	}
 
+	public function getUserByReviews()
+	{
+		$builder = $this->db->table($this->table);
+		$builder->select('user.*');
+		$builder->join('review', 'user.idUser = review.idUser');
+
+		return $builder->get()->getResultArray();
+	}
+
 	public function getUsersCount()
 	{
 		return $this->countAllResults();
