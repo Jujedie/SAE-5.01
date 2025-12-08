@@ -29,44 +29,8 @@ class ForgotPasswordController extends BaseController
 			// Envoyer l'e-mail avec le lien de réinitialisation
 			$resetLink = site_url("resetPassword/$token");
 
-			// Message HTML
-			$message = "
-				<!DOCTYPE html>
-				<html lang='fr'>
-				<head>
-					<meta charset='UTF-8'>
-					<style>
-						body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-						.container { max-width: 600px; margin: 0 auto; padding: 20px; }
-						.header { background-color: #243342; color: white; padding: 20px; text-align: center; border-radius: 5px 5px 0 0; }
-						.content { background-color: #f9f9f9; padding: 30px; border: 1px solid #ddd; }
-						.button { display: inline-block; padding: 12px 30px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
-						.footer { text-align: center; padding: 20px; font-size: 12px; color: #777; }
-					</style>
-				</head>
-				<body>
-					<div class='container'>
-						<div class='header'>
-							<h2>Réinitialisation de mot de passe</h2>
-						</div>
-						<div class='content'>
-							<p>Bonjour,</p>
-							<p>Vous avez demandé à réinitialiser votre mot de passe pour votre compte sur Eloge du monde.</p>
-							<p>Pour créer un nouveau mot de passe, cliquez sur le bouton ci-dessous :</p>
-							<p style='text-align: center;'>
-								<a href='$resetLink' style='color: #ffffffff;' class='button'>Réinitialiser mon mot de passe</a>
-							</p>
-							<p><strong>Important :</strong> Ce lien est valable pendant 1 heure seulement.</p>
-							<p>Si vous n'avez pas demandé cette réinitialisation, vous pouvez ignorer cet email en toute sécurité.</p>
-							<p>Cordialement,<br>L'équipe Eloge Du Monde</p>
-						</div>
-						<div class='footer'>
-							<p>Département Informatique - IUT du Havre - Groupe 1<br>&copy; " . date('Y') . " - Tous droits réservés</p>
-						</div>
-					</div>
-				</body>
-				</html>
-			";
+			// Générer le message HTML depuis la vue
+			$message = view('emails/emailResetPassword', ['resetLink' => $resetLink]);
 
 			$emailService = service('email');
 

@@ -1,4 +1,4 @@
-<?= $this->extend('layout/default') ?>
+<?= $this->extend('layouts/default') ?>
 
 <?= $this->section('title') ?>Mot de passe oublié<?= $this->endSection() ?>
 
@@ -10,7 +10,7 @@
 			<div class="p-6">
 				<h2 class="text-2xl font-semibold mb-4">Mot de passe oublié</h2>
 				<p class="text-gray-500 mb-4">Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.</p>
-				<form action="<?= site_url('forgotpassword/sendResetLink') ?>" method="POST">
+				<form action="<?= site_url('forgotPassword/sendResetLink') ?>" method="POST">
 					<?= csrf_field() ?>
 					<div class="mb-4">
 						<label for="email" class="block text-sm font-medium text-gray-700">Adresse e-mail <span class="text-red-500">*</span></label>

@@ -1,4 +1,4 @@
-<?= $this->extend('layout/default') ?>
+<?= $this->extend('layouts/default') ?>
 
 <?= $this->section('title') ?>Modifier une destination<?= $this->endSection() ?>
 

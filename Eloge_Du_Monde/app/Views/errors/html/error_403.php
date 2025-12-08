@@ -1,4 +1,4 @@
-<?= $this->extend('layout/default') ?>
+<?= $this->extend('layouts/default') ?>
 <?= $this->section('title') ?>403 - Accès interdit<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

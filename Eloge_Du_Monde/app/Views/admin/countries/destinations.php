@@ -1,4 +1,4 @@
-<?= $this->extend('layout/default') ?>
+<?= $this->extend('layouts/default') ?>
 
 <?= $this->section('title') ?>Destinations - <?= esc($country['name']) ?><?= $this->endSection() ?>
 
