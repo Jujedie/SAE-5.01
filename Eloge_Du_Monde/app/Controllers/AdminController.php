@@ -380,4 +380,60 @@ class AdminController extends BaseController
 
 		return redirect()->to('/admin/reviews')->with('success', 'Témoignage supprimé avec succès.');
 	}
+
+	// Gestion des extensions
+	public function viewPrebuiltTripWithExtensions($id)
+	{
+		$prebuiltTripModel = new PrebuiltTripModel();
+		$extensionModel = new ExtensionModel();
+		
+		$prebuiltTrip = $prebuiltTripModel->getPrebuiltTripById($id);
+		if (!$prebuiltTrip)
+		{
+			return redirect()->to('/admin/prebuiltTrips')->with('error', 'Voyage préfait non trouvé.');
+		}
+		
+		// Récupérer toutes les extensions pour ce voyage
+		$extensions = $extensionModel->getExtensionsByPrebuiltTrip($id, $prebuiltTrip['idUser']);
+		
+		return view('admin/prebuiltTrips/list', [
+			'prebuiltTrip' => $prebuiltTrip,
+			'extensions' => $extensions
+		]);
+	}
+
+	public function addExtension($prebuiltTripId)
+	{
+		$prebuiltTripModel = new PrebuiltTripModel();
+		$prebuiltTrip = $prebuiltTripModel->getPrebuiltTripById($prebuiltTripId);
+		
+		if (!$prebuiltTrip)
+		{
+			return redirect()->to('/admin/prebuiltTrips')->with('error', 'Voyage préfait non trouvé.');
+		}
+
+		if ($this->request->getMethod() === 'POST')
+		{
+			$extensionModel = new ExtensionModel();
+			$data = $this->request->getPost();
+			
+			// Utiliser les mêmes données que le voyage parent
+			$data['idUser'] = $prebuiltTrip['idUser'];
+			$data['type'] = $prebuiltTrip['type'];
+			$data['departureDate'] = $prebuiltTrip['departureDate'];
+			
+			$extensionModel->addExtension($data);
+			return redirect()->to('/admin/prebuiltTrips/view/' . $prebuiltTripId)->with('success', 'Extension ajoutée avec succès.');
+		}
+
+		return view('admin/prebuiltTrips/addExtension', ['prebuiltTrip' => $prebuiltTrip]);
+	}
+
+	public function deleteExtension($extensionId, $prebuiltTripId)
+	{
+		$extensionModel = new ExtensionModel();
+		$extensionModel->deleteExtensionById($extensionId);
+
+		return redirect()->to('/admin/prebuiltTrips/view/' . $prebuiltTripId)->with('success', 'Extension supprimée avec succès.');
+	}
 }
