@@ -44,7 +44,7 @@ CREATE TABLE UTILISATEUR
 	mdp                  VARCHAR(32)  NOT NULL,
 	estAbonne            BOOLEAN      NOT NULL DEFAULT FALSE,
 	resetToken           VARCHAR(255),
-	resetTokenExpiration TIMESTAMP,
+	resetTokenExpiration TIMESTAMP
 );
 
 -- Table JOURNAUX

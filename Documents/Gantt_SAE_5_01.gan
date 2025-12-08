@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2025-11-18" view-index="1" gantt-divider-location="461" resource-divider-location="465" version="3.3.3316" locale="fr_FR">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2025-11-18" view-index="0" gantt-divider-location="446" resource-divider-location="465" version="3.3.3316" locale="fr_FR">
     <description/>
     <view zooming-state="default:3" id="gantt-chart">
         <field id="tpd3" name="Nom" width="284" order="0"/>
@@ -67,7 +67,7 @@
         <task id="6" uid="53fd064ad94249a393cbd64fb7a3010f" name="Premiers développements" color="#ffcc99" meeting="false" start="2025-11-06" duration="2" complete="0" expand="true"/>
         <task id="1" uid="7193d6400ea948889ae9b8815e9cc87e" name="Rédaction du guide d'installation" color="#cc6600" meeting="false" start="2025-12-11" duration="2" complete="0" expand="true"/>
         <task id="29" uid="d0754f4d5154469981688a593640f6cc" name="Vérifications du fonctionnement du site" color="#00ffcc" meeting="false" start="2025-12-08" duration="5" complete="0" expand="true"/>
-        <task id="13" uid="663b960e07a64206b81e33c98c9fe653" name="Développement Front" meeting="false" start="2025-12-01" duration="9" complete="0" expand="false">
+        <task id="13" uid="663b960e07a64206b81e33c98c9fe653" name="Développement Front" meeting="false" start="2025-12-01" duration="9" complete="0" expand="true">
             <task id="33" uid="c6c285ece0f04a2dbc4472952c7f5b2c" name="Création layout" meeting="false" start="2025-12-01" duration="1" complete="0" expand="true">
                 <depend id="16" type="2" difference="0" hardness="Strong"/>
                 <depend id="22" type="2" difference="0" hardness="Strong"/>
@@ -98,7 +98,7 @@
             <task id="23" uid="a0b157396b194b51bb2ad8039097653d" name="Création vues admin" meeting="false" start="2025-12-03" duration="7" complete="0" expand="true"/>
             <task id="31" uid="45a39dae395f42469aa6144aab710ded" name="Modification vues d'erreurs" meeting="false" start="2025-12-02" duration="2" complete="0" expand="true"/>
         </task>
-        <task id="14" uid="413f2e35862d4141b6224bc671f63f37" name="Développement Back End" meeting="false" start="2025-12-01" duration="10" complete="0" expand="true">
+        <task id="14" uid="413f2e35862d4141b6224bc671f63f37" name="Développement Back End" meeting="false" start="2025-12-01" duration="9" complete="0" expand="true">
             <task id="18" uid="f7bfbee175dc43ecac854251c26d6933" name="Création Seeders" meeting="false" start="2025-12-01" duration="1" complete="0" expand="true">
                 <depend id="19" type="2" difference="0" hardness="Strong"/>
             </task>
@@ -110,10 +110,14 @@
             </task>
             <task id="21" uid="c39646d8b161431fa16ca03ed826107b" name="Création Controllers" meeting="false" start="2025-12-04" duration="2" complete="0" expand="true">
                 <depend id="20" type="2" difference="0" hardness="Strong"/>
+                <depend id="36" type="2" difference="0" hardness="Strong"/>
             </task>
             <task id="20" uid="308ca0cf3bad4afaabb02ff0562b6cbd" name="Création Routes" meeting="false" start="2025-12-08" duration="1" complete="0" expand="true"/>
             <task id="32" uid="c71e618ebb7e46f3bdf409e868d6c2f9" name="Création système de mail" meeting="false" start="2025-12-01" duration="4" complete="0" expand="true"/>
-            <task id="34" uid="2c53612ffe39496d93fec58d754dd77d" name="Implémenter la certification TSL/HTTPS via nginx" meeting="false" start="2025-12-11" duration="2" complete="0" expand="true"/>
+            <task id="36" uid="073b6e5e291f40a091502824489cabe0" name="Implémenter le paiement" meeting="false" start="2025-12-08" duration="2" complete="0" expand="true">
+                <depend id="34" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="34" uid="2c53612ffe39496d93fec58d754dd77d" name="Implémenter la certification TSL/HTTPS via nginx" meeting="false" start="2025-12-10" duration="2" complete="0" expand="true"/>
         </task>
     </tasks>
     <resources>

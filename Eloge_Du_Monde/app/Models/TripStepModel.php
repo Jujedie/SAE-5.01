@@ -1,0 +1,90 @@
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class TripStepModel extends Model
+{
+	protected $table            = 'tripStep';
+	protected $primaryKey       = 'idTripStep';
+	protected $useAutoIncrement = true;
+	protected $returnType       = 'array';
+	protected $useSoftDeletes   = false;
+	protected $protectFields    = true;
+	protected $allowedFields    = ['name', 'cost', 'idCountry'];
+
+	protected bool $allowEmptyInserts = false;
+	protected bool $updateOnlyChanged = true;
+
+	protected array $casts        = [];
+	protected array $castHandlers = [];
+
+	// Dates
+	protected $useTimestamps = false;
+	protected $dateFormat    = 'datetime';
+	protected $createdField  = 'created_at';
+	protected $updatedField  = 'updated_at';
+	protected $deletedField  = 'deleted_at';
+
+	// Validation
+	protected $validationRules      = [];
+	protected $validationMessages   = [];
+	protected $skipValidation       = false;
+	protected $cleanValidationRules = true;
+
+	// Callbacks
+	protected $allowCallbacks = true;
+	protected $beforeInsert   = [];
+	protected $afterInsert    = [];
+	protected $beforeUpdate   = [];
+	protected $afterUpdate    = [];
+	protected $beforeFind     = [];
+	protected $afterFind      = [];
+	protected $beforeDelete   = [];
+	protected $afterDelete    = [];
+
+	public function getAllSteps()
+	{
+		return $this->findAll();
+	}
+
+	public function getStepById($idTripStep)
+	{
+		return $this->where('idTripStep', $idTripStep)->first();
+	}
+
+	public function getStepsByCountry($idCountry)
+	{
+		return $this->where('idCountry', $idCountry)->findAll();
+	}
+
+	public function addStep($data)
+	{
+		return $this->insert($data);
+	}
+
+	public function updateStep($idTripStep, $data)
+	{
+		return $this->update($idTripStep, $data);
+	}
+
+	public function deleteStep($idTripStep)
+	{
+		return $this->delete($idTripStep);
+	}
+
+	public function stepsExists($steps)
+	{
+		$existingSteps = [];
+		foreach ($steps as $stepId)
+		{
+			$step = $this->getStepById($stepId);
+			if (!$step)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+}

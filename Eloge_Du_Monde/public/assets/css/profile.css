@@ -1,0 +1,14 @@
+button.button_modify
+{
+	background-color: #C9A96E;
+}
+
+button.button_modify:hover
+{
+	background-color: #B8995A;
+}
+
+.user_logo
+{
+	color: #C9A96E;
+}
