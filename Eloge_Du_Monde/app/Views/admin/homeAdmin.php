@@ -52,24 +52,7 @@
 			<p class="text-4xl font-bold text-gray-800 mb-1"><?= $countriesCount ?></p>
 			<p class="text-gray-500 text-sm">pays couverts</p>
 		</div>
-	</div>		<!-- Trips Card -->
-		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('admin/trips')">
-			<div class="flex items-start justify-between mb-4">
-				<div class="icon-wrapper bg-purple-100">
-					<svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-					</svg>
-				</div>
-				<svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-				</svg>
-			</div>
-			<div>
-				<p class="text-gray-600 text-sm mb-1">Voyages</p>
-				<p class="text-4xl font-bold text-gray-800 mb-1"><?= $tripsCount ?></p>
-				<p class="text-gray-500 text-sm">voyages créés</p>
-			</div>
-		</div>
+	</div>
 
 		<!-- Prebuilt Trips Card -->
 		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('admin/prebuiltTrips')">
@@ -87,6 +70,25 @@
 				<p class="text-gray-600 text-sm mb-1">Voyages préfaits</p>
 				<p class="text-4xl font-bold text-gray-800 mb-1"><?= $prebuiltTripsCount ?></p>
 				<p class="text-gray-500 text-sm">voyages préfaits disponibles</p>
+			</div>
+		</div>
+
+		<!-- Bookings Card -->
+		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('admin/bookings')">
+			<div class="flex items-start justify-between mb-4">
+				<div class="icon-wrapper bg-teal-100">
+					<svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+					</svg>
+				</div>
+				<svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+				</svg>
+			</div>
+			<div>
+				<p class="text-gray-600 text-sm mb-1">Réservations</p>
+				<p class="text-4xl font-bold text-gray-800 mb-1"><?= $bookingsCount ?></p>
+				<p class="text-gray-500 text-sm">réservations actives</p>
 			</div>
 		</div>
 
@@ -127,26 +129,6 @@
 				<p class="text-gray-500 text-sm">témoignages clients</p>
 			</div>
 		</div>
-
-		<!-- Bookings Card -->
-		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('admin/bookings')">
-			<div class="flex items-start justify-between mb-4">
-				<div class="icon-wrapper bg-teal-100">
-					<svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-					</svg>
-				</div>
-				<svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-				</svg>
-			</div>
-			<div>
-				<p class="text-gray-600 text-sm mb-1">Réservations</p>
-				<p class="text-4xl font-bold text-gray-800 mb-1"><?= $bookingsCount ?></p>
-				<p class="text-gray-500 text-sm">réservations actives</p>
-			</div>
-		</div>
-
 		<!-- Blog Posts Card -->
 		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('admin/blog')">
 			<div class="flex items-start justify-between mb-4">

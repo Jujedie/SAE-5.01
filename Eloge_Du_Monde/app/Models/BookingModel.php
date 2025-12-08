@@ -7,12 +7,12 @@ use CodeIgniter\Model;
 class BookingModel extends Model
 {
 	protected $table            = 'booking';
-	protected $primaryKey       = ['idTrip', 'idUser'];
-	protected $useAutoIncrement = true;
+	protected $primaryKey       = ['idTrip', 'idTripStep'];
+	protected $useAutoIncrement = false;
 	protected $returnType       = 'array';
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
-	protected $allowedFields    = ['idTrip', 'idUser'];
+	protected $allowedFields    = ['idTrip', 'idTripStep'];
 
 	protected bool $allowEmptyInserts = false;
 	protected bool $updateOnlyChanged = true;
@@ -56,7 +56,15 @@ class BookingModel extends Model
 
 	public function getBookingsByUser($idUser)
 	{
-		return $this->where('idUser', $idUser)->findAll();
+		// Get all trips for a user, then get their bookings
+		$tripModel = new TripModel();
+		$trips = $tripModel->where('idUser', $idUser)->findAll();
+		$bookings = [];
+		foreach ($trips as $trip) {
+			$tripBookings = $this->where('idTrip', $trip['idTrip'])->findAll();
+			$bookings = array_merge($bookings, $tripBookings);
+		}
+		return $bookings;
 	}
 
 	public function getBookingsCount()
@@ -64,24 +72,19 @@ class BookingModel extends Model
 		return $this->countAllResults();
 	}
 
-	public function addBooking($idTrip, $idUser)
+	public function addBooking($idTrip, $idTripStep)
 	{
-		$data =
-		[
-			'idTrip' => $idTrip,
-			'idUser' => $idUser,
-		];
-
-		return $this->insert($data);
+		$sql = "INSERT INTO booking (\"idTrip\", \"idTripStep\") VALUES (?, ?)";
+		return $this->db->query($sql, [$idTrip, $idTripStep]);
 	}
 
-	public function updateBooking($idTrip, $idUser, $data)
+	public function updateBooking($idTrip, $idTripStep, $data)
 	{
-		return $this->update(['idTrip' => $idTrip, 'idUser' => $idUser], $data);
+		return $this->update(['idTrip' => $idTrip, 'idTripStep' => $idTripStep], $data);
 	}
 
-	public function deleteBooking($idTrip, $idUser)
+	public function deleteBooking($idTrip, $idTripStep)
 	{
-		return $this->delete(['idTrip' => $idTrip, 'idUser' => $idUser]);
+		return $this->delete(['idTrip' => $idTrip, 'idTripStep' => $idTripStep]);
 	}
 }

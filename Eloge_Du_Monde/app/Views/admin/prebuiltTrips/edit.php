@@ -51,16 +51,18 @@
 					</select>
 				</div>
 
-				<!-- Thématique -->
-				<div>
-					<label for="thematic" class="block text-sm font-medium text-gray-700 mb-2">Thématique</label>
-					<input type="text" id="thematic" name="thematic"
-						   value="<?= esc($prebuiltTrip['thematic'] ?? '') ?>"
-						   placeholder="Ex: Culture, Nature, Plage..."
-						   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
-				</div>
-
-				<!-- Montant -->
+			<!-- Thématique -->
+			<div>
+				<label for="thematic" class="block text-sm font-medium text-gray-700 mb-2">Thématique</label>
+				<select id="thematic" name="thematic"
+						class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+					<option value="">Sélectionner une thématique</option>
+					<option value="Bien-être & Spa" <?= ($prebuiltTrip['thematic'] ?? '') === 'Bien-être & Spa' ? 'selected' : '' ?>>Bien-être & Spa</option>
+					<option value="Aventure & Nature" <?= ($prebuiltTrip['thematic'] ?? '') === 'Aventure & Nature' ? 'selected' : '' ?>>Aventure & Nature</option>
+					<option value="Gastronomie" <?= ($prebuiltTrip['thematic'] ?? '') === 'Gastronomie' ? 'selected' : '' ?>>Gastronomie</option>
+					<option value="Culture & Art" <?= ($prebuiltTrip['thematic'] ?? '') === 'Culture & Art' ? 'selected' : '' ?>>Culture & Art</option>
+				</select>
+			</div>				<!-- Montant -->
 				<div>
 					<label for="amount" class="block text-sm font-medium text-gray-700 mb-2">Prix (€) *</label>
 					<input type="number" id="amount" name="amount" min="0" step="0.01" required

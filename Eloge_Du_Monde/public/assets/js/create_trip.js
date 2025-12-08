@@ -1,46 +1,7 @@
 // Create Trip Page JavaScript
 
-// Destinations data by continent
-const destinationsData = {
-	asie: {
-		Japon: ['Tokyo', 'Kyoto', 'Osaka', 'Hiroshima', 'Nara'],
-		Chine: ['Pékin', 'Shanghai', 'Xi\'an', 'Guilin', 'Chengdu'],
-		Thaïlande: ['Bangkok', 'Phuket', 'Chiang Mai', 'Krabi', 'Koh Samui'],
-		Vietnam: ['Hanoi', 'Ho Chi Minh', 'Hoi An', 'Hue', 'Sapa'],
-		Inde: ['Delhi', 'Agra', 'Jaipur', 'Mumbai', 'Goa'],
-		'Indonésie': ['Bali', 'Jakarta', 'Yogyakarta', 'Lombok', 'Sumatra']
-	},
-	europe: {
-		France: ['Paris', 'Lyon', 'Marseille', 'Bordeaux', 'Nice'],
-		Italie: ['Rome', 'Florence', 'Venise', 'Milan', 'Naples'],
-		Espagne: ['Madrid', 'Barcelone', 'Séville', 'Valence', 'Grenade'],
-		Grèce: ['Athènes', 'Santorin', 'Mykonos', 'Rhodes', 'Crète'],
-		Portugal: ['Lisbonne', 'Porto', 'Algarve', 'Madère', 'Açores'],
-		'Royaume-Uni': ['Londres', 'Édimbourg', 'Manchester', 'Oxford', 'Brighton']
-	},
-	afrique: {
-		Maroc: ['Marrakech', 'Casablanca', 'Fès', 'Rabat', 'Tanger'],
-		Égypte: ['Le Caire', 'Louxor', 'Assouan', 'Alexandrie', 'Hurghada'],
-		'Afrique du Sud': ['Le Cap', 'Johannesburg', 'Durban', 'Pretoria', 'Kruger'],
-		Kenya: ['Nairobi', 'Mombasa', 'Masai Mara', 'Amboseli', 'Nakuru'],
-		Tanzanie: ['Dar es Salaam', 'Zanzibar', 'Serengeti', 'Kilimandjaro', 'Arusha'],
-		Tunisie: ['Tunis', 'Djerba', 'Sousse', 'Hammamet', 'Carthage']
-	},
-	amerique: {
-		'États-Unis': ['New York', 'Los Angeles', 'San Francisco', 'Miami', 'Las Vegas'],
-		Canada: ['Toronto', 'Vancouver', 'Montréal', 'Québec', 'Calgary'],
-		Mexique: ['Cancún', 'Mexico', 'Playa del Carmen', 'Tulum', 'Puerto Vallarta'],
-		Brésil: ['Rio de Janeiro', 'São Paulo', 'Salvador', 'Brasilia', 'Florianópolis'],
-		Argentine: ['Buenos Aires', 'Mendoza', 'Patagonie', 'Ushuaia', 'Salta'],
-		Pérou: ['Lima', 'Cusco', 'Machu Picchu', 'Arequipa', 'Nazca']
-	},
-	oceanie: {
-		Australie: ['Sydney', 'Melbourne', 'Brisbane', 'Perth', 'Cairns'],
-		'Nouvelle-Zélande': ['Auckland', 'Wellington', 'Queenstown', 'Christchurch', 'Rotorua'],
-		'Polynésie française': ['Tahiti', 'Bora Bora', 'Moorea', 'Rangiroa', 'Huahine'],
-		Fidji: ['Nadi', 'Suva', 'Denarau', 'Coral Coast', 'Yasawa']
-	}
-};
+// Destinations data by continent - will be loaded from API
+let destinationsData = {};
 
 // Store selected destinations
 let selectedDestinations = [];
@@ -48,6 +9,9 @@ let selectedDestinations = [];
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
 	console.log('Create Trip JS loaded');
+	
+	// Load countries data from API
+	loadCountriesData();
 	
 	// Setup continent selector
 	const continentSelect = document.getElementById('continent');
@@ -75,9 +39,68 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	}
 
+	// Setup departure date listener
+	const departureDateInput = document.getElementById('departureDate');
+	if (departureDateInput) {
+		departureDateInput.addEventListener('change', function() {
+			updateEndDateInfo();
+		});
+	}
+
 	// Initialize page animations
 	animateHero();
 });
+
+// Load countries data from API
+async function loadCountriesData() {
+	try {
+		const response = await fetch('/api/countries-data');
+		const data = await response.json();
+		destinationsData = data;
+		console.log('Countries data loaded:', destinationsData);
+		
+		// Populate continents dropdown with only continents that have countries
+		populateContinents();
+	} catch (error) {
+		console.error('Error loading countries data:', error);
+		alert('Erreur lors du chargement des données des pays');
+	}
+}
+
+// Populate continents dropdown
+function populateContinents() {
+	const continentSelect = document.getElementById('continent');
+	if (!continentSelect) return;
+	
+	// Clear existing options except the first one
+	continentSelect.innerHTML = '<option value="">Sélectionner</option>';
+	
+	// Get continent labels
+	const continentLabels = {
+		'asie': 'Asie',
+		'europe': 'Europe',
+		'afrique': 'Afrique',
+		'amerique': 'Amérique',
+		'oceanie': 'Océanie',
+		'autre': 'Autre'
+	};
+	
+	// Add only continents that have countries with destinations
+	Object.keys(destinationsData).forEach(continent => {
+		const countries = destinationsData[continent];
+		// Only add continent if it has at least one country with destinations
+		const hasDestinations = Object.values(countries).some(country => 
+			country.destinations && country.destinations.length > 0
+		);
+		
+		if (hasDestinations) {
+			const option = document.createElement('option');
+			option.value = continent;
+			option.textContent = continentLabels[continent] || continent;
+			continentSelect.appendChild(option);
+		}
+	});
+}
 
 // Handle continent change
 function onContinentChange() {
@@ -97,10 +120,14 @@ function onContinentChange() {
 		console.log('Countries found:', countries);
 		
 		countries.forEach(country => {
-			const option = document.createElement('option');
-			option.value = country;
-			option.textContent = country;
-			paysSelect.appendChild(option);
+			const countryData = destinationsData[continent][country];
+			// Only add country if it has destinations
+			if (countryData.destinations && countryData.destinations.length > 0) {
+				const option = document.createElement('option');
+				option.value = country;
+				option.textContent = country;
+				paysSelect.appendChild(option);
+			}
 		});
 		
 		console.log('Pays select updated with', countries.length, 'countries');
@@ -117,11 +144,16 @@ function onPaysChange() {
 	destinationSelect.innerHTML = '<option value="">Sélectionner une destination</option>';
 
 	if (pays && destinationsData[continent] && destinationsData[continent][pays]) {
-		const destinations = destinationsData[continent][pays];
+		const countryData = destinationsData[continent][pays];
+		const destinations = countryData.destinations || [];
 		destinations.forEach(dest => {
 			const option = document.createElement('option');
-			option.value = dest;
-			option.textContent = dest;
+			option.value = JSON.stringify({
+				idTripStep: dest.idTripStep,
+				name: dest.name,
+				cost: dest.cost
+			});
+			option.textContent = dest.name;
 			destinationSelect.appendChild(option);
 		});
 	}
@@ -131,16 +163,19 @@ function onPaysChange() {
 function addDestination() {
 	const continent = document.getElementById('continent').value;
 	const pays = document.getElementById('pays').value;
-	const destination = document.getElementById('destination').value;
+	const destinationSelect = document.getElementById('destination');
+	const destinationValue = destinationSelect.value;
 
-	if (!continent || !pays || !destination) {
+	if (!continent || !pays || !destinationValue) {
 		alert('Veuillez sélectionner un continent, un pays et une destination');
 		return;
 	}
 
+	const destData = JSON.parse(destinationValue);
+
 	// Check if already added
 	const exists = selectedDestinations.some(d => 
-		d.destination === destination && d.pays === pays
+		d.idTripStep === destData.idTripStep
 	);
 
 	if (exists) {
@@ -148,11 +183,19 @@ function addDestination() {
 		return;
 	}
 
+	// Get country data for cost
+	const countryData = destinationsData[continent][pays];
+	const countryCost = countryData.cost || 0;
+
 	// Add to array
 	const newDest = {
 		continent: continent,
 		pays: pays,
-		destination: destination,
+		destination: destData.name,
+		idTripStep: destData.idTripStep,
+		destinationCost: destData.cost || 0,
+		countryCost: countryCost,
+		idCountry: countryData.idCountry,
 		nights: 3
 	};
 
@@ -262,6 +305,44 @@ function updateSummary() {
 	if (reserveBtn) {
 		reserveBtn.disabled = totalDestinations === 0;
 	}
+
+	// Update end date info
+	updateEndDateInfo();
+}
+
+// Update end date information
+function updateEndDateInfo() {
+	const totalNights = selectedDestinations.reduce((sum, dest) => sum + dest.nights, 0);
+	const endDateInfo = document.getElementById('endDateInfo');
+	const endDateText = document.getElementById('endDateText');
+	const departureDateInput = document.getElementById('departureDate');
+	
+	if (!endDateInfo || !endDateText || !departureDateInput) return;
+	
+	if (totalNights > 0 && departureDateInput.value) {
+		const departureDate = new Date(departureDateInput.value + 'T00:00:00');
+		const endDate = new Date(departureDate);
+		endDate.setDate(endDate.getDate() + totalNights);
+		
+		const options = { year: 'numeric', month: 'long', day: 'numeric' };
+		const departureDateStr = departureDate.toLocaleDateString('fr-FR', options);
+		const endDateStr = endDate.toLocaleDateString('fr-FR', options);
+		
+		endDateText.innerHTML = `Votre voyage se déroulera <strong>du ${departureDateStr} au ${endDateStr}</strong> (${totalNights} nuit${totalNights > 1 ? 's' : ''})`;
+		endDateInfo.style.display = 'flex';
+	} else {
+		endDateInfo.style.display = 'none';
+	}
+}
+
+// Calculate total price based on country costs and nights
+function calculateTotalPrice() {
+	let totalPrice = 0;
+	selectedDestinations.forEach(dest => {
+		const nightlyCost = dest.countryCost || 0;
+		totalPrice += nightlyCost * dest.nights;
+	});
+	return totalPrice;
 }
 
 // Reserve trip
@@ -271,13 +352,31 @@ function reserveTrip() {
 		return;
 	}
 
-	// Calculate estimated price (example: 500€ per night)
+	// Calculate real price based on country costs
 	const tripData = {
 		destinations: selectedDestinations,
 		totalNights: selectedDestinations.reduce((sum, dest) => sum + dest.nights, 0)
 	};
 	
-	const estimatedPrice = tripData.totalNights * 500;
+	// Get departure date
+	const departureDateInput = document.getElementById('departureDate');
+	const departureDate = departureDateInput ? departureDateInput.value : null;
+	
+	if (!departureDate) {
+		alert('Veuillez sélectionner une date de départ');
+		return;
+	}
+	
+	// Calculate end date
+	const departure = new Date(departureDate + 'T00:00:00');
+	const endDate = new Date(departure);
+	endDate.setDate(endDate.getDate() + tripData.totalNights);
+	
+	const options = { year: 'numeric', month: 'long', day: 'numeric' };
+	const departureDateStr = departure.toLocaleDateString('fr-FR', options);
+	const endDateStr = endDate.toLocaleDateString('fr-FR', options);
+	
+	const estimatedPrice = calculateTotalPrice();
 
 	// Show payment form
 	const builderContainer = document.querySelector('.builder-container');
@@ -286,8 +385,11 @@ function reserveTrip() {
 			<div class="payment-container" style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
 				<div style="text-align: center; margin-bottom: 32px;">
 					<h2 class="playfair" style="font-size: 32px; color: #1a1a1a; margin-bottom: 16px;">Finaliser votre réservation</h2>
-					<p style="font-size: 16px; color: #6b7280; margin-bottom: 24px;">
+					<p style="font-size: 16px; color: #6b7280; margin-bottom: 16px;">
 						${selectedDestinations.length} destination${selectedDestinations.length > 1 ? 's' : ''} • ${tripData.totalNights} nuits
+					</p>
+					<p style="font-size: 14px; color: #3b82f6; margin-bottom: 24px;">
+						Du ${departureDateStr} au ${endDateStr}
 					</p>
 					<div style="background: #f5f1ea; padding: 16px; border-radius: 12px; display: inline-block;">
 						<div style="font-size: 14px; color: #6b7280; margin-bottom: 4px;">Montant total estimé</div>
@@ -333,7 +435,7 @@ function reserveTrip() {
 						</svg>
 						<p style="font-size: 13px; color: #0c4a6e; margin: 0; line-height: 1.5;">
 							<strong>Paiement sécurisé</strong><br>
-							Cette transaction est une simulation. Aucun paiement réel ne sera effectué.
+							Votre voyage sera créé dans la base de données après confirmation.
 						</p>
 					</div>
 
@@ -375,30 +477,72 @@ function reserveTrip() {
 
 		// Handle form submission
 		const paymentForm = document.getElementById('paymentForm');
-		paymentForm.addEventListener('submit', function(e) {
+		paymentForm.addEventListener('submit', async function(e) {
 			e.preventDefault();
 			
-			// Simulate payment processing
-			const submitBtn = paymentForm.querySelector('button[type="submit"]');
-			submitBtn.disabled = true;
-			submitBtn.innerHTML = `
-				<svg style="animation: spin 1s linear infinite; display: inline-block;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-					<line x1="12" y1="2" x2="12" y2="6"></line>
-					<line x1="12" y1="18" x2="12" y2="22"></line>
-					<line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
-					<line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
-					<line x1="2" y1="12" x2="6" y2="12"></line>
-					<line x1="18" y1="12" x2="22" y2="12"></line>
-					<line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
-					<line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
-				</svg>
-				<span style="margin-left: 8px;">Traitement en cours...</span>
-			`;
+			try {
+				// Get departure date from the form context
+				const departureDateInput = document.getElementById('departureDate');
+				const currentDepartureDate = departureDateInput ? departureDateInput.value : departureDate;
+				
+				// Recalculate tripData and price for success display
+				const currentTripData = {
+					destinations: selectedDestinations,
+					totalNights: selectedDestinations.reduce((sum, dest) => sum + dest.nights, 0)
+				};
+				const currentEstimatedPrice = calculateTotalPrice();
+				
+				console.log('Sending trip data:', {
+					destinations: selectedDestinations.map(d => ({
+						idTripStep: d.idTripStep,
+						nights: d.nights
+					})),
+					departureDate: currentDepartureDate
+				});
+				
+				// Create trip in database
+				const response = await fetch('/api/trips/create', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						destinations: selectedDestinations.map(d => ({
+							idTripStep: d.idTripStep,
+							nights: d.nights
+						})),
+						departureDate: currentDepartureDate
+					})
+				});
 
-			// Show success after 2 seconds
-			setTimeout(() => {
-				showPaymentSuccess(tripData, estimatedPrice);
-			}, 2000);
+				console.log('Response status:', response.status);
+				
+				if (!response.ok) {
+					throw new Error(`HTTP error! status: ${response.status}`);
+				}
+
+				const result = await response.json();
+				console.log('Response result:', result);
+
+				if (result.success) {
+					// Calculate dates for display
+					const departure = new Date(currentDepartureDate + 'T00:00:00');
+					const endDate = new Date(departure);
+					endDate.setDate(endDate.getDate() + currentTripData.totalNights);
+					
+					const options = { year: 'numeric', month: 'long', day: 'numeric' };
+					const departureDateStr = departure.toLocaleDateString('fr-FR', options);
+					const endDateStr = endDate.toLocaleDateString('fr-FR', options);
+					
+					// Show success immediately
+					showPaymentSuccess(currentTripData, currentEstimatedPrice, departureDateStr, endDateStr);
+				} else {
+					alert('Erreur : ' + (result.message || 'Impossible de créer le voyage'));
+				}
+			} catch (error) {
+				console.error('Error creating trip:', error);
+				alert('Erreur lors de la création du voyage: ' + error.message);
+			}
 		});
 
 		window.scrollTo({
@@ -409,7 +553,21 @@ function reserveTrip() {
 }
 
 // Show payment success
-function showPaymentSuccess(tripData, price) {
+function showPaymentSuccess(tripData, price, departureDateStr = null, endDateStr = null) {
+	// Recalculate dates if not provided
+	if (!departureDateStr || !endDateStr) {
+		const departureDateInput = document.getElementById('departureDate');
+		if (departureDateInput && departureDateInput.value) {
+			const departureDate = new Date(departureDateInput.value + 'T00:00:00');
+			const endDate = new Date(departureDate);
+			endDate.setDate(endDate.getDate() + tripData.totalNights);
+			
+			const options = { year: 'numeric', month: 'long', day: 'numeric' };
+			departureDateStr = departureDate.toLocaleDateString('fr-FR', options);
+			endDateStr = endDate.toLocaleDateString('fr-FR', options);
+		}
+	}
+	
 	const builderContainer = document.querySelector('.builder-container');
 	if (builderContainer) {
 		builderContainer.innerHTML = `
@@ -428,6 +586,10 @@ function showPaymentSuccess(tripData, price) {
 					<div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
 						<span style="color: #6b7280;">Destinations</span>
 						<strong>${selectedDestinations.length}</strong>
+					</div>
+					<div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+						<span style="color: #6b7280;">Dates</span>
+						<strong>${departureDateStr} - ${endDateStr}</strong>
 					</div>
 					<div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
 						<span style="color: #6b7280;">Durée totale</span>

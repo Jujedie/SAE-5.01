@@ -49,15 +49,18 @@
 					</select>
 				</div>
 
-				<!-- Thématique -->
-				<div>
-					<label for="thematic" class="block text-sm font-medium text-gray-700 mb-2">Thématique</label>
-					<input type="text" id="thematic" name="thematic"
-						   placeholder="Ex: Culture, Nature, Plage..."
-						   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
-				</div>
-
-				<!-- Montant -->
+			<!-- Thématique -->
+			<div>
+				<label for="thematic" class="block text-sm font-medium text-gray-700 mb-2">Thématique</label>
+				<select id="thematic" name="thematic"
+						class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+					<option value="">Sélectionner une thématique</option>
+					<option value="Bien-être & Spa">Bien-être & Spa</option>
+					<option value="Aventure & Nature">Aventure & Nature</option>
+					<option value="Gastronomie">Gastronomie</option>
+					<option value="Culture & Art">Culture & Art</option>
+				</select>
+			</div>				<!-- Montant -->
 				<div>
 					<label for="amount" class="block text-sm font-medium text-gray-700 mb-2">Prix (€) *</label>
 					<input type="number" id="amount" name="amount" min="0" step="0.01" required

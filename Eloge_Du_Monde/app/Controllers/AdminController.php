@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 use App\Models\BookingModel;
+use App\Models\HostModel;
 use App\Models\CountryModel;
 use App\Models\TripModel;
 use App\Models\TripStepModel;
@@ -45,12 +46,73 @@ class AdminController extends BaseController
 	// Gestion des réservations
 	public function bookings()
 	{
-		$bookingModel = new BookingModel();
-		$bookings = $bookingModel->getAllBookings();
+		$tripModel = new TripModel();
+		$userModel = new UserModel();
+		$hostModel = new HostModel();
+		$tripStepModel = new TripStepModel();
+		$countryModel = new CountryModel();
 
-		return view('admin/reservations/list',
-		[
-			'reservations' => $bookings
+		$reservations = $tripModel->getAllTrips();
+		$reservationsData = [];
+
+		foreach ($reservations as $reservation)
+		{
+			$user = $userModel->getUserById($reservation['idUser']);
+			
+			// Vérifier si l'utilisateur existe
+			if (!$user) {
+				$user = [
+					'firstname' => 'N/A',
+					'lastname' => '',
+					'email' => 'N/A',
+					'phone' => ''
+				];
+			}
+			
+			$hosts = $hostModel->getHostsByTrip($reservation['idTrip']);
+			
+			$destinations = [];
+			$totalAmount = 0;
+			$totalNights = 0;
+			
+			foreach ($hosts as $host)
+			{
+				$tripStep = $tripStepModel->getStepById($host['idTripStep']);
+				if ($tripStep)
+				{
+					$country = $countryModel->getCountryById($tripStep['idCountry']);
+					if ($country) {
+						$destinations[] =
+						[
+							'name' => $tripStep['name'],
+							'country' => $country['name']
+						];
+						// Utiliser les vraies nuits stockées dans host
+						$nights = $host['nbNights'];
+						$totalNights += $nights;
+						$totalAmount += $country['cost'] * $nights;
+					}
+				}
+			}
+
+			$departureDate = new \DateTime($reservation['departureDate']);
+			$endDate = clone $departureDate;
+			$endDate->modify('+' . $totalNights . ' days');
+			
+			$reservationsData[] = [
+				'idTrip' => $reservation['idTrip'],
+				'client' => $user,
+				'destinations' => $destinations,
+				'departureDate' => $departureDate->format('Y-m-d'),
+				'endDate' => $endDate->format('Y-m-d'),
+				'totalNights' => $totalNights,
+				'totalAmount' => $totalAmount,
+				'type' => $reservation['type'] ?? 'individuel'
+			];
+		}
+
+		return view('admin/bookings/list', [
+			'reservations' => $reservationsData
 		]);
 	}
 
