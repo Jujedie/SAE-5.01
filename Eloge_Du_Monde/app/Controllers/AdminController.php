@@ -268,9 +268,11 @@ class AdminController extends BaseController
 		
 		// Récupérer les extensions pour chaque voyage
 		$tripsWithExtensions = [];
-		foreach ($prebuiltTrips as $trip) {
-			$trip['extensions'] = $extensionModel->getExtensionsByPrebuiltTrip($trip['idTrip'], $trip['idUser']);
-			$tripsWithExtensions[] = $trip;
+		if (is_array($prebuiltTrips) && !empty($prebuiltTrips)) {
+			foreach ($prebuiltTrips as $trip) {
+				$trip['extensions'] = $extensionModel->getExtensionsByPrebuiltTrip($trip['idTrip'], $trip['idUser']);
+				$tripsWithExtensions[] = $trip;
+			}
 		}
 
 		return view('admin/prebuiltTrips/list', ['prebuiltTrips' => $tripsWithExtensions]);
@@ -423,7 +425,7 @@ class AdminController extends BaseController
 			$data['departureDate'] = $prebuiltTrip['departureDate'];
 			
 			$extensionModel->addExtension($data);
-			return redirect()->to('/admin/prebuiltTrips/view/' . $prebuiltTripId)->with('success', 'Extension ajoutée avec succès.');
+			return redirect()->to('/admin/prebuiltTrips')->with('success', 'Extension ajoutée avec succès.');
 		}
 
 		return view('admin/prebuiltTrips/addExtension', ['prebuiltTrip' => $prebuiltTrip]);
@@ -434,6 +436,6 @@ class AdminController extends BaseController
 		$extensionModel = new ExtensionModel();
 		$extensionModel->deleteExtensionById($extensionId);
 
-		return redirect()->to('/admin/prebuiltTrips/view/' . $prebuiltTripId)->with('success', 'Extension supprimée avec succès.');
+		return redirect()->to('/admin/prebuiltTrips')->with('success', 'Extension supprimée avec succès.');
 	}
 }

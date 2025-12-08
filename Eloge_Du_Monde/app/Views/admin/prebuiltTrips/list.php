@@ -60,7 +60,7 @@
 		<div class="flex items-center justify-between">
 			<div>
 				<h1 class="text-3xl font-bold text-gray-800 mb-2">Gestion des voyages préfaits</h1>
-				<p class="text-gray-600"><?= count($prebuiltTrips) ?> voyage<?= count($prebuiltTrips) > 1 ? 's' : '' ?> préfait<?= count($prebuiltTrips) > 1 ? 's' : '' ?> au total</p>
+				<p class="text-gray-600"><?php $count = (isset($prebuiltTrips) && is_array($prebuiltTrips)) ? count($prebuiltTrips) : 0; echo $count; ?> voyage<?= $count > 1 ? 's' : '' ?> préfait<?= $count > 1 ? 's' : '' ?> au total</p>
 			</div>
 			<a href="<?= base_url('admin/prebuiltTrips/add') ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center space-x-2">
 				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
