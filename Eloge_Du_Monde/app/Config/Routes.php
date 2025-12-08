@@ -10,7 +10,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'HomeController::index');
 
 // Pages principales
-$routes->get('blog'       , 'HomeController::blog'      );
+$routes->get('blog'       , 'BlogController::index'      );
 $routes->get('reviews'    , 'ReviewController::index'   );
 $routes->post('reviews'   , 'ReviewController::store'   );
 $routes->get('createTrip' , 'HomeController::createTrip');

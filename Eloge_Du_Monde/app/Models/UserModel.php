@@ -88,6 +88,15 @@ class UserModel extends Model
 		return $builder->get()->getResultArray();
 	}
 
+	public function getUsersByPosts()
+	{
+		$builder = $this->db->table($this->table);
+		$builder->select('user.*');
+		$builder->join('blogPost', 'user.idUser = blogPost.idUser');
+
+		return $builder->get()->getResultArray();
+	}
+
 	public function getUsersCount()
 	{
 		return $this->countAllResults();

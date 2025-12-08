@@ -59,6 +59,12 @@ class BlogPostModel extends Model
 		return $this->where('idUser', $idUser)->findAll();
 	}
 
+	public function getPostCount()
+	{
+		return $this->countAllResults();
+	}
+
+
 	public function addPost($title, $type, $content, $image, $idUser)
 	{
 		$data =
