@@ -40,7 +40,43 @@ class TripController extends BaseController
 
 	public function creationPersonalTrip()
 	{
-		
+		if (!session()->get('isLoggedIn'))
+		{
+			return redirect()->to('/signin')->with('error', 'Vous devez être connecté pour créer un voyage personnalisé.');
+		}
+
+		helper(['form']);
+		$rules =
+		[
+			'departureDate' => 'required|valid_date',
+			'type'          => 'required|string',
+			'cost' 		    => 'integer|greater_than_equal_to[0]',
+			'steps'         => 'required|array',
+		];
+
+		if ($this->validate($rules))
+		{
+			$tripModel = new TripModel();
+			$logModel  = new LogModel();
+			$tripStepModel = new TripStepModel();
+
+			$dataTrip =
+			[
+				'departureDate' => $this->request->getVar('departureDate'),
+				'type'          => $this->request->getVar('type'),
+				'idUser'        => session()->get('idUser'),
+			];
+
+			$steps = $tripStepModel->stepsExists($this->request->getVar('steps'));
+
+			$tripModel->createPersonalTrip($dataTrip, $steps);
+
+			return redirect()->to('/trips')->with('success', 'Votre voyage personnalisé a été créé avec succès.');
+		}
+		else
+		{
+			return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+		}
 	}
 
 	public function viewTrip($idTrip)
