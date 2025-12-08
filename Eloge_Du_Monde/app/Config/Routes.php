@@ -13,7 +13,13 @@ $routes->get('/', 'HomeController::index');
 $routes->get('blog'       , 'BlogController::index'      );
 $routes->get('reviews'    , 'ReviewController::index'   );
 $routes->post('reviews'   , 'ReviewController::store'   );
-$routes->get('createTrip' , 'HomeController::createTrip');
+$routes->get('contact'    , 'HomeController::contact'   );
+
+// Voyages
+$routes->get('createTrip' , 'TripController::createPersonalTrip');
+$routes->get('viewTrip/(:num)', 'TripController::viewTrip/$1');
+$routes->post('createTrip', 'TripController::creationPersonalTrip');
+$routes->get('trips/(:segment)?', 'TripController::index/$1');
 
 // Connexion
 $routes->get('signin'                          , 'SigninController::index'  );

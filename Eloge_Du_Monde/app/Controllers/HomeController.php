@@ -19,13 +19,18 @@ class HomeController extends BaseController
 		return view('blog');
 	}
 
-	public function createTrip()
+	public function reviews()
 	{
-		return view('createTrip');
+		return view('reviews');
 	}
 
 	public function error403()
 	{
 		return view('errors/html/error_403');
+	}
+
+	public function contact()
+	{
+		return view('contact');
 	}
 }

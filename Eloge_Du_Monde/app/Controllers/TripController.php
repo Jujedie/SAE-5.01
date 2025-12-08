@@ -9,7 +9,7 @@ use App\Models\UserModel;
 
 class TripController extends BaseController
 {
-	public function index($filter = [])
+	public function index($filter = String)
 	{
 		$session   = session();
 		$tripModel = new TripModel();
@@ -24,7 +24,7 @@ class TripController extends BaseController
 			$trips = $tripModel->getAllTrips();
 		}
 
-		return view('trips', ["user" => ((new UserModel())->getUserById($session->get('idUser'))), "listTrips" => $trips]);
+		return view('trip/index', ["user" => ((new UserModel())->getUserById($session->get('idUser'))), "listTrips" => $trips]);
 	}
 
 	public function createPersonalTrip()
@@ -40,6 +40,23 @@ class TripController extends BaseController
 		return view('trip/create_trip', ["isAdmin" => ((new UserModel())->isAdmin($session->get('idUser')))]);
 	}
 
+	public function addPrebuiltTrip()
+	{
+		if ($this->request->getMethod() === 'POST')
+		{
+			$prebuiltTripModel = new PrebuiltTripModel();
+			$data = $this->request->getPost();
+			
+			// Ajouter l'ID de l'utilisateur connecté
+			$data['idUser'] = session()->get('idUser');
+			
+			$prebuiltTripModel->addPrebuiltTrip($data);
+			return redirect()->to('/admin/prebuiltTrips')->with('success', 'Voyage préfait ajouté avec succès.');
+		}
+
+		return view('admin/prebuiltTrips/add');
+	}
+	
 	public function creationPersonalTrip()
 	{
 		if (!session()->get('isLoggedIn'))
