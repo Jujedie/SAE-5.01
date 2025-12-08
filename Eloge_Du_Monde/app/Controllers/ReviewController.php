@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\ReviewModel;
+use App\Models\UserModel;
 
 class ReviewController extends BaseController
 {
@@ -12,6 +13,7 @@ class ReviewController extends BaseController
 	public function index()
 	{
 		$reviewModel = new ReviewModel();
+		$userModel = new UserModel();
 
 		$reviews = $reviewModel->getVerifiedReviews();
 
@@ -33,7 +35,8 @@ class ReviewController extends BaseController
 		[
 			'reviews' => $reviews,
 			'average' => $average,
-			'count'   => $reviewModel->getReviewsCount()
+			'count'   => $reviewModel->getReviewsCount(),
+			'users'   => $userModel->getUserByReviews(),
 		];
 
 		return view('reviews', $data);
