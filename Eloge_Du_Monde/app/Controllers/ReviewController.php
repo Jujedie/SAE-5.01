@@ -36,7 +36,7 @@ class ReviewController extends BaseController
 			'reviews' => $reviews,
 			'average' => $average,
 			'count'   => $reviewModel->getReviewsCount(),
-			'users'   => $userModel->getUserByReviews(),
+			'users'   => $userModel->getUsersByVerifiedReviews(),
 		];
 
 		return view('reviews', $data);

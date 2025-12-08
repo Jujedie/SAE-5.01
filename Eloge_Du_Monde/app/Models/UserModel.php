@@ -78,6 +78,16 @@ class UserModel extends Model
 		return $builder->get()->getResultArray();
 	}
 
+	public function getUsersByVerifiedReviews()
+	{
+		$builder = $this->db->table($this->table);
+		$builder->select('user.*');
+		$builder->join('review', 'user.idUser = review.idUser');
+		$builder->where('review.verified', 't');
+
+		return $builder->get()->getResultArray();
+	}
+
 	public function getUsersCount()
 	{
 		return $this->countAllResults();
