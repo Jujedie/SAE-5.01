@@ -114,7 +114,7 @@ class UserController extends BaseController
 		else
 		{
 			$data['validation'] = $this->validator;
-			echo view('authentication/signup', $data);
+			echo view('authentications/signup', $data);
 		}
 	}
 }

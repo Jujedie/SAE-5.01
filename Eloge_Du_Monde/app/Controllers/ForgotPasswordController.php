@@ -9,7 +9,7 @@ class ForgotPasswordController extends BaseController
 	public function index()
 	{
 		helper(['form']);
-		return view('authentication/forgotPassword');
+		return view('authentications/forgotPassword');
 	}
 
 	public function sendResetLink()

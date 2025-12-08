@@ -18,7 +18,7 @@ class SignupController extends BaseController
 		}
 		else
 		{
-			echo view('authentication/signup');
+			echo view('authentications/signup');
 		}
 	}
 
@@ -66,7 +66,7 @@ class SignupController extends BaseController
 		else
 		{
 			$data['validation'] = $this->validator;
-			echo view('authentication/signup', $data);
+			echo view('authentications/signup', $data);
 		}
 	}
 }

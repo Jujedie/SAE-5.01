@@ -14,7 +14,7 @@ class ResetPasswordController extends BaseController
 		
 		if ($user)
 		{
-			return view('authentication/resetPassword', ['token' => $token]);
+			return view('authentications/resetPassword', ['token' => $token]);
 		}
 		else
 		{

@@ -18,7 +18,7 @@ class SigninController extends BaseController
 		}
 		else
 		{
-			echo view('authentication/signin');
+			echo view('authentications/signin');
 		}
 	}
 
