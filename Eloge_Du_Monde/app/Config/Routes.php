@@ -72,12 +72,17 @@ $routes->get('admin/prebuiltTrips'                                     , 'AdminC
 $routes->match(['GET', 'POST'], 'admin/prebuiltTrips/add'              , 'AdminController::addPrebuiltTrip'     , ['filter' => ['authGuard', 'roleGuard']]);
 $routes->match(['GET', 'POST'], 'admin/prebuiltTrips/edit/(:num)'      , 'AdminController::editPrebuiltTrip/$1' , ['filter' => ['authGuard', 'roleGuard']]);
 $routes->post('admin/prebuiltTrips/delete/(:num)'                      , 'AdminController::deletePrebuiltTrip/$1', ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/prebuiltTrips/view/(:num)'                         , 'AdminController::viewPrebuiltTripWithExtensions/$1', ['filter' => ['authGuard', 'roleGuard']]);
+
+// Admin - Extensions de voyages préfaits
+$routes->match(['GET', 'POST'], 'admin/prebuiltTrips/extension/add/(:num)', 'AdminController::addExtension/$1'        , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->post('admin/prebuiltTrips/extension/delete/(:num)/(:num)'        , 'AdminController::deleteExtension/$1/$2'  , ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Témoignages
-$routes->get('admin/reviews'               , 'AdminController::reviews'        , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->get('admin/reviews/verify/(:num)', 'AdminController::verifyReview/$1', ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/reviews'                , 'AdminController::reviews'          , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/reviews/verify/(:num)'  , 'AdminController::verifyReview/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
 $routes->get('admin/reviews/unverify/(:num)', 'AdminController::unverifyReview/$1', ['filter' => ['authGuard', 'roleGuard']]);
-$routes->get('admin/reviews/delete/(:num)', 'AdminController::deleteReview/$1', ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/reviews/delete/(:num)'  , 'AdminController::deleteReview/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
 
 // Erreurs
 $routes->get('error_403', 'HomeController::error403');
