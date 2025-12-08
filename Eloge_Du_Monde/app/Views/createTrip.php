@@ -49,11 +49,7 @@
 						<label for="continent" class="form-label">Continent</label>
 						<select id="continent" class="form-control">
 							<option value="">Sélectionner</option>
-							<option value="asie">Asie</option>
-							<option value="europe">Europe</option>
-							<option value="afrique">Afrique</option>
-							<option value="amerique">Amérique</option>
-							<option value="oceanie">Océanie</option>
+							<!-- Les continents seront chargés dynamiquement depuis la base de données -->
 						</select>
 					</div>
 
@@ -163,5 +159,5 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<script src="<?= base_url('assets/js/createTrip.js') ?>"></script>
+<script src="<?= base_url('assets/js/create_trip.js') ?>"></script>
 <?= $this->endSection() ?>
