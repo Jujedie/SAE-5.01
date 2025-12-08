@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\PrebuiltTripModel;
 use App\Models\TripModel;
 use App\Models\UserModel;
 
@@ -69,7 +70,7 @@ class TripController extends BaseController
 
 			$steps = $tripStepModel->stepsExists($this->request->getVar('steps'));
 
-			$tripModel->createPersonalTrip($dataTrip, $steps);
+			$tripModel->createTrip($dataTrip, $steps);
 
 			return redirect()->to('/trips')->with('success', 'Votre voyage personnalisé a été créé avec succès.');
 		}

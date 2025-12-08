@@ -83,6 +83,21 @@ class TripModel extends Model
 		return $this->insert($data);
 	}
 
+	public function createTrip($dataTrip, $steps)
+	{
+		$this->insert($dataTrip);
+		$idTrip = $this->getInsertID();
+
+		$bookingModel = new BookingModel();
+
+		foreach ($steps as $step)
+		{
+			$bookingModel->addBooking($idTrip, $step['idTripStep']);
+		}
+
+		return $idTrip;
+	}
+
 	public function updateTrip($idTrip, $data)
 	{
 		return $this->where('idTrip', $idTrip)->set($data)->update();
