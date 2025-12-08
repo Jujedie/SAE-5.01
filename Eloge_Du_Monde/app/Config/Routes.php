@@ -83,5 +83,8 @@ $routes->get('admin/reviews/verify/(:num)'  , 'AdminController::verifyReview/$1'
 $routes->get('admin/reviews/unverify/(:num)', 'AdminController::unverifyReview/$1', ['filter' => ['authGuard', 'roleGuard']]);
 $routes->get('admin/reviews/delete/(:num)'  , 'AdminController::deleteReview/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
 
+// Admin - Blog
+$routes->get('admin/blog' , 'AdminController::blog' , ['filter' => ['authGuard', 'roleGuard']]);
+
 // Erreurs
 $routes->get('error_403', 'HomeController::error403');

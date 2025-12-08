@@ -146,6 +146,25 @@
 				<p class="text-gray-500 text-sm">réservations actives</p>
 			</div>
 		</div>
+
+		<!-- Blog Posts Card -->
+		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('admin/blog')">
+			<div class="flex items-start justify-between mb-4">
+				<div class="icon-wrapper bg-teal-100">
+					<svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+					</svg>
+				</div>
+				<svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+				</svg>
+			</div>
+			<div>
+				<p class="text-gray-600 text-sm mb-1">Articles de blog</p>
+				<p class="text-4xl font-bold text-gray-800 mb-1"><?= $postsCount ?></p>
+				<p class="text-gray-500 text-sm">articles publiés</p>
+			</div>
+		</div>
 	</div>
 
 <script>

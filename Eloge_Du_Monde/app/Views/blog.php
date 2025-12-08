@@ -49,7 +49,7 @@
 			<!-- Blog Posts -->
 			<div class="blog-posts" id="blogPosts">
 				<?php if (empty($posts)): ?>
-					<p class="no-posts-message">Aucun article de blog disponible pour le moment. Revenez bientôt pour découvrir nos dernières publications !</p>
+					<p class="no-posts-message">Aucun article de blog</p>
 				<?php else: ?>
 					<?php for ($i = 0; $i < count($posts); $i++): ?>
 						<article class="blog-post" data-tag="<?= $posts[$i]['type'] ?>">
@@ -88,35 +88,9 @@
 					<?php endfor; ?>
 				<?php endif; ?>
 			</div>
-
-			<!-- Load More -->
-			<div class="load-more">
-				<button class="btn btn-outline">Charger plus d'articles</button>
-			</div>
 		</div>
 	</div>
 </section>
-
-<!-- CTA Section -->
-<section class="blog-cta">
-	<div class="blog-cta-container">
-		<svg class="cta-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-			<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
-			<line x1="7" y1="7" x2="7.01" y2="7"></line>
-		</svg>
-		
-		<h2 class="cta-title playfair">Besoin de conseils personnalisés ?</h2>
-		
-		<p class="cta-description">
-			Nos experts voyages sont à votre disposition pour vous accompagner dans 
-			la préparation de votre séjour sur mesure.
-		</p>
-		
-		<a href="<?= base_url('contact') ?>" class="btn btn-primary">Prendre rendez-vous</a>
-	</div>
-</section>
-
-<?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
 <script src="<?= base_url('assets/js/blog.js') ?>"></script>

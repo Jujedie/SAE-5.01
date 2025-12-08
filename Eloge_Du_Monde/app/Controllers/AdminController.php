@@ -10,6 +10,7 @@ use App\Models\TripStepModel;
 use App\Models\PrebuiltTripModel;
 use App\Models\ExtensionModel;
 use App\Models\ReviewModel;
+use App\Models\BlogPostModel;
 use App\Models\LogModel;
 
 class AdminController extends BaseController
@@ -23,6 +24,7 @@ class AdminController extends BaseController
 		$tripModel          = new TripModel();
 		$reviewModel        = new ReviewModel();
 		$prebuiltTripModel  = new PrebuiltTripModel();
+		$blogModel          = new BlogPostModel();
 
 		$data =
 		[
@@ -34,6 +36,7 @@ class AdminController extends BaseController
 			'countriesCount'     => $countryModel->getCountriesCount(),
 			'continentsCount'    => $countryModel->getContinentsCount(),
 			'prebuiltTripsCount' => $prebuiltTripModel->countAllResults(),
+			'postsCount'         => $blogModel->getPostCount(),
 		];
 
 		return view('admin/homeAdmin', $data);
@@ -437,5 +440,17 @@ class AdminController extends BaseController
 		$extensionModel->deleteExtensionById($extensionId);
 
 		return redirect()->to('/admin/prebuiltTrips')->with('success', 'Extension supprimée avec succès.');
+	}
+
+	public function blog()
+	{
+		$blogModel = new BlogPostModel();
+		$userModel = new UserModel();
+		$data =
+		[
+			'posts' => $blogModel->getAllPosts(),
+			'users' => $userModel->getUsersByPosts(),	
+		];
+		return view('admin/blog/list', $data);
 	}
 }
