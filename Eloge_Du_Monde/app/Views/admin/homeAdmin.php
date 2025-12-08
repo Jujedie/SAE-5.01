@@ -87,7 +87,7 @@
 			</div>
 			<div>
 				<p class="text-gray-600 text-sm mb-1">Réservations</p>
-				<p class="text-4xl font-bold text-gray-800 mb-1"><?= $bookingsCount ?></p>
+				<p class="text-4xl font-bold text-gray-800 mb-1"><?= $tripsCount ?></p>
 				<p class="text-gray-500 text-sm">réservations actives</p>
 			</div>
 		</div>

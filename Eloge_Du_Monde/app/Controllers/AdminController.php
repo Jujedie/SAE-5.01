@@ -21,7 +21,6 @@ class AdminController extends BaseController
 		// Afficher le tableau de bord admin
 		$countryModel       = new CountryModel();
 		$userModel          = new UserModel();
-		$bookingModel       = new BookingModel();
 		$tripModel          = new TripModel();
 		$reviewModel        = new ReviewModel();
 		$prebuiltTripModel  = new PrebuiltTripModel();
@@ -29,13 +28,10 @@ class AdminController extends BaseController
 
 		$data =
 		[
-			'destinationsCount'  => $countryModel->countAllResults(),
 			'usersCount'         => $userModel->getUsersCount(),
-			'bookingsCount'      => $bookingModel->getBookingsCount(),
 			'tripsCount'         => $tripModel->getTripsCount(),
 			'reviewsCount'       => $reviewModel->getReviewsCount(),
 			'countriesCount'     => $countryModel->getCountriesCount(),
-			'continentsCount'    => $countryModel->getContinentsCount(),
 			'prebuiltTripsCount' => $prebuiltTripModel->countAllResults(),
 			'postsCount'         => $blogModel->getPostCount(),
 		];
