@@ -13,7 +13,8 @@ $routes->get('/'                                              , 'HomeController:
 $routes->get('blog'                                           , 'BlogController::index'  );
 $routes->get('reviews'                                        , 'ReviewController::index');
 $routes->post('reviews'                                       , 'ReviewController::store');
-$routes->get('contact'                                        , 'HomeController::contact');
+$routes->get('contact'                                        , 'ContactController::index');
+$routes->post('contact/send'                                  , 'ContactController::send');
 
 // Voyages
 $routes->get('createTrip'                                     , 'TripController::createPersonalTrip'  );
