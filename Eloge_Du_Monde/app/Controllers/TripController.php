@@ -83,8 +83,8 @@ class TripController extends BaseController
 	{
 		if (!session()->get('isLoggedIn'))
 		{
-			return $this->response->setJSON(
-			[
+			return $this->response->setJSON
+			([
 				'success' => false,
 				'message' => 'Vous devez être connecté pour créer un voyage.'
 			])->setStatusCode(401);
@@ -94,8 +94,8 @@ class TripController extends BaseController
 		
 		if (!$json || !isset($json->destinations) || empty($json->destinations))
 		{
-			return $this->response->setJSON(
-			[
+			return $this->response->setJSON
+			([
 				'success' => false,
 				'message' => 'Données invalides'
 			])->setStatusCode(400);
@@ -127,8 +127,8 @@ class TripController extends BaseController
 			$hostModel->db->query($sql, [$idTrip, $dest->idTripStep, $days, $nights]);
 		}
 
-		return $this->response->setJSON(
-		[
+		return $this->response->setJSON
+		([
 			'success' => true,
 			'message' => 'Voyage créé avec succès',
 			'idTrip'  => $idTrip
