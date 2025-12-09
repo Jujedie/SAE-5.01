@@ -86,9 +86,9 @@ $routes->post('admin/prebuiltTrips/extension/delete/(:num)/(:num)'        , 'Adm
 
 // Admin - Témoignages
 $routes->get ('admin/reviews'                , 'AdminController::reviews'          , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->post('admin/reviews/verify/(:num)'  , 'AdminController::verifyReview/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->post('admin/reviews/unverify/(:num)', 'AdminController::unverifyReview/$1', ['filter' => ['authGuard', 'roleGuard']]);
-$routes->post('admin/reviews/delete/(:num)'  , 'AdminController::deleteReview/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/reviews/verify/(:num)'  , 'AdminController::verifyReview/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/reviews/unverify/(:num)', 'AdminController::unverifyReview/$1', ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/reviews/delete/(:num)'  , 'AdminController::deleteReview/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
 
 // API pour créer un voyage personnalisé
 $routes->get('api/countries-data', 'TripController::getCountriesData');
