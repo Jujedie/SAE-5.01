@@ -41,7 +41,7 @@ class CreateTableBlogPost extends Migration
 			'image'          =>
 			[
 				'type'       => 'TEXT',
-				'null'       => false,
+				'null'       => true,
 			],
 			'idUser'         =>
 			[
