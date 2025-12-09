@@ -42,34 +42,37 @@ class AdminController extends BaseController
 	// Gestion des réservations
 	public function bookings()
 	{
-		$tripModel = new TripModel();
-		$userModel = new UserModel();
-		$hostModel = new HostModel();
+		$tripModel     = new TripModel();
+		$userModel     = new UserModel();
+		$hostModel     = new HostModel();
 		$tripStepModel = new TripStepModel();
-		$countryModel = new CountryModel();
+		$countryModel  = new CountryModel();
 
-		$reservations = $tripModel->getAllTrips();
 		$reservationsData = [];
+
+		$reservations     = $tripModel->getAllTrips();
 
 		foreach ($reservations as $reservation)
 		{
 			$user = $userModel->getUserById($reservation['idUser']);
-			
+
 			// Vérifier si l'utilisateur existe
-			if (!$user) {
-				$user = [
+			if (!$user)
+			{
+				$user =
+				[
 					'firstname' => 'N/A',
-					'lastname' => '',
-					'email' => 'N/A',
-					'phone' => ''
+					'lastname'  => '',
+					'email'     => 'N/A',
+					'phone'     => ''
 				];
 			}
 			
 			$hosts = $hostModel->getHostsByTrip($reservation['idTrip']);
 			
 			$destinations = [];
-			$totalAmount = 0;
-			$totalNights = 0;
+			$totalAmount  = 0;
+			$totalNights  = 0;
 			
 			foreach ($hosts as $host)
 			{
@@ -77,14 +80,16 @@ class AdminController extends BaseController
 				if ($tripStep)
 				{
 					$country = $countryModel->getCountryById($tripStep['idCountry']);
-					if ($country) {
+					if ($country)
+					{
 						$destinations[] =
 						[
-							'name' => $tripStep['name'],
+							'name'    => $tripStep['name'],
 							'country' => $country['name']
 						];
+
 						// Utiliser les vraies nuits stockées dans host
-						$nights = $host['nbNights'];
+						$nights       = $host['nbNights'];
 						$totalNights += $nights;
 						$totalAmount += $country['cost'] * $nights;
 					}
@@ -95,19 +100,21 @@ class AdminController extends BaseController
 			$endDate = clone $departureDate;
 			$endDate->modify('+' . $totalNights . ' days');
 			
-			$reservationsData[] = [
-				'idTrip' => $reservation['idTrip'],
-				'client' => $user,
-				'destinations' => $destinations,
+			$reservationsData[] =
+			[
+				'idTrip'        => $reservation['idTrip'],
+				'client'        => $user,
+				'destinations'  => $destinations,
 				'departureDate' => $departureDate->format('Y-m-d'),
-				'endDate' => $endDate->format('Y-m-d'),
-				'totalNights' => $totalNights,
-				'totalAmount' => $totalAmount,
-				'type' => $reservation['type'] ?? 'individuel'
+				'endDate'       => $endDate->format('Y-m-d'),
+				'totalNights'   => $totalNights,
+				'totalAmount'   => $totalAmount,
+				'type'          => $reservation['type'] ?? 'individuel'
 			];
 		}
 
-		return view('admin/bookings/list', [
+		return view('admin/bookings/list',
+		[
 			'reservations' => $reservationsData
 		]);
 	}
@@ -137,6 +144,7 @@ class AdminController extends BaseController
 	public function users()
 	{
 		$userModel = new UserModel();
+
 		$users = $userModel->getAllUsers();
 
 		return view('admin/users/list', ['users' => $users]);
@@ -154,6 +162,7 @@ class AdminController extends BaseController
 	public function countries()
 	{
 		$countryModel = new CountryModel();
+
 		$countries = $countryModel->getAllCountries();
 
 		return view('admin/countries/list', ['countries' => $countries]);
@@ -176,6 +185,7 @@ class AdminController extends BaseController
 	public function editCountry($id)
 	{
 		$countryModel = new CountryModel();
+
 		$country = $countryModel->getCountryById($id);
 
 		if (!$country)
@@ -204,7 +214,7 @@ class AdminController extends BaseController
 	// Gestion des destinations d'un pays
 	public function countryDestinations($idCountry)
 	{
-		$countryModel = new CountryModel();
+		$countryModel  = new CountryModel();
 		$tripStepModel = new TripStepModel();
 		
 		$country = $countryModel->getCountryById($idCountry);
@@ -216,7 +226,8 @@ class AdminController extends BaseController
 		
 		$destinations = $tripStepModel->getStepsByCountry($idCountry);
 
-		return view('admin/countries/destinations', [
+		return view('admin/countries/destinations',
+		[
 			'country' => $country,
 			'destinations' => $destinations
 		]);
@@ -247,7 +258,7 @@ class AdminController extends BaseController
 
 	public function editDestination($idCountry, $idDestination)
 	{
-		$countryModel = new CountryModel();
+		$countryModel  = new CountryModel();
 		$tripStepModel = new TripStepModel();
 		
 		$country = $countryModel->getCountryById($idCountry);
@@ -265,8 +276,9 @@ class AdminController extends BaseController
 			return redirect()->to('/admin/countries/' . $idCountry . '/destinations')->with('success', 'Destination mise à jour avec succès.');
 		}
 
-		return view('admin/countries/editDestination', [
-			'country' => $country,
+		return view('admin/countries/editDestination',
+		[
+			'country'     => $country,
 			'destination' => $destination
 		]);
 	}
@@ -294,6 +306,7 @@ class AdminController extends BaseController
 	public function editTrip($id)
 	{
 		$tripModel = new TripModel();
+
 		$trip = $tripModel->getTripById($id);
 
 		if (!$trip)
@@ -314,6 +327,7 @@ class AdminController extends BaseController
 	public function deleteTrip($id)
 	{
 		$tripModel = new TripModel();
+
 		$tripModel->deleteTrip($id);
 
 		return redirect()->to('/admin/trips')->with('success', 'Voyage supprimé avec succès.');
@@ -323,15 +337,17 @@ class AdminController extends BaseController
 	public function prebuiltTrips()
 	{
 		$prebuiltTripModel = new PrebuiltTripModel();
-		$extensionModel = new ExtensionModel();
+		$extensionModel    = new ExtensionModel();
 		
 		$prebuiltTrips = $prebuiltTripModel->getAllPrebuiltTrips();
 		
 		// Récupérer les extensions pour chaque voyage
 		$tripsWithExtensions = [];
-		if (is_array($prebuiltTrips) && !empty($prebuiltTrips)) {
-			foreach ($prebuiltTrips as $trip) {
-				$trip['extensions'] = $extensionModel->getExtensionsByPrebuiltTrip($trip['idTrip'], $trip['idUser']);
+		if (is_array($prebuiltTrips) && !empty($prebuiltTrips))
+		{
+			foreach ($prebuiltTrips as $trip)
+			{
+				$trip['extensions']      = $extensionModel->getExtensionsByPrebuiltTrip($trip['idTrip'], $trip['idUser']);
 				$tripsWithExtensions[] = $trip;
 			}
 		}
@@ -359,6 +375,7 @@ class AdminController extends BaseController
 	public function editPrebuiltTrip($id)
 	{
 		$prebuiltTripModel = new PrebuiltTripModel();
+
 		$prebuiltTrip = $prebuiltTripModel->getPrebuiltTripById($id);
 
 		if (!$prebuiltTrip)
@@ -379,6 +396,7 @@ class AdminController extends BaseController
 	public function deletePrebuiltTrip($id)
 	{
 		$prebuiltTripModel = new PrebuiltTripModel();
+
 		$prebuiltTripModel->deletePrebuiltTrip($id);
 
 		return redirect()->to('/admin/prebuiltTrips')->with('success', 'Voyage préfait supprimé avec succès.');
@@ -389,6 +407,7 @@ class AdminController extends BaseController
 	{
 		$reviewModel = new ReviewModel();
 		$userModel   = new UserModel();
+
 		$reviews = $reviewModel->getAllReviews();
 
 		return view('admin/reviews/list', ['reviews' => $reviews, 'users' => $userModel->getUserByReviews()]);
@@ -397,7 +416,7 @@ class AdminController extends BaseController
 	public function verifyReview($id)
 	{
 		$reviewModel = new ReviewModel();
-		$logModel = new LogModel();
+		$logModel    = new LogModel();
 
 		$review = $reviewModel->getReviewById($id);
 
@@ -414,7 +433,8 @@ class AdminController extends BaseController
 	public function unverifyReview($id)
 	{
 		$reviewModel = new ReviewModel();
-		$logModel = new LogModel();
+		$logModel    = new LogModel();
+
 		$review = $reviewModel->getReviewById($id);
 
 		if (!$review)
@@ -430,7 +450,8 @@ class AdminController extends BaseController
 	public function deleteReview($id)
 	{
 		$reviewModel = new ReviewModel();
-		$logModel = new LogModel();
+		$logModel    = new LogModel();
+
 		$review = $reviewModel->getReviewById($id);
 
 		if (!$review)
@@ -448,26 +469,28 @@ class AdminController extends BaseController
 	public function viewPrebuiltTripWithExtensions($id)
 	{
 		$prebuiltTripModel = new PrebuiltTripModel();
-		$extensionModel = new ExtensionModel();
+		$extensionModel    = new ExtensionModel();
 		
 		$prebuiltTrip = $prebuiltTripModel->getPrebuiltTripById($id);
 		if (!$prebuiltTrip)
 		{
 			return redirect()->to('/admin/prebuiltTrips')->with('error', 'Voyage préfait non trouvé.');
 		}
-		
+
 		// Récupérer toutes les extensions pour ce voyage
 		$extensions = $extensionModel->getExtensionsByPrebuiltTrip($id, $prebuiltTrip['idUser']);
 		
-		return view('admin/prebuiltTrips/list', [
+		return view('admin/prebuiltTrips/list',
+		[
 			'prebuiltTrip' => $prebuiltTrip,
-			'extensions' => $extensions
+			'extensions'   => $extensions
 		]);
 	}
 
 	public function addExtension($prebuiltTripId)
 	{
 		$prebuiltTripModel = new PrebuiltTripModel();
+
 		$prebuiltTrip = $prebuiltTripModel->getPrebuiltTripById($prebuiltTripId);
 		
 		if (!$prebuiltTrip)
@@ -478,6 +501,7 @@ class AdminController extends BaseController
 		if ($this->request->getMethod() === 'POST')
 		{
 			$extensionModel = new ExtensionModel();
+
 			$data = $this->request->getPost();
 			
 			// Utiliser les mêmes données que le voyage parent
@@ -495,6 +519,7 @@ class AdminController extends BaseController
 	public function deleteExtension($extensionId, $prebuiltTripId)
 	{
 		$extensionModel = new ExtensionModel();
+
 		$extensionModel->deleteExtensionById($extensionId);
 
 		return redirect()->to('/admin/prebuiltTrips')->with('success', 'Extension supprimée avec succès.');
@@ -504,10 +529,11 @@ class AdminController extends BaseController
 	{
 		$blogModel = new BlogPostModel();
 		$userModel = new UserModel();
-		$data =
+
+		$data      =
 		[
 			'posts' => $blogModel->getAllPosts(),
-			'users' => $userModel->getUsersByPosts(),	
+			'users' => $userModel->getUsersByPosts(),
 		];
 
 		log_message('debug', print_r($data['posts'], true));

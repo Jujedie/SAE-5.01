@@ -92,7 +92,7 @@ class UserController extends BaseController
 		{
 
 			$userModel = new UserModel();
-			$user = $userModel->find($session->get('idUser'));
+			$user      = $userModel->find($session->get('idUser'));
 
 			// Récupérer les données du formulaire
 			$lastName  = $this->request->getPost('lastName');

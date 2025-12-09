@@ -114,28 +114,33 @@ class TripController extends BaseController
 
 	public function getCountriesData()
 	{
-		$countryModel = new \App\Models\CountryModel();
+		$countryModel  = new \App\Models\CountryModel();
 		$tripStepModel = new \App\Models\TripStepModel();
 
 		$countries = $countryModel->getAllCountries();
-		$data = [];
+		$data      = [];
 
-		foreach ($countries as $country) {
-			$continent = strtolower($country['continent'] ?? 'autre');
+		foreach ($countries as $country)
+		{
+			$continent    = strtolower($country['continent'] ?? 'autre');
 			$destinations = $tripStepModel->getStepsByCountry($country['idCountry']);
 			
-			if (!isset($data[$continent])) {
+			if (!isset($data[$continent]))
+			{
 				$data[$continent] = [];
 			}
 			
-			$data[$continent][$country['name']] = [
-				'idCountry' => $country['idCountry'],
-				'cost' => $country['cost'] ?? 0,
-				'destinations' => array_map(function($dest) {
-					return [
+			$data[$continent][$country['name']] =
+			[
+				'idCountry'    => $country['idCountry'],
+				'cost'         => $country['cost'] ?? 0,
+				'destinations' => array_map(function($dest)
+				{
+					return
+					[
 						'idTripStep' => $dest['idTripStep'],
-						'name' => $dest['name'],
-						'cost' => $dest['cost'] ?? 0
+						'name'       => $dest['name'],
+						'cost'       => $dest['cost'] ?? 0
 					];
 				}, $destinations)
 			];
@@ -146,8 +151,10 @@ class TripController extends BaseController
 
 	public function createTrip()
 	{
-		if (!session()->get('isLoggedIn')) {
-			return $this->response->setJSON([
+		if (!session()->get('isLoggedIn'))
+		{
+			return $this->response->setJSON(
+			[
 				'success' => false,
 				'message' => 'Vous devez être connecté pour créer un voyage.'
 			])->setStatusCode(401);
@@ -155,8 +162,10 @@ class TripController extends BaseController
 
 		$json = $this->request->getJSON();
 		
-		if (!$json || !isset($json->destinations) || empty($json->destinations)) {
-			return $this->response->setJSON([
+		if (!$json || !isset($json->destinations) || empty($json->destinations))
+		{
+			return $this->response->setJSON(
+			[
 				'success' => false,
 				'message' => 'Données invalides'
 			])->setStatusCode(400);
@@ -169,27 +178,30 @@ class TripController extends BaseController
 		$departureDate = $json->departureDate ?? date('Y-m-d');
 
 		// Créer le voyage
-		$dataTrip = [
+		$dataTrip =
+		[
 			'departureDate' => $departureDate,
-			'type' => 'individuel',
-			'idUser' => session()->get('idUser')
+			'type'          => 'individuel',
+			'idUser'        => session()->get('idUser')
 		];
 
 		$tripModel->insert($dataTrip);
 		$idTrip = $tripModel->getInsertID();
 
 		// Créer les hosts (destinations) pour chaque étape
-		foreach ($json->destinations as $dest) {
+		foreach ($json->destinations as $dest)
+		{
 			$nights = $dest->nights ?? 3;
-			$days = $nights + 1;
-			$sql = "INSERT INTO host (\"idTrip\", \"idTripStep\", \"nbDays\", \"nbNights\") VALUES (?, ?, ?, ?)";
+			$days   = $nights + 1;
+			$sql    = "INSERT INTO host (\"idTrip\", \"idTripStep\", \"nbDays\", \"nbNights\") VALUES (?, ?, ?, ?)";
 			$hostModel->db->query($sql, [$idTrip, $dest->idTripStep, $days, $nights]);
 		}
 
-		return $this->response->setJSON([
+		return $this->response->setJSON(
+		[
 			'success' => true,
 			'message' => 'Voyage créé avec succès',
-			'idTrip' => $idTrip
+			'idTrip'  => $idTrip
 		]);
 	}
 }
