@@ -215,7 +215,6 @@
 </footer>
 
 <script src="<?= base_url('assets/js/notifications.js') ?>"></script>
-<script src="<?= base_url('assets/js/home.js') ?>"></script>
 <?= $this->renderSection('scripts') ?>
 </body>
 </html>

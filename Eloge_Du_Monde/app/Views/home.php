@@ -421,4 +421,5 @@ Antenne : Sceaux (92330)</p>
 	</div>
 </section>
 
+<script src="<?= base_url('assets/js/home.js') ?>"></script>
 <?= $this->endSection() ?>

@@ -24,7 +24,7 @@ class TripController extends BaseController
 			$trips = $tripModel->getAllTrips();
 		}
 
-		return view('trip/index', ["user" => ((new UserModel())->getUserById($session->get('idUser'))), "listTrips" => $trips]);
+		return view('trips/index', ["user" => ((new UserModel())->getUserById($session->get('idUser'))), "listTrips" => $trips]);
 	}
 
 	public function createPersonalTrip()
@@ -37,7 +37,7 @@ class TripController extends BaseController
 			return redirect()->to('/signin')->with('error', 'Vous devez être connecté pour créer un voyage personnalisé.');
 		}
 
-		return view('trip/create_trip', ["isAdmin" => ((new UserModel())->isAdmin($session->get('idUser')))]);
+		return view('trips/createTrip', ["isAdmin" => ((new UserModel())->isAdmin($session->get('idUser')))]);
 	}
 
 	public function addPrebuiltTrip()
@@ -109,7 +109,7 @@ class TripController extends BaseController
 			return redirect()->to('/trips')->with('error', 'Le voyage demandé n\'existe pas.');
 		}
 
-		return view('trip/view_trip', ["isAdmin" => ((new UserModel())->isAdmin($session->get('idUser'))), "trip" => $trip]);
+		return view('trips/viewTrip', ["isAdmin" => ((new UserModel())->isAdmin($session->get('idUser'))), "trip" => $trip]);
 	}
 
 	public function getCountriesData()
