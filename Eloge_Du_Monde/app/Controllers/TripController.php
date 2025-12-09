@@ -9,8 +9,9 @@ use App\Models\UserModel;
 
 class TripController extends BaseController
 {
-	public function index(String $filter = "")
+	public function index()
 	{
+		$filter    = [$this->request->getGet('filter') => $this->request->getGet('value')];
 		$session   = session();
 		$tripModel = new TripModel();
 
@@ -25,77 +26,6 @@ class TripController extends BaseController
 		}
 
 		return view('trips/index', ["user" => ((new UserModel())->getUserById($session->get('idUser'))), "listTrips" => $trips]);
-	}
-
-	public function createPersonalTrip()
-	{
-		$session = session();
-
-		// Vérifier si l'utilisateur est connecté
-		if (!$session->get('isLoggedIn'))
-		{
-			return redirect()->to('/signin')->with('error', 'Vous devez être connecté pour créer un voyage personnalisé.');
-		}
-
-		return view('trips/createTrip', ["isAdmin" => ((new UserModel())->isAdmin($session->get('idUser')))]);
-	}
-
-	public function addPrebuiltTrip()
-	{
-		if ($this->request->getMethod() === 'POST')
-		{
-			$prebuiltTripModel = new PrebuiltTripModel();
-			$data = $this->request->getPost();
-			
-			// Ajouter l'ID de l'utilisateur connecté
-			$data['idUser'] = session()->get('idUser');
-			
-			$prebuiltTripModel->addPrebuiltTrip($data);
-			return redirect()->to('/admin/prebuiltTrips')->with('success', 'Voyage préfait ajouté avec succès.');
-		}
-
-		return view('admin/prebuiltTrips/add');
-	}
-	
-	public function creationPersonalTrip()
-	{
-		if (!session()->get('isLoggedIn'))
-		{
-			return redirect()->to('/signin')->with('error', 'Vous devez être connecté pour créer un voyage personnalisé.');
-		}
-
-		helper(['form']);
-		$rules =
-		[
-			'departureDate' => 'required|valid_date',
-			'type'          => 'required|string',
-			'cost' 		    => 'integer|greater_than_equal_to[0]',
-			'steps'         => 'required|array',
-		];
-
-		if ($this->validate($rules))
-		{
-			$tripModel = new TripModel();
-			$logModel  = new LogModel();
-			$tripStepModel = new TripStepModel();
-
-			$dataTrip =
-			[
-				'departureDate' => $this->request->getVar('departureDate'),
-				'type'          => $this->request->getVar('type'),
-				'idUser'        => session()->get('idUser'),
-			];
-
-			$steps = $tripStepModel->stepsExists($this->request->getVar('steps'));
-
-			$tripModel->createTrip($dataTrip, $steps);
-
-			return redirect()->to('/trips')->with('success', 'Votre voyage personnalisé a été créé avec succès.');
-		}
-		else
-		{
-			return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-		}
 	}
 
 	public function viewTrip($idTrip)
