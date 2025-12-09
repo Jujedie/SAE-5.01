@@ -58,13 +58,23 @@
 		<div class="testimonials-content">
 			<!-- Add Testimonial Button -->
 			<div class="add-testimonial-btn-wrapper">
-				<a href="<?= base_url('contact') ?>" class="btn btn-primary">
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<line x1="12" y1="5" x2="12" y2="19"></line>
-						<line x1="5" y1="12" x2="19" y2="12"></line>
-					</svg>
-					Partager mon expérience
-				</a>
+				<?php if (session()->get('isLoggedIn')): ?>
+					<button type="button" class="btn btn-primary" id="openReviewModal">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<line x1="12" y1="5" x2="12" y2="19"></line>
+							<line x1="5" y1="12" x2="19" y2="12"></line>
+						</svg>
+						Partager mon expérience
+					</button>
+				<?php else: ?>
+					<a href="<?= base_url('signin') ?>" class="btn btn-primary">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<line x1="12" y1="5" x2="12" y2="19"></line>
+							<line x1="5" y1="12" x2="19" y2="12"></line>
+						</svg>
+						Partager mon expérience
+					</a>
+				<?php endif; ?>
 			</div>
 
 			<!-- Testimonials Grid -->
@@ -136,6 +146,64 @@
 		</div>
 	</div>
 </section>
+
+<!-- Modal Ajouter un avis -->
+<div class="review-modal-overlay" id="reviewModalOverlay">
+	<div class="review-modal">
+		<div class="review-modal-header">
+			<h5 class="review-modal-title">Partager mon expérience</h5>
+			<button type="button" class="review-modal-close" id="closeReviewModal">&times;</button>
+		</div>
+		<form action="<?= base_url('reviews') ?>" method="POST">
+			<?= csrf_field() ?>
+			<div class="review-modal-body">
+				<!-- Rating -->
+				<div class="form-group-modal">
+					<label for="rating" class="form-label-modal">Note <span class="text-danger">*</span></label>
+					<div class="star-rating" id="starRating">
+						<svg class="star-input" data-value="1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+						</svg>
+						<svg class="star-input" data-value="2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+						</svg>
+						<svg class="star-input" data-value="3" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+						</svg>
+						<svg class="star-input" data-value="4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+						</svg>
+						<svg class="star-input" data-value="5" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+						</svg>
+					</div>
+					<input type="hidden" id="rating" name="rating" value="" required>
+					<small class="text-muted-modal">Cliquez sur les étoiles pour donner votre note</small>
+				</div>
+
+				<!-- Content -->
+				<div class="form-group-modal">
+					<label for="content" class="form-label-modal">Votre avis <span class="text-danger">*</span></label>
+					<textarea class="form-control-modal" id="content" name="content" rows="5" required minlength="10" maxlength="2000" placeholder="Partagez votre expérience de voyage avec nous..."></textarea>
+					<small class="text-muted-modal">Minimum 10 caractères, maximum 2000 caractères</small>
+				</div>
+
+				<div class="alert-info-modal">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<circle cx="12" cy="12" r="10"></circle>
+						<line x1="12" y1="16" x2="12" y2="12"></line>
+						<line x1="12" y1="8" x2="12.01" y2="8"></line>
+					</svg>
+					<span>Votre avis sera publié après vérification par notre équipe.</span>
+				</div>
+			</div>
+			<div class="review-modal-footer">
+				<button type="button" class="btn-modal btn-secondary-modal" id="cancelReviewModal">Annuler</button>
+				<button type="submit" class="btn-modal btn-primary-modal">Envoyer mon avis</button>
+			</div>
+		</form>
+	</div>
+</div>
 
 <?= $this->endSection() ?>
 

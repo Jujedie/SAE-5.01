@@ -80,7 +80,7 @@ class ReviewController extends BaseController
 		[
 			'rating'  => (int) $this->request->getPost('rating'),
 			'content' => $this->request->getPost('content'),
-			'verified' => 0,
+			'verified' => false,
 			'idUser'  => $session->get('idUser'),
 		];
 

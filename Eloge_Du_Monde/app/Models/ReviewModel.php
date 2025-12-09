@@ -76,6 +76,10 @@ class ReviewModel extends Model
 
 	public function addReview($data)
 	{
+		// Ajouter la date actuelle si elle n'est pas fournie
+		if (!isset($data['date'])) {
+			$data['date'] = date('Y-m-d');
+		}
 		return $this->insert($data);
 	}
 
