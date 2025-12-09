@@ -53,18 +53,18 @@
 		<nav class="nav-left">
 			<ul class="nav-links">
 				<li class="nav-dropdown">
-					<a href="<?= base_url('destinations') ?>">
+					<a href="<?= base_url('trips') ?>">
 						Nos destinations
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 							<polyline points="6 9 12 15 18 9"></polyline>
 						</svg>
 					</a>
 					<div class="dropdown-menu">
-						<a href="<?= base_url('destinations?filter=continent&value=europe') ?>">Europe</a>
-						<a href="<?= base_url('destinations?filter=continent&value=asie') ?>">Asie</a>
-						<a href="<?= base_url('destinations?filter=continent&value=afrique') ?>">Afrique</a>
-						<a href="<?= base_url('destinations?filter=continent&value=ameriques') ?>">Amériques</a>
-						<a href="<?= base_url('destinations?filter=continent&value=oceanie') ?>">Océanie</a>
+						<a href="<?= base_url('trips?filter=continent&value=europe') ?>">Europe</a>
+						<a href="<?= base_url('trips?filter=continent&value=asie') ?>">Asie</a>
+						<a href="<?= base_url('trips?filter=continent&value=afrique') ?>">Afrique</a>
+						<a href="<?= base_url('trips?filter=continent&value=ameriques') ?>">Amériques</a>
+						<a href="<?= base_url('trips?filter=continent&value=oceanie') ?>">Océanie</a>
 					</div>
 				</li>
 				<li><a href="<?= base_url('createTrip') ?>">Créer votre voyage</a></li>
