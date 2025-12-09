@@ -1,157 +1,159 @@
-// Create Trip Page JavaScript
+let destinationsData     = {};
 
-// Destinations data by continent - will be loaded from API
-let destinationsData = {};
-
-// Store selected destinations
 let selectedDestinations = [];
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function()
+{
 	console.log('Create Trip JS loaded');
-	
-	// Load countries data from API
+
 	loadCountriesData();
-	
-	// Setup continent selector
-	const continentSelect = document.getElementById('continent');
-	const paysSelect = document.getElementById('pays');
+
+	const continentSelect   = document.getElementById('continent'  );
+	const paysSelect        = document.getElementById('pays'       );
 	const destinationSelect = document.getElementById('destination');
-	
-	console.log('Elements found:', {
-		continent: continentSelect,
-		pays: paysSelect,
+
+	console.log('Elements found:',
+	{
+		continent  : continentSelect,
+		pays       : paysSelect,
 		destination: destinationSelect
 	});
-	
-	if (continentSelect) {
-		continentSelect.addEventListener('change', function() {
+
+	if (continentSelect)
+	{
+		continentSelect.addEventListener('change', function()
+		{
 			console.log('Continent changed to:', this.value);
 			onContinentChange();
 		});
 	}
 
-	// Setup country selector
-	if (paysSelect) {
-		paysSelect.addEventListener('change', function() {
+	if (paysSelect)
+	{
+		paysSelect.addEventListener('change', function()
+		{
 			console.log('Pays changed to:', this.value);
 			onPaysChange();
 		});
 	}
 
-	// Setup departure date listener
 	const departureDateInput = document.getElementById('departureDate');
-	if (departureDateInput) {
-		departureDateInput.addEventListener('change', function() {
+	if (departureDateInput)
+	{
+		departureDateInput.addEventListener('change', function()
+		{
 			updateEndDateInfo();
 		});
 	}
 
-	// Initialize page animations
 	animateHero();
 });
 
-// Load countries data from API
-async function loadCountriesData() {
-	try {
-		const response = await fetch('/api/countries-data');
-		const data = await response.json();
+async function loadCountriesData()
+{
+	try
+	{
+		const response   = await fetch('/api/countries-data');
+		const data       = await response.json();
 		destinationsData = data;
 		console.log('Countries data loaded:', destinationsData);
-		
-		// Populate continents dropdown with only continents that have countries
+
 		populateContinents();
-	} catch (error) {
+	}
+	catch (error)
+	{
 		console.error('Error loading countries data:', error);
 		alert('Erreur lors du chargement des données des pays');
 	}
 }
 
-// Populate continents dropdown
-function populateContinents() {
+function populateContinents()
+{
 	const continentSelect = document.getElementById('continent');
 	if (!continentSelect) return;
-	
-	// Clear existing options except the first one
+
 	continentSelect.innerHTML = '<option value="">Sélectionner</option>';
-	
-	// Get continent labels
-	const continentLabels = {
-		'asie': 'Asie',
-		'europe': 'Europe',
-		'afrique': 'Afrique',
+
+	const continentLabels =
+	{
+		'asie'    : 'Asie',
+		'europe'  : 'Europe',
+		'afrique' : 'Afrique',
 		'amerique': 'Amérique',
-		'oceanie': 'Océanie',
-		'autre': 'Autre'
+		'oceanie' : 'Océanie',
+		'autre'   : 'Autre'
 	};
-	
-	// Add only continents that have countries with destinations
-	Object.keys(destinationsData).forEach(continent => {
+
+	Object.keys(destinationsData).forEach(continent =>
+	{
 		const countries = destinationsData[continent];
-		// Only add continent if it has at least one country with destinations
-		const hasDestinations = Object.values(countries).some(country => 
-			country.destinations && country.destinations.length > 0
-		);
-		
-		if (hasDestinations) {
-			const option = document.createElement('option');
-			option.value = continent;
+
+		const hasDestinations = Object.values(countries).some(country => country.destinations && country.destinations.length > 0);
+
+		if (hasDestinations)
+		{
+			const option       = document.createElement('option');
+			option.value       = continent;
 			option.textContent = continentLabels[continent] || continent;
 			continentSelect.appendChild(option);
 		}
 	});
 }
 
-// Handle continent change
-function onContinentChange() {
-	const continent = document.getElementById('continent').value;
-	const paysSelect = document.getElementById('pays');
+function onContinentChange()
+{
+	const continent         = document.getElementById('continent'  ).value;
+	const paysSelect        = document.getElementById('pays'       );
 	const destinationSelect = document.getElementById('destination');
 
 	console.log('onContinentChange called with:', continent);
 	console.log('Available data for continent:', destinationsData[continent]);
 
-	// Reset country and destination
-	paysSelect.innerHTML = '<option value="">Sélectionner un pays</option>';
+	paysSelect.innerHTML        = '<option value="">Sélectionner un pays</option>';
 	destinationSelect.innerHTML = '<option value="">Sélectionner un pays d\'abord</option>';
 
-	if (continent && destinationsData[continent]) {
+	if (continent && destinationsData[continent])
+	{
 		const countries = Object.keys(destinationsData[continent]);
 		console.log('Countries found:', countries);
 		
-		countries.forEach(country => {
+		countries.forEach(country =>
+		{
 			const countryData = destinationsData[continent][country];
-			// Only add country if it has destinations
-			if (countryData.destinations && countryData.destinations.length > 0) {
-				const option = document.createElement('option');
-				option.value = country;
+
+			if (countryData.destinations && countryData.destinations.length > 0)
+			{
+				const option       = document.createElement('option');
+				option.value       = country;
 				option.textContent = country;
 				paysSelect.appendChild(option);
 			}
 		});
-		
+
 		console.log('Pays select updated with', countries.length, 'countries');
 	}
 }
 
-// Handle country change
-function onPaysChange() {
-	const continent = document.getElementById('continent').value;
-	const pays = document.getElementById('pays').value;
+function onPaysChange()
+{
+	const continent         = document.getElementById('continent'  ).value;
+	const pays              = document.getElementById('pays'       ).value;
 	const destinationSelect = document.getElementById('destination');
 
-	// Reset destination
 	destinationSelect.innerHTML = '<option value="">Sélectionner une destination</option>';
 
-	if (pays && destinationsData[continent] && destinationsData[continent][pays]) {
-		const countryData = destinationsData[continent][pays];
+	if (pays && destinationsData[continent] && destinationsData[continent][pays])
+	{
+		const countryData  = destinationsData[continent][pays];
 		const destinations = countryData.destinations || [];
-		destinations.forEach(dest => {
+		destinations.forEach(dest =>
+		{
 			const option = document.createElement('option');
-			option.value = JSON.stringify({
+			option.value = JSON.stringify(
+			{
 				idTripStep: dest.idTripStep,
-				name: dest.name,
-				cost: dest.cost
+				name      : dest.name,
+				cost      : dest.cost
 			});
 			option.textContent = dest.name;
 			destinationSelect.appendChild(option);
@@ -159,61 +161,59 @@ function onPaysChange() {
 	}
 }
 
-// Add destination to itinerary
-function addDestination() {
-	const continent = document.getElementById('continent').value;
-	const pays = document.getElementById('pays').value;
+function addDestination()
+{
+	const continent         = document.getElementById('continent'  ).value;
+	const pays              = document.getElementById('pays'       ).value;
 	const destinationSelect = document.getElementById('destination');
-	const destinationValue = destinationSelect.value;
+	const destinationValue  = destinationSelect.value;
 
-	if (!continent || !pays || !destinationValue) {
+	if (!continent || !pays || !destinationValue)
+	{
 		alert('Veuillez sélectionner un continent, un pays et une destination');
 		return;
 	}
 
 	const destData = JSON.parse(destinationValue);
 
-	// Check if already added
-	const exists = selectedDestinations.some(d => 
-		d.idTripStep === destData.idTripStep
-	);
+	const exists = selectedDestinations.some(d => d.idTripStep === destData.idTripStep);
 
-	if (exists) {
+	if (exists)
+	{
 		alert('Cette destination est déjà dans votre itinéraire');
 		return;
 	}
 
-	// Get country data for cost
 	const countryData = destinationsData[continent][pays];
 	const countryCost = countryData.cost || 0;
 
-	// Add to array
-	const newDest = {
-		continent: continent,
-		pays: pays,
-		destination: destData.name,
-		idTripStep: destData.idTripStep,
+	const newDest =
+	{
+		continent      : continent,
+		pays           : pays,
+		destination    : destData.name,
+		idTripStep     : destData.idTripStep,
 		destinationCost: destData.cost || 0,
-		countryCost: countryCost,
-		idCountry: countryData.idCountry,
-		nights: 3
+		countryCost    : countryCost,
+		idCountry      : countryData.idCountry,
+		nights         : 3
 	};
 
 	selectedDestinations.push(newDest);
 	updateDestinationsList();
 	updateSummary();
 
-	// Reset form
-	document.getElementById('continent').value = '';
-	document.getElementById('pays').innerHTML = '<option value="">Sélectionner un continent d\'abord</option>';
+	document.getElementById('continent'  ).value     = '';
+	document.getElementById('pays'       ).innerHTML = '<option value="">Sélectionner un continent d\'abord</option>';
 	document.getElementById('destination').innerHTML = '<option value="">Sélectionner un pays d\'abord</option>';
 }
 
-// Update destinations list display
-function updateDestinationsList() {
+function updateDestinationsList()
+{
 	const listContainer = document.getElementById('destinationsList');
 	
-	if (selectedDestinations.length === 0) {
+	if (selectedDestinations.length === 0)
+	{
 		listContainer.innerHTML = `
 			<div class="empty-state">
 				<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -257,23 +257,27 @@ function updateDestinationsList() {
 	`).join('');
 }
 
-// Get continent label in French
-function getContinentLabel(continent) {
-	const labels = {
-		'asie': 'Asie',
-		'europe': 'Europe',
-		'afrique': 'Afrique',
+function getContinentLabel(continent)
+{
+	const labels =
+	{
+		'asie'    : 'Asie',
+		'europe'  : 'Europe',
+		'afrique' : 'Afrique',
 		'amerique': 'Amérique',
-		'oceanie': 'Océanie'
+		'oceanie' : 'Océanie'
 	};
+
 	return labels[continent] || continent;
 }
 
-// Change number of nights
-function changeNights(index, delta) {
-	if (selectedDestinations[index]) {
+function changeNights(index, delta)
+{
+	if (selectedDestinations[index])
+	{
 		const newValue = selectedDestinations[index].nights + delta;
-		if (newValue >= 1 && newValue <= 30) {
+		if (newValue >= 1 && newValue <= 30)
+		{
 			selectedDestinations[index].nights = newValue;
 			updateDestinationsList();
 			updateSummary();
@@ -281,106 +285,111 @@ function changeNights(index, delta) {
 	}
 }
 
-// Remove destination
-function removeDestination(index) {
-	if (confirm('Êtes-vous sûr de vouloir retirer cette destination ?')) {
+function removeDestination(index)
+{
+	if (confirm('Êtes-vous sûr de vouloir retirer cette destination ?'))
+	{
 		selectedDestinations.splice(index, 1);
 		updateDestinationsList();
 		updateSummary();
 	}
 }
 
-// Update summary
-function updateSummary() {
+function updateSummary()
+{
 	const totalDestinations = selectedDestinations.length;
-	const totalNights = selectedDestinations.reduce((sum, dest) => sum + dest.nights, 0);
-	const totalDays = totalNights > 0 ? totalNights + 1 : 0;
+	const totalNights       = selectedDestinations.reduce((sum, dest) => sum + dest.nights, 0);
+	const totalDays         = totalNights > 0 ? totalNights + 1 : 0;
 
 	document.getElementById('totalDestinations').textContent = totalDestinations;
-	document.getElementById('totalNights').textContent = totalNights;
-	document.getElementById('totalDays').textContent = totalDays;
+	document.getElementById('totalNights'      ).textContent = totalNights;
+	document.getElementById('totalDays'        ).textContent = totalDays;
 
-	// Enable/disable reserve button
 	const reserveBtn = document.getElementById('reserveBtn');
-	if (reserveBtn) {
+	if (reserveBtn)
+	{
 		reserveBtn.disabled = totalDestinations === 0;
 	}
 
-	// Update end date info
 	updateEndDateInfo();
 }
 
-// Update end date information
-function updateEndDateInfo() {
-	const totalNights = selectedDestinations.reduce((sum, dest) => sum + dest.nights, 0);
-	const endDateInfo = document.getElementById('endDateInfo');
-	const endDateText = document.getElementById('endDateText');
-	const departureDateInput = document.getElementById('departureDate');
+function updateEndDateInfo()
+{
+	const totalNights        = selectedDestinations.reduce((sum, dest) => sum + dest.nights, 0);
+	const endDateInfo        = document.getElementById('endDateInfo'   );
+	const endDateText        = document.getElementById('endDateText'   );
+	const departureDateInput = document.getElementById('departureDate' );
 	
 	if (!endDateInfo || !endDateText || !departureDateInput) return;
 	
-	if (totalNights > 0 && departureDateInput.value) {
+	if (totalNights > 0 && departureDateInput.value)
+	{
 		const departureDate = new Date(departureDateInput.value + 'T00:00:00');
-		const endDate = new Date(departureDate);
+		const endDate       = new Date(departureDate);
 		endDate.setDate(endDate.getDate() + totalNights);
 		
-		const options = { year: 'numeric', month: 'long', day: 'numeric' };
+		const options          = { year: 'numeric', month: 'long', day: 'numeric' };
 		const departureDateStr = departureDate.toLocaleDateString('fr-FR', options);
-		const endDateStr = endDate.toLocaleDateString('fr-FR', options);
+		const endDateStr       = endDate.toLocaleDateString('fr-FR', options);
 		
-		endDateText.innerHTML = `Votre voyage se déroulera <strong>du ${departureDateStr} au ${endDateStr}</strong> (${totalNights} nuit${totalNights > 1 ? 's' : ''})`;
+		endDateText.innerHTML     = `Votre voyage se déroulera <strong>du ${departureDateStr} au ${endDateStr}</strong> (${totalNights} nuit${totalNights > 1 ? 's' : ''})`;
 		endDateInfo.style.display = 'flex';
-	} else {
+	}
+	else
+	{
 		endDateInfo.style.display = 'none';
 	}
 }
 
-// Calculate total price based on country costs and nights
-function calculateTotalPrice() {
+function calculateTotalPrice()
+{
 	let totalPrice = 0;
-	selectedDestinations.forEach(dest => {
+	selectedDestinations.forEach(dest =>
+	{
 		const nightlyCost = dest.countryCost || 0;
 		totalPrice += nightlyCost * dest.nights;
 	});
+
 	return totalPrice;
 }
 
-// Reserve trip
-function reserveTrip() {
-	if (selectedDestinations.length === 0) {
+function reserveTrip()
+{
+	if (selectedDestinations.length === 0)
+	{
 		alert('Veuillez ajouter au moins une destination');
 		return;
 	}
 
-	// Calculate real price based on country costs
-	const tripData = {
+	const tripData =
+	{
 		destinations: selectedDestinations,
-		totalNights: selectedDestinations.reduce((sum, dest) => sum + dest.nights, 0)
+		totalNights : selectedDestinations.reduce((sum, dest) => sum + dest.nights, 0)
 	};
-	
-	// Get departure date
+
 	const departureDateInput = document.getElementById('departureDate');
-	const departureDate = departureDateInput ? departureDateInput.value : null;
+	const departureDate      = departureDateInput ? departureDateInput.value : null;
 	
-	if (!departureDate) {
+	if (!departureDate)
+	{
 		alert('Veuillez sélectionner une date de départ');
 		return;
 	}
-	
-	// Calculate end date
-	const departure = new Date(departureDate + 'T00:00:00');
-	const endDate = new Date(departure);
-	endDate.setDate(endDate.getDate() + tripData.totalNights);
-	
-	const options = { year: 'numeric', month: 'long', day: 'numeric' };
-	const departureDateStr = departure.toLocaleDateString('fr-FR', options);
-	const endDateStr = endDate.toLocaleDateString('fr-FR', options);
-	
-	const estimatedPrice = calculateTotalPrice();
 
-	// Show payment form
+	const departure        = new Date(departureDate + 'T00:00:00');
+	const endDate          = new Date(departure);
+	endDate.setDate(endDate.getDate() + tripData.totalNights);
+
+	const options          = { year: 'numeric', month: 'long', day: 'numeric' };
+	const departureDateStr = departure.toLocaleDateString('fr-FR', options);
+	const endDateStr       = endDate.toLocaleDateString('fr-FR', options);
+	
+	const estimatedPrice   = calculateTotalPrice();
+
 	const builderContainer = document.querySelector('.builder-container');
-	if (builderContainer) {
+	if (builderContainer)
+	{
 		builderContainer.innerHTML = `
 			<div class="payment-container" style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
 				<div style="text-align: center; margin-bottom: 32px;">
@@ -450,126 +459,139 @@ function reserveTrip() {
 			</div>
 		`;
 
-		// Format card number with spaces
 		const cardNumberInput = document.getElementById('cardNumber');
-		cardNumberInput.addEventListener('input', function(e) {
+		cardNumberInput.addEventListener('input', function(e)
+		{
 			let value = e.target.value.replace(/\s/g, '');
+
 			value = value.replace(/\D/g, '');
 			value = value.replace(/(\d{4})/g, '$1 ').trim();
 			e.target.value = value;
 		});
 
-		// Format expiry date
 		const cardExpiryInput = document.getElementById('cardExpiry');
-		cardExpiryInput.addEventListener('input', function(e) {
+		cardExpiryInput.addEventListener('input', function(e)
+		{
 			let value = e.target.value.replace(/\D/g, '');
-			if (value.length >= 2) {
+
+			if (value.length >= 2)
+			{
 				value = value.substring(0, 2) + '/' + value.substring(2, 4);
 			}
+
 			e.target.value = value;
 		});
 
-		// Only allow numbers for CVV
 		const cardCvvInput = document.getElementById('cardCvv');
-		cardCvvInput.addEventListener('input', function(e) {
+		cardCvvInput.addEventListener('input', function(e)
+		{
 			e.target.value = e.target.value.replace(/\D/g, '');
 		});
 
-		// Handle form submission
 		const paymentForm = document.getElementById('paymentForm');
-		paymentForm.addEventListener('submit', async function(e) {
+		paymentForm.addEventListener('submit', async function(e)
+		{
 			e.preventDefault();
-			
-			try {
-				// Get departure date from the form context
-				const departureDateInput = document.getElementById('departureDate');
+			try
+			{
+				const departureDateInput   = document.getElementById('departureDate');
 				const currentDepartureDate = departureDateInput ? departureDateInput.value : departureDate;
-				
-				// Recalculate tripData and price for success display
-				const currentTripData = {
+
+				const currentTripData =
+				{
 					destinations: selectedDestinations,
-					totalNights: selectedDestinations.reduce((sum, dest) => sum + dest.nights, 0)
+					totalNights : selectedDestinations.reduce((sum, dest) => sum + dest.nights, 0)
 				};
+
 				const currentEstimatedPrice = calculateTotalPrice();
-				
-				console.log('Sending trip data:', {
-					destinations: selectedDestinations.map(d => ({
+
+				console.log('Sending trip data:',
+				{
+					destinations: selectedDestinations.map(d =>
+					({
 						idTripStep: d.idTripStep,
-						nights: d.nights
-					})),
-					departureDate: currentDepartureDate
+						nights    : d.nights
+					})), departureDate: currentDepartureDate
 				});
-				
-				// Create trip in database
-				const response = await fetch('/api/trips/create', {
-					method: 'POST',
-					headers: {
+
+				const response = await fetch('/api/trips/create',
+				{
+					method : 'POST',
+					headers:
+					{
 						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-						destinations: selectedDestinations.map(d => ({
+					}, body: JSON.stringify
+					({
+						destinations: selectedDestinations.map(d =>
+						({
 							idTripStep: d.idTripStep,
-							nights: d.nights
-						})),
-						departureDate: currentDepartureDate
+							nights    : d.nights
+						})), departureDate: currentDepartureDate
 					})
 				});
 
 				console.log('Response status:', response.status);
 				
-				if (!response.ok) {
+				if (!response.ok)
+				{
 					throw new Error(`HTTP error! status: ${response.status}`);
 				}
 
 				const result = await response.json();
 				console.log('Response result:', result);
 
-				if (result.success) {
-					// Calculate dates for display
+				if (result.success)
+				{
 					const departure = new Date(currentDepartureDate + 'T00:00:00');
-					const endDate = new Date(departure);
+					const endDate   = new Date(departure);
 					endDate.setDate(endDate.getDate() + currentTripData.totalNights);
 					
-					const options = { year: 'numeric', month: 'long', day: 'numeric' };
+					const options          = { year: 'numeric', month: 'long', day: 'numeric' };
 					const departureDateStr = departure.toLocaleDateString('fr-FR', options);
-					const endDateStr = endDate.toLocaleDateString('fr-FR', options);
-					
-					// Show success immediately
+					const endDateStr       = endDate.toLocaleDateString('fr-FR', options);
+
 					showPaymentSuccess(currentTripData, currentEstimatedPrice, departureDateStr, endDateStr);
-				} else {
+				}
+				else
+				{
 					alert('Erreur : ' + (result.message || 'Impossible de créer le voyage'));
 				}
-			} catch (error) {
+			}
+			catch (error)
+			{
 				console.error('Error creating trip:', error);
 				alert('Erreur lors de la création du voyage: ' + error.message);
 			}
 		});
 
-		window.scrollTo({
-			top: 0,
+		window.scrollTo
+		({
+			top     : 0,
 			behavior: 'smooth'
 		});
 	}
 }
 
-// Show payment success
-function showPaymentSuccess(tripData, price, departureDateStr = null, endDateStr = null) {
-	// Recalculate dates if not provided
-	if (!departureDateStr || !endDateStr) {
+function showPaymentSuccess(tripData, price, departureDateStr = null, endDateStr = null)
+{
+	if (!departureDateStr || !endDateStr)
+	{
 		const departureDateInput = document.getElementById('departureDate');
-		if (departureDateInput && departureDateInput.value) {
+		if (departureDateInput && departureDateInput.value)
+		{
 			const departureDate = new Date(departureDateInput.value + 'T00:00:00');
-			const endDate = new Date(departureDate);
+			const endDate       = new Date(departureDate);
 			endDate.setDate(endDate.getDate() + tripData.totalNights);
 			
-			const options = { year: 'numeric', month: 'long', day: 'numeric' };
+			const options    = { year: 'numeric', month: 'long', day: 'numeric' };
 			departureDateStr = departureDate.toLocaleDateString('fr-FR', options);
-			endDateStr = endDate.toLocaleDateString('fr-FR', options);
+			endDateStr       = endDate.toLocaleDateString('fr-FR', options);
 		}
 	}
 	
 	const builderContainer = document.querySelector('.builder-container');
-	if (builderContainer) {
+	if (builderContainer)
+	{
 		builderContainer.innerHTML = `
 			<div class="success-message" style="text-align: center; padding: 80px 40px; max-width: 600px; margin: 0 auto;">
 				<div style="width: 80px; height: 80px; margin: 0 auto 24px; border-radius: 50%; background: rgba(16, 185, 129, 0.1); display: flex; align-items: center; justify-content: center; border: 2px solid #10b981;">
@@ -604,34 +626,38 @@ function showPaymentSuccess(tripData, price, departureDateStr = null, endDateStr
 			</div>
 		`;
 
-		// Add CSS animation for spinner
 		const style = document.createElement('style');
 		style.textContent = `
-			@keyframes spin {
+			@keyframes spin
+			{
 				from { transform: rotate(0deg); }
 				to { transform: rotate(360deg); }
 			}
 		`;
+
 		document.head.appendChild(style);
 
-		window.scrollTo({
-			top: 0,
+		window.scrollTo
+		({
+			top     : 0,
 			behavior: 'smooth'
 		});
 	}
 }
 
-// Animate hero section
-function animateHero() {
+function animateHero()
+{
 	const heroContent = document.querySelector('.hero-content');
-	if (heroContent) {
-		heroContent.style.opacity = '0';
+	if (heroContent)
+	{
+		heroContent.style.opacity   = '0';
 		heroContent.style.transform = 'translateY(20px)';
 		
-		setTimeout(() => {
+		setTimeout(() =>
+		{
 			heroContent.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-			heroContent.style.opacity = '1';
-			heroContent.style.transform = 'translateY(0)';
+			heroContent.style.opacity    = '1';
+			heroContent.style.transform  = 'translateY(0)';
 		}, 100);
 	}
 }

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function()
 {
-	const semestreFilter = document.getElementById('semestreFilter');
+	const semestreFilter  = document.getElementById('semestreFilter' );
 	const ressourceSelect = document.getElementById('ressourceSelect');
 	
 	if (!semestreFilter || !ressourceSelect) return;
@@ -13,18 +13,21 @@ document.addEventListener('DOMContentLoaded', function()
 
 		// Restaurer toutes les options
 		ressourceSelect.innerHTML = '';
-		allOptions.forEach(option =>{ressourceSelect.appendChild(option.cloneNode(true));});
+		allOptions.forEach(option =>
+		{
+			ressourceSelect.appendChild(option.cloneNode(true));
+		});
 
 		// Filtrer si un semestre est sélectionné
 		if (selectedSemestre)
 		{
 			const options = ressourceSelect.options;
-			for (let i = options.length - 1; i >= 0; i--)
+			for (let cpt = options.length - 1; cpt >= 0; cpt--)
 			{
-				const option = options[i];
+				const option = options[cpt];
 				if (option.value && option.dataset.semestre !== selectedSemestre)
 				{
-					ressourceSelect.remove(i);
+					ressourceSelect.remove(cpt);
 				}
 			}
 		}
