@@ -4,7 +4,6 @@
 	<meta charset="UTF-8">
 	<title><?= $this->renderSection('title') ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 	<script src="https://cdn.tailwindcss.com"></script>
 	<link rel="stylesheet" href="<?= base_url('assets/css/default.css') ?>">
 	<?= $this->renderSection('styles') ?>
