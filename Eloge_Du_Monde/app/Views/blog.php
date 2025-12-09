@@ -66,16 +66,18 @@
 								<span class="post-tag"><?= $posts[$i]['type'] ?></span>
 							</div>
 
-						<span class="ml-10 text-gray-400"><?= $users[$i]['firstName'] ?> <?= $users[$i]['lastName'] ?></span>
-						
-						<h2 class="post-title playfair"><?= $posts[$i]['title'] ?></h2>
+					<span class="ml-10 text-gray-400"><?= $users[$i]['firstName'] ?> <?= $users[$i]['lastName'] ?></span>
+					
+					<h2 class="post-title playfair"><?= $posts[$i]['title'] ?></h2>
 
+					<?php if (!empty($posts[$i]['image'])): ?>
 						<div class="post-image">
 							<img src="<?= base_url('assets/images/' . $posts[$i]['image']) ?>" alt="image de l'article">
 						</div>
+					<?php endif; ?>
 
-						<div class="post-content">
-							<p class="post-excerpt"><?= $posts[$i]['content'] ?></p>
+					<div class="post-content">
+						<p class="post-excerpt"><?= $posts[$i]['content'] ?></p>
 							</div>
 						</article>
 					<?php endfor; ?>

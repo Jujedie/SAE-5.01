@@ -554,7 +554,7 @@ class AdminController extends BaseController
 				'title'   => 'required|max_length[255]',
 				'type'    => 'required|in_list[Destinations,Budgets,Guides,Conseils]',
 				'content' => 'required',
-				'image'   => 'uploaded[image]|max_size[image,5120]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png,image/webp]',
+				'image'   => 'permit_empty|max_size[image,5120]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png,image/webp]',
 			];
 
 			if (!$this->validate($rules))
@@ -572,10 +572,6 @@ class AdminController extends BaseController
 				$imageName = $imageFile->getRandomName();
 				// Déplacer le fichier vers public/assets/images/
 				$imageFile->move(FCPATH . 'assets/images', $imageName);
-			}
-			else
-			{
-				return redirect()->back()->withInput()->with('error', 'Erreur lors de l\'upload de l\'image.');
 			}
 
 			$data['idUser'] = session()->get('idUser');
@@ -604,6 +600,42 @@ class AdminController extends BaseController
 		if ($this->request->getMethod() === 'POST')
 		{
 			$data = $this->request->getPost();
+
+			$rules =
+			[
+				'title'   => 'required|max_length[255]',
+				'type'    => 'required|in_list[Destinations,Budgets,Guides,Conseils]',
+				'content' => 'required',
+				'image'   => 'permit_empty|max_size[image,5120]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png,image/webp]',
+			];
+
+			if (!$this->validate($rules))
+			{
+				return redirect()->back()->withInput()->with('error', 'Veuillez corriger les erreurs dans le formulaire.');
+			}
+
+			// Gérer l'upload de la nouvelle image si fournie
+			$imageFile = $this->request->getFile('image');
+			
+			if ($imageFile && $imageFile->isValid() && !$imageFile->hasMoved())
+			{
+				// Supprimer l'ancienne image si elle existe
+				if (!empty($post['image']) && file_exists(FCPATH . 'assets/images/' . $post['image']))
+				{
+					unlink(FCPATH . 'assets/images/' . $post['image']);
+				}
+				
+				// Générer un nom unique pour la nouvelle image
+				$data['image'] = $imageFile->getRandomName();
+				// Déplacer le fichier vers public/assets/images/
+				$imageFile->move(FCPATH . 'assets/images', $data['image']);
+			}
+			else
+			{
+				// Conserver l'image actuelle si aucune nouvelle image n'est uploadée
+				unset($data['image']);
+			}
+
 			$blogModel->updatePost($id, $data);
 			$logModel->addLogEntry('Mise à jour du post de blog ID ' . $id, session()->get('idUser'));
 			return redirect()->to('/admin/blog')->with('success', 'Post mis à jour avec succès.');

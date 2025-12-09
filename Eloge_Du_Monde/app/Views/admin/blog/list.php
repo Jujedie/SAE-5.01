@@ -82,7 +82,9 @@
 								<h3 class="text-lg font-bold text-gray-900">Titre :</span> <?= $posts[$i]['title'] ?></h3>
 							</div>
 							<p class="text-gray-600 mb-1"><span class="font-semibold"><?= $users[$i]['firstName'] ?> <?= $users[$i]['lastName'] ?></span></p>
-							<img src="<?= base_url($posts[$i]['image']) ?>" alt="Image du poste" class="w-full h-48 object-cover rounded-md mb-4">
+							<?php if (!empty($posts[$i]['image'])): ?>
+								<img src="<?= base_url('assets/images/' . $posts[$i]['image']) ?>" alt="Image du poste" class="w-full h-48 object-cover rounded-md mb-4">
+							<?php endif; ?>
 							<p class="text-gray-700 mb-3"><?= $posts[$i]['content'] ?></p>
 							<p class="text-xs text-gray-500"><?= date('d M Y', strtotime($posts[$i]['date'])) ?></p>
 						</div>

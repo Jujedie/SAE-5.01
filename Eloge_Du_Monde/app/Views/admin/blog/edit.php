@@ -28,7 +28,7 @@
 	<?php endif; ?>
 
 	<div class="bg-white rounded-lg shadow-md p-8">
-		<form action="<?= base_url('admin/blog/edit/' . $post['idBlogPost']) ?>" method="POST">
+		<form action="<?= base_url('admin/blog/edit/' . $post['idBlogPost']) ?>" method="POST" enctype="multipart/form-data">
 			<?= csrf_field() ?>
 
 			<div class="mb-6">
@@ -45,14 +45,20 @@
 
 			<div class="mb-6">
 				<label for="image" class="block text-gray-700 font-semibold mb-2">
-					Image du poste (URL) <span class="text-red-500">*</span>
+					Image du poste
 				</label>
-				<input type="text" 
+				<?php if (!empty($post['image'])): ?>
+					<div class="mb-2">
+						<img src="<?= base_url('assets/images/' . $post['image']) ?>" alt="Image actuelle" class="w-48 h-32 object-cover rounded-md">
+						<p class="text-sm text-gray-500 mt-1">Image actuelle</p>
+					</div>
+				<?php endif; ?>
+				<input type="file" 
 					   id="image" 
 					   name="image" 
-					   value="<?= old('image', esc($post['image'])) ?>" 
-					   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-					   required>
+					   accept="image/jpeg,image/jpg,image/png,image/webp"
+					   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+				<p class="text-sm text-gray-500 mt-1">Formats acceptés: JPEG, JPG, PNG, WEBP (max 5MB) - Laisser vide pour conserver l'image actuelle</p>
 			</div>
 
 			<div class="mb-6">
