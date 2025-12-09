@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\BlogPostModel;
 
 class HomeController extends BaseController
 {
@@ -16,7 +17,10 @@ class HomeController extends BaseController
 
 	public function blog()
 	{
-		return view('blog');
+		$blogModel = new BlogPostModel();
+		$posts = $blogModel->getAllPosts();
+		
+		return view('blog', ['posts' => $posts]);
 	}
 
 	public function reviews()

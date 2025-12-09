@@ -554,7 +554,7 @@ class AdminController extends BaseController
 				'title'   => 'required|max_length[255]',
 				'type'    => 'required|in_list[Destinations,Budgets,Guides,Conseils]',
 				'content' => 'required',
-				'image'   => 'required|max_length[255]|valid_url',
+				'image'   => 'uploaded[image]|max_size[image,5120]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png,image/webp]',
 			];
 
 			if (!$this->validate($rules))
@@ -562,9 +562,25 @@ class AdminController extends BaseController
 				return redirect()->back()->withInput()->with('error', 'Veuillez corriger les erreurs dans le formulaire.');
 			}
 
+			// Gérer l'upload de l'image
+			$imageFile = $this->request->getFile('image');
+			$imageName = null;
+
+			if ($imageFile && $imageFile->isValid() && !$imageFile->hasMoved())
+			{
+				// Générer un nom unique pour l'image
+				$imageName = $imageFile->getRandomName();
+				// Déplacer le fichier vers public/assets/images/
+				$imageFile->move(FCPATH . 'assets/images', $imageName);
+			}
+			else
+			{
+				return redirect()->back()->withInput()->with('error', 'Erreur lors de l\'upload de l\'image.');
+			}
+
 			$data['idUser'] = session()->get('idUser');
 			$data['date'] = date('Y-m-d H:i:s');
-			$blogModel->addPost($data['title'], $data['type'], $data['date'], $data['content'], $data['image'], $data['idUser']);
+			$blogModel->addPost($data['title'], $data['type'], $data['date'], $data['content'], $imageName, $data['idUser']);
 			$logModel->addLogEntry('Ajout d\'un nouveau post de blog', session()->get('idUser'));
 
 			return redirect()->to('/admin/blog')->with('success', 'Post ajouté avec succès.');

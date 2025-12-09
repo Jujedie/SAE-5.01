@@ -28,7 +28,7 @@
 	<?php endif; ?>
 
 	<div class="bg-white rounded-lg shadow-md p-8">
-		<form action="<?= base_url('admin/blog/add') ?>" method="POST">
+		<form action="<?= base_url('admin/blog/add') ?>" method="POST" enctype="multipart/form-data">
 			<?= csrf_field() ?>
 
 			<div class="mb-6">
@@ -45,14 +45,15 @@
 
 			<div class="mb-6">
 				<label for="image" class="block text-gray-700 font-semibold mb-2">
-					Image du poste (URL) <span class="text-red-500">*</span>
+					Image du poste <span class="text-red-500">*</span>
 				</label>
-				<input type="text" 
+				<input type="file" 
 					   id="image" 
 					   name="image" 
-					   value="<?= old('image') ?>" 
+					   accept="image/jpeg,image/jpg,image/png,image/webp"
 					   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
 					   required>
+				<p class="text-sm text-gray-500 mt-1">Formats acceptés: JPEG, JPG, PNG, WEBP (max 5MB)</p>
 			</div>
 
 			<div class="mb-6">
