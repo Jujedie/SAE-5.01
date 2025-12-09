@@ -28,6 +28,19 @@ class TripController extends BaseController
 		return view('trips/index', ["user" => ((new UserModel())->getUserById($session->get('idUser'))), "listTrips" => $trips]);
 	}
 
+	public function createPersonalTrip()
+	{
+		$session = session();
+
+		// Vérifier si l'utilisateur est connecté
+		if (!$session->get('isLoggedIn'))
+		{
+			return redirect()->to('/signin')->with('error', 'Vous devez être connecté pour créer un voyage personnalisé.');
+		}
+
+		return view('trips/createTrip', ["isAdmin" => ((new UserModel())->isAdmin($session->get('idUser')))]);
+	}
+
 	public function viewTrip($idTrip)
 	{
 		$session   = session();

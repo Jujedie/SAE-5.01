@@ -59,6 +59,16 @@ class TripStepModel extends Model
 		return $this->where('idCountry', $idCountry)->findAll();
 	}
 
+	public function getTripsByContinent($continent)
+	{
+		$builder = $this->db->table('tripStep ts');
+		$builder->select('ts.*');
+		$builder->join('country c', 'ts.idCountry = c.idCountry');
+		$builder->where('c.continent', $continent);
+		$query = $builder->get();
+		return $query->getResultArray();
+	}
+
 	public function addStep($data)
 	{
 		return $this->insert($data);
