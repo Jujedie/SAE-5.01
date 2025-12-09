@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function()
 			notification.style.opacity   = '1';
 			notification.style.transform = 'translateX(0)';
 		}, delay);
-		
+
 		// Masquer automatiquement après 5 secondes + délai
 		setTimeout(() =>
 		{

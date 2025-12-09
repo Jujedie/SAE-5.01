@@ -138,20 +138,8 @@
 	</div>
 </div>
 
-
-
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<script src="<?= base_url('assets/js/profil.js') ?>"></script>
-<script>
-	document.getElementById('btn-modifier').addEventListener('click', function (e) {
-		e.preventDefault();
-		document.getElementById('modifierModal').classList.remove('hidden');
-	});
-
-	document.getElementById('closeModal').addEventListener('click', function () {
-		document.getElementById('modifierModal').classList.add('hidden');
-	});
-</script>
+<script src="<?= base_url('assets/js/profile.js') ?>"></script>
 <?= $this->endSection() ?>
