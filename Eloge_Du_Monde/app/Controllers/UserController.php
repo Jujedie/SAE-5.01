@@ -100,6 +100,13 @@ class UserController extends BaseController
 			$email     = $this->request->getPost('email');
 			$phone     = $this->request->getPost('phone');
 
+			if ($this->request->getPost('password'))
+			{
+				$password = password_hash($this->request->getPost('password'), PASSWORD_BCRYPT);
+				// Mettre à jour le mot de passe si un nouveau mot de passe est fourni
+				$userModel->update($user['idUser'], ['password' => $password]);
+			}
+
 			// Mettre à jour les informations de l'utilisateur
 			$userModel->update($user['idUser'],
 			[
