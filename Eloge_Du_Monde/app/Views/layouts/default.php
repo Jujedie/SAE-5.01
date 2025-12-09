@@ -13,28 +13,36 @@
 <body class="d-flex flex-column min-vh-100 bg-light">
 
 <!-- Conteneur des Notifications -->
-<div class="notification-container position-fixed end-0 p-3" style="z-index: 9999; top: 70px;">
+<div id="notification-container" class="fixed top-32 right-0 p-4 space-y-4 z-[9999] max-w-md">
 	<?php if (session()->getFlashdata('success')): ?>
-		<div class="toast align-items-center text-bg-success border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
-			<div class="d-flex">
-				<div class="toast-body">
-					<i class="bi bi-check-circle-fill me-2"></i>
-					<?= esc(session()->getFlashdata('success')) ?>
-				</div>
-				<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fermer"></button>
+		<div class="notification-toast bg-green-700 text-white px-6 py-4 rounded-lg shadow-lg flex items-center justify-between opacity-0 translate-x-full transition-all duration-500 ease-in-out" data-type="success">
+			<div class="flex items-center space-x-3">
+				<svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+				</svg>
+				<span class="font-medium"><?= esc(session()->getFlashdata('success')) ?></span>
 			</div>
+			<button onclick="this.parentElement.remove()" class="ml-4 text-white hover:text-green-200 transition-all duration-200 ease-in-out hover:scale-110">
+				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+				</svg>
+			</button>
 		</div>
 	<?php endif; ?>
 	
 	<?php if (session()->getFlashdata('error')): ?>
-		<div class="toast align-items-center text-bg-danger border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
-			<div class="d-flex">
-				<div class="toast-body">
-					<i class="bi bi-exclamation-circle-fill me-2"></i>
-					<?= esc(session()->getFlashdata('error')) ?>
-				</div>
-				<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fermer"></button>
+		<div class="notification-toast bg-red-700 text-white px-6 py-4 rounded-lg shadow-lg flex items-center justify-between opacity-0 translate-x-full transition-all duration-500 ease-in-out" data-type="error">
+			<div class="flex items-center space-x-3">
+				<svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+				</svg>
+				<span class="font-medium"><?= esc(session()->getFlashdata('error')) ?></span>
 			</div>
+			<button onclick="this.parentElement.remove()" class="ml-4 text-white hover:text-red-200 transition-all duration-200 ease-in-out hover:scale-110">
+				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+				</svg>
+			</button>
 		</div>
 	<?php endif; ?>
 </div>
