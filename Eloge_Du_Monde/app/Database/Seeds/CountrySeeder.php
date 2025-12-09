@@ -9,9 +9,9 @@ class CountrySeeder extends Seeder
 	public function run()
 	{
 		$countries = [
-			['name' => 'France'       , 'continent' => 'Europe'          , 'cost' => 100],
-			['name' => 'Japan'        , 'continent' => 'Asia'            , 'cost' => 150],
-			['name' => 'United States', 'continent' => 'North America'   , 'cost' => 120],
+			['name' => 'France'       , 'continent' => 'Europe'  , 'cost' => 100],
+			['name' => 'Japon'        , 'continent' => 'Asie'    , 'cost' => 150],
+			['name' => 'Etats-Unis'   , 'continent' => 'Amérique', 'cost' => 120],
 		];
 
 		$this->db->table('country')->insertBatch($countries);

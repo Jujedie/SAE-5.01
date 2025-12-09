@@ -247,6 +247,18 @@ class AdminController extends BaseController
 		{
 			$tripStepModel = new TripStepModel();
 			$data = $this->request->getPost();
+
+			$rules =
+			[
+				'name' => 'required|max_length[255]',
+				'cost' => 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000000000]',
+			];
+
+			if (!$this->validate($rules))
+			{
+				return redirect()->back()->withInput()->with('error', 'Le nom est trop grand ou le coût est invalide.');
+			}
+
 			$data['idCountry'] = $idCountry;
 
 			$tripStepModel->addStep($data);
