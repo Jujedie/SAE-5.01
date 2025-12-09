@@ -7,28 +7,28 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 // Route par defaut
-$routes->get('/', 'HomeController::index');
+$routes->get('/'                                              , 'HomeController::index');
 
 // Pages principales
-$routes->get('blog'       , 'BlogController::index'      );
-$routes->get('reviews'    , 'ReviewController::index'   );
-$routes->post('reviews'   , 'ReviewController::store'   );
-$routes->get('contact'    , 'HomeController::contact'   );
+$routes->get('blog'                                           , 'BlogController::index'  );
+$routes->get('reviews'                                        , 'ReviewController::index');
+$routes->post('reviews'                                       , 'ReviewController::store');
+$routes->get('contact'                                        , 'HomeController::contact');
 
 // Voyages
-$routes->get('createTrip' , 'TripController::createPersonalTrip');
-$routes->get('viewTrip/(:num)', 'TripController::viewTrip/$1');
-$routes->post('createTrip', 'TripController::creationPersonalTrip');
-$routes->get('trips', 'TripController::index');
+$routes->get('createTrip'                                     , 'TripController::createPersonalTrip'  );
+$routes->get('viewTrip/(:num)'                                , 'TripController::viewTrip/$1'         );
+$routes->post('createTrip'                                    , 'TripController::creationPersonalTrip');
+$routes->get('trips'                                          , 'TripController::index'               );
 
 // Connexion
-$routes->get('signin'                          , 'SigninController::index'  );
-$routes->get('signout'                         , 'SigninController::signout');
-$routes->match(['GET', 'POST'], 'signin/signin', 'SigninController::signin' );
+$routes->get('signin'                                         , 'SigninController::index'  );
+$routes->get('signout'                                        , 'SigninController::signout');
+$routes->match(['GET', 'POST'], 'signin/signin'               , 'SigninController::signin' );
 
 // Inscription
-$routes->get('signup'                            , 'SignupController::index'   );
-$routes->match(['GET', 'POST'], 'signup/register', 'SignupController::register');
+$routes->get('signup'                                         , 'SignupController::index'   );
+$routes->match(['GET', 'POST'], 'signup/register'             , 'SignupController::register');
 
 // Mot de passe oublie
 $routes->get('forgotPassword'                                 , 'ForgotPasswordController::index'        );
@@ -39,65 +39,65 @@ $routes->get('resetPassword/(:segment)'                       , 'ResetPasswordCo
 $routes->match(['GET', 'POST'], 'resetPassword/updatePassword', 'ResetPasswordController::updatePassword');
 
 // Utilisateur
-$routes->get('profile'                                      , 'UserController::profile'         , ['filter' => 'authGuard']);
-$routes->match(['GET', 'POST']   , 'profile/updateUser'     , 'UserController::updateUser'      , ['filter' => 'authGuard']);
-$routes->match(['POST', 'DELETE'], 'profile/deleteUser'     , 'UserController::deleteUser'      , ['filter' => 'authGuard']);
-$routes->match(['GET', 'POST']   , 'newsletter/toggle'      , 'UserController::toggleNewsletter', ['filter' => 'authGuard']);
+$routes->get('profile'                                        , 'UserController::profile'                , ['filter' => 'authGuard']);
+$routes->match(['GET', 'POST']   , 'profile/updateUser'       , 'UserController::updateUser'             , ['filter' => 'authGuard']);
+$routes->match(['POST', 'DELETE'], 'profile/deleteUser'       , 'UserController::deleteUser'             , ['filter' => 'authGuard']);
+$routes->match(['GET', 'POST']   , 'newsletter/toggle'        , 'UserController::toggleNewsletter'       , ['filter' => 'authGuard']);
 
 // Admin
-$routes->get('admin', 'AdminController::index', ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin'                                          , 'AdminController::index'                 , ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Réservations
-$routes->get('admin/bookings'              , 'AdminController::bookings'           , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->get('admin/bookings/(:num)/(:num)', 'AdminController::bookingDetail/$1/$2', ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/bookings'                                 , 'AdminController::bookings'              , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/bookings/(:num)/(:num)'                   , 'AdminController::bookingDetail/$1/$2'   , ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Utilisateurs
-$routes->get('admin/users'                                      , 'AdminController::users'        , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->match(['GET', 'POST'], 'admin/users/edit/(:num)'       , 'AdminController::editUser/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->get('admin/users/delete/(:num)'                       , 'AdminController::deleteUser/$1', ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/users'                                    , 'AdminController::users'                 , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->match(['GET', 'POST'], 'admin/users/edit/(:num)'     , 'AdminController::editUser/$1'           , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/users/delete/(:num)'                      , 'AdminController::deleteUser/$1'         , ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Pays
-$routes->get('admin/countries'                                     , 'AdminController::countries'       , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->match(['GET', 'POST'], 'admin/countries/add'              , 'AdminController::addCountry'      , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->match(['GET', 'POST'], 'admin/countries/edit/(:num)'      , 'AdminController::editCountry/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->post('admin/countries/delete/(:num)'                      , 'AdminController::deleteCountry/$1', ['filter' => ['authGuard', 'roleGuard']]);
-$routes->get('admin/countries/(:num)/destinations'                 , 'AdminController::countryDestinations/$1', ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/countries'                                , 'AdminController::countries'             , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->match(['GET', 'POST'], 'admin/countries/add'         , 'AdminController::addCountry'            , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->match(['GET', 'POST'], 'admin/countries/edit/(:num)' , 'AdminController::editCountry/$1'        , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->post('admin/countries/delete/(:num)'                 , 'AdminController::deleteCountry/$1'      , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/countries/(:num)/destinations'            , 'AdminController::countryDestinations/$1', ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Destinations (TripStep)
-$routes->match(['GET', 'POST'], 'admin/countries/(:num)/destinations/add'       , 'AdminController::addDestination/$1'     , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->match(['GET', 'POST'], 'admin/countries/(:num)/destinations/edit/(:num)', 'AdminController::editDestination/$1/$2' , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->post('admin/countries/(:num)/destinations/delete/(:num)'               , 'AdminController::deleteDestination/$1/$2', ['filter' => ['authGuard', 'roleGuard']]);
+$routes->match(['GET', 'POST'], 'admin/countries/(:num)/destinations/add'        , 'AdminController::addDestination/$1'      , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->match(['GET', 'POST'], 'admin/countries/(:num)/destinations/edit/(:num)', 'AdminController::editDestination/$1/$2'  , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->post('admin/countries/(:num)/destinations/delete/(:num)'                , 'AdminController::deleteDestination/$1/$2', ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Voyages
-$routes->get('admin/trips'                                      , 'AdminController::trips'        , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->match(['GET', 'POST'], 'admin/trips/edit/(:num)'       , 'AdminController::editTrip/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->post('admin/trips/delete/(:num)'                       , 'AdminController::deleteTrip/$1', ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/trips'                                                       , 'AdminController::trips'                  , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->match(['GET', 'POST'], 'admin/trips/edit/(:num)'                        , 'AdminController::editTrip/$1'            , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->post('admin/trips/delete/(:num)'                                        , 'AdminController::deleteTrip/$1'          , ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Voyages préfaits
-$routes->get('admin/prebuiltTrips'                                     , 'AdminController::prebuiltTrips'       , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->match(['GET', 'POST'], 'admin/prebuiltTrips/add'              , 'AdminController::addPrebuiltTrip'     , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->match(['GET', 'POST'], 'admin/prebuiltTrips/edit/(:num)'      , 'AdminController::editPrebuiltTrip/$1' , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->post('admin/prebuiltTrips/delete/(:num)'                      , 'AdminController::deletePrebuiltTrip/$1', ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/prebuiltTrips'                                               , 'AdminController::prebuiltTrips'          , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->match(['GET', 'POST'], 'admin/prebuiltTrips/add'                        , 'AdminController::addPrebuiltTrip'        , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->match(['GET', 'POST'], 'admin/prebuiltTrips/edit/(:num)'                , 'AdminController::editPrebuiltTrip/$1'    , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->post('admin/prebuiltTrips/delete/(:num)'                                , 'AdminController::deletePrebuiltTrip/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Extensions de voyages préfaits
-$routes->match(['GET', 'POST'], 'admin/prebuiltTrips/extension/add/(:num)', 'AdminController::addExtension/$1'        , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->post('admin/prebuiltTrips/extension/delete/(:num)/(:num)'        , 'AdminController::deleteExtension/$1/$2'  , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->match(['GET', 'POST'], 'admin/prebuiltTrips/extension/add/(:num)'       , 'AdminController::addExtension/$1'        , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->post('admin/prebuiltTrips/extension/delete/(:num)/(:num)'               , 'AdminController::deleteExtension/$1/$2'  , ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Témoignages
-$routes->get ('admin/reviews'                , 'AdminController::reviews'          , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->get('admin/reviews/verify/(:num)'  , 'AdminController::verifyReview/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->get('admin/reviews/unverify/(:num)', 'AdminController::unverifyReview/$1', ['filter' => ['authGuard', 'roleGuard']]);
-$routes->get('admin/reviews/delete/(:num)'  , 'AdminController::deleteReview/$1'  , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get ('admin/reviews'                                                    , 'AdminController::reviews'                , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/reviews/verify/(:num)'                                       , 'AdminController::verifyReview/$1'        , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/reviews/unverify/(:num)'                                     , 'AdminController::unverifyReview/$1'      , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/reviews/delete/(:num)'                                       , 'AdminController::deleteReview/$1'        , ['filter' => ['authGuard', 'roleGuard']]);
 
 // API pour créer un voyage personnalisé
-$routes->get('api/countries-data', 'TripController::getCountriesData');
-$routes->post('api/trips/create', 'TripController::createTrip', ['filter' => 'authGuard']);
+$routes->get('api/countries-data'                                                , 'TripController::getCountriesData');
+$routes->post('api/trips/create'                                                 , 'TripController::createTrip'              , ['filter' => 'authGuard']);
 
 // Admin - Blog
-$routes->get('admin/blog' , 'AdminController::blog' , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->match(['GET', 'POST'], 'admin/blog/add'        , 'AdminController::addBlogPost'        , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->match(['GET', 'POST'], 'admin/blog/edit/(:num)'   , 'AdminController::editBlogPost/$1'   , ['filter' => ['authGuard', 'roleGuard']]);
-$routes->get('admin/blog/delete/(:num)' , 'AdminController::deleteBlogPost/$1' , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/blog'                                                        , 'AdminController::blog'                   , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->match(['GET', 'POST'], 'admin/blog/add'                                 , 'AdminController::addBlogPost'            , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->match(['GET', 'POST'], 'admin/blog/edit/(:num)'                         , 'AdminController::editBlogPost/$1'        , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/blog/delete/(:num)'                                          , 'AdminController::deleteBlogPost/$1'      , ['filter' => ['authGuard', 'roleGuard']]);
 
 // Erreurs
-$routes->get('error_403', 'HomeController::error403');
+$routes->get('error_403'                                                         , 'HomeController::error403');
