@@ -7,18 +7,17 @@ use App\Models\UserModel;
 
 class ReviewController extends BaseController
 {
-	/**
-	 * Affiche les avis vérifiés et l'information de note moyenne.
-	 */
+	// Affiche les avis vérifiés et l'information de note moyenne.
 	public function index()
 	{
 		$reviewModel = new ReviewModel();
-		$userModel = new UserModel();
+		$userModel   = new UserModel();
 
 		$reviews = $reviewModel->getVerifiedReviews();
 
-		$avgRow = $reviewModel->getAverageRating();
+		$avgRow  = $reviewModel->getAverageRating();
 		$average = 0.0;
+
 		if (is_array($avgRow))
 		{
 			if (isset($avgRow['rating']))
@@ -42,9 +41,7 @@ class ReviewController extends BaseController
 		return view('reviews', $data);
 	}
 
-	/**
-	 * Enregistre un nouvel avis
-	 */
+	// Enregistre un nouvel avis
 	public function store()
 	{
 		helper(['form']);
@@ -78,10 +75,10 @@ class ReviewController extends BaseController
 
 		$data =
 		[
-			'rating'  => (int) $this->request->getPost('rating'),
-			'content' => $this->request->getPost('content'),
+			'rating'   => (int) $this->request->getPost('rating'),
+			'content'  => $this->request->getPost('content'),
 			'verified' => false,
-			'idUser'  => $session->get('idUser'),
+			'idUser'   => $session->get('idUser'),
 		];
 
 		$insertId = $reviewModel->addReview($data);
