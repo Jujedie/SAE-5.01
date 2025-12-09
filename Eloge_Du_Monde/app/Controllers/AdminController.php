@@ -509,6 +509,75 @@ class AdminController extends BaseController
 			'posts' => $blogModel->getAllPosts(),
 			'users' => $userModel->getUsersByPosts(),	
 		];
+
+		log_message('debug', print_r($data['posts'], true));
 		return view('admin/blog/list', $data);
+	}
+
+	public function addBlogPost()
+	{
+		$blogModel = new BlogPostModel();
+		$logModel  = new LogModel();
+
+		if ($this->request->getMethod() === 'POST')
+		{
+			$data = $this->request->getPost();
+
+			$rules =
+			[
+				'title'   => 'required|max_length[255]',
+				'type'    => 'required|in_list[Destinations,Budgets,Guides,Conseils]',
+				'content' => 'required',
+				'image'   => 'required|max_length[255]|valid_url',
+			];
+
+			if (!$this->validate($rules))
+			{
+				return redirect()->back()->withInput()->with('error', 'Veuillez corriger les erreurs dans le formulaire.');
+			}
+
+			$data['idUser'] = session()->get('idUser');
+			$data['date'] = date('Y-m-d H:i:s');
+			$blogModel->addPost($data['title'], $data['type'], $data['date'], $data['content'], $data['image'], $data['idUser']);
+			$logModel->addLogEntry('Ajout d\'un nouveau post de blog', session()->get('idUser'));
+
+			return redirect()->to('/admin/blog')->with('success', 'Post ajouté avec succès.');
+		}
+
+		return view('admin/blog/add');
+	}
+
+	public function editBlogPost($id)
+	{
+		$blogModel = new BlogPostModel();
+		$logModel  = new LogModel();
+
+		$post = $blogModel->getPostById($id);
+
+		if (!$post)
+		{
+			return redirect()->to('/admin/blog')->with('error', 'Post non trouvé.');
+		}
+
+		if ($this->request->getMethod() === 'POST')
+		{
+			$data = $this->request->getPost();
+			$blogModel->updatePost($id, $data);
+			$logModel->addLogEntry('Mise à jour du post de blog ID ' . $id, session()->get('idUser'));
+			return redirect()->to('/admin/blog')->with('success', 'Post mis à jour avec succès.');
+		}
+
+		return view('admin/blog/edit', ['post' => $post]);
+	}
+
+	public function deleteBlogPost($id)
+	{
+		$blogModel = new BlogPostModel();
+		$logModel  = new LogModel();
+
+		$logModel->addLogEntry('Suppression du post de blog ID ' . $id, session()->get('idUser'));
+		$blogModel->deletePost($id);
+
+		return redirect()->to('/admin/blog')->with('success', 'Post supprimé avec succès.');
 	}
 }
