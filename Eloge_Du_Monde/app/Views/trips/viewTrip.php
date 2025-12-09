@@ -3,7 +3,7 @@
 <?= $this->section('styles') ?>
 <style>
 	.hero-trip {
-		background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('<?= esc($trip['attachment'] ?? '/images/default-trip.jpg') ?>');
+		background-image: url('<?= esc($trip['attachment'] ?? '/assets/images/fond-voyage.jpeg') ?>');
 		background-size: cover;
 		background-position: center;
 	}
@@ -14,7 +14,7 @@
 
 <!-- Hero Section -->
 <section class="hero-trip relative h-96 flex items-end">
-	<div class="w-full bg-gradient-to-t from-black/70 to-transparent p-8">
+	<div class="w-full bg-gradient-to-t p-8">
 		<div class="max-w-7xl mx-auto">
 			<span class="inline-block bg-amber-500 text-white text-sm font-medium px-4 py-1 rounded mb-4">
 				<?= esc($trip['thematic'] ?? 'Voyage') ?>

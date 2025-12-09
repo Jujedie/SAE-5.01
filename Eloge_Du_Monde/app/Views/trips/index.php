@@ -13,7 +13,7 @@
 <?= $this->section('content') ?>
 
 <!-- Hero Section -->
-<section class="hero-section relative h-96 flex items-center justify-center">
+<section class="hero-section relative h-96 flex items-center justify-center" style="background-image: url('<?= base_url('assets/images/fond-voyages.jpeg') ?>');">
 	<div class="absolute inset-0 bg-black/40"></div>
 	<div class="relative z-10 text-center text-white px-4">
 		<h1 class="text-sm uppercase tracking-widest mb-4">Nos Destinations</h1>
