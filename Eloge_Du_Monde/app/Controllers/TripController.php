@@ -9,7 +9,7 @@ use App\Models\UserModel;
 
 class TripController extends BaseController
 {
-	public function index($filter = String)
+	public function index(String $filter = "")
 	{
 		$session   = session();
 		$tripModel = new TripModel();

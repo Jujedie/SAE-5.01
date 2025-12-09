@@ -19,6 +19,7 @@ $routes->get('contact'    , 'HomeController::contact'   );
 $routes->get('createTrip' , 'TripController::createPersonalTrip');
 $routes->get('viewTrip/(:num)', 'TripController::viewTrip/$1');
 $routes->post('createTrip', 'TripController::creationPersonalTrip');
+$routes->get('trips', 'TripController::index');
 $routes->get('trips/(:segment)?', 'TripController::index/$1');
 
 // Connexion
