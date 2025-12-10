@@ -442,6 +442,24 @@ class AdminController extends BaseController
 			// Ajouter l'ID de l'utilisateur connecté
 			$data['idUser'] = session()->get('idUser');
 			
+			// Gérer l'upload de l'attachment (PDF)
+			$attachment = $this->request->getFile('attachment');
+			if ($attachment && $attachment->isValid() && !$attachment->hasMoved())
+			{
+				$newName = $attachment->getRandomName();
+				$attachment->move(FCPATH . 'assets/uploads/attachments', $newName);
+				$data['attachment'] = 'assets/uploads/attachments/' . $newName;
+			}
+			
+			// Gérer l'upload de l'image
+			$image = $this->request->getFile('image');
+			if ($image && $image->isValid() && !$image->hasMoved())
+			{
+				$newName = $image->getRandomName();
+				$image->move(FCPATH . 'assets/uploads/images', $newName);
+				$data['image'] = 'assets/uploads/images/' . $newName;
+			}
+			
 			$prebuiltTripModel->addPrebuiltTrip($data);
 			
 			// Récupérer les étapes depuis 'steps' (nom utilisé dans le formulaire)
@@ -477,6 +495,35 @@ class AdminController extends BaseController
 		if ($this->request->getMethod() === 'POST')
 		{
 			$data = $this->request->getPost();
+			
+			// Gérer l'upload de l'attachment (PDF)
+			$attachment = $this->request->getFile('attachment');
+			if ($attachment && $attachment->isValid() && !$attachment->hasMoved())
+			{
+				// Supprimer l'ancien fichier si existant
+				if (!empty($prebuiltTrip['attachment']) && file_exists(FCPATH . $prebuiltTrip['attachment']))
+				{
+					unlink(FCPATH . $prebuiltTrip['attachment']);
+				}
+				$newName = $attachment->getRandomName();
+				$attachment->move(FCPATH . 'assets/uploads/attachments', $newName);
+				$data['attachment'] = 'assets/uploads/attachments/' . $newName;
+			}
+			
+			// Gérer l'upload de l'image
+			$image = $this->request->getFile('image');
+			if ($image && $image->isValid() && !$image->hasMoved())
+			{
+				// Supprimer l'ancienne image si existante
+				if (!empty($prebuiltTrip['image']) && file_exists(FCPATH . $prebuiltTrip['image']))
+				{
+					unlink(FCPATH . $prebuiltTrip['image']);
+				}
+				$newName = $image->getRandomName();
+				$image->move(FCPATH . 'assets/uploads/images', $newName);
+				$data['image'] = 'assets/uploads/images/' . $newName;
+			}
+			
 			$prebuiltTripModel->updatePrebuiltTrip($id, $data);
 			
 			// Récupérer les étapes depuis 'steps' (nom utilisé dans le formulaire)
@@ -616,6 +663,15 @@ class AdminController extends BaseController
 			$data['type'] = $prebuiltTrip['type'];
 			$data['departureDate'] = $prebuiltTrip['departureDate'];
 			
+			// Gérer l'upload de l'attachment (PDF)
+			$attachment = $this->request->getFile('attachment');
+			if ($attachment && $attachment->isValid() && !$attachment->hasMoved())
+			{
+				$newName = $attachment->getRandomName();
+				$attachment->move(FCPATH . 'assets/uploads/attachments', $newName);
+				$data['attachment'] = 'assets/uploads/attachments/' . $newName;
+			}
+			
 			$extensionModel->addExtension($data);
 			$logModel = new LogModel();
 			$logModel->addLogEntry('Ajout de l\'extension : ' . $data['title'] . ' pour le voyage préfait ID : ' . $prebuiltTripId, session()->get('idUser'));
@@ -651,6 +707,20 @@ class AdminController extends BaseController
 		if ($this->request->getMethod() === 'POST')
 		{
 			$data = $this->request->getPost();
+			
+			// Gérer l'upload de l'attachment (PDF)
+			$attachment = $this->request->getFile('attachment');
+			if ($attachment && $attachment->isValid() && !$attachment->hasMoved())
+			{
+				// Supprimer l'ancien fichier si existant
+				if (!empty($extension['attachment']) && file_exists(FCPATH . $extension['attachment']))
+				{
+					unlink(FCPATH . $extension['attachment']);
+				}
+				$newName = $attachment->getRandomName();
+				$attachment->move(FCPATH . 'assets/uploads/attachments', $newName);
+				$data['attachment'] = 'assets/uploads/attachments/' . $newName;
+			}
 			
 			$extensionModel->updateExtension($extensionId, $data);
 			$logModel = new LogModel();

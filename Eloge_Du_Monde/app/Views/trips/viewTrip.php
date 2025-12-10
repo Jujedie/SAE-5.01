@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/trips/viewTrip.css') ?>">
 <style>
 	.hero-trip {
-		background-image: url('<?= esc($trip['attachment'] ?? '/assets/images/fond-voyage.jpeg') ?>');
+		background-image: url('<?= base_url($trip['image'] ?? '/assets/images/fond-voyage.jpeg') ?>');
 	}
 </style>
 <?= $this->endSection() ?>
