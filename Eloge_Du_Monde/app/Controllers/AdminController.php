@@ -618,7 +618,7 @@ class AdminController extends BaseController
 			
 			$extensionModel->addExtension($data);
 			$logModel = new LogModel();
-			$logModel->addLogEntry('Ajout de l\'extension : ' . $data['name'] . ' pour le voyage préfait ID : ' . $prebuiltTripId, session()->get('idUser'));
+			$logModel->addLogEntry('Ajout de l\'extension : ' . $data['title'] . ' pour le voyage préfait ID : ' . $prebuiltTripId, session()->get('idUser'));
 			return redirect()->to('/admin/prebuiltTrips')->with('success', 'Extension ajoutée avec succès.');
 		}
 

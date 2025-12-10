@@ -64,6 +64,16 @@ class CountryModel extends Model
 		return $this->where('continent', $continent)->findAll();
 	}
 
+	public function getTripsByCountryName($countryName)
+	{
+		$country = $this->where('name', $countryName)->first();
+		if ($country) {
+			$TripStepModel = new \App\Models\TripStepModel();
+			return $TripStepModel->getStepsByCountry($country['idCountry']);
+		}
+		return [];
+	}
+
 	public function getCountriesCount()
 	{
 		return $this->countAllResults();

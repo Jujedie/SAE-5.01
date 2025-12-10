@@ -29,7 +29,7 @@
 						<!-- Image avec badge -->
 						<div class="relative h-52">
 							<img 
-								src="<?= esc($trip['attachment'] ?? '/assets/images/fond-voyage.jpeg') ?>" 
+								src="<?= esc($trip['image'] ?? '/assets/images/fond-voyage.jpeg') ?>" 
 								alt="<?= esc($trip['title'] ?? 'Voyage') ?>" 
 								class="w-full h-full object-cover"
 							>

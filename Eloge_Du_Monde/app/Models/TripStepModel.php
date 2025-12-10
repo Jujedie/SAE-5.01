@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\CountryModel;
 
 class TripStepModel extends Model
 {
@@ -61,12 +62,16 @@ class TripStepModel extends Model
 
 	public function getTripsByContinent($continent)
 	{
-		$builder = $this->db->table('tripStep ts');
-		$builder->select('ts.*');
-		$builder->join('country c', 'ts.idCountry = c.idCountry');
-		$builder->where('c.continent', $continent);
-		$query = $builder->get();
-		return $query->getResultArray();
+		$CountryModel = new CountryModel();
+		$countries    = $CountryModel->where('continent', $continent)->findAll();
+		$steps        = [];
+
+		foreach ($countries as $country)
+		{
+			$countrySteps = $this->getStepsByCountry($country['idCountry']);
+			$steps        = array_merge($steps, $countrySteps);
+		}
+		return $steps;
 	}
 
 	public function addStep($data)

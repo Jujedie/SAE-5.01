@@ -81,24 +81,15 @@ class PrebuiltTripModel extends Model
 				$tripStepModel = new TripStepModel();
 				$tripsInContinent = $tripStepModel->getTripsByContinent($value);
 
-				$tripIds = array_map(fn($trip) => $trip['idTrip'], $tripsInContinent);
+				log_message('debug', 'Filter continent value: ' . $value);
+				log_message('debug', 'Trips in continent ' . $value . ': ' . print_r($tripsInContinent, true));
 				
-				if (empty($tripIds)) {
-					return [];
-				}
-				
-				return $this->whereIn('idTrip', $tripIds)->findAll();
+				return $tripsInContinent;
 			} elseif ($key == 'country') {
 				$tripStepModel = new TripStepModel();
 				$tripsInCountry = $tripStepModel->getTripsByCountryName($value);
 
-				$tripIds = array_map(fn($trip) => $trip['idTrip'], $tripsInCountry);
-				
-				if (empty($tripIds)) {
-					return [];
-				}
-				
-				return $this->whereIn('idTrip', $tripIds)->findAll();
+				return $tripsInCountry;
 			}
 		}
 		return $this->findAll();
