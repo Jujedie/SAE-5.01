@@ -1,5 +1,6 @@
 #!/bin/bash
 
+php spark migrate:rollback --all
 php spark migrate
 php spark db:seed UserSeeder
 php spark db:seed CountrySeeder
