@@ -452,7 +452,7 @@ class AdminController extends BaseController
 			}
 			
 			$logModel = new LogModel();
-			$logModel->addLogEntry('Ajout du voyage préfait : ' . $data['name'], session()->get('idUser'));
+			$logModel->addLogEntry('Ajout du voyage préfait : ' . $data['title'], session()->get('idUser'));
 			return redirect()->to(uri: '/admin/prebuiltTrips')->with('success', 'Voyage préfait ajouté avec succès.');
 		}
 
