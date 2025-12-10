@@ -436,10 +436,17 @@ class AdminController extends BaseController
 			$data['idUser'] = session()->get('idUser');
 			
 			$prebuiltTripModel->addPrebuiltTrip($data);
-			$hostModel->addHostsForPrebuiltTrip($prebuiltTripModel->getInsertID(), $this->request->getPost('tripSteps', []));
+			
+			// Récupérer les étapes depuis 'steps' (nom utilisé dans le formulaire)
+			$steps = $this->request->getPost('steps');
+			if (!empty($steps) && is_array($steps))
+			{
+				$hostModel->addHostsForPrebuiltTrip($prebuiltTripModel->getInsertID(), $steps);
+			}
+			
 			$logModel = new LogModel();
 			$logModel->addLogEntry('Ajout du voyage préfait : ' . $data['name'], session()->get('idUser'));
-			return redirect()->to('/admin/prebuiltTrips')->with('success', 'Voyage préfait ajouté avec succès.');
+			return redirect()->to(uri: '/admin/prebuiltTrips')->with('success', 'Voyage préfait ajouté avec succès.');
 		}
 
 		$destinations = (new TripStepModel())->getAllSteps();
@@ -452,30 +459,39 @@ class AdminController extends BaseController
 	{
 		$prebuiltTripModel = new PrebuiltTripModel();
 		$hostModel         = new HostModel();
-
+	
 		$prebuiltTrip = $prebuiltTripModel->getPrebuiltTripById($id);
-
+	
 		if (!$prebuiltTrip)
 		{
 			return redirect()->to('/admin/prebuiltTrips')->with('error', 'Voyage préfait non trouvé.');
 		}
-
+	
 		if ($this->request->getMethod() === 'POST')
 		{
 			$data = $this->request->getPost();
 			$prebuiltTripModel->updatePrebuiltTrip($id, $data);
-			$hostModel->updateHostsForPrebuiltTrip($id, $this->request->getPost('tripSteps', []));
+			
+			// Récupérer les étapes depuis 'steps' (nom utilisé dans le formulaire)
+			$steps = $this->request->getPost('steps');
+			if (!empty($steps) && is_array($steps))
+			{
+				$hostModel->updateHostsForPrebuiltTrip($id, $steps);
+			}
+			
 			$logModel = new LogModel();
 			$logModel->addLogEntry('Modification du voyage préfait avec ID : ' . $id, session()->get('idUser'));
+			
 			return redirect()->to('/admin/prebuiltTrips')->with('success', 'Voyage préfait mis à jour avec succès.');
 		}
-
+	
 		$destinations = (new TripStepModel())->getAllSteps();
 		$countries    = (new CountryModel())->getAllCountries();
-
-		return view('admin/prebuiltTrips/edit', ['prebuiltTrip' => $prebuiltTrip]);
+		$existingHosts= $hostModel->getHostsByTrip($id);
+	
+		return view('admin/prebuiltTrips/edit', ['prebuiltTrip' => $prebuiltTrip, 'tripSteps' => $destinations, 'countries' => $countries, 'existingHosts' => $existingHosts]);
 	}
-
+	
 	public function deletePrebuiltTrip($id)
 	{
 		$prebuiltTripModel = new PrebuiltTripModel();

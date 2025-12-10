@@ -6,79 +6,79 @@ use CodeIgniter\Model;
 
 class ExtensionModel extends Model
 {
-	protected $table            = 'extension';
-	protected $primaryKey       = 'idTrip';
-	protected $useAutoIncrement = true;
-	protected $returnType       = 'array';
-	protected $useSoftDeletes   = false;
-	protected $protectFields    = true;
-	protected $allowedFields    = ['departureDate', 'type', 'idUser', 'title', 'amount', 'attachment'];
+    protected $table            = 'extension';
+    protected $primaryKey       = 'idTrip';
+    protected $useAutoIncrement = true;
+    protected $returnType       = 'array';
+    protected $useSoftDeletes   = false;
+    protected $protectFields    = true;
+    protected $allowedFields    = ['departureDate', 'type', 'idUser', 'title', 'amount', 'attachment'];
 
-	protected bool $allowEmptyInserts = false;
-	protected bool $updateOnlyChanged = true;
+    protected bool $allowEmptyInserts = false;
+    protected bool $updateOnlyChanged = true;
 
-	protected array $casts        = [];
-	protected array $castHandlers = [];
+    protected array $casts        = [];
+    protected array $castHandlers = [];
 
-	// Dates
-	protected $useTimestamps = false;
-	protected $dateFormat    = 'datetime';
-	protected $createdField  = 'created_at';
-	protected $updatedField  = 'updated_at';
-	protected $deletedField  = 'deleted_at';
+    // Dates
+    protected $useTimestamps = false;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
 
-	// Validation
-	protected $validationRules      = [];
-	protected $validationMessages   = [];
-	protected $skipValidation       = false;
-	protected $cleanValidationRules = true;
+    // Validation
+    protected $validationRules      = [];
+    protected $validationMessages   = [];
+    protected $skipValidation       = false;
+    protected $cleanValidationRules = true;
 
-	// Callbacks
-	protected $allowCallbacks = true;
-	protected $beforeInsert   = [];
-	protected $afterInsert    = [];
-	protected $beforeUpdate   = [];
-	protected $afterUpdate    = [];
-	protected $beforeFind     = [];
-	protected $afterFind      = [];
-	protected $beforeDelete   = [];
-	protected $afterDelete    = [];
+    // Callbacks
+    protected $allowCallbacks = true;
+    protected $beforeInsert   = [];
+    protected $afterInsert    = [];
+    protected $beforeUpdate   = [];
+    protected $afterUpdate    = [];
+    protected $beforeFind     = [];
+    protected $afterFind      = [];
+    protected $beforeDelete   = [];
+    protected $afterDelete    = [];
 
-	public function getAllExtensions()
-	{
-		return $this->findAll();
-	}
+    public function getAllExtensions()
+    {
+        return $this->findAll();
+    }
 
-	public function getExtensionById($idTrip)
-	{
-		return $this->where('idTrip', $idTrip)->first();
-	}
+    public function getExtensionById($idTrip)
+    {
+        return $this->where('idTrip', $idTrip)->first();
+    }
 
-	public function getExtensionsByUser($idUser)
-	{
-		return $this->where('idUser', $idUser)->findAll();
-	}
+    public function getExtensionsByUser($idUser)
+    {
+        return $this->where('idUser', $idUser)->findAll();
+    }
 
-	public function getExtensionsByPrebuiltTrip($prebuiltTripId, $idUser)
-	{
-		// Récupérer toutes les extensions pour le même utilisateur
-		// Note: Dans PostgreSQL avec INHERITS, les extensions ont leur propre idTrip
-		// mais partagent le même idUser que le voyage parent
-		return $this->where('idUser', $idUser)->findAll();
-	}
+    public function getExtensionsByPrebuiltTrip($prebuiltTripId, $idUser)
+    {
+        // Récupérer toutes les extensions pour le même utilisateur
+        // Note: Dans PostgreSQL avec INHERITS, les extensions ont leur propre idTrip
+        // mais partagent le même idUser que le voyage parent
+        return $this->where('idUser', $idUser)->findAll();
+    }
 
-	public function addExtension($data)
-	{
-		return $this->insert($data);
-	}
+    public function addExtension($data)
+    {
+        return $this->insert($data);
+    }
 
-	public function updateExtension($idTrip, $data)
-	{
-		return $this->where('idTrip', $idTrip)->set($data)->update();
-	}
+    public function updateExtension($idTrip, $data)
+    {
+        return $this->where('idTrip', $idTrip)->set($data)->update();
+    }
 
-	public function deleteExtensionById($idTrip)
-	{
-		return $this->where('idTrip', $idTrip)->delete();
-	}
+    public function deleteExtensionById($idTrip)
+    {
+        return $this->where('idTrip', $idTrip)->delete();
+    }
 }

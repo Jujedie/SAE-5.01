@@ -85,6 +85,25 @@ class HostModel extends Model
 		return $this->where(['idTrip' => $idTrip, 'idTripStep' => $idTripStep])->set($data)->update();
 	}
 
+	public function updateHostsForPrebuiltTrip($idTrip, $tripSteps)
+	{
+		// Supprimer les anciennes étapes
+		$this->where('idTrip', $idTrip)->delete();
+		if (empty($tripSteps) || !$idTrip) {
+			return;
+		}
+		
+		// Ajouter les nouvelles étapes
+		foreach ($tripSteps as $step) {
+			$this->insert([
+				'idTrip'     => $idTrip,
+				'idTripStep' => $step['idTripStep'],
+				'nbDays'     => $step['nbDays'],
+				'nbNights'   => $step['nbNights'],
+			]);
+		}
+	}
+
 	public function deleteHost($idTrip, $idTripStep)
 	{
 		return $this->where(['idTrip' => $idTrip, 'idTripStep' => $idTripStep])->delete();
