@@ -69,6 +69,11 @@ class ReviewModel extends Model
 		return $this->where('verified', 't')->findAll();
 	}
 
+	public function getRecentReviews($nb)
+	{
+		return $this->where('verified', 't')->orderBy('date')->findAll($nb);
+	}
+
 	public function getReviewsCount()
 	{
 		return $this->countAllResults();

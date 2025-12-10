@@ -266,7 +266,7 @@
 	</div>
 </section>
 
-<!-- Testimonials Section -->
+<!-- Reviews Section -->
 <section id="temoignages" class="section-gray">
 	<div class="section-container">
 		<div class="section-text-center">
@@ -281,47 +281,18 @@
 		</div>
 
 		<div class="testimonials-grid">
-			<div class="testimonial-card fade-in">
-				<div class="stars">
-					<?php for($i = 0; $i < 5; $i++): ?>
-					<svg class="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-					<?php endfor; ?>
+			<?php for ($i = 0 ; $i < 3 ; $i++): ?>
+				<div class="testimonial-card fade-in">
+					<div class="stars">
+						<?php for($j = 0; $j < $reviews[$i]['rating']; $j++): ?>
+						<svg class="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+						<?php endfor; ?>
+					</div>
+					<p class="testimonial-text">
+						<?= $reviews[$i]['content'] ?>
+					</p>
 				</div>
-				<p class="testimonial-text">
-					"Hélène a créé pour nous un voyage au Japon absolument magique. Chaque détail était pensé, chaque expérience authentique. Nous avons découvert des lieux hors des sentiers battus que nous n'aurions jamais trouvés seuls."
-				</p>
-				<div class="testimonial-trip">Japon sur mesure - 15 jours</div>
-				<p class="testimonial-name">Sophie & Marc L.</p>
-				<p class="testimonial-location">Paris</p>
-			</div>
-
-			<div class="testimonial-card fade-in">
-				<div class="stars">
-					<?php for($i = 0; $i < 5; $i++): ?>
-					<svg class="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-					<?php endfor; ?>
-				</div>
-				<p class="testimonial-text">
-					"Le professionnalisme et l'écoute d'Éloge du Monde ont transformé notre lune de miel en Toscane en un rêve éveillé. L'accompagnement à domicile nous a vraiment mis en confiance."
-				</p>
-				<div class="testimonial-trip">Toscane romantique - 10 jours</div>
-				<p class="testimonial-name">Catherine D.</p>
-				<p class="testimonial-location">Lyon</p>
-			</div>
-
-			<div class="testimonial-card fade-in">
-				<div class="stars">
-					<?php for($i = 0; $i < 5; $i++): ?>
-					<svg class="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-					<?php endfor; ?>
-				</div>
-				<p class="testimonial-text">
-					"Notre safari en Tanzanie était parfaitement adapté à nos enfants. Hélène a su trouver le juste équilibre entre aventure et confort. Une expérience inoubliable pour toute la famille !"
-				</p>
-				<div class="testimonial-trip">Safari familial - 12 jours</div>
-				<p class="testimonial-name">Famille Rousseau</p>
-				<p class="testimonial-location">Bordeaux</p>
-			</div>
+			<?php endfor; ?>
 		</div>
 
 		<div class="stats-grid">

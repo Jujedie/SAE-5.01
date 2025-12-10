@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 use App\Models\BlogPostModel;
+use App\Models\ReviewModel;
 
 class HomeController extends BaseController
 {
@@ -12,7 +13,9 @@ class HomeController extends BaseController
 		$session = session();
 
 		$userModel = new UserModel();
-		return view('home', ["isAdmin" => $userModel->isAdmin($session->get('idUser'))]);
+		$reviewsModel = new ReviewModel();
+		$reviews = $reviewsModel->getRecentReviews(3);
+		return view('home', ["isAdmin" => $userModel->isAdmin($session->get('idUser')), "reviews" => $reviews]);
 	}
 
 	public function blog()
