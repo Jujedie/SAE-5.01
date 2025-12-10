@@ -61,10 +61,19 @@ class ExtensionModel extends Model
 
     public function getExtensionsByPrebuiltTrip($prebuiltTripId, $idUser)
     {
-        // Récupérer toutes les extensions pour le même utilisateur
-        // Note: Dans PostgreSQL avec INHERITS, les extensions ont leur propre idTrip
-        // mais partagent le même idUser que le voyage parent
-        return $this->where('idUser', $idUser)->findAll();
+        // Récupérer le voyage préfait pour obtenir ses propriétés
+        $prebuiltTripModel = new \App\Models\PrebuiltTripModel();
+        $prebuiltTrip = $prebuiltTripModel->getPrebuiltTripById($prebuiltTripId);
+        
+        if (!$prebuiltTrip) {
+            return [];
+        }
+        
+        // Les extensions sont liées par idUser, departureDate et type
+        return $this->where('idUser', $idUser)
+                   ->where('departureDate', $prebuiltTrip['departureDate'])
+                   ->where('type', $prebuiltTrip['type'])
+                   ->findAll();
     }
 
     public function addExtension($data)

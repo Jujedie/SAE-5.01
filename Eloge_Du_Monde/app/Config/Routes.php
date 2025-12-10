@@ -88,6 +88,7 @@ $routes->post('admin/prebuiltTrips/delete/(:num)'                               
 
 // Admin - Extensions de voyages préfaits
 $routes->match(['GET', 'POST'], 'admin/prebuiltTrips/extension/add/(:num)'       , 'AdminController::addExtension/$1'        , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->match(['GET', 'POST'], 'admin/prebuiltTrips/extension/edit/(:num)'      , 'AdminController::editExtension/$1'        , ['filter' => ['authGuard', 'roleGuard']]);
 $routes->post('admin/prebuiltTrips/extension/delete/(:num)/(:num)'               , 'AdminController::deleteExtension/$1/$2'  , ['filter' => ['authGuard', 'roleGuard']]);
 
 // Admin - Témoignages

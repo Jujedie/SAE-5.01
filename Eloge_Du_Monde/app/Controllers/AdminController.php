@@ -420,7 +420,7 @@ class AdminController extends BaseController
 		// Récupérer toutes les extensions pour ce voyage
 		$extensions = $extensionModel->getExtensionsByPrebuiltTrip($id, $prebuiltTrip['idUser']);
 
-		$hosts = $hostModel->getHostsByTrip($id);
+		$hosts = $hostModel->getHostsByTripWithDetails($id);
 		
 		return view('admin/prebuiltTrips/view',
 		[
@@ -623,6 +623,45 @@ class AdminController extends BaseController
 		}
 
 		return view('admin/prebuiltTrips/addExtension', ['prebuiltTrip' => $prebuiltTrip]);
+	}
+
+	public function editExtension($extensionId)
+	{
+		$extensionModel = new ExtensionModel();
+		$prebuiltTripModel = new PrebuiltTripModel();
+
+		$extension = $extensionModel->getExtensionById($extensionId);
+		
+		if (!$extension)
+		{
+			return redirect()->to('/admin/prebuiltTrips')->with('error', 'Extension non trouvée.');
+		}
+
+		// Trouver le voyage parent (même idUser et même departureDate/type)
+		$prebuiltTrip = $prebuiltTripModel->where('idUser', $extension['idUser'])
+			->where('departureDate', $extension['departureDate'])
+			->where('type', $extension['type'])
+			->first();
+		
+		if (!$prebuiltTrip)
+		{
+			return redirect()->to('/admin/prebuiltTrips')->with('error', 'Voyage parent non trouvé.');
+		}
+
+		if ($this->request->getMethod() === 'POST')
+		{
+			$data = $this->request->getPost();
+			
+			$extensionModel->updateExtension($extensionId, $data);
+			$logModel = new LogModel();
+			$logModel->addLogEntry('Modification de l\'extension : ' . $data['title'] . ' (ID : ' . $extensionId . ')', session()->get('idUser'));
+			return redirect()->to('/admin/prebuiltTrips')->with('success', 'Extension modifiée avec succès.');
+		}
+
+		return view('admin/prebuiltTrips/editExtension', [
+			'extension' => $extension,
+			'prebuiltTrip' => $prebuiltTrip
+		]);
 	}
 
 	public function deleteExtension($extensionId, $prebuiltTripId)
