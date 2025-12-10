@@ -3,3 +3,9 @@
 	background-size: cover;
 	background-position: center;
 }
+
+.custom-amber-bg { background-color: #C9A96E; }
+.custom-amber-text { color: #C9A96E; }
+.custom-amber-border { border-color: #C9A96E; }
+.custom-amber-hover:hover { background-color: #B8955A; }
+.custom-amber-hover-text:hover { color: #B8955A; }

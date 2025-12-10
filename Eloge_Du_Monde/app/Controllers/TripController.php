@@ -25,6 +25,13 @@ class TripController extends BaseController
 			$trips = $tripModel->getAllPrebuiltTrips();
 		}
 
+		$hostModel = new HostModel();
+		foreach ($trips as &$trip) {
+			$hosts = $hostModel->getHostsByTripWithDetails($trip['idTrip']);
+			$trip['steps'] = $hosts;
+		}
+		unset($trip); // Détruire la référence
+
 		return view('trips/index', ["user" => ((new UserModel())->getUserById($session->get('idUser'))), "listTrips" => $trips]);
 	}
 
@@ -51,10 +58,12 @@ class TripController extends BaseController
 		{
 			return redirect()->to('/trips')->with('error', 'Le voyage demandé n\'existe pas.');
 		}
+		
 		$tripHostModel = new HostModel();
-		$hosts         = $tripHostModel->getHostsByTrip($idTrip);
+		$hosts         = $tripHostModel->getHostsByTripWithDetails($idTrip);
+		$trip['steps'] = $hosts;
 
-		return view('trips/viewTrip', ["trip" => $trip, "hosts" => $hosts, "isConnected" => $session->get('isLoggedIn')]);
+		return view('trips/viewTrip', ["trip" => $trip, "isConnected" => $session->get('isLoggedIn')]);
 	}
 
 	public function getCountriesData()
