@@ -103,4 +103,29 @@ class PrebuiltTripModel extends Model
 		}
 		return $this->findAll();
 	}
+
+	public function createPrebuiltTripWithSteps($data, $steps)
+	{
+		$this->insert($data);
+		$idTrip = $this->getInsertID();
+
+		if (!empty($steps)) {
+			$hostModel = new HostModel();
+			$hostModel->addHostsForTrip($idTrip, $steps);
+		}
+
+		return $idTrip;
+	}
+
+	public function getPrebuiltTripWithSteps($idTrip)
+	{
+		$trip = $this->getPrebuiltTripById($idTrip);
+		
+		if ($trip) {
+			$hostModel = new HostModel();
+			$trip['steps'] = $hostModel->getHostsByTripWithDetails($idTrip);
+		}
+
+		return $trip;
+	}
 }

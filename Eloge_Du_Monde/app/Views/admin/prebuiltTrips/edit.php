@@ -62,7 +62,8 @@
 					<option value="Gastronomie" <?= ($prebuiltTrip['thematic'] ?? '') === 'Gastronomie' ? 'selected' : '' ?>>Gastronomie</option>
 					<option value="Culture & Art" <?= ($prebuiltTrip['thematic'] ?? '') === 'Culture & Art' ? 'selected' : '' ?>>Culture & Art</option>
 				</select>
-			</div>				<!-- Montant -->
+			</div>				
+				<!-- Montant -->
 				<div>
 					<label for="amount" class="block text-sm font-medium text-gray-700 mb-2">Prix (€) <span class="text-red-500">*</span></label>
 					<input type="number" id="amount" name="amount" min="0" step="0.01" required

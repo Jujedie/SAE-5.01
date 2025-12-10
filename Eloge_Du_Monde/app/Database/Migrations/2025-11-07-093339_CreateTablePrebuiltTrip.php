@@ -21,7 +21,7 @@ class CreateTablePrebuiltTrip extends Migration
 				thematic          TEXT,
 				amount            INT  NOT NULL,
 				attachment        TEXT,
-				image             TEXT,
+				image             TEXT
 			) INHERITS (trip);");
 	}
 
