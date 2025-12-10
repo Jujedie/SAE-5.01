@@ -16,6 +16,11 @@ $routes->post('reviews'                                       , 'ReviewControlle
 $routes->get('contact'                                        , 'ContactController::index');
 $routes->post('contact/send'                                  , 'ContactController::send');
 
+// Pages légales
+$routes->get('mentions-legales'                               , 'LegalController::mentionsLegales');
+$routes->get('cgv'                                            , 'LegalController::cgv'           );
+$routes->get('confidentialite'                                , 'LegalController::confidentialite');
+
 // Voyages
 $routes->get('createTrip'                                     , 'TripController::createPersonalTrip'  );
 $routes->get('viewTrip/(:num)'                                , 'TripController::viewTrip/$1'         );
