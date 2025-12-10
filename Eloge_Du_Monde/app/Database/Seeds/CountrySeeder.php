@@ -12,7 +12,7 @@ class CountrySeeder extends Seeder
 			['name' => 'France'        , 'continent' => 'Europe'  , 'cost' => 100],
 			['name' => 'Japon'         , 'continent' => 'Asie'    , 'cost' => 150],
 			['name' => 'Etats-Unis'    , 'continent' => 'Amerique', 'cost' => 120],
-			['name' => 'Brésil'        , 'continent' => 'Amerique', 'cost' => 130],
+			['name' => 'Bresil'        , 'continent' => 'Amerique', 'cost' => 130],
 			['name' => 'Australie'     , 'continent' => 'Oceanie' , 'cost' => 200],
 			['name' => 'Afrique du Sud', 'continent' => 'Afrique' , 'cost' => 180],
 		];
