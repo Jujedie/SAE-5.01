@@ -165,10 +165,10 @@
 			<div class="footer-column">
 				<h4>L'entreprise</h4>
 				<ul class="footer-links">
-					<li><a href="#about">Qui sommes-nous ?</a></li>
-					<li><a href="#about">Nos valeurs</a></li>
-					<li><a href="#about">L'équipe</a></li>
-					<li><a href="<?= base_url('blog') ?>">Blog</a></li>
+					<li><a href="<?= base_url('/#about') ?>">Qui sommes-nous ?</a></li>
+					<li><a href="<?= base_url('/#about') ?>">Nos valeurs</a></li>
+					<li><a href="<?= base_url('/#about') ?>">L'équipe</a></li>
+					<li><a href="<?= base_url('/#accueil') ?>">Blog</a></li>
 				</ul>
 			</div>
 
@@ -176,10 +176,10 @@
 			<div class="footer-column">
 				<h4>Nos services</h4>
 				<ul class="footer-links">
-					<li><a href="#destinations">Voyages sur mesure</a></li>
-					<li><a href="#themes">Voyages thématiques</a></li>
-					<li><a href="#destinations">Destinations</a></li>
-					<li><a href="#reviews">Témoignages</a></li>
+					<li><a href="<?= base_url('/#destinations') ?>">Voyages sur mesure</a></li>
+					<li><a href="<?= base_url('/#themes') ?>">Voyages thématiques</a></li>
+					<li><a href="<?= base_url('/#destinations') ?>">Destinations</a></li>
+					<li><a href="<?= base_url('/#temoignages') ?>">Témoignages</a></li>
 				</ul>
 			</div>
 
