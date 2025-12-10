@@ -78,16 +78,16 @@ class PrebuiltTripModel extends Model
 		foreach ($filter as $key => $value)
 		{
 			if ($key == 'continent'){
-				$tripStepModel = new TripStepModel();
-				$tripsInContinent = $tripStepModel->getTripsByContinent($value);
+				$hostModel = new HostModel();
+				$tripsInContinent = $hostModel->getTripsByContinent($value);
 
 				log_message('debug', 'Filter continent value: ' . $value);
 				log_message('debug', 'Trips in continent ' . $value . ': ' . print_r($tripsInContinent, true));
 				
 				return $tripsInContinent;
 			} elseif ($key == 'country') {
-				$tripStepModel = new TripStepModel();
-				$tripsInCountry = $tripStepModel->getTripsByCountryName($value);
+				$hostModel = new HostModel();
+				$tripsInCountry = $hostModel->getTripsByCountryName($value);
 
 				return $tripsInCountry;
 			}

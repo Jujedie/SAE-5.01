@@ -59,11 +59,11 @@
 						</svg>
 					</a>
 					<div class="dropdown-menu">
-						<a href="<?= base_url('trips?filter=continent&value=europe') ?>">Europe</a>
-						<a href="<?= base_url('trips?filter=continent&value=asie') ?>">Asie</a>
-						<a href="<?= base_url('trips?filter=continent&value=afrique') ?>">Afrique</a>
-						<a href="<?= base_url('trips?filter=continent&value=ameriques') ?>">Amériques</a>
-						<a href="<?= base_url('trips?filter=continent&value=oceanie') ?>">Océanie</a>
+						<a href="<?= base_url('trips?filter=continent&value=Europe') ?>">Europe</a>
+						<a href="<?= base_url('trips?filter=continent&value=Asie') ?>">Asie</a>
+						<a href="<?= base_url('trips?filter=continent&value=Afrique') ?>">Afrique</a>
+						<a href="<?= base_url('trips?filter=continent&value=Amerique') ?>">Amériques</a>
+						<a href="<?= base_url('trips?filter=continent&value=Oceanie') ?>">Océanie</a>
 					</div>
 				</li>
 				<li><a href="<?= base_url('createTrip') ?>">Créer votre voyage</a></li>

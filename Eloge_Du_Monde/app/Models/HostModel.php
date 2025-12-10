@@ -172,4 +172,42 @@ class HostModel extends Model
 		$db = \Config\Database::connect();
 		return $db->query('DELETE FROM host WHERE "idTrip" = ?', [$idTrip]);
 	}
+
+	public function getTripsByContinent($continent)
+	{
+		$db = \Config\Database::connect();
+		$sql = '
+			SELECT DISTINCT pt.*
+			FROM prebuilttrip pt
+			JOIN host h ON h."idTrip" = pt."idTrip"
+			JOIN "tripStep" ts ON ts."idTripStep" = h."idTripStep"
+			JOIN country c ON c."idCountry" = ts."idCountry"
+			WHERE LOWER(c.continent) = LOWER(?)
+		';
+		$query = $db->query($sql, [$continent]);
+		$trips = $query->getResultArray();
+
+		log_message('debug', 'Trips in continent ' . $continent . ': ' . print_r($trips, true));
+
+		return $trips;
+	}
+
+	public function getTripsByCountryName($countryName)
+	{
+		$db = \Config\Database::connect();
+		$sql = '
+			SELECT DISTINCT pt.*
+			FROM prebuilttrip pt
+			JOIN host h ON h."idTrip" = pt."idTrip"
+			JOIN "tripStep" ts ON ts."idTripStep" = h."idTripStep"
+			JOIN country c ON c."idCountry" = ts."idCountry"
+			WHERE LOWER(c.name) = LOWER(?)
+		';
+		$query = $db->query($sql, [$countryName]);
+		$trips = $query->getResultArray();
+
+		log_message('debug', 'Trips in country ' . $countryName . ': ' . print_r($trips, true));
+
+		return $trips;
+	}
 }

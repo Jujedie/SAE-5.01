@@ -4,6 +4,8 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 use App\Models\CountryModel;
+use App\Models\HostModel;
+use App\Models\PrebuiltTripModel;
 
 class TripStepModel extends Model
 {
@@ -68,10 +70,23 @@ class TripStepModel extends Model
 
 		foreach ($countries as $country)
 		{
+			$CountryModel = new CountryModel();
 			$countrySteps = $this->getStepsByCountry($country['idCountry']);
 			$steps        = array_merge($steps, $countrySteps);
 		}
-		return $steps;
+
+		$hostModel = new HostModel();
+		$prebuiltTripModel = new PrebuiltTripModel();
+		$trips     = [];
+		foreach ($steps as $step)
+		{
+			$hosts = $hostModel->getHostsByTripStep($step['idTripStep']);
+			foreach ($hosts as $host)
+			{
+				$trips[] = $prebuiltTripModel->getPrebuiltTripById($host['idTrip']);
+			}
+		}
+		return $trips;
 	}
 
 	public function addStep($data)
