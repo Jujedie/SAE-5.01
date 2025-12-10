@@ -61,18 +61,21 @@
 							<?= esc($user['phone'] ?? '+33 6 12 34 56 78') ?>
 						</p>
 					</div>
-					<!-- Newsletter -->
-					<div class>
-						<p class="text-sm text-gray-400">Newsletter</p>
-						<p class="text-gray-800 font-medium"><?= ($user['isSubscribed'] == 't' ?? true) ? 'Abonné(e)' : 'Non abonné(e)' ?></p>
-					</div>
-					<div class>
-						<form action="<?= base_url('newsletter/toggle') ?>" method="post">
-							<button type="submit" class="button_modify bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 px-6 rounded-md transition-colors">
-								<?= ($user['isSubscribed'] == 't' ?? true) ? 'Se désabonner' : 'S\'abonner' ?>
-							</button>
-						</form>
-					</div>
+				<!-- Newsletter -->
+				<div class="col-span-2">
+					<form action="<?= base_url('newsletter/toggle') ?>" method="post" id="newsletterForm">
+						<div class="flex items-center gap-3">
+						<input type="checkbox" id="newsletter" name="isSubscribed" 
+							class="w-5 h-5 border-gray-300 rounded focus:ring-2 cursor-pointer"
+							style="accent-color: #C9A96E;"
+							<?= ($user['isSubscribed'] == 't' ?? true) ? 'checked' : '' ?>
+							onchange="this.form.submit()">
+							<label for="newsletter" class="text-sm text-gray-700 cursor-pointer">
+								Je souhaite recevoir la newsletter et les offres promotionnelles
+							</label>
+						</div>
+					</form>
+				</div>
 				</div>
 			</div>
 
