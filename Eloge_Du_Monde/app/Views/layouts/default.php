@@ -128,7 +128,7 @@
 			<div>
 				<div class="footer-brand">
 					<div class="footer-logo">
-						<span style="color: white; font-family: 'Playfair Display', serif;">É</span>
+						<img src="<?= base_url('assets/images/logo-eloge-du-monde.png') ?>" alt="Éloge du Monde">
 					</div>
 					<div>
 						<span style="letter-spacing: 0.05em; font-size: 0.875rem;">ÉLOGE DU MONDE</span>
