@@ -81,6 +81,7 @@ $routes->post('admin/trips/delete/(:num)'                                       
 
 // Admin - Voyages préfaits
 $routes->get('admin/prebuiltTrips'                                               , 'AdminController::prebuiltTrips'          , ['filter' => ['authGuard', 'roleGuard']]);
+$routes->get('admin/prebuiltTrips/view/(:num)'                                   , 'AdminController::viewPrebuiltTrip/$1'    , ['filter' => ['authGuard', 'roleGuard']]);
 $routes->match(['GET', 'POST'], 'admin/prebuiltTrips/add'                        , 'AdminController::addPrebuiltTrip'        , ['filter' => ['authGuard', 'roleGuard']]);
 $routes->match(['GET', 'POST'], 'admin/prebuiltTrips/edit/(:num)'                , 'AdminController::editPrebuiltTrip/$1'    , ['filter' => ['authGuard', 'roleGuard']]);
 $routes->post('admin/prebuiltTrips/delete/(:num)'                                , 'AdminController::deletePrebuiltTrip/$1'  , ['filter' => ['authGuard', 'roleGuard']]);

@@ -367,6 +367,30 @@ class AdminController extends BaseController
 		return view('admin/prebuiltTrips/list', ['prebuiltTrips' => $tripsWithExtensions]);
 	}
 
+	public function viewPrebuiltTrip($id) {
+		$prebuiltTripModel = new PrebuiltTripModel();
+		$extensionModel    = new ExtensionModel();
+		$hostModel         = new HostModel();
+		
+		$prebuiltTrip = $prebuiltTripModel->getPrebuiltTripById($id);
+		if (!$prebuiltTrip)
+		{
+			return redirect()->to('/admin/prebuiltTrips')->with('error', 'Voyage préfait non trouvé.');
+		}
+
+		// Récupérer toutes les extensions pour ce voyage
+		$extensions = $extensionModel->getExtensionsByPrebuiltTrip($id, $prebuiltTrip['idUser']);
+
+		$hosts = $hostModel->getHostsByTrip($id);
+		
+		return view('admin/prebuiltTrips/view',
+		[
+			'prebuiltTrip' => $prebuiltTrip,
+			'extensions'   => $extensions,
+			'hosts'        => $hosts
+		]);
+	}
+
 	public function addPrebuiltTrip()
 	{
 		if ($this->request->getMethod() === 'POST')

@@ -20,7 +20,8 @@ class CreateTablePrebuiltTrip extends Migration
 				formalitiesDesc   TEXT,
 				thematic          TEXT,
 				amount            INT  NOT NULL,
-				attachment        TEXT
+				attachment        TEXT,
+				image             TEXT,
 			) INHERITS (trip);");
 	}
 

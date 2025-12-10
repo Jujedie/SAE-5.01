@@ -64,36 +64,6 @@ class TripModel extends Model
 		return $this->where('type', $type)->findAll();
 	}
 
-	public function getTripsByFilter($filter)
-	{
-		foreach ($filter as $key => $value)
-		{
-			if ($key == 'continent'){
-				$tripStepModel = new TripStepModel();
-				$tripsInContinent = $tripStepModel->getTripsByContinent($value);
-
-				$tripIds = array_map(fn($trip) => $trip['idTrip'], $tripsInContinent);
-				
-				if (empty($tripIds)) {
-					return [];
-				}
-				
-				return $this->whereIn('idTrip', $tripIds)->findAll();
-			} elseif ($key == 'country') {
-				$tripStepModel = new TripStepModel();
-				$tripsInCountry = $tripStepModel->getTripsByCountryName($value);
-
-				$tripIds = array_map(fn($trip) => $trip['idTrip'], $tripsInCountry);
-				
-				if (empty($tripIds)) {
-					return [];
-				}
-				
-				return $this->whereIn('idTrip', $tripIds)->findAll();
-			}
-		}
-		return $this->findAll();
-	}
 
 	public function getTripsCount()
 	{

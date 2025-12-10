@@ -69,7 +69,7 @@
 			</div>
 
 			<div class="mt-8 flex items-center justify-end space-x-4">
-				<a href="<?= base_url('admin/prebuiltTrips/list/' . $prebuiltTrip['idTrip']) ?>" 
+				<a href="<?= base_url('admin/prebuiltTrips') ?>" 
 				   class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition">
 					Annuler
 				</a>

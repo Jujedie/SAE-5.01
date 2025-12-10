@@ -12,7 +12,7 @@ class PrebuiltTripModel extends Model
 	protected $returnType       = 'array';
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
-	protected $allowedFields    = ['departureDate', 'type', 'idUser', 'title', 'programdesc', 'hostingdesc', 'conditiondesc', 'formalitiesdesc', 'thematic', 'amount', 'attachment'];
+	protected $allowedFields    = ['departureDate', 'type', 'idUser', 'title', 'programdesc', 'hostingdesc', 'conditiondesc', 'formalitiesdesc', 'thematic', 'amount', 'attachment', 'image'];
 
 	protected bool $allowEmptyInserts = false;
 	protected bool $updateOnlyChanged = true;
@@ -72,5 +72,35 @@ class PrebuiltTripModel extends Model
 	public function deletePrebuiltTrip($idTrip)
 	{
 		return $this->delete($idTrip);
+	}
+	public function getPrebuiltsByFilter($filter)
+	{
+		foreach ($filter as $key => $value)
+		{
+			if ($key == 'continent'){
+				$tripStepModel = new TripStepModel();
+				$tripsInContinent = $tripStepModel->getTripsByContinent($value);
+
+				$tripIds = array_map(fn($trip) => $trip['idTrip'], $tripsInContinent);
+				
+				if (empty($tripIds)) {
+					return [];
+				}
+				
+				return $this->whereIn('idTrip', $tripIds)->findAll();
+			} elseif ($key == 'country') {
+				$tripStepModel = new TripStepModel();
+				$tripsInCountry = $tripStepModel->getTripsByCountryName($value);
+
+				$tripIds = array_map(fn($trip) => $trip['idTrip'], $tripsInCountry);
+				
+				if (empty($tripIds)) {
+					return [];
+				}
+				
+				return $this->whereIn('idTrip', $tripIds)->findAll();
+			}
+		}
+		return $this->findAll();
 	}
 }

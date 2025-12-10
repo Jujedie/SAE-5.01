@@ -23,7 +23,7 @@
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 				<!-- Titre -->
 				<div class="md:col-span-2">
-					<label for="title" class="block text-sm font-medium text-gray-700 mb-2">Titre du voyage *</label>
+					<label for="title" class="block text-sm font-medium text-gray-700 mb-2">Titre du voyage <span class="text-red-500">*</span></label>
 					<input type="text" id="title" name="title" required
 						   value="<?= esc($prebuiltTrip['title'] ?? '') ?>"
 						   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
@@ -31,7 +31,7 @@
 
 				<!-- Date de départ -->
 				<div>
-					<label for="departureDate" class="block text-sm font-medium text-gray-700 mb-2">Date de départ *</label>
+					<label for="departureDate" class="block text-sm font-medium text-gray-700 mb-2">Date de départ <span class="text-red-500">*</span></label>
 					<input type="date" id="departureDate" name="departureDate" required
 						   value="<?= esc($prebuiltTrip['departureDate'] ?? '') ?>"
 						   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
@@ -39,7 +39,7 @@
 
 				<!-- Type -->
 				<div>
-					<label for="type" class="block text-sm font-medium text-gray-700 mb-2">Type de voyage *</label>
+					<label for="type" class="block text-sm font-medium text-gray-700 mb-2">Type de voyage <span class="text-red-500">*</span></label>
 					<select id="type" name="type" required
 							class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
 						<option value="">Sélectionner un type</option>
@@ -64,7 +64,7 @@
 				</select>
 			</div>				<!-- Montant -->
 				<div>
-					<label for="amount" class="block text-sm font-medium text-gray-700 mb-2">Prix (€) *</label>
+					<label for="amount" class="block text-sm font-medium text-gray-700 mb-2">Prix (€) <span class="text-red-500">*</span></label>
 					<input type="number" id="amount" name="amount" min="0" step="0.01" required
 						   value="<?= esc($prebuiltTrip['amount'] ?? '') ?>"
 						   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
@@ -121,9 +121,29 @@
 						<?= !empty($prebuiltTrip['attachment']) ? 'Remplacer la pièce jointe' : 'Pièce jointe' ?>
 					</label>
 					<input type="file" id="attachment" name="attachment"
-						   accept=".pdf,.jpg,.jpeg,.png"
+						   accept=".pdf"
 						   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
-					<p class="mt-1 text-sm text-gray-500">Formats acceptés: PDF, JPG, PNG (max 5MB)</p>
+					<p class="mt-1 text-sm text-gray-500">Formats acceptés: PDF (max 5MB)</p>
+				</div>
+
+				<!-- Image actuelle -->
+				<?php if (!empty($prebuiltTrip['image'])): ?>
+					<div class="md:col-span-2">
+						<label class="block text-sm font-medium text-gray-700 mb-2">Image actuelle</label>
+						<div class="flex items-center space-x-4">
+							<img src="<?= esc($prebuiltTrip['image']) ?>" alt="Image du voyage" class="w-32 h-20 object-cover rounded-lg border border-gray-300">
+						</div>
+					</div>
+				<?php endif; ?>
+				<!-- Nouvelle image -->
+				<div class="md:col-span-2">
+					<label for="image" class="block text-sm font-medium text-gray-700 mb-2">
+						<?= !empty($prebuiltTrip['image']) ? 'Remplacer l\'image du voyage' : 'Image du voyage' ?>
+					</label>
+					<input type="file" id="image" name="image"
+						   accept=".jpg,.jpeg,.png"
+						   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+					<p class="mt-1 text-sm text-gray-500">Formats acceptés: JPG, PNG (max 5MB)</p>
 				</div>
 			</div>
 

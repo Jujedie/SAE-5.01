@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\PrebuiltTripModel;
-use App\Models\TripModel;
 use App\Models\HostModel;
 use App\Models\UserModel;
 
@@ -13,16 +12,16 @@ class TripController extends BaseController
 	{
 		$filter    = [$this->request->getGet('filter') => $this->request->getGet('value')];
 		$session   = session();
-		$tripModel = new TripModel();
+		$tripModel = new PrebuiltTripModel();
 
 		$trips = [];
 		if (!empty($filter))
 		{
-			$trips = $tripModel->getTripsByFilter($filter);
+			$trips = $tripModel->getPrebuiltsByFilter($filter);
 		}
 		else
 		{
-			$trips = $tripModel->getAllTrips();
+			$trips = $tripModel->getAllPrebuiltTrips();
 		}
 
 		return view('trips/index', ["user" => ((new UserModel())->getUserById($session->get('idUser'))), "listTrips" => $trips]);
@@ -44,15 +43,17 @@ class TripController extends BaseController
 	public function viewTrip($idTrip)
 	{
 		$session   = session();
-		$tripModel = new TripModel();
+		$tripModel = new PrebuiltTripModel();
 
-		$trip = $tripModel->getTripById($idTrip);
+		$trip = $tripModel->getPrebuiltTripById($idTrip);
 		if (!$trip)
 		{
 			return redirect()->to('/trips')->with('error', 'Le voyage demandé n\'existe pas.');
 		}
+		$tripHostModel = new HostModel();
+		$hosts         = $tripHostModel->getHostsByTrip($idTrip);
 
-		return view('trips/viewTrip', ["isAdmin" => (new UserModel())->isAdmin($session->get('idUser')), "trip" => $trip]);
+		return view('trips/viewTrip', ["trip" => $trip, "hosts" => $hosts, "isConnected" => $session->get('isLoggedIn')]);
 	}
 
 	public function getCountriesData()

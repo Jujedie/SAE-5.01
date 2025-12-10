@@ -33,7 +33,7 @@
 						<!-- Image avec badge -->
 						<div class="relative h-52">
 							<img 
-								src="<?= esc($trip['attachment'] ?? '/images/default-trip.jpg') ?>" 
+								src="<?= esc($trip['attachment'] ?? '/assets/images/fond-voyage.jpeg') ?>" 
 								alt="<?= esc($trip['title'] ?? 'Voyage') ?>" 
 								class="w-full h-full object-cover"
 							>
@@ -88,15 +88,15 @@
 										<svg class="w-5 h-5 mx-auto text-gray-400 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
 										</svg>
-										<p class="text-xs text-gray-400 mb-1">Durée</p>
-										<p class="text-sm font-medium text-gray-700"><?= esc($trip['duration'] ?? '5-10 jours') ?></p>
+										<p class="text-xs text-gray-400 mb-1">Date de départ</p>
+										<p class="text-sm font-medium text-gray-700"><?= esc($trip['departureDate'] ?? '1970-01-01 00:00:00') ?></p>
 									</div>
 									<div class="px-2">
 										<svg class="w-5 h-5 mx-auto text-gray-400 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-2.667 0-8 1.333-8 4v2h16v-2c0-2.667-5.333-4-8-4z"/>
 										</svg>
-										<p class="text-xs text-gray-400 mb-1">Meilleure saison</p>
-										<p class="text-sm font-medium text-gray-700"><?= esc($trip['season'] ?? 'Mar - Mai, Oct - Nov') ?></p>
+										<p class="text-xs text-gray-400 mb-1">Type Voyage</p>
+										<p class="text-sm font-medium text-gray-700"><?= esc($trip['type'] ?? 'Luxe') ?></p>
 									</div>
 									<div class="px-2">
 										<svg class="w-5 h-5 mx-auto text-amber-500 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
