@@ -44,6 +44,17 @@ class HostModel extends Model
 	protected $beforeDelete   = [];
 	protected $afterDelete    = [];
 
+	public function addHostsForPrebuiltTrip($idTrip, $tripSteps)
+	{
+		foreach ($tripSteps as $step) {
+			$this->insert([
+				'idTrip'     => $idTrip,
+				'idTripStep' => $step['idTripStep'],
+				'nbDays'     => $step['nbDays'],
+				'nbNights'   => $step['nbNights'],
+			]);
+		}
+	}
 	public function getAllHosts()
 	{
 		return $this->findAll();
@@ -77,5 +88,38 @@ class HostModel extends Model
 	public function deleteHost($idTrip, $idTripStep)
 	{
 		return $this->where(['idTrip' => $idTrip, 'idTripStep' => $idTripStep])->delete();
+	}
+
+	public function getHostsByTripWithDetails($idTrip)
+	{
+		$db = \Config\Database::connect();
+		$query = $db->query('
+			SELECT h.*, ts.name, ts.cost, ts."idCountry", c.name as country, c.continent
+			FROM host h
+			JOIN "tripStep" ts ON ts."idTripStep" = h."idTripStep"
+			LEFT JOIN country c ON c."idCountry" = ts."idCountry"
+			WHERE h."idTrip" = ?
+			ORDER BY h."idTripStep" ASC
+		', [$idTrip]);
+		return $query->getResultArray();
+	}
+
+	public function updateHostsForTrip($idTrip, $steps)
+	{
+		// Supprimer les anciennes étapes
+		$this->deleteHostsByTrip($idTrip);
+		
+		// Ajouter les nouvelles étapes
+		if (!empty($steps)) {
+			$this->addHostsForPrebuiltTrip($idTrip, $steps);
+		}
+		
+		return true;
+	}
+
+	public function deleteHostsByTrip($idTrip)
+	{
+		$db = \Config\Database::connect();
+		return $db->query('DELETE FROM host WHERE "idTrip" = ?', [$idTrip]);
 	}
 }

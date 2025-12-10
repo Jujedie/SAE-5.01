@@ -396,21 +396,28 @@ class AdminController extends BaseController
 		if ($this->request->getMethod() === 'POST')
 		{
 			$prebuiltTripModel = new PrebuiltTripModel();
+			$hostModel         = new HostModel();
+
 			$data = $this->request->getPost();
 			
 			// Ajouter l'ID de l'utilisateur connecté
 			$data['idUser'] = session()->get('idUser');
 			
 			$prebuiltTripModel->addPrebuiltTrip($data);
+			$hostModel->addHostsForPrebuiltTrip($prebuiltTripModel->getInsertID(), $this->request->getPost('tripSteps', []));
 			return redirect()->to('/admin/prebuiltTrips')->with('success', 'Voyage préfait ajouté avec succès.');
 		}
 
-		return view('admin/prebuiltTrips/add');
+		$destinations = (new TripStepModel())->getAllSteps();
+		$countries    = (new CountryModel())->getAllCountries();
+
+		return view('admin/prebuiltTrips/add', ['tripSteps' => $destinations, 'countries' => $countries]);
 	}
 
 	public function editPrebuiltTrip($id)
 	{
 		$prebuiltTripModel = new PrebuiltTripModel();
+		$hostModel         = new HostModel();
 
 		$prebuiltTrip = $prebuiltTripModel->getPrebuiltTripById($id);
 
@@ -423,8 +430,12 @@ class AdminController extends BaseController
 		{
 			$data = $this->request->getPost();
 			$prebuiltTripModel->updatePrebuiltTrip($id, $data);
+			$hostModel->updateHostsForPrebuiltTrip($id, $this->request->getPost('tripSteps', []));
 			return redirect()->to('/admin/prebuiltTrips')->with('success', 'Voyage préfait mis à jour avec succès.');
 		}
+
+		$destinations = (new TripStepModel())->getAllSteps();
+		$countries    = (new CountryModel())->getAllCountries();
 
 		return view('admin/prebuiltTrips/edit', ['prebuiltTrip' => $prebuiltTrip]);
 	}

@@ -97,4 +97,16 @@ class TripStepModel extends Model
 		}
 		return true;
 	}
+
+	public function getAllStepsWithCountry()
+	{
+		$db = \Config\Database::connect();
+		$query = $db->query('
+			SELECT ts.*, c.name as country, c.continent
+			FROM "tripStep" ts
+			LEFT JOIN country c ON c."idCountry" = ts."idCountry"
+			ORDER BY c.name ASC, ts.name ASC
+		');
+		return $query->getResultArray();
+	}
 }
