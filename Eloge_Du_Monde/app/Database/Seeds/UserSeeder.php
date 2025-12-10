@@ -26,6 +26,24 @@ class UserSeeder extends Seeder
 				'role' => 'admin',
 				'password' => password_hash('4321', PASSWORD_BCRYPT),
 				'isSubscribed' => false,
+			],
+			[
+				'lastName' => 'Dupont',
+				'firstName' => 'Marie',
+				'phone' => '0678901234',
+				'email' => 'marie.dupont@gmail.com',
+				'role' => 'client',
+				'password' => password_hash('abcd', PASSWORD_BCRYPT),
+				'isSubscribed' => true,
+			],
+			[
+				'lastName' => 'Smith',
+				'firstName' => 'John',
+				'phone' => '0654321098',
+				'email' => 'john.smith@gmail.com',
+				'role' => 'client',
+				'password' => password_hash('efgh', PASSWORD_BCRYPT),
+				'isSubscribed' => false,
 			]
 		];
 
