@@ -154,11 +154,13 @@
 					<h3 class="destination-title playfair">Europe</h3>
 					<p class="destination-description">Paris, Rome, Lisbonne... Redécouvrez l'élégance européenne</p>
 				</div>
-				<div class="destination-arrow">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" style="width: 1.5rem; height: 1.5rem;">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-					</svg>
-				</div>
+				<a href="<?= base_url('trips?region=Europe') ?>">
+					<div class="destination-arrow">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" style="width: 1.5rem; height: 1.5rem;">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+						</svg>
+					</div>
+				</a>
 			</div>
 
 		<div class="destination-card fade-in">
@@ -169,11 +171,13 @@
 					<h3 class="destination-title playfair">Asie</h3>
 					<p class="destination-description">Japon, Thaïlande, Bali... L'Asie mystique et raffinée</p>
 				</div>
-				<div class="destination-arrow">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" style="width: 1.5rem; height: 1.5rem;">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-					</svg>
-				</div>
+				<a href="<?= base_url('trips?region=Asie') ?>">
+					<div class="destination-arrow">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" style="width: 1.5rem; height: 1.5rem;">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+						</svg>
+					</div>
+				</a>
 			</div>
 
 		<div class="destination-card fade-in">
@@ -184,11 +188,13 @@
 					<h3 class="destination-title playfair">Afrique</h3>
 					<p class="destination-description">Safari, déserts, cultures millénaires... L'Afrique authentique</p>
 				</div>
-				<div class="destination-arrow">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" style="width: 1.5rem; height: 1.5rem;">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-					</svg>
-				</div>
+				<a href="<?= base_url('trips?region=Afrique') ?>">
+					<div class="destination-arrow">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" style="width: 1.5rem; height: 1.5rem;">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+						</svg>
+					</div>
+				</a>
 			</div>
 		</div>
 
