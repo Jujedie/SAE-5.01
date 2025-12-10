@@ -8,7 +8,7 @@
 
 <?= $this->section('content') ?>
 
-<div class="min-h-screen flex items-center justify-center pt-4 bg-white">
+<div class="min-h-screen flex items-center justify-center pt-4 bg-white" style="margin-top:6rem;">
 	<div class="w-full sm:w-3/4 md:w-2/3 lg:w-5/12 px-4">
 		<div class="bg-white rounded-lg shadow border border-gray-300">
 			<div class="p-6">

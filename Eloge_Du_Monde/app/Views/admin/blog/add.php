@@ -75,12 +75,11 @@
 				<label for="content" class="block text-gray-700 font-semibold mb-2">
 					Contenu du poste <span class="text-red-500">*</span>
 				</label>
-				<input type="text" 
+				<textarea 
 					   id="content" 
 					   name="content" 
-					   value="<?= old('content') ?>" 
 					   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-					   required>
+					   required><?= old('content') ?></textarea>
 			</div>
 
 			<div class="flex items-center justify-end space-x-4 pt-6 border-t">

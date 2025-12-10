@@ -155,6 +155,9 @@ class AdminController extends BaseController
 		$userModel = new UserModel();
 		$userModel->deleteUserById($id);
 
+		$logModel = new LogModel();
+		$logModel->addLogEntry('Suppression de l\'utilisateur avec ID : ' . $id, session()->get('idUser'));
+		
 		return redirect()->to('/admin/users')->with('success', 'Utilisateur supprimé avec succès.');
 	}
 
@@ -173,9 +176,24 @@ class AdminController extends BaseController
 		if ($this->request->getMethod() === 'POST')
 		{
 			$countryModel = new CountryModel();
+			$logModel     = new LogModel();
+
 			$data = $this->request->getPost();
 
+			$rules =
+			[
+				'name' => 'required|max_length[255]|is_unique[countries.name]',
+				'continent' => 'required|in_list[europe,asie,afrique,amerique,oceanie]',
+				'cost' => 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000000000]',
+			];
+
+			if (!$this->validate($rules))
+			{
+				return redirect()->back()->withInput()->with('error', 'Le nom est déjà utilisé, trop grand ou le coût est invalide.');
+			}
+
 			$countryModel->addCountry($data);
+			$logModel->addLogEntry('Ajout du pays : ' . $data['name'], session()->get('idUser'));
 			return redirect()->to('/admin/countries')->with('success', 'Pays ajouté avec succès.');
 		}
 
@@ -197,6 +215,8 @@ class AdminController extends BaseController
 		{
 			$data = $this->request->getPost();
 			$countryModel->updateCountry($id, $data);
+			$logModel = new LogModel();
+			$logModel->addLogEntry('Modification du pays avec ID : ' . $id, session()->get('idUser'));
 			return redirect()->to('/admin/countries')->with('success', 'Pays mis à jour avec succès.');
 		}
 
@@ -207,6 +227,9 @@ class AdminController extends BaseController
 	{
 		$countryModel = new CountryModel();
 		$countryModel->deleteCountry($id);
+
+		$logModel = new LogModel();
+		$logModel->addLogEntry('Suppression du pays avec ID : ' . $id, session()->get('idUser'));
 
 		return redirect()->to('/admin/countries')->with('success', 'Pays supprimé avec succès.');
 	}
@@ -262,6 +285,8 @@ class AdminController extends BaseController
 			$data['idCountry'] = $idCountry;
 
 			$tripStepModel->addStep($data);
+			$logModel = new LogModel();
+			$logModel->addLogEntry('Ajout de la destination : ' . $data['name'] . ' pour le pays ID : ' . $idCountry, session()->get('idUser'));
 			return redirect()->to('/admin/countries/' . $idCountry . '/destinations')->with('success', 'Destination ajoutée avec succès.');
 		}
 
@@ -285,6 +310,8 @@ class AdminController extends BaseController
 		{
 			$data = $this->request->getPost();
 			$tripStepModel->updateStep($idDestination, $data);
+			$logModel = new LogModel();
+			$logModel->addLogEntry('Modification de la destination avec ID : ' . $idDestination . ' pour le pays ID : ' . $idCountry, session()->get('idUser'));
 			return redirect()->to('/admin/countries/' . $idCountry . '/destinations')->with('success', 'Destination mise à jour avec succès.');
 		}
 
@@ -299,6 +326,9 @@ class AdminController extends BaseController
 	{
 		$tripStepModel = new TripStepModel();
 		$tripStepModel->deleteStep($idDestination);
+
+		$logModel = new LogModel();
+		$logModel->addLogEntry('Suppression de la destination avec ID : ' . $idDestination . ' pour le pays ID : ' . $idCountry, session()->get('idUser'));
 
 		return redirect()->to('/admin/countries/' . $idCountry . '/destinations')->with('success', 'Destination supprimée avec succès.');
 	}
@@ -330,6 +360,8 @@ class AdminController extends BaseController
 		{
 			$data = $this->request->getPost();
 			$tripModel->updateTrip($id, $data);
+			$logModel = new LogModel();
+			$logModel->addLogEntry('Modification du voyage avec ID : ' . $id, session()->get('idUser'));
 			return redirect()->to('/admin/trips')->with('success', 'Voyage mis à jour avec succès.');
 		}
 
@@ -405,6 +437,8 @@ class AdminController extends BaseController
 			
 			$prebuiltTripModel->addPrebuiltTrip($data);
 			$hostModel->addHostsForPrebuiltTrip($prebuiltTripModel->getInsertID(), $this->request->getPost('tripSteps', []));
+			$logModel = new LogModel();
+			$logModel->addLogEntry('Ajout du voyage préfait : ' . $data['name'], session()->get('idUser'));
 			return redirect()->to('/admin/prebuiltTrips')->with('success', 'Voyage préfait ajouté avec succès.');
 		}
 
@@ -431,6 +465,8 @@ class AdminController extends BaseController
 			$data = $this->request->getPost();
 			$prebuiltTripModel->updatePrebuiltTrip($id, $data);
 			$hostModel->updateHostsForPrebuiltTrip($id, $this->request->getPost('tripSteps', []));
+			$logModel = new LogModel();
+			$logModel->addLogEntry('Modification du voyage préfait avec ID : ' . $id, session()->get('idUser'));
 			return redirect()->to('/admin/prebuiltTrips')->with('success', 'Voyage préfait mis à jour avec succès.');
 		}
 
@@ -446,6 +482,8 @@ class AdminController extends BaseController
 
 		$prebuiltTripModel->deletePrebuiltTrip($id);
 
+		$logModel = new LogModel();
+		$logModel->addLogEntry('Suppression du voyage préfait avec ID : ' . $id, session()->get('idUser'));
 		return redirect()->to('/admin/prebuiltTrips')->with('success', 'Voyage préfait supprimé avec succès.');
 	}
 
@@ -472,8 +510,8 @@ class AdminController extends BaseController
 			return redirect()->to('/admin/reviews')->with('error', 'Témoignage non trouvé.');
 		}
 
-		$logModel->addLogEntry('Approuvement du témoignage ID ' . $id, session()->get('idUser'));
 		$reviewModel->updateReview($id, ['verified' => 't']);
+		$logModel->addLogEntry('Approuvement du témoignage ID ' . $id, session()->get('idUser'));
 		return redirect()->to('/admin/reviews')->with('success', 'Témoignage vérifié avec succès.');
 	}
 
@@ -489,8 +527,8 @@ class AdminController extends BaseController
 			return redirect()->to('/admin/reviews')->with('error', 'Témoignage non trouvé.');
 		}
 
-		$logModel->addLogEntry('Désapprouvement du témoignage ID ' . $id, session()->get('idUser'));
 		$reviewModel->updateReview($id, ['verified' => 'f']);
+		$logModel->addLogEntry('Désapprouvement du témoignage ID ' . $id, session()->get('idUser'));
 		return redirect()->to('/admin/reviews')->with('success', 'Témoignage non vérifié avec succès.');
 	}
 
@@ -506,9 +544,8 @@ class AdminController extends BaseController
 			return redirect()->to('/admin/reviews')->with('error', 'Témoignage non trouvé.');
 		}
 
-		$logModel->addLogEntry('Suppression du témoignage ID ' . $id, session()->get('idUser'));
 		$reviewModel->deleteReviewById($id);
-
+		$logModel->addLogEntry('Suppression du témoignage ID ' . $id, session()->get('idUser'));
 		return redirect()->to('/admin/reviews')->with('success', 'Témoignage supprimé avec succès.');
 	}
 
@@ -557,6 +594,8 @@ class AdminController extends BaseController
 			$data['departureDate'] = $prebuiltTrip['departureDate'];
 			
 			$extensionModel->addExtension($data);
+			$logModel = new LogModel();
+			$logModel->addLogEntry('Ajout de l\'extension : ' . $data['name'] . ' pour le voyage préfait ID : ' . $prebuiltTripId, session()->get('idUser'));
 			return redirect()->to('/admin/prebuiltTrips')->with('success', 'Extension ajoutée avec succès.');
 		}
 
@@ -569,6 +608,8 @@ class AdminController extends BaseController
 
 		$extensionModel->deleteExtensionById($extensionId);
 
+		$logModel = new LogModel();
+		$logModel->addLogEntry('Suppression de l\'extension ID : ' . $extensionId . ' pour le voyage préfait ID : ' . $prebuiltTripId, session()->get('idUser'));
 		return redirect()->to('/admin/prebuiltTrips')->with('success', 'Extension supprimée avec succès.');
 	}
 
@@ -583,7 +624,6 @@ class AdminController extends BaseController
 			'users' => $userModel->getUsersByPosts(),
 		];
 
-		log_message('debug', print_r($data['posts'], true));
 		return view('admin/blog/list', $data);
 	}
 
@@ -696,9 +736,9 @@ class AdminController extends BaseController
 		$blogModel = new BlogPostModel();
 		$logModel  = new LogModel();
 
-		$logModel->addLogEntry('Suppression du post de blog ID ' . $id, session()->get('idUser'));
 		$blogModel->deletePost($id);
 
+		$logModel->addLogEntry('Suppression du post de blog ID ' . $id, session()->get('idUser'));
 		return redirect()->to('/admin/blog')->with('success', 'Post supprimé avec succès.');
 	}
 }
