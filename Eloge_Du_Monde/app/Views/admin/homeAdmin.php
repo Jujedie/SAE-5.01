@@ -115,9 +115,15 @@
 		<!-- Blog Posts Card -->
 		<div class="stat-card bg-white rounded-lg shadow-md p-6" onclick="navigateTo('admin/blog')">
 			<div class="flex items-start justify-between mb-4">
-				<div class="icon-wrapper bg-teal-100">
-					<svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+				<div class="icon-wrapper bg-yellow-100">
+					<svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<!-- Bulle de dialogue -->
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8h18a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-5l-4 3l-4-3H3a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2Z"/>
+						<!-- Groupe de personnes -->
+						<circle cx="8" cy="14" r="2" stroke-width="1.5"/>
+						<circle cx="12" cy="13" r="2.5" stroke-width="1.5"/>
+						<circle cx="16" cy="14" r="2" stroke-width="1.5"/>
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 20c0-1.5 1.5-3 3-3s3 1.5 3 3M9.5 20c0-2 1.5-3.5 2.5-3.5s2.5 1.5 2.5 3.5M14 20c0-1.5 1.5-3 3-3s3 1.5 3 3"/>
 					</svg>
 				</div>
 				<svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
