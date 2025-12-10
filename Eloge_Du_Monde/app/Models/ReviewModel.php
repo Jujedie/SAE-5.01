@@ -61,7 +61,7 @@ class ReviewModel extends Model
 
 	public function getAverageRating()
 	{
-		return $this->selectAvg('rating')->first();
+		return $this->where('verified', 't')->selectAvg('rating')->first();
 	}
 
 	public function getVerifiedReviews()
