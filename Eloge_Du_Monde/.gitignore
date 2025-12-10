@@ -27,3 +27,4 @@ application/logs/*
 /writable/cache/*
 /writable/session/*
 
+/public/assets/uploads/*
