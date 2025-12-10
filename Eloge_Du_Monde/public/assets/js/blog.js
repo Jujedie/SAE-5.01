@@ -148,4 +148,48 @@ document.addEventListener('DOMContentLoaded', function()
 			this.style.cursor  = 'not-allowed';
 		});
 	}
+
+	// Image Modal Functionality
+	const clickableImages = document.querySelectorAll('.clickable-image');
+	const imageModal      = document.getElementById('imageModal');
+	const modalImage      = document.getElementById('modalImage');
+	const modalClose      = document.querySelector('.modal-close');
+
+	clickableImages.forEach(image =>
+	{
+		image.addEventListener('click', function()
+		{
+			modalImage.src = this.src;
+			imageModal.style.display = 'flex';
+			document.body.style.overflow = 'hidden';
+		});
+	});
+
+	if (modalClose)
+	{
+		modalClose.addEventListener('click', function()
+		{
+			imageModal.style.display = 'none';
+			document.body.style.overflow = 'auto';
+		});
+	}
+
+	imageModal.addEventListener('click', function(event)
+	{
+		if (event.target === this)
+		{
+			this.style.display = 'none';
+			document.body.style.overflow = 'auto';
+		}
+	});
+
+	// Fermer la modal avec la touche Échap
+	document.addEventListener('keydown', function(event)
+	{
+		if (event.key === 'Escape' && imageModal.style.display === 'flex')
+		{
+			imageModal.style.display = 'none';
+			document.body.style.overflow = 'auto';
+		}
+	});
 });

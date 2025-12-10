@@ -68,15 +68,13 @@
 
 					<span class="ml-10 text-gray-400"><?= $users[$i]['firstName'] ?> <?= $users[$i]['lastName'] ?></span>
 					
-					<h2 class="post-title playfair"><?= $posts[$i]['title'] ?></h2>
+				<h2 class="post-title playfair"><?= $posts[$i]['title'] ?></h2>
 
-					<?php if (!empty($posts[$i]['image'])): ?>
-						<div class="post-image">
-							<img src="<?= base_url('assets/images/' . $posts[$i]['image']) ?>" alt="image de l'article">
-						</div>
-					<?php endif; ?>
-
-					<div class="post-content">
+				<?php if (!empty($posts[$i]['image'])): ?>
+					<div class="post-image">
+						<img src="<?= base_url('assets/images/' . $posts[$i]['image']) ?>" alt="image de l'article" class="clickable-image" style="cursor: pointer;">
+					</div>
+				<?php endif; ?>					<div class="post-content">
 						<p class="post-excerpt"><?= $posts[$i]['content'] ?></p>
 							</div>
 						</article>
@@ -86,6 +84,12 @@
 		</div>
 	</div>
 </section>
+
+<!-- Image Modal -->
+<div id="imageModal" class="image-modal" style="display: none;">
+	<span class="modal-close">&times;</span>
+	<img class="modal-content" id="modalImage" src="" alt="image agrandie">
+</div>
 
 <?= $this->endSection() ?>
 
