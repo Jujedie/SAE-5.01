@@ -226,7 +226,6 @@
 					<div class="theme-line"></div>
 					<h3 class="theme-title playfair">Bien-être & Spa</h3>
 					<p class="theme-description">Ressourcez-vous dans des spas d'exception</p>
-					<span class="theme-link">Découvrir</span>
 				</div>
 			</div>
 
@@ -237,7 +236,6 @@
 					<div class="theme-line"></div>
 					<h3 class="theme-title playfair">Aventure & Nature</h3>
 					<p class="theme-description">Des expériences outdoor inoubliables</p>
-					<span class="theme-link">Découvrir</span>
 				</div>
 			</div>
 
@@ -248,7 +246,6 @@
 					<div class="theme-line"></div>
 					<h3 class="theme-title playfair">Gastronomie</h3>
 					<p class="theme-description">Savourez les meilleures tables du monde</p>
-					<span class="theme-link">Découvrir</span>
 				</div>
 			</div>
 
@@ -259,7 +256,6 @@
 					<div class="theme-line"></div>
 					<h3 class="theme-title playfair">Culture & Art</h3>
 					<p class="theme-description">Plongez dans l'histoire et l'art</p>
-					<span class="theme-link">Découvrir</span>
 				</div>
 			</div>
 		</div>

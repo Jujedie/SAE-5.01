@@ -394,22 +394,12 @@
 	transition: transform 0.7s;
 }
 
-.theme-card:hover img
-{
-	transform: scale(1.05);
-}
-
 .theme-overlay
 {
 	position: absolute;
 	inset: 0;
 	background: rgba(0,0,0,0.3);
 	transition: background 0.3s;
-}
-
-.theme-card:hover .theme-overlay
-{
-	background: rgba(0,0,0,0.5);
 }
 
 .theme-content
