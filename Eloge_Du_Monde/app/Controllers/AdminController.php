@@ -457,7 +457,7 @@ class AdminController extends BaseController
 		}
 
 		$destinations = (new TripStepModel())->getAllSteps();
-		$countries    = (new CountryModel())->getAllCountries();
+		$countries    = (new TripStepModel())->getContinentBySteps();
 
 		return view('admin/prebuiltTrips/add', ['tripSteps' => $destinations, 'countries' => $countries]);
 	}
@@ -493,7 +493,7 @@ class AdminController extends BaseController
 		}
 	
 		$destinations = (new TripStepModel())->getAllSteps();
-		$countries    = (new CountryModel())->getAllCountries();
+		$countries    = (new TripStepModel())->getContinentBySteps();
 		$existingHosts= $hostModel->getHostsByTripWithDetails($id);
 	
 		return view('admin/prebuiltTrips/edit', ['prebuiltTrip' => $prebuiltTrip, 'tripSteps' => $destinations, 'countries' => $countries, 'existingHosts' => $existingHosts]);

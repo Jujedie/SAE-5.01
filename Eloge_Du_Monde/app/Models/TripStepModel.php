@@ -89,6 +89,24 @@ class TripStepModel extends Model
 		return $trips;
 	}
 
+	public function getContinentBySteps()
+	{
+		$db = \Config\Database::connect();
+		$query = $db->query('
+			SELECT DISTINCT c."idCountry"
+			FROM "tripStep" ts
+			LEFT JOIN country c ON c."idCountry" = ts."idCountry"
+		');
+		$idCountry = $query->getResultArray();
+
+		foreach ($idCountry as $country)
+		{
+			$CountryModel = new CountryModel();
+			$countries[] = $CountryModel->where('idCountry', $country['idCountry'])->first();
+		}
+		return $countries;
+	}
+
 	public function addStep($data)
 	{
 		return $this->insert($data);
