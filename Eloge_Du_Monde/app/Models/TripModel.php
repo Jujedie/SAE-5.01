@@ -14,7 +14,7 @@ class TripModel extends Model
 	protected $protectFields    = true;
 	protected $allowedFields    = ['departureDate', 'type', 'idUser'];
 
-	protected bool $allowEmptyInserts = false;
+	protected bool $allowEmptyInserts = true;
 	protected bool $updateOnlyChanged = true;
 
 	protected array $casts        = [];

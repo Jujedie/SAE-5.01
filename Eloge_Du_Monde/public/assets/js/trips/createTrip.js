@@ -534,7 +534,9 @@ function reserveTrip()
 				
 				if (!response.ok)
 				{
-					throw new Error(`HTTP error! status: ${response.status}`);
+					const errorData = await response.json().catch(() => ({}));
+					console.error('Error response:', errorData);
+					throw new Error(`HTTP error! status: ${response.status}, message: ${errorData.message || 'Unknown error'}`);
 				}
 
 				const result = await response.json();

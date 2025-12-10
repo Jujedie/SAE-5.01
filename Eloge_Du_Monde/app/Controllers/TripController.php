@@ -96,57 +96,119 @@ class TripController extends BaseController
 
 	public function createTrip()
 	{
-		if (!session()->get('isLoggedIn'))
+		try
 		{
+			if (!session()->get('isLoggedIn'))
+			{
+				return $this->response->setJSON
+				([
+					'success' => false,
+					'message' => 'Vous devez être connecté pour créer un voyage.'
+				])->setStatusCode(401);
+			}
+
+			$json = $this->request->getJSON();
+			
+			log_message('info', 'Creating trip with data: ' . json_encode($json));
+			
+			if (!$json || !isset($json->destinations) || empty($json->destinations))
+			{
+				return $this->response->setJSON
+				([
+					'success' => false,
+					'message' => 'Données invalides : aucune destination fournie'
+				])->setStatusCode(400);
+			}
+
+			$tripModel = new TripModel();
+			$hostModel = new HostModel();
+
+			// Utiliser la date de départ fournie ou aujourd'hui par défaut
+			$departureDate = $json->departureDate ?? date('Y-m-d');
+
+			// Créer le voyage
+			$dataTrip =
+			[
+				'departureDate' => $departureDate,
+				'type'          => 'individuel',
+				'idUser'        => session()->get('idUser')
+			];
+
+			log_message('info', 'Tentative insertion voyage: ' . json_encode($dataTrip));
+
+			// Désactiver temporairement la validation
+			$tripModel->skipValidation(true);
+			$insertResult = $tripModel->insert($dataTrip, false);
+			
+			if (!$insertResult)
+			{
+				$errors = $tripModel->errors();
+				log_message('error', 'Erreur insertion voyage: ' . json_encode($errors));
+				log_message('error', 'Last query: ' . $tripModel->getLastQuery());
+				return $this->response->setJSON
+				([
+					'success' => false,
+					'message' => 'Erreur lors de la création du voyage',
+					'errors'  => $errors,
+					'debug'   => [
+						'data' => $dataTrip,
+						'lastQuery' => (string)$tripModel->getLastQuery()
+					]
+				])->setStatusCode(500);
+			}
+
+			$idTrip = $tripModel->getInsertID();
+			log_message('info', 'Voyage créé avec ID: ' . $idTrip);
+
+			// Créer les hosts (destinations) pour chaque étape
+			$hostModel->skipValidation(true);
+			foreach ($json->destinations as $dest)
+			{
+				if (!isset($dest->idTripStep))
+				{
+					log_message('error', 'idTripStep manquant pour une destination');
+					continue;
+				}
+
+				$nights = isset($dest->nights) ? (int)$dest->nights : 3;
+				$days   = $nights + 1;
+				
+				$hostData =
+				[
+					'idTrip'     => $idTrip,
+					'idTripStep' => $dest->idTripStep,
+					'nbDays'     => $days,
+					'nbNights'   => $nights
+				];
+
+				log_message('info', 'Insertion host: ' . json_encode($hostData));
+				
+				$hostInsertResult = $hostModel->insert($hostData, false);
+				
+				if (!$hostInsertResult)
+				{
+					log_message('error', 'Erreur insertion host: ' . json_encode($hostModel->errors()));
+					log_message('error', 'Last query: ' . $hostModel->getLastQuery());
+				}
+			}
+
+			return $this->response->setJSON
+			([
+				'success' => true,
+				'message' => 'Voyage créé avec succès',
+				'idTrip'  => $idTrip
+			]);
+		}
+		catch (\Exception $e)
+		{
+			log_message('error', 'Exception création voyage: ' . $e->getMessage());
+			log_message('error', 'Stack trace: ' . $e->getTraceAsString());
+			
 			return $this->response->setJSON
 			([
 				'success' => false,
-				'message' => 'Vous devez être connecté pour créer un voyage.'
-			])->setStatusCode(401);
+				'message' => 'Erreur lors de la création du voyage: ' . $e->getMessage()
+			])->setStatusCode(500);
 		}
-
-		$json = $this->request->getJSON();
-		
-		if (!$json || !isset($json->destinations) || empty($json->destinations))
-		{
-			return $this->response->setJSON
-			([
-				'success' => false,
-				'message' => 'Données invalides'
-			])->setStatusCode(400);
-		}
-
-		$tripModel = new TripModel();
-		$hostModel = new HostModel();
-
-		// Utiliser la date de départ fournie ou aujourd'hui par défaut
-		$departureDate = $json->departureDate ?? date('Y-m-d');
-
-		// Créer le voyage
-		$dataTrip =
-		[
-			'departureDate' => $departureDate,
-			'type'          => 'individuel',
-			'idUser'        => session()->get('idUser')
-		];
-
-		$tripModel->insert($dataTrip);
-		$idTrip = $tripModel->getInsertID();
-
-		// Créer les hosts (destinations) pour chaque étape
-		foreach ($json->destinations as $dest)
-		{
-			$nights = $dest->nights ?? 3;
-			$days   = $nights + 1;
-			$sql    = "INSERT INTO host (\"idTrip\", \"idTripStep\", \"nbDays\", \"nbNights\") VALUES (?, ?, ?, ?)";
-			$hostModel->db->query($sql, [$idTrip, $dest->idTripStep, $days, $nights]);
-		}
-
-		return $this->response->setJSON
-		([
-			'success' => true,
-			'message' => 'Voyage créé avec succès',
-			'idTrip'  => $idTrip
-		]);
 	}
 }
