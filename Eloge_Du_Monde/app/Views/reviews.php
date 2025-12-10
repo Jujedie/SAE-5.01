@@ -144,7 +144,7 @@
 		
 		<div class="cta-buttons">
 			<a href="<?= base_url('createTrip') ?>" class="btn btn-primary">Créer mon voyage</a>
-			<a href="<?= base_url('trips') ?>" class="btn btn-outline">Découvrir nos destinations</a>
+			<a href="<?= base_url('trips') ?>" class="btn btn-primary">Découvrir nos destinations</a>
 		</div>
 	</div>
 </section>
