@@ -3,24 +3,7 @@
 <?= $this->section('title') ?>Tableau de bord administrateur<?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
-<style>
-	.stat-card {
-		transition: all 0.3s ease;
-		cursor: pointer;
-	}
-	.stat-card:hover {
-		transform: translateY(-5px);
-		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-	}
-	.icon-wrapper {
-		width: 64px;
-		height: 64px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: 12px;
-	}
-</style>
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/homeAdmin.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -149,11 +132,11 @@
 		</div>
 	</div>
 
+<?= $this->section('scripts') ?>
 <script>
-	// Navigation function
-	function navigateTo(url) {
-		window.location.href = '<?= base_url() ?>' + url;
-	}
+	const baseUrl = '<?= base_url() ?>';
 </script>
+<script src="<?= base_url('assets/js/admin/homeAdmin.js') ?>"></script>
+<?= $this->endSection() ?>
 
 <?= $this->endSection() ?>

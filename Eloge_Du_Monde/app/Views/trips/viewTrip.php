@@ -1,11 +1,10 @@
 <?= $this->extend('layouts/default') ?>
 
 <?= $this->section('styles') ?>
+<link rel="stylesheet" href="<?= base_url('assets/css/trips/viewTrip.css') ?>">
 <style>
 	.hero-trip {
 		background-image: url('<?= esc($trip['attachment'] ?? '/assets/images/fond-voyage.jpeg') ?>');
-		background-size: cover;
-		background-position: center;
 	}
 </style>
 <?= $this->endSection() ?>

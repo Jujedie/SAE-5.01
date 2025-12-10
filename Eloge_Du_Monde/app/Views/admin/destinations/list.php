@@ -3,27 +3,7 @@
 <?= $this->section('title') ?>Gestion des destinations<?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
-<style>
-	.destination-card {
-		transition: all 0.3s ease;
-	}
-	.destination-card:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	}
-	.status-badge {
-		display: inline-flex;
-		align-items: center;
-		padding: 0.25rem 0.75rem;
-		border-radius: 9999px;
-		font-size: 0.75rem;
-		font-weight: 600;
-	}
-	.status-active {
-		background-color: #d1fae5;
-		color: #065f46;
-	}
-</style>
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/destinations/list.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -233,38 +213,11 @@
 	</div>
 </div>
 
+<?= $this->section('scripts') ?>
 <script>
-	function editDestination(id) {
-		window.location.href = '<?= base_url('admin/destinations/edit/') ?>' + id;
-	}
-
-	function deleteDestination(id) {
-		if (confirm('Êtes-vous sûr de vouloir supprimer cette destination ?')) {
-			fetch('<?= base_url('admin/destinations/delete/') ?>' + id, {
-				method: 'POST',
-				headers: {
-					'X-Requested-With': 'XMLHttpRequest'
-				}
-			})
-			.then(response => response.json())
-			.then(data => {
-				if (data.success) {
-					location.reload();
-				}
-			});
-		}
-	}
-
-	// Search functionality
-	document.getElementById('searchInput').addEventListener('keyup', function() {
-		const searchTerm = this.value.toLowerCase();
-		const cards = document.querySelectorAll('.destination-card');
-		
-		cards.forEach(card => {
-			const text = card.textContent.toLowerCase();
-			card.style.display = text.includes(searchTerm) ? '' : 'none';
-		});
-	});
+	initBaseUrl('<?= base_url() ?>');
 </script>
+<script src="<?= base_url('assets/js/admin/destinations/list.js') ?>"></script>
+<?= $this->endSection() ?>
 
 <?= $this->endSection() ?>

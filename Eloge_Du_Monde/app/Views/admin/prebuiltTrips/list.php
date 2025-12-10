@@ -3,47 +3,7 @@
 <?= $this->section('title') ?>Gestion des voyages préfaits<?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
-<style>
-	.voyage-card {
-		transition: all 0.3s ease;
-	}
-	.voyage-card:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	}
-	.thematic-badge {
-		display: inline-flex;
-		align-items: center;
-		padding: 0.25rem 0.75rem;
-		border-radius: 9999px;
-		font-size: 0.75rem;
-		font-weight: 600;
-		background-color: #e0e7ff;
-		color: #3730a3;
-	}
-	.extension-badge {
-		display: inline-flex;
-		align-items: center;
-		padding: 0.25rem 0.5rem;
-		border-radius: 9999px;
-		font-size: 0.7rem;
-		font-weight: 600;
-		background-color: #f3e8ff;
-		color: #6b21a8;
-	}
-	.extensions-container {
-		max-height: 0;
-		overflow: hidden;
-		transition: max-height 0.3s ease;
-	}
-	.extensions-container.active {
-		max-height: 1000px;
-	}
-	.extension-item {
-		border-left: 3px solid #8b5cf6;
-		background-color: #faf5ff;
-	}
-</style>
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/prebuiltTrips/list.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -252,34 +212,13 @@
 						</div>
 					<?php endif; ?>
 				</div>
-			<?php endforeach; ?>
-		</div>
+		<?php endforeach; ?>
+	</div>
 	<?php endif; ?>
 </div>
 
-<script>
-	function filterTrips() {
-		const searchInput = document.getElementById('searchInput').value.toLowerCase();
-		const cards = document.querySelectorAll('.voyage-card');
-		
-		cards.forEach(card => {
-			const title = card.getAttribute('data-title') || '';
-			const thematic = card.getAttribute('data-thematic') || '';
-			
-			if (title.includes(searchInput) || thematic.includes(searchInput)) {
-				card.style.display = 'block';
-			} else {
-				card.style.display = 'none';
-			}
-		});
-	}
-	
-	function toggleExtensions(tripId) {
-		const container = document.getElementById('extensions-' + tripId);
-		if (container) {
-			container.classList.toggle('active');
-		}
-	}
-</script>
+<?= $this->section('scripts') ?>
+<script src="<?= base_url('assets/js/admin/prebuiltTrips/list.js') ?>"></script>
+<?= $this->endSection() ?>
 
 <?= $this->endSection() ?>

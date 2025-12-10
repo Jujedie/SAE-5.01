@@ -3,25 +3,7 @@
 <?= $this->section('title') ?>Gestion des voyages personnalisés<?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
-<style>
-	.voyage-card {
-		transition: all 0.3s ease;
-	}
-	.voyage-card:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	}
-	.type-badge {
-		display: inline-flex;
-		align-items: center;
-		padding: 0.25rem 0.75rem;
-		border-radius: 9999px;
-		font-size: 0.75rem;
-		font-weight: 600;
-		background-color: #fef3c7;
-		color: #92400e;
-	}
-</style>
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/trips/list.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -158,22 +140,8 @@
 	<?php endif; ?>
 </div>
 
-<script>
-	function filterTrips() {
-		const searchInput = document.getElementById('searchInput').value.toLowerCase();
-		const cards = document.querySelectorAll('.voyage-card');
-		
-		cards.forEach(card => {
-			const type = card.getAttribute('data-type') || '';
-			const text = card.textContent.toLowerCase();
-			
-			if (type.includes(searchInput) || text.includes(searchInput)) {
-				card.style.display = 'block';
-			} else {
-				card.style.display = 'none';
-			}
-		});
-	}
-</script>
+<?= $this->section('scripts') ?>
+<script src="<?= base_url('assets/js/admin/trips/list.js') ?>"></script>
+<?= $this->endSection() ?>
 
 <?= $this->endSection() ?>

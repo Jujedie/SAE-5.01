@@ -1,13 +1,7 @@
 <?= $this->extend('layouts/default') ?>
 
 <?= $this->section('styles') ?>
-<style>
-	.hero-section {
-		background-image: url('/images/map-background.jpg');
-		background-size: cover;
-		background-position: center;
-	}
-</style>
+<link rel="stylesheet" href="<?= base_url('assets/css/trips/index.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
