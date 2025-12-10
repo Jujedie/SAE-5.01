@@ -1,5 +1,7 @@
 <?= $this->extend('layouts/default') ?>
 
+<?= $this->section('title') ?>Mention légale<?= $this->endSection() ?>
+
 <?= $this->section('styles') ?>
 <link rel="stylesheet" href="<?= base_url('assets/css/home.css') ?>">
 <?= $this->endSection() ?>

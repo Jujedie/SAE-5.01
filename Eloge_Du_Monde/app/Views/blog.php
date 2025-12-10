@@ -1,5 +1,7 @@
 <?= $this->extend('layouts/default') ?>
 
+<?= $this->section('title') ?>Blog<?= $this->endSection() ?>
+
 <?= $this->section('styles') ?>
 <link rel="stylesheet" href="<?= base_url('assets/css/blog.css') ?>">
 <?= $this->endSection() ?>
