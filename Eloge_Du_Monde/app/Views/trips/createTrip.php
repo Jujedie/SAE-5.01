@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/default') ?>
 
 <?= $this->section('styles') ?>
-<link rel="stylesheet" href="<?= base_url('assets/css/createTrip.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/trips/createTrip.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -159,5 +159,5 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<script src="<?= base_url('assets/js/createTrip.js') ?>"></script>
+<script src="<?= base_url('assets/js/trips/createTrip.js') ?>"></script>
 <?= $this->endSection() ?>

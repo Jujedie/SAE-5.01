@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
-		<?= file_get_contents(FCPATH . 'assets/css/email.css') ?>
+		<?= file_get_contents(FCPATH . 'assets/css/layouts/email.css') ?>
 	</style>
 </head>
 <body>

@@ -5,7 +5,7 @@
 	<title><?= $this->renderSection('title') ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://cdn.tailwindcss.com"></script>
-	<link rel="stylesheet" href="<?= base_url('assets/css/default.css') ?>">
+	<link rel="stylesheet" href="<?= base_url('assets/css/layouts/default.css') ?>">
 	<?= $this->renderSection('styles') ?>
 </head>
 
@@ -213,7 +213,7 @@
 	</div>
 </footer>
 
-<script src="<?= base_url('assets/js/notifications.js') ?>"></script>
+<script src="<?= base_url('assets/js/layouts/notifications.js') ?>"></script>
 <?= $this->renderSection('scripts') ?>
 </body>
 </html>
