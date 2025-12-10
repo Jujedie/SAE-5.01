@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\PrebuiltTripModel;
 use App\Models\HostModel;
 use App\Models\UserModel;
+use App\Models\TripModel;
 
 class TripController extends BaseController
 {
