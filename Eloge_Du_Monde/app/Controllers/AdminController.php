@@ -348,6 +348,9 @@ class AdminController extends BaseController
 	public function editTrip($id)
 	{
 		$tripModel = new TripModel();
+		$hostModel = new HostModel();
+		$countriesModel = new CountryModel();
+		$stepModel = new TripStepModel();
 
 		$trip = $tripModel->getTripById($id);
 
@@ -365,7 +368,11 @@ class AdminController extends BaseController
 			return redirect()->to('/admin/trips')->with('success', 'Voyage mis à jour avec succès.');
 		}
 
-		return view('admin/trips/edit', ['trip' => $trip]);
+		$countries = $countriesModel->getAllCountries();
+		$tripSteps = $stepModel->getAllSteps();
+		$existingSteps = $hostModel->getStepsByTrip($id);
+
+		return view('admin/trips/edit', ['trip' => $trip, 'countries' => $countries, 'tripSteps' => $tripSteps, 'existingSteps' => $existingSteps]);
 	}
 
 	public function deleteTrip($id)
@@ -487,7 +494,7 @@ class AdminController extends BaseController
 	
 		$destinations = (new TripStepModel())->getAllSteps();
 		$countries    = (new CountryModel())->getAllCountries();
-		$existingHosts= $hostModel->getHostsByTrip($id);
+		$existingHosts= $hostModel->getHostsByTripWithDetails($id);
 	
 		return view('admin/prebuiltTrips/edit', ['prebuiltTrip' => $prebuiltTrip, 'tripSteps' => $destinations, 'countries' => $countries, 'existingHosts' => $existingHosts]);
 	}
