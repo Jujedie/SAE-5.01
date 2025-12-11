@@ -81,7 +81,7 @@
 {
 	font-size: 1.25rem;
 	line-height: 1.75;
-	color: #6b7280;
+	color: var(--text-secondary);
 	max-width: 42rem;
 	margin: 0 auto;
 }
@@ -90,7 +90,7 @@
 .blog-posts-section
 {
 	padding: 5rem 0;
-	background: white;
+	background: var(--card-bg);
 }
 
 .blog-container
@@ -115,7 +115,7 @@
 .filter-label
 {
 	font-size: 0.875rem;
-	color: #6b7280;
+	color: var(--text-secondary);
 	margin-right: 0.75rem;
 }
 
@@ -132,7 +132,7 @@
 {
 	padding: 0.5rem 1rem;
 	border: 1px solid rgba(201, 169, 110, 0.4);
-	background: white;
+	background: var(--card-bg);
 	color: #C9A96E;
 	cursor: pointer;
 	transition: all 0.3s ease;
@@ -149,7 +149,7 @@
 .filter-count
 {
 	font-size: 0.875rem;
-	color: #6b7280;
+	color: var(--text-secondary);
 	margin-top: 1rem;
 }
 
@@ -164,7 +164,7 @@
 .blog-post
 {
 	border: 1px solid rgba(201, 169, 110, 0.2);
-	background: white;
+	background: var(--card-bg);
 	transition: all 0.3s ease;
 	overflow: hidden;
 	opacity: 1;
@@ -198,7 +198,7 @@
 	align-items: center;
 	gap: 0.5rem;
 	font-size: 0.875rem;
-	color: #6b7280;
+	color: var(--text-secondary);
 }
 
 .post-date svg
@@ -260,7 +260,7 @@
 
 .post-excerpt
 {
-	color: #6b7280;
+	color: var(--text-secondary);
 	line-height: 1.75;
 	margin-bottom: 1rem;
 }
@@ -288,7 +288,7 @@
 	gap: 1.5rem;
 	padding: 0 2rem 1.5rem 2rem;
 	font-size: 0.875rem;
-	color: #6b7280;
+	color: var(--text-secondary);
 }
 
 .post-action
@@ -298,7 +298,7 @@
 	gap: 0.5rem;
 	background: none;
 	border: none;
-	color: #6b7280;
+	color: var(--text-secondary);
 	cursor: pointer;
 	padding: 0;
 	transition: color 0.3s ease;
@@ -357,7 +357,7 @@
 {
 	font-size: 1.125rem;
 	line-height: 1.75;
-	color: #6b7280;
+	color: var(--text-secondary);
 	margin-bottom: 2rem;
 }
 

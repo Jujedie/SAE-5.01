@@ -82,7 +82,7 @@
 {
 	font-size: 1.25rem;
 	line-height: 1.75;
-	color: #6b7280;
+	color: var(--text-secondary);
 	max-width: 42rem;
 	margin: 0 auto 2rem;
 }
@@ -93,7 +93,7 @@
 	display: inline-flex;
 	align-items: center;
 	gap: 1rem;
-	background: white;
+	background: var(--card-bg);
 	padding: 0.75rem 1.5rem;
 	border: 1px solid rgba(201, 169, 110, 0.2);
 	margin-top: 2rem;
@@ -142,14 +142,14 @@
 .rating-label
 {
 	font-size: 0.875rem;
-	color: #6b7280;
+	color: var(--text-secondary);
 }
 
 /* Testimonials Section */
 .testimonials-section
 {
 	padding: 5rem 0;
-	background: white;
+	background: var(--card-bg);
 }
 
 .testimonials-container
@@ -198,7 +198,7 @@
 .testimonial-card
 {
 	border: 1px solid rgba(201, 169, 110, 0.2);
-	background: white;
+	background: var(--card-bg);
 	transition: all 0.3s ease;
 	height: 100%;
 	display: flex;
@@ -266,7 +266,7 @@
 	align-items: center;
 	gap: 0.25rem;
 	font-size: 0.875rem;
-	color: #6b7280;
+	color: var(--text-secondary);
 }
 
 .testimonial-date svg
@@ -331,7 +331,7 @@
 
 .testimonial-text
 {
-	color: #6b7280;
+	color: var(--text-secondary);
 	line-height: 1.75;
 	margin: 0;
 }
@@ -371,7 +371,7 @@
 {
 	font-size: 1.125rem;
 	line-height: 1.75;
-	color: #6b7280;
+	color: var(--text-secondary);
 	margin-bottom: 2rem;
 }
 
@@ -450,7 +450,7 @@
 
 .review-modal
 {
-	background: white;
+	background: var(--card-bg);
 	border-radius: 8px;
 	width: 90%;
 	max-width: 600px;
@@ -482,7 +482,7 @@
 	background: none;
 	border: none;
 	font-size: 2rem;
-	color: #6b7280;
+	color: var(--text-secondary);
 	cursor: pointer;
 	line-height: 1;
 	transition: color 0.3s ease;
@@ -539,7 +539,7 @@
 	display: block;
 	margin-top: 0.25rem;
 	font-size: 0.875rem;
-	color: #6b7280;
+	color: var(--text-secondary);
 }
 
 .text-danger
@@ -600,7 +600,7 @@
 {
 	background-color: transparent;
 	border: 1px solid #6b7280;
-	color: #6b7280;
+	color: var(--text-secondary);
 }
 
 .btn-secondary-modal:hover

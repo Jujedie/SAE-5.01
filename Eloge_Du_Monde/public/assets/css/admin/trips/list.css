@@ -1,17 +1,24 @@
-.voyage-card {
-	transition: all 0.3s ease;
+/* Override Tailwind classes pour le mode sombre */
+.bg-white {
+background-color: var(--card-bg) !important;
 }
-.voyage-card:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+.bg-gray-50 {
+background-color: var(--bg-secondary) !important;
 }
-.type-badge {
-	display: inline-flex;
-	align-items: center;
-	padding: 0.25rem 0.75rem;
-	border-radius: 9999px;
-	font-size: 0.75rem;
-	font-weight: 600;
-	background-color: #fef3c7;
-	color: #92400e;
+
+.text-gray-600,
+.text-gray-700,
+.text-gray-800,
+.text-gray-900 {
+color: var(--text-primary) !important;
+}
+
+.text-gray-500 {
+color: var(--text-secondary) !important;
+}
+
+.border-gray-200,
+.border-gray-300 {
+border-color: var(--border-color) !important;
 }

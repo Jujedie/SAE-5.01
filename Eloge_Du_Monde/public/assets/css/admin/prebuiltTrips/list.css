@@ -1,39 +1,24 @@
-.voyage-card {
-	transition: all 0.3s ease;
+/* Override Tailwind classes pour le mode sombre */
+.bg-white {
+background-color: var(--card-bg) !important;
 }
-.voyage-card:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+.bg-gray-50 {
+background-color: var(--bg-secondary) !important;
 }
-.thematic-badge {
-	display: inline-flex;
-	align-items: center;
-	padding: 0.25rem 0.75rem;
-	border-radius: 9999px;
-	font-size: 0.75rem;
-	font-weight: 600;
-	background-color: #e0e7ff;
-	color: #3730a3;
+
+.text-gray-600,
+.text-gray-700,
+.text-gray-800,
+.text-gray-900 {
+color: var(--text-primary) !important;
 }
-.extension-badge {
-	display: inline-flex;
-	align-items: center;
-	padding: 0.25rem 0.5rem;
-	border-radius: 9999px;
-	font-size: 0.7rem;
-	font-weight: 600;
-	background-color: #f3e8ff;
-	color: #6b21a8;
+
+.text-gray-500 {
+color: var(--text-secondary) !important;
 }
-.extensions-container {
-	max-height: 0;
-	overflow: hidden;
-	transition: max-height 0.3s ease;
-}
-.extensions-container.active {
-	max-height: 1000px;
-}
-.extension-item {
-	border-left: 3px solid #8b5cf6;
-	background-color: #faf5ff;
+
+.border-gray-200,
+.border-gray-300 {
+border-color: var(--border-color) !important;
 }
