@@ -33,7 +33,8 @@ class CreateTableHost extends Migration
         ]);
 
         $this->forge->addKey(['idTrip', 'idTripStep'], true);
-        $this->forge->addForeignKey('idTrip', 'trip', 'idTrip', 'CASCADE', 'CASCADE');
+        // Note: No FK on idTrip because PostgreSQL table inheritance (INHERITS) 
+        // doesn't work well with foreign keys - the parent table doesn't see child rows
         $this->forge->addForeignKey('idTripStep', 'tripStep', 'idTripStep', 'CASCADE', 'CASCADE');
         $this->forge->createTable('host', true);
     }
