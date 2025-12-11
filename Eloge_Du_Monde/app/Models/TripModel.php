@@ -95,6 +95,12 @@ class TripModel extends Model
 		return $idTrip;
 	}
 
+	public function idInTable($idTrip)
+	{
+		return $this->where('idTrip', $idTrip)->whereNotIn('idTrip', function($query) 
+			{$query->select('idTrip')->from('prebuilttrip');})->first() !== null;
+	}
+
 	public function updateTrip($idTrip, $data)
 	{
 		return $this->where('idTrip', $idTrip)->whereNotIn('idTrip', function($query) 

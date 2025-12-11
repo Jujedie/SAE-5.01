@@ -118,6 +118,11 @@ class HostModel extends Model
 
 	public function updateHost($idTrip, $idTripStep, $data)
 	{
+		$tripModel = new TripModel();
+		if (!in_array($idTrip, $tripModel->idInTable($idTrip))) {
+			return;
+		}
+
 		return $this->where(['idTrip' => $idTrip, 'idTripStep' => $idTripStep])->set($data)->update();
 	}
 
