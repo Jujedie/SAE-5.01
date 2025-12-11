@@ -212,7 +212,7 @@ class AdminController extends BaseController
 		if ($this->request->getMethod() === 'POST')
 		{
 			$data = $this->request->getPost();
-			
+
 			if (!$data['cost']) {
 				$data['cost'] = 0;
 			}
@@ -454,16 +454,29 @@ class AdminController extends BaseController
 				$attachment->move(FCPATH . 'assets/uploads/attachments', $newName);
 				$data['attachment'] = 'assets/uploads/attachments/' . $newName;
 			}
+			else
+			{
+				unset($data['attachment']);
+			}
 			
 			// Gérer l'upload de l'image
 			$image = $this->request->getFile('image');
 			if ($image && $image->isValid() && !$image->hasMoved())
 			{
+				if (!empty($data['image']) && file_exists(FCPATH . 'assets/uploads/images/' . $data['image']))
+				{
+					unlink(FCPATH . 'assets/uploads/images/' . $data['image']);
+				}
+
 				$newName = $image->getRandomName();
 				$image->move(FCPATH . 'assets/uploads/images', $newName);
 				$data['image'] = 'assets/uploads/images/' . $newName;
 			}
-			
+			else
+			{
+				// Conserver l'image actuelle si aucune nouvelle image n'est uploadée
+				unset($data['image']);
+			}
 			$prebuiltTripModel->addPrebuiltTrip($data);
 			
 			// Récupérer les étapes depuis 'steps' (nom utilisé dans le formulaire)
@@ -513,6 +526,10 @@ class AdminController extends BaseController
 				$attachment->move(FCPATH . 'assets/uploads/attachments', $newName);
 				$data['attachment'] = 'assets/uploads/attachments/' . $newName;
 			}
+			else
+			{
+				unset($data['attachment']);
+			}
 			
 			// Gérer l'upload de l'image
 			$image = $this->request->getFile('image');
@@ -526,6 +543,11 @@ class AdminController extends BaseController
 				$newName = $image->getRandomName();
 				$image->move(FCPATH . 'assets/uploads/images', $newName);
 				$data['image'] = 'assets/uploads/images/' . $newName;
+			}
+			else
+			{
+				// Conserver l'image actuelle si aucune nouvelle image n'est uploadée
+				unset($data['image']);
 			}
 			
 			$prebuiltTripModel->updatePrebuiltTrip($id, $data);
@@ -675,6 +697,10 @@ class AdminController extends BaseController
 				$attachment->move(FCPATH . 'assets/uploads/attachments', $newName);
 				$data['attachment'] = 'assets/uploads/attachments/' . $newName;
 			}
+			else
+			{
+				unset($data['attachment']);
+			}
 			
 			$extensionModel->addExtension($data);
 			$logModel = new LogModel();
@@ -724,6 +750,10 @@ class AdminController extends BaseController
 				$newName = $attachment->getRandomName();
 				$attachment->move(FCPATH . 'assets/uploads/attachments', $newName);
 				$data['attachment'] = 'assets/uploads/attachments/' . $newName;
+			}
+			else
+			{
+				unset($data['attachment']);
 			}
 			
 			$extensionModel->updateExtension($extensionId, $data);
@@ -843,15 +873,15 @@ class AdminController extends BaseController
 			if ($imageFile && $imageFile->isValid() && !$imageFile->hasMoved())
 			{
 				// Supprimer l'ancienne image si elle existe
-				if (!empty($post['image']) && file_exists(FCPATH . 'assets/images/' . $post['image']))
+				if (!empty($data['image']) && file_exists(FCPATH . 'assets/uploads/images/' . $post['image']))
 				{
-					unlink(FCPATH . 'assets/images/' . $post['image']);
+					unlink(FCPATH . 'assets/uploads/images/' . $data['image']);
 				}
 				
 				// Générer un nom unique pour la nouvelle image
 				$data['image'] = $imageFile->getRandomName();
-				// Déplacer le fichier vers public/assets/images/
-				$imageFile->move(FCPATH . 'assets/images', $data['image']);
+				// Déplacer le fichier vers public/assets/uploads/images/
+				$imageFile->move(FCPATH . 'assets/uploads/images', $data['image']);
 			}
 			else
 			{
