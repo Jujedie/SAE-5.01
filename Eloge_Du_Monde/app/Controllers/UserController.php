@@ -82,9 +82,8 @@ class UserController extends BaseController
 		[
 			'lastName'        => 'required|min_length[2]|max_length[50]',
 			'firstName'       => 'required|min_length[2]|max_length[50]',
-			'email'           => 'required|min_length[4]|max_length[100]|valid_email|is_unique[user.email]',
-			'phone'           => 'min_length[10]|max_length[15]',
-			'password'        => 'min_length[4]|max_length[50]',
+			'email'           => 'required|min_length[4]|max_length[100]|valid_email',
+			'phone'           => 'max_length[15]',
 			'confirmPassword' => 'matches[password]',
 		];
 		
@@ -107,6 +106,16 @@ class UserController extends BaseController
 				$userModel->update($user['idUser'], ['password' => $password]);
 			}
 
+			if ( $this->request->getPost('email') !== $user['email'] )
+			{
+				// Vérifier si l'email est déjà utilisé par un autre utilisateur
+				$existingUser = $userModel->where('email', $email)->first();
+				if ($existingUser && $existingUser['idUser'] != $user['idUser'])
+				{
+					return redirect()->to('/profile/updateUser')->with('error', 'L\'adresse email est déjà utilisée par un autre compte.');
+				}
+			}
+
 			// Mettre à jour les informations de l'utilisateur
 			$userModel->update($user['idUser'],
 			[
@@ -116,12 +125,11 @@ class UserController extends BaseController
 				'phone'     => $phone,
 			]);
 
-			return redirect()->to('/profile/updateUser')->with('success', 'Votre profil a été mis à jour avec succès.');
+			return redirect()->to('/profile')->with('success', 'Votre profil a été mis à jour avec succès.');
 		}
 		else
 		{
-			$data['validation'] = $this->validator;
-			echo view('authentications/signup', $data);
+			return redirect()->to('profile')->with('error', 'Votre profil n\'a pas pu être mis à jour. Veuillez vérifier les informations saisies.');
 		}
 	}
 }
