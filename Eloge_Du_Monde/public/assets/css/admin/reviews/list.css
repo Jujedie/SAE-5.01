@@ -1,24 +1,57 @@
 /* Override Tailwind classes pour le mode sombre */
 .bg-white {
-background-color: var(--card-bg) !important;
+    background-color: var(--card-bg) !important;
 }
 
 .bg-gray-50 {
-background-color: var(--bg-secondary) !important;
+    background-color: var(--bg-secondary) !important;
 }
 
 .text-gray-600,
 .text-gray-700,
 .text-gray-800,
 .text-gray-900 {
-color: var(--text-primary) !important;
+    color: var(--text-primary) !important;
 }
 
 .text-gray-500 {
-color: var(--text-secondary) !important;
+    color: var(--text-secondary) !important;
 }
 
 .border-gray-200,
 .border-gray-300 {
-border-color: var(--border-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Styles originaux */
+.temoignage-card {
+    transition: all 0.3s ease;
+}
+
+.temoignage-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-approuve {
+    background-color: #d1fae5 !important;
+    color: #065f46 !important;
+}
+
+.status-attente {
+    background-color: #fef3c7 !important;
+    color: #92400e !important;
+}
+
+.stars {
+    color: #fbbf24;
 }
