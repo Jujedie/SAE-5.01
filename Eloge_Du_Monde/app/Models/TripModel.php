@@ -46,8 +46,12 @@ class TripModel extends Model
 
 	public function getAllTrips()
 	{
-		return $this->whereNotIn('idTrip', function($query) 
-			{$query->select('idTrip')->from('prebuilttrip');})->findAll();
+		// Exclure les prebuilt trips ET les extensions
+		return $this->whereNotIn('idTrip', function($query) {
+			$query->select('idTrip')->from('prebuilttrip');
+		})->whereNotIn('idTrip', function($query) {
+			$query->select('idTrip')->from('extension');
+		})->findAll();
 	}
 
 	public function getTripsByUser($idUser)
@@ -72,7 +76,8 @@ class TripModel extends Model
 	public function getTripsCount()
 	{
 		return $this->whereNotIn('idTrip', function($query) 
-			{$query->select('idTrip')->from('prebuilttrip');})->countAllResults();
+			{$query->select('idTrip')->from('prebuilttrip');})->whereNotIn('idTrip', function($query) 
+			{$query->select('idTrip')->from('extension');})->countAllResults();
 	}
 
 	public function addTrip($data)

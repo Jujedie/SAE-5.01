@@ -186,7 +186,7 @@
 					<li><a href="<?= base_url('/#about') ?>">Qui sommes-nous ?</a></li>
 					<li><a href="<?= base_url('/#about') ?>">Nos valeurs</a></li>
 					<li><a href="<?= base_url('/#about') ?>">L'équipe</a></li>
-					<li><a href="<?= base_url('/#accueil') ?>">Blog</a></li>
+					<li><a href="<?= base_url('/blog') ?>">Blog</a></li>
 				</ul>
 			</div>
 

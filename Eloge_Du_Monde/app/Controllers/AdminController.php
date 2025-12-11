@@ -49,6 +49,7 @@ class AdminController extends BaseController
 
 		$reservationsData = [];
 
+		// Récupérer uniquement les trips individuels (pas les prebuilt ni les extensions)
 		$reservations     = $tripModel->getAllTrips();
 
 		foreach ($reservations as $reservation)

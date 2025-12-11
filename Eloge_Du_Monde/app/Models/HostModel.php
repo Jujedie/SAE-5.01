@@ -119,7 +119,8 @@ class HostModel extends Model
 	public function updateHost($idTrip, $idTripStep, $data)
 	{
 		$tripModel = new TripModel();
-		if (!in_array($idTrip, $tripModel->idInTable($idTrip))) {
+		if (!in_array($idTrip, $tripModel->idInTable($idTrip)))
+		{
 			return;
 		}
 
@@ -129,7 +130,15 @@ class HostModel extends Model
 	public function updateHostsForPrebuiltTrip($idTrip, $tripSteps)
 	{
 		$prebuiltModel = new PrebuiltTripModel();
-		if (!in_array($idTrip, $prebuiltModel->idInTable($idTrip))) {
+		$extension = new ExtensionModel();
+		// Exclure les extensions - on ne veut que les prebuilt trips
+		if (in_array($idTrip, $extension->idInTable($idTrip)))
+		{
+			return [];
+		}
+		// Vérifier que c'est bien un prebuilt trip
+		if (!in_array($idTrip, $prebuiltModel->idInTable($idTrip)))
+		{
 			return [];
 		}
 
@@ -158,7 +167,15 @@ class HostModel extends Model
 	public function getHostsByTripWithDetails($idTrip)
 	{
 		$prebuiltModel = new PrebuiltTripModel();
-		if (!in_array($idTrip, $prebuiltModel->idInTable($idTrip))) {
+		$extension = new ExtensionModel();
+		// Exclure les extensions - on ne veut que les prebuilt trips
+		if (in_array($idTrip, $extension->idInTable($idTrip)))
+		{
+			return [];
+		}
+		// Vérifier que c'est bien un prebuilt trip
+		if (!in_array($idTrip, $prebuiltModel->idInTable($idTrip)))
+		{
 			return [];
 		}
 
@@ -194,7 +211,8 @@ class HostModel extends Model
 	public function getTripsByContinent($continent)
 	{
 		$trips = $this->db->table('prebuilttrip pt')
-			->select('DISTINCT pt.*')
+			->distinct()
+			->select('pt.*')
 			->join('host h', 'h."idTrip" = pt."idTrip"')
 			->join('"tripStep" ts', 'ts."idTripStep" = h."idTripStep"')
 			->join('country c', 'c."idCountry" = ts."idCountry"')
@@ -210,7 +228,8 @@ class HostModel extends Model
 	public function getTripsByCountryName($countryName)
 	{
 		$trips = $this->db->table('prebuilttrip pt')
-			->select('DISTINCT pt.*')
+			->distinct()
+			->select('pt.*')
 			->join('host h', 'h."idTrip" = pt."idTrip"')
 			->join('"tripStep" ts', 'ts."idTripStep" = h."idTripStep"')
 			->join('country c', 'c."idCountry" = ts."idCountry"')
