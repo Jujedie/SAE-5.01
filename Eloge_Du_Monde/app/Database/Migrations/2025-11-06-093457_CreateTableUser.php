@@ -37,6 +37,7 @@ class CreateTableUser extends Migration
 			[
 				'type'       => 'TEXT',
 				'null'       => false,
+				'unique'     => true,
 			],
 			'role'           =>
 			[
