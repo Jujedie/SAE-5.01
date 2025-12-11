@@ -277,18 +277,22 @@
 		</div>
 
 		<div class="testimonials-grid">
-			<?php for ($i = 0 ; $i < 3 ; $i++): ?>
-				<div class="testimonial-card fade-in">
-					<div class="stars">
-						<?php for($j = 0; $j < $reviews[$i]['rating']; $j++): ?>
-						<svg class="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-						<?php endfor; ?>
+			<?php if (!isset($reviews) || count($reviews) < 3): ?>
+				<p class="no-reviews fade-in">Aucun témoignage disponible pour le moment.</p>
+			<?php else: ?>
+				<?php for ($i = 0 ; $i < 3 ; $i++): ?>
+					<div class="testimonial-card fade-in">
+						<div class="stars">
+							<?php for($j = 0; $j < $reviews[$i]['rating']; $j++): ?>
+							<svg class="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+							<?php endfor; ?>
+						</div>
+						<p class="testimonial-text">
+							<?= $reviews[$i]['content'] ?>
+						</p>
 					</div>
-					<p class="testimonial-text">
-						<?= $reviews[$i]['content'] ?>
-					</p>
-				</div>
-			<?php endfor; ?>
+				<?php endfor; ?>
+			<?php endif; ?>
 		</div>
 
 		<div class="stats-grid">
