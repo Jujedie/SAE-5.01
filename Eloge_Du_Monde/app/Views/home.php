@@ -147,6 +147,7 @@
 
 	<div class="destinations-grid">
 		<div class="destination-card fade-in">
+		<a href="<?= base_url('trips?filter=continent&value=Europe') ?>">
 			<img src="<?= base_url('assets/images/destination1.jpeg') ?>" alt="Europe">
 			<div class="destination-overlay"></div>
 				<div class="destination-content">
@@ -162,8 +163,10 @@
 					</div>
 				</a>
 			</div>
+		</a>
 
 		<div class="destination-card fade-in">
+		<a href="<?= base_url('trips?filter=continent&value=Asie') ?>">
 			<img src="<?= base_url('assets/images/destination2.jpeg') ?>" alt="Asie">
 			<div class="destination-overlay"></div>
 				<div class="destination-content">
@@ -179,24 +182,27 @@
 					</div>
 				</a>
 			</div>
+		</a>
 
 		<div class="destination-card fade-in">
+		<a href="<?= base_url('trips?filter=continent&value=Afrique') ?>">
 			<img src="<?= base_url('assets/images/destination3.jpeg') ?>" alt="Afrique">
-			<div class="destination-overlay"></div>
-				<div class="destination-content">
-					<div class="destination-highlight">8 pays</div>
-					<h3 class="destination-title playfair">Afrique</h3>
-					<p class="destination-description">Safari, déserts, cultures millénaires... L'Afrique authentique</p>
-				</div>
-				<a href="<?= base_url('trips?region=Afrique') ?>">
-					<div class="destination-arrow">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" style="width: 1.5rem; height: 1.5rem;">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-						</svg>
+				<div class="destination-overlay"></div>
+					<div class="destination-content">
+						<div class="destination-highlight">8 pays</div>
+						<h3 class="destination-title playfair">Afrique</h3>
+						<p class="destination-description">Safari, déserts, cultures millénaires... L'Afrique authentique</p>
 					</div>
-				</a>
+					<a href="<?= base_url('trips?region=Afrique') ?>">
+						<div class="destination-arrow">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" style="width: 1.5rem; height: 1.5rem;">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+							</svg>
+						</div>
+					</a>
+				</div>
 			</div>
-		</div>
+		</a>
 
 		<div class="section-text-center fade-in">
 			<a href="<?= base_url('trips') ?>" class="btn btn-primary">Voir toutes nos destinations</a>
