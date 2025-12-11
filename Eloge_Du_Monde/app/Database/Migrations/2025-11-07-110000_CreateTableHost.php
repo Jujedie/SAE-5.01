@@ -33,7 +33,7 @@ class CreateTableHost extends Migration
         ]);
 
         $this->forge->addKey(['idTrip', 'idTripStep'], true);
-        $this->forge->addForeignKey('idTrip', 'prebuilttrip', 'idTrip', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('idTrip', 'trip', 'idTrip', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('idTripStep', 'tripStep', 'idTripStep', 'CASCADE', 'CASCADE');
         $this->forge->createTable('host', true);
     }
