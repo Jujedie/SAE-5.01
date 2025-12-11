@@ -30,7 +30,7 @@ class CreateTableUser extends Migration
 			'phone'          =>
 			[
 				'type'       => 'VARCHAR',
-				'constraint' => '10',
+				'constraint' => '20',
 				'null'       => true,
 			],
 			'email'          =>
