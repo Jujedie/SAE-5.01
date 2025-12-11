@@ -69,7 +69,10 @@ class HostModel extends Model
 
 	public function addHostsForPrebuiltTrip($idTrip, $tripSteps)
 	{
-		
+		$prebuiltModel = new PrebuiltTripModel();
+		if (!in_array($idTrip, $prebuiltModel->idInTable($idTrip))) {
+			return [];
+		}
 
 		foreach ($tripSteps as $step) {
 			$this->insert([
@@ -120,6 +123,11 @@ class HostModel extends Model
 
 	public function updateHostsForPrebuiltTrip($idTrip, $tripSteps)
 	{
+		$prebuiltModel = new PrebuiltTripModel();
+		if (!in_array($idTrip, $prebuiltModel->idInTable($idTrip))) {
+			return [];
+		}
+
 		// Supprimer les anciennes étapes
 		$this->where('idTrip', $idTrip)->delete();
 		if (empty($tripSteps) || !$idTrip) {
@@ -144,16 +152,19 @@ class HostModel extends Model
 
 	public function getHostsByTripWithDetails($idTrip)
 	{
-		$db = \Config\Database::connect();
-		$query = $db->query('
-			SELECT h.*, ts.name, ts.cost, ts."idCountry", c.name as country, c.continent
-			FROM host h
-			JOIN "tripStep" ts ON ts."idTripStep" = h."idTripStep"
-			LEFT JOIN country c ON c."idCountry" = ts."idCountry"
-			WHERE h."idTrip" = ?
-			ORDER BY h."idTripStep" ASC
-		', [$idTrip]);
-		return $query->getResultArray();
+		$prebuiltModel = new PrebuiltTripModel();
+		if (!in_array($idTrip, $prebuiltModel->idInTable($idTrip))) {
+			return [];
+		}
+
+		return $this->db->table('host h')
+			->select('h.*, ts.name, ts.cost, ts."idCountry", c.name as country, c.continent')
+			->join('"tripStep" ts', 'ts."idTripStep" = h."idTripStep"')
+			->join('country c', 'c."idCountry" = ts."idCountry"', 'left')
+			->where('h."idTrip"', $idTrip)
+			->orderBy('h."idTripStep"', 'ASC')
+			->get()
+			->getResultArray();
 	}
 
 	public function updateHostsForTrip($idTrip, $steps)
@@ -177,17 +188,14 @@ class HostModel extends Model
 
 	public function getTripsByContinent($continent)
 	{
-		$db = \Config\Database::connect();
-		$sql = '
-			SELECT DISTINCT pt.*
-			FROM prebuilttrip pt
-			JOIN host h ON h."idTrip" = pt."idTrip"
-			JOIN "tripStep" ts ON ts."idTripStep" = h."idTripStep"
-			JOIN country c ON c."idCountry" = ts."idCountry"
-			WHERE LOWER(c.continent) = LOWER(?)
-		';
-		$query = $db->query($sql, [$continent]);
-		$trips = $query->getResultArray();
+		$trips = $this->db->table('prebuilttrip pt')
+			->select('DISTINCT pt.*')
+			->join('host h', 'h."idTrip" = pt."idTrip"')
+			->join('"tripStep" ts', 'ts."idTripStep" = h."idTripStep"')
+			->join('country c', 'c."idCountry" = ts."idCountry"')
+			->where('LOWER(c.continent)', strtolower($continent))
+			->get()
+			->getResultArray();
 
 		log_message('debug', 'Trips in continent ' . $continent . ': ' . print_r($trips, true));
 
@@ -196,17 +204,14 @@ class HostModel extends Model
 
 	public function getTripsByCountryName($countryName)
 	{
-		$db = \Config\Database::connect();
-		$sql = '
-			SELECT DISTINCT pt.*
-			FROM prebuilttrip pt
-			JOIN host h ON h."idTrip" = pt."idTrip"
-			JOIN "tripStep" ts ON ts."idTripStep" = h."idTripStep"
-			JOIN country c ON c."idCountry" = ts."idCountry"
-			WHERE LOWER(c.name) = LOWER(?)
-		';
-		$query = $db->query($sql, [$countryName]);
-		$trips = $query->getResultArray();
+		$trips = $this->db->table('prebuilttrip pt')
+			->select('DISTINCT pt.*')
+			->join('host h', 'h."idTrip" = pt."idTrip"')
+			->join('"tripStep" ts', 'ts."idTripStep" = h."idTripStep"')
+			->join('country c', 'c."idCountry" = ts."idCountry"')
+			->where('LOWER(c.name)', strtolower($countryName))
+			->get()
+			->getResultArray();
 
 		log_message('debug', 'Trips in country ' . $countryName . ': ' . print_r($trips, true));
 

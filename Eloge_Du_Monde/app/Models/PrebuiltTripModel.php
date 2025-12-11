@@ -44,6 +44,15 @@ class PrebuiltTripModel extends Model
 	protected $beforeDelete   = [];
 	protected $afterDelete    = [];
 
+	public function idInTable($idTrip)
+	{
+		$result = $this->select('idTrip')
+					   ->where('idTrip', $idTrip)
+					   ->findAll();
+
+		return array_column($result, 'idTrip');
+	}
+
 	public function getAllPrebuiltTrips()
 	{
 		return $this->findAll();

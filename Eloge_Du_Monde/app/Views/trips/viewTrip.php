@@ -8,8 +8,7 @@
 
 <?= $this->section('content') ?>
 
-<!-- Hero Section -->
-<section class="hero-trip relative h-96 flex items-end">
+<section class="hero-trip relative h-96 flex items-end" style="background-image: url('<?= base_url('assets/images/fond-voyage.jpeg') ?>'); background-size: cover; background-position: center;">
 	<div class="w-full bg-gradient-to-t p-8">
 		<div class="max-w-7xl mx-auto">
 			<span class="inline-block custom-amber-bg text-white text-sm font-medium px-4 py-1 rounded mb-4">
@@ -149,10 +148,8 @@
 						</svg>
 						Document
 					</h2>
-					<a 
-						href="<?= site_url('trips/download/' . ($trip['idTrip'] ?? '#')) ?>" 
-						class="inline-flex items-center custom-amber-text custom-amber-hover-text font-medium"
-					>
+					<a href="<?= base_url($trip['attachment']) ?>" download class="inline-flex items-center custom-amber-text custom-amber-hover-text font-medium"
+						href="<?= site_url('trips/download/' . ($trip['idTrip'] ?? '#')) ?>">
 						<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
 						</svg>

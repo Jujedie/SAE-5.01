@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
-use App\Models\BookingModel;
 use App\Models\HostModel;
 use App\Models\CountryModel;
 use App\Models\TripModel;
@@ -121,7 +120,6 @@ class AdminController extends BaseController
 
 	public function bookingDetail($idTrip, $idUser)
 	{
-		$bookingModel = new BookingModel();
 		$tripModel    = new TripModel();
 		$userModel    = new UserModel();
 
@@ -182,7 +180,7 @@ class AdminController extends BaseController
 
 			$rules =
 			[
-				'name' => 'required|max_length[255]|is_unique[countries.name]',
+				'name' => 'required|max_length[255]|is_unique[country.name]',
 				'continent' => 'required|in_list[europe,asie,afrique,amerique,oceanie]',
 				'cost' => 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000000000]',
 			];
@@ -214,7 +212,13 @@ class AdminController extends BaseController
 		if ($this->request->getMethod() === 'POST')
 		{
 			$data = $this->request->getPost();
+			
+			if (!$data['cost']) {
+				$data['cost'] = 0;
+			}
+
 			$countryModel->updateCountry($id, $data);
+			
 			$logModel = new LogModel();
 			$logModel->addLogEntry('Modification du pays avec ID : ' . $id, session()->get('idUser'));
 			return redirect()->to('/admin/countries')->with('success', 'Pays mis à jour avec succès.');

@@ -211,7 +211,7 @@
 										<?php if (!empty($extension['attachment'])): ?>
 										<div>
 											<span class="text-gray-600">Pièce jointe:</span>
-											<a href="<?= base_url('uploads/' . $extension['attachment']) ?>" target="_blank" class="ml-2 text-purple-600 hover:text-purple-800 underline">Voir le fichier</a>
+											<a href="<?= base_url($extension['attachment']) ?>" download class="ml-2 text-purple-600 hover:text-purple-800 underline">Télécharger le fichier</a>
 										</div>
 										<?php endif; ?>
 									</div>
