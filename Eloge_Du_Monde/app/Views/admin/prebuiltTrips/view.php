@@ -127,7 +127,7 @@
 				<div class="md:col-span-2">
 					<label class="block text-sm font-medium text-gray-700 mb-2">Image du voyage</label>
 					<div class="flex items-center space-x-4">
-						<img src="<?= esc($prebuiltTrip['image']) ?>" alt="Image du voyage" class="w-48 h-32 object-cover rounded-lg border border-gray-300">
+						<img src="<?= base_url($prebuiltTrip['image']) ?>" alt="Image du voyage" class="w-48 h-32 object-cover rounded-lg border border-gray-300">
 					</div>
 				</div>
 			<?php endif; ?>
