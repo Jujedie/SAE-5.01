@@ -46,7 +46,7 @@ class BlogPostModel extends Model
 
 	public function getAllPosts()
 	{
-		return $this->findAll();
+		return $this->orderBy('date', 'DESC')->findAll();
 	}
 
 	public function getPostById($idBlogPost)
@@ -56,7 +56,7 @@ class BlogPostModel extends Model
 
 	public function getPostsByUser($idUser)
 	{
-		return $this->where('idUser', $idUser)->findAll();
+		return $this->where('idUser', $idUser)->orderBy('date', 'DESC')->findAll();
 	}
 
 	public function getPostCount()
