@@ -46,28 +46,33 @@ class TripModel extends Model
 
 	public function getAllTrips()
 	{
-		return $this->findAll();
+		return $this->whereNotIn('idTrip', function($query) 
+			{$query->select('idTrip')->from('prebuilttrip');})->findAll();
 	}
 
 	public function getTripsByUser($idUser)
 	{
-		return $this->where('idUser', $idUser)->findAll();
+		return $this->where('idUser', $idUser)->whereNotIn('idTrip', function($query) 
+			{$query->select('idTrip')->from('prebuilttrip');})->findAll();
 	}
 
 	public function getTripById($idTrip)
 	{
-		return $this->where('idTrip', $idTrip)->first();
+		return $this->where('idTrip', $idTrip)->whereNotIn('idTrip', function($query) 
+			{$query->select('idTrip')->from('prebuilttrip');})->first();
 	}
 
 	public function getTripsByType($type)
 	{
-		return $this->where('type', $type)->findAll();
+		return $this->where('type', $type)->whereNotIn('idTrip', function($query) 
+			{$query->select('idTrip')->from('prebuilttrip');})->findAll();
 	}
 
 
 	public function getTripsCount()
 	{
-		return $this->countAllResults();
+		return $this->whereNotIn('idTrip', function($query) 
+			{$query->select('idTrip')->from('prebuilttrip');})->countAllResults();
 	}
 
 	public function addTrip($data)
@@ -92,7 +97,8 @@ class TripModel extends Model
 
 	public function updateTrip($idTrip, $data)
 	{
-		return $this->where('idTrip', $idTrip)->set($data)->update();
+		return $this->where('idTrip', $idTrip)->whereNotIn('idTrip', function($query) 
+			{$query->select('idTrip')->from('prebuilttrip');})->set($data)->update();
 	}
 
 	public function deleteTrip($idTrip)

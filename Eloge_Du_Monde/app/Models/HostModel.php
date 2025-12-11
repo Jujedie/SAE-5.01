@@ -69,6 +69,8 @@ class HostModel extends Model
 
 	public function addHostsForPrebuiltTrip($idTrip, $tripSteps)
 	{
+		
+
 		foreach ($tripSteps as $step) {
 			$this->insert([
 				'idTrip'     => $idTrip,
