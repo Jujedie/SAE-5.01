@@ -271,7 +271,7 @@ header.scrolled
 .theme-toggle-btn:hover
 {
 	background: #C9A96E;
-	transform: rotate(20deg);
+	transform: rotate(10deg);
 }
 
 .theme-toggle-btn svg
