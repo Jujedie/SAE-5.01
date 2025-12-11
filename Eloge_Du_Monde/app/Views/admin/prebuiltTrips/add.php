@@ -2,6 +2,11 @@
 
 <?= $this->section('title') ?>Créer un voyage préfait<?= $this->endSection() ?>
 
+<?= $this->section('styles') ?>
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/common.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/prebuiltTrips/add.css') ?>">
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <div class="container mx-auto px-4 py-8">

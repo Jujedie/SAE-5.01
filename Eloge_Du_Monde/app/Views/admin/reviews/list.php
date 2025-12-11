@@ -3,6 +3,7 @@
 <?= $this->section('title') ?>Gestion des témoignages<?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/common.css') ?>">
 <link rel="stylesheet" href="<?= base_url('assets/css/admin/reviews/list.css') ?>">
 <?= $this->endSection() ?>
 

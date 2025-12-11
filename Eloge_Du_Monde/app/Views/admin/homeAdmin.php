@@ -3,6 +3,7 @@
 <?= $this->section('title') ?>Tableau de bord administrateur<?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/common.css') ?>">
 <link rel="stylesheet" href="<?= base_url('assets/css/admin/homeAdmin.css') ?>">
 <?= $this->endSection() ?>
 

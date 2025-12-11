@@ -1,3 +1,5 @@
+/* Styles communs à toutes les pages admin */
+
 /* Override Tailwind classes pour le mode sombre */
 .bg-white {
     background-color: var(--card-bg) !important;
@@ -23,14 +25,29 @@
     border-color: var(--border-color) !important;
 }
 
-/* Styles originaux */
-.destination-card {
-    transition: all 0.3s ease;
+/* Formulaires */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="url"],
+select,
+textarea {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
 }
 
-.destination-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="url"]::placeholder,
+textarea::placeholder {
+    color: var(--text-secondary) !important;
 }
 
 /* Boutons d'action */

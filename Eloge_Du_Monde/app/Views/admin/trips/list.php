@@ -3,6 +3,7 @@
 <?= $this->section('title') ?>Gestion des voyages personnalisés<?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/common.css') ?>">
 <link rel="stylesheet" href="<?= base_url('assets/css/admin/trips/list.css') ?>">
 <?= $this->endSection() ?>
 

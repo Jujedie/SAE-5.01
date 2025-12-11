@@ -3,6 +3,7 @@
 <?= $this->section('title') ?>Gestion des utilisateurs<?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/common.css') ?>">
 <link rel="stylesheet" href="<?= base_url('assets/css/admin/users/list.css') ?>">
 <?= $this->endSection() ?>
 

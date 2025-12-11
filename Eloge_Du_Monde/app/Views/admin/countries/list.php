@@ -3,6 +3,7 @@
 <?= $this->section('title') ?>Gestion des pays<?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/common.css') ?>">
 <link rel="stylesheet" href="<?= base_url('assets/css/admin/countries/list.css') ?>">
 <?= $this->endSection() ?>
 
