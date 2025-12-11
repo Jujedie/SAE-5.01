@@ -11,13 +11,20 @@ class TripController extends BaseController
 {
 	public function index()
 	{
-		$filter    = [$this->request->getGet('filter') => $this->request->getGet('value')];
 		$session   = session();
 		$tripModel = new PrebuiltTripModel();
 
 		$trips = [];
-		if (!empty($filter))
+		
+		// Vérifier si on a un paramètre thematic dans l'URL
+		$thematic = $this->request->getGet('thematic');
+		if (!empty($thematic)) {
+			$trips = $tripModel->getPrebuiltsByFilter(['thematic' => $thematic]);
+		}
+		// Sinon vérifier l'ancien système de filtres
+		elseif (!empty($this->request->getGet('filter')) && !empty($this->request->getGet('value')))
 		{
+			$filter = [$this->request->getGet('filter') => $this->request->getGet('value')];
 			$trips = $tripModel->getPrebuiltsByFilter($filter);
 		}
 		else

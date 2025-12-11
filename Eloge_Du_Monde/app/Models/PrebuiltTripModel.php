@@ -90,6 +90,17 @@ class PrebuiltTripModel extends Model
 				$tripsInCountry = $hostModel->getTripsByCountryName($value);
 
 				return $tripsInCountry;
+			} elseif ($key == 'thematic') {
+				// Mapping des slugs vers les vraies valeurs
+				$thematicMap = [
+					'bien-etre-spa' => 'Bien-être & Spa',
+					'aventure-nature' => 'Aventure & Nature',
+					'gastronomie' => 'Gastronomie',
+					'culture-art' => 'Culture & Art'
+				];
+				
+				$thematicValue = $thematicMap[$value] ?? $value;
+				return $this->where('thematic', $thematicValue)->findAll();
 			}
 		}
 		return $this->findAll();

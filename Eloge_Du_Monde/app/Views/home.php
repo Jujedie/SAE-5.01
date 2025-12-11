@@ -219,7 +219,7 @@
 		</div>
 
 	<div class="themes-grid">
-		<div class="theme-card fade-in">
+		<a href="<?= base_url('trips?thematic=bien-etre-spa') ?>" class="theme-card fade-in">
 			<img src="<?= base_url('assets/images/thematic1.jpeg') ?>" alt="Bien-être & Spa">
 			<div class="theme-overlay"></div>
 				<div class="theme-content">
@@ -227,9 +227,9 @@
 					<h3 class="theme-title playfair">Bien-être & Spa</h3>
 					<p class="theme-description">Ressourcez-vous dans des spas d'exception</p>
 				</div>
-			</div>
+		</a>
 
-		<div class="theme-card fade-in">
+		<a href="<?= base_url('trips?thematic=aventure-nature') ?>" class="theme-card fade-in">
 			<img src="<?= base_url('assets/images/thematic2.jpeg') ?>" alt="Aventure & Nature">
 			<div class="theme-overlay"></div>
 				<div class="theme-content">
@@ -237,9 +237,9 @@
 					<h3 class="theme-title playfair">Aventure & Nature</h3>
 					<p class="theme-description">Des expériences outdoor inoubliables</p>
 				</div>
-			</div>
+		</a>
 
-		<div class="theme-card fade-in">
+		<a href="<?= base_url('trips?thematic=gastronomie') ?>" class="theme-card fade-in">
 			<img src="<?= base_url('assets/images/thematic3.jpeg') ?>" alt="Gastronomie">
 			<div class="theme-overlay"></div>
 				<div class="theme-content">
@@ -247,9 +247,9 @@
 					<h3 class="theme-title playfair">Gastronomie</h3>
 					<p class="theme-description">Savourez les meilleures tables du monde</p>
 				</div>
-			</div>
+		</a>
 
-		<div class="theme-card fade-in">
+		<a href="<?= base_url('trips?thematic=culture-art') ?>" class="theme-card fade-in">
 			<img src="<?= base_url('assets/images/thematic4.jpeg') ?>" alt="Culture & Art">
 			<div class="theme-overlay"></div>
 				<div class="theme-content">
@@ -257,8 +257,7 @@
 					<h3 class="theme-title playfair">Culture & Art</h3>
 					<p class="theme-description">Plongez dans l'histoire et l'art</p>
 				</div>
-			</div>
-		</div>
+		</a>
 	</div>
 </section>
 
