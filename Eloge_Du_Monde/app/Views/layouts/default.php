@@ -228,7 +228,7 @@
 		<div class="footer-bottom">
 			<p>© <?= date('Y') ?> Éloge du Monde</p>
 			<p>Développé par :
-			Harel Théo - Dujardin Thao - Oyez Julien - Thomazeau-Agullo Louis - Mangeant Thibault</p>
+			Harel Théo - Dujardin Thao - Oyer Julien - Thomazeau-Agullo Louis - Mangeant Thibault</p>
 		</div>
 	</div>
 </footer>
