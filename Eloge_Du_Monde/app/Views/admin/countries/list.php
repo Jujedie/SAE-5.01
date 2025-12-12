@@ -3,28 +3,8 @@
 <?= $this->section('title') ?>Gestion des pays<?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
-<style>
-	.country-card {
-		transition: all 0.3s ease;
-	}
-	.country-card:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	}
-	.continent-badge {
-		display: inline-flex;
-		align-items: center;
-		padding: 0.25rem 0.75rem;
-		border-radius: 9999px;
-		font-size: 0.75rem;
-		font-weight: 600;
-	}
-	.continent-europe { background-color: #dbeafe; color: #1e40af; }
-	.continent-asie { background-color: #fce7f3; color: #be123c; }
-	.continent-afrique { background-color: #fef3c7; color: #92400e; }
-	.continent-amerique { background-color: #d1fae5; color: #065f46; }
-	.continent-oceanie { background-color: #e0e7ff; color: #3730a3; }
-</style>
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/common.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/countries/list.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -151,22 +131,8 @@
 	<?php endif; ?>
 </div>
 
-<script>
-	function filterCountries() {
-		const searchInput = document.getElementById('searchInput').value.toLowerCase();
-		const cards = document.querySelectorAll('.country-card');
-		
-		cards.forEach(card => {
-			const name = card.getAttribute('data-name') || '';
-			const continent = card.getAttribute('data-continent') || '';
-			
-			if (name.includes(searchInput) || continent.includes(searchInput)) {
-				card.style.display = 'block';
-			} else {
-				card.style.display = 'none';
-			}
-		});
-	}
-</script>
+<?= $this->section('scripts') ?>
+<script src="<?= base_url('assets/js/admin/countries/list.js') ?>"></script>
+<?= $this->endSection() ?>
 
 <?= $this->endSection() ?>

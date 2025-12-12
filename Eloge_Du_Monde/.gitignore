@@ -26,3 +26,5 @@ application/logs/*
 /writable/debugbar/*
 /writable/cache/*
 /writable/session/*
+
+/public/assets/uploads/*

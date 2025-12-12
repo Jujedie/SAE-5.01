@@ -8,7 +8,7 @@
 
 <?= $this->section('content') ?>
 
-<div class="min-h-screen flex items-center justify-center pt-4 bg-white">
+<div class="min-h-screen flex items-center justify-center pt-4 bg-white" style="margin-top:6rem;">
 	<div class="w-full sm:w-3/4 md:w-2/3 lg:w-5/12 px-4">
 		<div class="bg-white rounded-lg shadow border border-gray-300">
 			<div class="p-6">
@@ -47,6 +47,16 @@
 					<div class="mb-4">
 						<label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmer le mot de passe <span class="text-red-500">*</span></label>
 						<input type="password" id="confirmPassword" name="confirmPassword" class="block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600" required>
+					</div>
+					<div class="mb-4">
+						<div class="flex items-start gap-3">
+						<input type="checkbox" id="newsletter" name="isSubscribed" value="1"
+							class="w-5 h-5 border-gray-300 rounded focus:ring-2 cursor-pointer mt-0.5"
+							style="accent-color: #C9A96E;">
+							<label for="newsletter" class="text-sm text-gray-700 cursor-pointer">
+								Je souhaite recevoir la newsletter et les offres promotionnelles
+							</label>
+						</div>
 					</div>
 					<button type="submit" class="w-full btn-primary font-medium py-2 rounded-md">Créer le compte</button>
 				</form>

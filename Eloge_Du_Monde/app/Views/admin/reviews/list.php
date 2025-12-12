@@ -3,34 +3,8 @@
 <?= $this->section('title') ?>Gestion des témoignages<?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
-<style>
-	.temoignage-card {
-		transition: all 0.3s ease;
-	}
-	.temoignage-card:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	}
-	.status-badge {
-		display: inline-flex;
-		align-items: center;
-		padding: 0.25rem 0.75rem;
-		border-radius: 9999px;
-		font-size: 0.75rem;
-		font-weight: 600;
-	}
-	.status-approuve {
-		background-color: #d1fae5;
-		color: #065f46;
-	}
-	.status-attente {
-		background-color: #fef3c7;
-		color: #92400e;
-	}
-	.stars {
-		color: #fbbf24;
-	}
-</style>
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/common.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/reviews/list.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -127,20 +101,5 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<script>
-// Search functionality
-document.getElementById('searchInput').addEventListener('input', function(e) {
-	const searchTerm = e.target.value.toLowerCase();
-	const temoignageCards = document.querySelectorAll('.temoignage-card');
-	
-	temoignageCards.forEach(card => {
-		const text = card.textContent.toLowerCase();
-		if (text.includes(searchTerm)) {
-			card.style.display = '';
-		} else {
-			card.style.display = 'none';
-		}
-	});
-});
-</script>
+<script src="<?= base_url('assets/js/admin/reviews/list.js') ?>"></script>
 <?= $this->endSection() ?>

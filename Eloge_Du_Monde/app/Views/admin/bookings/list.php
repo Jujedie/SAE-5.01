@@ -3,30 +3,8 @@
 <?= $this->section('title') ?>Gestion des réservations<?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
-<style>
-	.search-box {
-		transition: all 0.3s ease;
-	}
-	.search-box:focus {
-		box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-	}
-	.reservation-row {
-		transition: all 0.3s ease;
-	}
-	.reservation-row:hover {
-		background-color: #f9fafb;
-	}
-	.destination-badge {
-		display: inline-block;
-		background-color: #dbeafe;
-		color: #1e40af;
-		padding: 0.25rem 0.75rem;
-		border-radius: 9999px;
-		font-size: 0.75rem;
-		font-weight: 600;
-		margin: 0.125rem;
-	}
-</style>
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/common.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/bookings/list.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -185,23 +163,8 @@
 	<?php endif; ?>
 </div>
 
-<script>
-	function filterReservations() {
-		const searchInput = document.getElementById('searchInput').value.toLowerCase();
-		const rows = document.querySelectorAll('.reservation-row');
-		
-		rows.forEach(row => {
-			const client = row.getAttribute('data-client') || '';
-			const email = row.getAttribute('data-email') || '';
-			const destinations = row.getAttribute('data-destinations') || '';
-			
-			if (client.includes(searchInput) || email.includes(searchInput) || destinations.includes(searchInput)) {
-				row.style.display = '';
-			} else {
-				row.style.display = 'none';
-			}
-		});
-	}
-</script>
+<?= $this->section('scripts') ?>
+<script src="<?= base_url('assets/js/admin/bookings/list.js') ?>"></script>
+<?= $this->endSection() ?>
 
 <?= $this->endSection() ?>

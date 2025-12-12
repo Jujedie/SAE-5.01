@@ -29,8 +29,8 @@ class SignupController extends BaseController
 		[
 			'lastName'        => 'required|min_length[2]|max_length[50]',
 			'firstName'       => 'required|min_length[2]|max_length[50]',
-			'email'           => 'required|min_length[4]|max_length[100]|valid_email|is_unique[user.email]',
-			'phone'           => 'min_length[10]|max_length[15]',
+			'email'           => 'required|min_length[4]|max_length[255]|valid_email|is_unique[user.email]',
+			'phone'           => 'max_length[20]',
 			'password'        => 'required|min_length[4]|max_length[50]',
 			'confirmPassword' => 'matches[password]',
 		];
@@ -47,10 +47,13 @@ class SignupController extends BaseController
 				'lastName'  => $this->request->getVar('lastName'),
 				'firstName' => $this->request->getVar('firstName'),
 				'email'     => $this->request->getVar('email'),
-				'phone'     => $this->request->getVar('phone'),
 				'password'  => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
 				'role'      => 'user',
 			];
+
+			if ($this->request->getVar('phone')) {
+				$data['phone'] = $this->request->getVar('phone');
+			}
 
 			$userModel->addUser($data);
 			$logModel->addLogEntry('Nouvelle utilisateur inscrit : ' . $data['email'], $userModel->getUserByEmail($data['email'])['idUser']);

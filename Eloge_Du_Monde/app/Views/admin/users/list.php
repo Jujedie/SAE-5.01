@@ -3,27 +3,8 @@
 <?= $this->section('title') ?>Gestion des utilisateurs<?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
-<style>
-	.user-card {
-		transition: all 0.3s ease;
-	}
-	.user-card:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	}
-	.status-badge {
-		display: inline-flex;
-		align-items: center;
-		padding: 0.25rem 0.75rem;
-		border-radius: 9999px;
-		font-size: 0.75rem;
-		font-weight: 600;
-	}
-	.status-active {
-		background-color: #d1fae5;
-		color: #065f46;
-	}
-</style>
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/common.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/users/list.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -100,17 +81,8 @@
 	</div>
 </div>
 
-<script>
-	// Barre de recherche
-	document.getElementById('searchInput').addEventListener('keyup', function() {
-		const searchTerm = this.value.toLowerCase();
-		const cards = document.querySelectorAll('.user-card');
-		
-		cards.forEach(card => {
-			const text = card.textContent.toLowerCase();
-			card.style.display = text.includes(searchTerm) ? '' : 'none';
-		});
-	});
-</script>
+<?= $this->section('scripts') ?>
+<script src="<?= base_url('assets/js/admin/users/list.js') ?>"></script>
+<?= $this->endSection() ?>
 
 <?= $this->endSection() ?>

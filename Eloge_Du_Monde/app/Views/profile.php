@@ -61,18 +61,21 @@
 							<?= esc($user['phone'] ?? '+33 6 12 34 56 78') ?>
 						</p>
 					</div>
-					<!-- Newsletter -->
-					<div class>
-						<p class="text-sm text-gray-400">Newsletter</p>
-						<p class="text-gray-800 font-medium"><?= ($user['isSubscribed'] == 't' ?? true) ? 'Abonné(e)' : 'Non abonné(e)' ?></p>
-					</div>
-					<div class>
-						<form action="<?= base_url('newsletter/toggle') ?>" method="post">
-							<button type="submit" class="button_modify bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 px-6 rounded-md transition-colors">
-								<?= ($user['isSubscribed'] == 't' ?? true) ? 'Se désabonner' : 'S\'abonner' ?>
-							</button>
-						</form>
-					</div>
+				<!-- Newsletter -->
+				<div class="col-span-2">
+					<form action="<?= base_url('newsletter/toggle') ?>" method="post" id="newsletterForm">
+						<div class="flex items-center gap-3">
+						<input type="checkbox" id="newsletter" name="isSubscribed" 
+							class="w-5 h-5 border-gray-300 rounded focus:ring-2 cursor-pointer"
+							style="accent-color: #C9A96E;"
+							<?= ($user['isSubscribed'] == 't' ?? true) ? 'checked' : '' ?>
+							onchange="this.form.submit()">
+							<label for="newsletter" class="text-sm text-gray-700 cursor-pointer">
+								Je souhaite recevoir la newsletter et les offres promotionnelles
+							</label>
+						</div>
+					</form>
+				</div>
 				</div>
 			</div>
 
@@ -115,20 +118,28 @@
 		<h2 class="text-xl font-semibold text-gray-800 mb-4">Modifier le compte</h2>
 		<form action="<?= base_url('profile/updateUser') ?>" method="post">
 			<div class="mb-4">
-				<label for="lastName" class="block text-sm text-gray-600">Nom</label>
+				<label for="lastName" class="block text-sm text-gray-600">Nom <span class="text-red-500">*</span></label>
 				<input type="text" id="lastName" name="lastName" value="<?= esc($user['lastName'] ?? '') ?>" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
 			</div>
 			<div class="mb-4">
-				<label for="firstName" class="block text-sm text-gray-600">Prénom</label>
+				<label for="firstName" class="block text-sm text-gray-600">Prénom <span class="text-red-500">*</span></label>
 				<input type="text" id="firstName" name="firstName" value="<?= esc($user['firstName'] ?? '') ?>" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
 			</div>
 			<div class="mb-4">
-				<label for="email" class="block text-sm text-gray-600">Email</label>
+				<label for="email" class="block text-sm text-gray-600">Email <span class="text-red-500">*</span></label>
 				<input type="email" id="email" name="email" value="<?= esc($user['email'] ?? '') ?>" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
 			</div>
 			<div class="mb-4">
-				<label for="phone" class="block text-sm text-gray-600">Téléphone</label>
+				<label for="phone" class="block text-sm text-gray-600">Téléphone <span class="text-red-500">*</span></label>
 				<input type="text" id="phone" name="phone" value="<?= esc($user['phone'] ?? '') ?>" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+			</div>
+			<div class="mb-4">
+				<label for="password" class="block text-sm text-gray-600">Nouveau mot de passe</label>
+				<input type="password" id="password" name="password" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+			</div>
+			<div class="mb-6">
+				<label for="confirmPassword" class="block text-sm text-gray-600">Confirmer le nouveau mot de passe</label>
+				<input type="password" id="confirmPassword" name="confirmPassword" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
 			</div>
 			<div class="flex justify-end gap-4">
 				<button type="button" id="closeModal" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium py-2 px-4 rounded-md transition-colors">Annuler</button>
@@ -138,20 +149,8 @@
 	</div>
 </div>
 
-
-
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<script src="<?= base_url('assets/js/profil.js') ?>"></script>
-<script>
-	document.getElementById('btn-modifier').addEventListener('click', function (e) {
-		e.preventDefault();
-		document.getElementById('modifierModal').classList.remove('hidden');
-	});
-
-	document.getElementById('closeModal').addEventListener('click', function () {
-		document.getElementById('modifierModal').classList.add('hidden');
-	});
-</script>
+<script src="<?= base_url('assets/js/profile.js') ?>"></script>
 <?= $this->endSection() ?>

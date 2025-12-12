@@ -21,18 +21,18 @@ class CreateTableCountry extends Migration
 			[
 				'type'       => 'VARCHAR',
 				'constraint' => 100,
-				'nullable'   => false,
+				'null'   => false,
 			],
 			'continent'      =>
 			[
 				'type'       => 'VARCHAR',
 				'constraint' => 50,
-				'nullable'   => false,
+				'null'   => false,
 			],
 			'cost'           =>
 			[
 				'type'       => 'INT',
-				'nullable'   => false,
+				'null'   => false,
 			],
 		]);
 

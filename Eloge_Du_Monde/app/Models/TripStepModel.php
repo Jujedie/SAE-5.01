@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\CountryModel;
+use App\Models\HostModel;
+use App\Models\PrebuiltTripModel;
 
 class TripStepModel extends Model
 {
@@ -59,6 +62,51 @@ class TripStepModel extends Model
 		return $this->where('idCountry', $idCountry)->findAll();
 	}
 
+	public function getTripsByContinent($continent)
+	{
+		$CountryModel = new CountryModel();
+		$countries    = $CountryModel->where('continent', $continent)->findAll();
+		$steps        = [];
+
+		foreach ($countries as $country)
+		{
+			$CountryModel = new CountryModel();
+			$countrySteps = $this->getStepsByCountry($country['idCountry']);
+			$steps        = array_merge($steps, $countrySteps);
+		}
+
+		$hostModel = new HostModel();
+		$prebuiltTripModel = new PrebuiltTripModel();
+		$trips     = [];
+		foreach ($steps as $step)
+		{
+			$hosts = $hostModel->getHostsByTripStep($step['idTripStep']);
+			foreach ($hosts as $host)
+			{
+				$trips[] = $prebuiltTripModel->getPrebuiltTripById($host['idTrip']);
+			}
+		}
+		return $trips;
+	}
+
+	public function getContinentBySteps()
+	{
+		$db = \Config\Database::connect();
+		$query = $db->query('
+			SELECT DISTINCT c."idCountry"
+			FROM "tripStep" ts
+			LEFT JOIN country c ON c."idCountry" = ts."idCountry"
+		');
+		$idCountry = $query->getResultArray();
+
+		foreach ($idCountry as $country)
+		{
+			$CountryModel = new CountryModel();
+			$countries[] = $CountryModel->where('idCountry', $country['idCountry'])->first();
+		}
+		return $countries;
+	}
+
 	public function addStep($data)
 	{
 		return $this->insert($data);
@@ -86,5 +134,17 @@ class TripStepModel extends Model
 			}
 		}
 		return true;
+	}
+
+	public function getAllStepsWithCountry()
+	{
+		$db = \Config\Database::connect();
+		$query = $db->query('
+			SELECT ts.*, c.name as country, c.continent
+			FROM "tripStep" ts
+			LEFT JOIN country c ON c."idCountry" = ts."idCountry"
+			ORDER BY c.name ASC, ts.name ASC
+		');
+		return $query->getResultArray();
 	}
 }

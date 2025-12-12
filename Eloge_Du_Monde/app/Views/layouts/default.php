@@ -4,37 +4,44 @@
 	<meta charset="UTF-8">
 	<title><?= $this->renderSection('title') ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 	<script src="https://cdn.tailwindcss.com"></script>
-	<link rel="stylesheet" href="<?= base_url('assets/css/default.css') ?>">
+	<link rel="stylesheet" href="<?= base_url('assets/css/layouts/default.css') ?>">
 	<?= $this->renderSection('styles') ?>
 </head>
 
 <body class="d-flex flex-column min-vh-100 bg-light">
 
 <!-- Conteneur des Notifications -->
-<div class="notification-container position-fixed end-0 p-3" style="z-index: 9999; top: 70px;">
+<div id="notification-container" class="fixed top-32 right-0 p-4 space-y-4 z-[9999] max-w-md">
 	<?php if (session()->getFlashdata('success')): ?>
-		<div class="toast align-items-center text-bg-success border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
-			<div class="d-flex">
-				<div class="toast-body">
-					<i class="bi bi-check-circle-fill me-2"></i>
-					<?= esc(session()->getFlashdata('success')) ?>
-				</div>
-				<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fermer"></button>
+		<div class="notification-toast bg-green-700 text-white px-6 py-4 rounded-lg shadow-lg flex items-center justify-between opacity-0 translate-x-full transition-all duration-500 ease-in-out" data-type="success">
+			<div class="flex items-center space-x-3">
+				<svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+				</svg>
+				<span class="font-medium"><?= esc(session()->getFlashdata('success')) ?></span>
 			</div>
+			<button onclick="this.parentElement.remove()" class="ml-4 text-white hover:text-green-200 transition-all duration-200 ease-in-out hover:scale-110">
+				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+				</svg>
+			</button>
 		</div>
 	<?php endif; ?>
 	
 	<?php if (session()->getFlashdata('error')): ?>
-		<div class="toast align-items-center text-bg-danger border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
-			<div class="d-flex">
-				<div class="toast-body">
-					<i class="bi bi-exclamation-circle-fill me-2"></i>
-					<?= esc(session()->getFlashdata('error')) ?>
-				</div>
-				<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fermer"></button>
+		<div class="notification-toast bg-red-700 text-white px-6 py-4 rounded-lg shadow-lg flex items-center justify-between opacity-0 translate-x-full transition-all duration-500 ease-in-out" data-type="error">
+			<div class="flex items-center space-x-3">
+				<svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+				</svg>
+				<span class="font-medium"><?= esc(session()->getFlashdata('error')) ?></span>
 			</div>
+			<button onclick="this.parentElement.remove()" class="ml-4 text-white hover:text-red-200 transition-all duration-200 ease-in-out hover:scale-110">
+				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+				</svg>
+			</button>
 		</div>
 	<?php endif; ?>
 </div>
@@ -45,18 +52,18 @@
 		<nav class="nav-left">
 			<ul class="nav-links">
 				<li class="nav-dropdown">
-					<a href="<?= base_url('destinations') ?>">
+					<a href="<?= base_url('trips') ?>">
 						Nos destinations
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 							<polyline points="6 9 12 15 18 9"></polyline>
 						</svg>
 					</a>
 					<div class="dropdown-menu">
-						<a href="<?= base_url('destinations?filter=continent&value=europe') ?>">Europe</a>
-						<a href="<?= base_url('destinations?filter=continent&value=asie') ?>">Asie</a>
-						<a href="<?= base_url('destinations?filter=continent&value=afrique') ?>">Afrique</a>
-						<a href="<?= base_url('destinations?filter=continent&value=ameriques') ?>">Amériques</a>
-						<a href="<?= base_url('destinations?filter=continent&value=oceanie') ?>">Océanie</a>
+						<a href="<?= base_url('trips?filter=continent&value=Europe') ?>">Europe</a>
+						<a href="<?= base_url('trips?filter=continent&value=Asie') ?>">Asie</a>
+						<a href="<?= base_url('trips?filter=continent&value=Afrique') ?>">Afrique</a>
+						<a href="<?= base_url('trips?filter=continent&value=Amerique') ?>">Amériques</a>
+						<a href="<?= base_url('trips?filter=continent&value=Oceanie') ?>">Océanie</a>
 					</div>
 				</li>
 				<li><a href="<?= base_url('createTrip') ?>">Créer votre voyage</a></li>
@@ -64,7 +71,8 @@
 		</nav>
 
 		<a href="<?= base_url('/') ?>" class="logo">
-			<img src="<?= base_url('assets/images/logo-eloge-du-monde.png') ?>" alt="Éloge du Monde">
+			<img id="logo-light" src="<?= base_url('assets/images/logo-eloge-du-monde.png') ?>" alt="Éloge du Monde">
+			<img id="logo-dark" src="<?= base_url('assets/images/logo-eloge-du-monde-sombre.png') ?>" alt="Éloge du Monde" style="display: none;">
 		</a>
 
 		<nav class="nav-right">
@@ -95,6 +103,23 @@
 				</svg>
 			</a>
 			<?php endif; ?>
+			
+			<button id="theme-toggle" class="theme-toggle-btn" aria-label="Changer le thème">
+				<svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<circle cx="12" cy="12" r="5"></circle>
+					<line x1="12" y1="1" x2="12" y2="3"></line>
+					<line x1="12" y1="21" x2="12" y2="23"></line>
+					<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+					<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+					<line x1="1" y1="12" x2="3" y2="12"></line>
+					<line x1="21" y1="12" x2="23" y2="12"></line>
+					<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+					<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+				</svg>
+				<svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+				</svg>
+			</button>
 		</div>
 
 		<button class="mobile-menu-btn" aria-label="Menu mobile">
@@ -121,7 +146,7 @@
 			<div>
 				<div class="footer-brand">
 					<div class="footer-logo">
-						<span style="color: white; font-family: 'Playfair Display', serif;">É</span>
+						<img src="<?= base_url('assets/images/logo-eloge-du-monde.png') ?>" alt="Éloge du Monde">
 					</div>
 					<div>
 						<span style="letter-spacing: 0.05em; font-size: 0.875rem;">ÉLOGE DU MONDE</span>
@@ -158,10 +183,10 @@
 			<div class="footer-column">
 				<h4>L'entreprise</h4>
 				<ul class="footer-links">
-					<li><a href="#about">Qui sommes-nous ?</a></li>
-					<li><a href="#about">Nos valeurs</a></li>
-					<li><a href="#about">L'équipe</a></li>
-					<li><a href="<?= base_url('blog') ?>">Blog</a></li>
+					<li><a href="<?= base_url('/#about') ?>">Qui sommes-nous ?</a></li>
+					<li><a href="<?= base_url('/#about') ?>">Nos valeurs</a></li>
+					<li><a href="<?= base_url('/#about') ?>">L'équipe</a></li>
+					<li><a href="<?= base_url('/blog') ?>">Blog</a></li>
 				</ul>
 			</div>
 
@@ -169,10 +194,10 @@
 			<div class="footer-column">
 				<h4>Nos services</h4>
 				<ul class="footer-links">
-					<li><a href="#destinations">Voyages sur mesure</a></li>
-					<li><a href="#themes">Voyages thématiques</a></li>
-					<li><a href="#destinations">Destinations</a></li>
-					<li><a href="#reviews">Témoignages</a></li>
+					<li><a href="<?= base_url('/#destinations') ?>">Voyages sur mesure</a></li>
+					<li><a href="<?= base_url('/#themes') ?>">Voyages thématiques</a></li>
+					<li><a href="<?= base_url('/#destinations') ?>">Destinations</a></li>
+					<li><a href="<?= base_url('/#temoignages') ?>">Témoignages</a></li>
 				</ul>
 			</div>
 
@@ -201,14 +226,15 @@
 
 		<!-- Bottom Bar -->
 		<div class="footer-bottom">
-			<p>© <?= date('Y') ?> Éloge du Monde. Tous droits réservés.</p>
+			<p>© <?= date('Y') ?> Éloge du Monde</p>
+			<p>Développé par :
+			Harel Théo - Dujardin Thao - Oyer Julien - Thomazeau-Agullo Louis - Mangeant Thibault</p>
 		</div>
 	</div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="<?= base_url('assets/js/notifications.js') ?>"></script>
-<script src="<?= base_url('assets/js/home.js') ?>"></script>
+<script src="<?= base_url('assets/js/layouts/notifications.js') ?>"></script>
+<script src="<?= base_url('assets/js/layouts/theme-toggle.js') ?>"></script>
 <?= $this->renderSection('scripts') ?>
 </body>
 </html>

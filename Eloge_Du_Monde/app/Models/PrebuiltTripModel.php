@@ -12,7 +12,7 @@ class PrebuiltTripModel extends Model
 	protected $returnType       = 'array';
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
-	protected $allowedFields    = ['departureDate', 'type', 'idUser', 'title', 'programdesc', 'hostingdesc', 'conditiondesc', 'formalitiesdesc', 'thematic', 'amount', 'attachment'];
+	protected $allowedFields    = ['departureDate', 'type', 'idUser', 'title', 'programdesc', 'hostingdesc', 'conditiondesc', 'formalitiesdesc', 'thematic', 'amount', 'attachment', 'image'];
 
 	protected bool $allowEmptyInserts = false;
 	protected bool $updateOnlyChanged = true;
@@ -44,6 +44,15 @@ class PrebuiltTripModel extends Model
 	protected $beforeDelete   = [];
 	protected $afterDelete    = [];
 
+	public function idInTable($idTrip)
+	{
+		$result = $this->select('idTrip')
+					   ->where('idTrip', $idTrip)
+					   ->findAll();
+
+		return array_column($result, 'idTrip');
+	}
+
 	public function getAllPrebuiltTrips()
 	{
 		return $this->findAll();
@@ -72,5 +81,62 @@ class PrebuiltTripModel extends Model
 	public function deletePrebuiltTrip($idTrip)
 	{
 		return $this->delete($idTrip);
+	}
+	public function getPrebuiltsByFilter($filter)
+	{
+		foreach ($filter as $key => $value)
+		{
+			if ($key == 'continent'){
+				$hostModel = new HostModel();
+				$tripsInContinent = $hostModel->getTripsByContinent($value);
+
+				log_message('debug', 'Filter continent value: ' . $value);
+				log_message('debug', 'Trips in continent ' . $value . ': ' . print_r($tripsInContinent, true));
+				
+				return $tripsInContinent;
+			} elseif ($key == 'country') {
+				$hostModel = new HostModel();
+				$tripsInCountry = $hostModel->getTripsByCountryName($value);
+
+				return $tripsInCountry;
+			} elseif ($key == 'thematic') {
+				// Mapping des slugs vers les vraies valeurs
+				$thematicMap = [
+					'bien-etre-spa' => 'Bien-être & Spa',
+					'aventure-nature' => 'Aventure & Nature',
+					'gastronomie' => 'Gastronomie',
+					'culture-art' => 'Culture & Art'
+				];
+				
+				$thematicValue = $thematicMap[$value] ?? $value;
+				return $this->where('thematic', $thematicValue)->findAll();
+			}
+		}
+		return $this->findAll();
+	}
+
+	public function createPrebuiltTripWithSteps($data, $steps)
+	{
+		$this->insert($data);
+		$idTrip = $this->getInsertID();
+
+		if (!empty($steps)) {
+			$hostModel = new HostModel();
+			$hostModel->addHostsForTrip($idTrip, $steps);
+		}
+
+		return $idTrip;
+	}
+
+	public function getPrebuiltTripWithSteps($idTrip)
+	{
+		$trip = $this->getPrebuiltTripById($idTrip);
+		
+		if ($trip) {
+			$hostModel = new HostModel();
+			$trip['steps'] = $hostModel->getHostsByTripWithDetails($idTrip);
+		}
+
+		return $trip;
 	}
 }

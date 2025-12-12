@@ -61,12 +61,17 @@ class ReviewModel extends Model
 
 	public function getAverageRating()
 	{
-		return $this->selectAvg('rating')->first();
+		return $this->where('verified', 't')->selectAvg('rating')->first();
 	}
 
 	public function getVerifiedReviews()
 	{
 		return $this->where('verified', 't')->findAll();
+	}
+
+	public function getRecentReviews($nb)
+	{
+		return $this->where('verified', 't')->orderBy('date')->findAll($nb);
 	}
 
 	public function getReviewsCount()
@@ -76,6 +81,10 @@ class ReviewModel extends Model
 
 	public function addReview($data)
 	{
+		// Ajouter la date actuelle si elle n'est pas fournie
+		if (!isset($data['date'])) {
+			$data['date'] = date('Y-m-d');
+		}
 		return $this->insert($data);
 	}
 

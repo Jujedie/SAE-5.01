@@ -1,0 +1,43 @@
+/* Styles spécifiques pour la liste des pays */
+.country-card {
+    transition: all 0.3s ease;
+}
+
+.country-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.continent-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.continent-europe {
+    background-color: #dbeafe !important;
+    color: #1e40af !important;
+}
+
+.continent-asie {
+    background-color: #fce7f3 !important;
+    color: #be123c !important;
+}
+
+.continent-afrique {
+    background-color: #fef3c7 !important;
+    color: #92400e !important;
+}
+
+.continent-amerique {
+    background-color: #d1fae5 !important;
+    color: #065f46 !important;
+}
+
+.continent-oceanie {
+    background-color: #e0e7ff !important;
+    color: #3730a3 !important;
+}

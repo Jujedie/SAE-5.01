@@ -3,47 +3,8 @@
 <?= $this->section('title') ?>Gestion des voyages préfaits<?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
-<style>
-	.voyage-card {
-		transition: all 0.3s ease;
-	}
-	.voyage-card:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	}
-	.thematic-badge {
-		display: inline-flex;
-		align-items: center;
-		padding: 0.25rem 0.75rem;
-		border-radius: 9999px;
-		font-size: 0.75rem;
-		font-weight: 600;
-		background-color: #e0e7ff;
-		color: #3730a3;
-	}
-	.extension-badge {
-		display: inline-flex;
-		align-items: center;
-		padding: 0.25rem 0.5rem;
-		border-radius: 9999px;
-		font-size: 0.7rem;
-		font-weight: 600;
-		background-color: #f3e8ff;
-		color: #6b21a8;
-	}
-	.extensions-container {
-		max-height: 0;
-		overflow: hidden;
-		transition: max-height 0.3s ease;
-	}
-	.extensions-container.active {
-		max-height: 1000px;
-	}
-	.extension-item {
-		border-left: 3px solid #8b5cf6;
-		background-color: #faf5ff;
-	}
-</style>
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/common.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/prebuiltTrips/list.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -170,6 +131,14 @@
 									</svg>
 								</button>
 							<?php endif; ?>
+							<a href="<?= base_url('admin/prebuiltTrips/view/' . $trip['idTrip']) ?>" 
+								class="p-2 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition" 
+								title="Voir">
+								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+								</svg>
+							</a>
 							<a href="<?= base_url('admin/prebuiltTrips/extension/add/' . $trip['idTrip']) ?>" 
 							   class="p-2 text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-lg transition" 
 							   title="Ajouter une extension">
@@ -244,34 +213,13 @@
 						</div>
 					<?php endif; ?>
 				</div>
-			<?php endforeach; ?>
-		</div>
+		<?php endforeach; ?>
+	</div>
 	<?php endif; ?>
 </div>
 
-<script>
-	function filterTrips() {
-		const searchInput = document.getElementById('searchInput').value.toLowerCase();
-		const cards = document.querySelectorAll('.voyage-card');
-		
-		cards.forEach(card => {
-			const title = card.getAttribute('data-title') || '';
-			const thematic = card.getAttribute('data-thematic') || '';
-			
-			if (title.includes(searchInput) || thematic.includes(searchInput)) {
-				card.style.display = 'block';
-			} else {
-				card.style.display = 'none';
-			}
-		});
-	}
-	
-	function toggleExtensions(tripId) {
-		const container = document.getElementById('extensions-' + tripId);
-		if (container) {
-			container.classList.toggle('active');
-		}
-	}
-</script>
+<?= $this->section('scripts') ?>
+<script src="<?= base_url('assets/js/admin/prebuiltTrips/list.js') ?>"></script>
+<?= $this->endSection() ?>
 
 <?= $this->endSection() ?>

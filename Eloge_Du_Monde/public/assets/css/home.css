@@ -151,7 +151,7 @@
 {
 	width: 0.375rem;
 	height: 0.375rem;
-	background: white;
+	background: var(--footer-text);
 	border-radius: 9999px;
 	animation: scroll 1.5s infinite;
 }
@@ -222,13 +222,13 @@
 
 .value-description
 {
-	color: #6b7280;
+	color: var(--text-secondary);
 	line-height: 1.75;
 }
 
 .story-section
 {
-	background: #f9fafb;
+	background: var(--bg-secondary);
 	padding: 4rem;
 	position: relative;
 	overflow: hidden;
@@ -268,7 +268,7 @@
 .story-role
 {
 	font-size: 0.875rem;
-	color: #6b7280;
+	color: var(--text-secondary);
 }
 
 /* Destinations Section */
@@ -394,22 +394,12 @@
 	transition: transform 0.7s;
 }
 
-.theme-card:hover img
-{
-	transform: scale(1.05);
-}
-
 .theme-overlay
 {
 	position: absolute;
 	inset: 0;
 	background: rgba(0,0,0,0.3);
 	transition: background 0.3s;
-}
-
-.theme-card:hover .theme-overlay
-{
-	background: rgba(0,0,0,0.5);
 }
 
 .theme-content
@@ -471,7 +461,7 @@
 
 .testimonial-card
 {
-	background: white;
+	background: var(--card-bg);
 	padding: 2rem;
 	transition: all 0.3s;
 }
@@ -479,7 +469,7 @@
 .testimonial-card:hover
 {
 	transform: translateY(-5px);
-	box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+	box-shadow: 0 20px 40px var(--shadow);
 }
 
 .stars
@@ -508,7 +498,7 @@
 .testimonial-trip
 {
 	font-size: 0.875rem;
-	color: #6b7280;
+	color: var(--text-secondary);
 	margin-bottom: 1rem;
 	padding-bottom: 1rem;
 	border-bottom: 1px solid #e5e7eb;
@@ -523,7 +513,7 @@
 .testimonial-location
 {
 	font-size: 0.875rem;
-	color: #6b7280;
+	color: var(--text-secondary);
 }
 
 .stats-grid
@@ -550,7 +540,7 @@
 
 .stat-label
 {
-	color: #6b7280;
+	color: var(--text-secondary);
 }
 
 /* Contact Section */
@@ -601,13 +591,13 @@
 
 .contact-content
 {
-	color: #6b7280;
+	color: var(--text-secondary);
 	white-space: pre-line;
 }
 
 .hours-section
 {
-	background: #f9fafb;
+	background: var(--bg-secondary);
 	padding: 2rem;
 	margin-top: 2rem;
 }
@@ -623,7 +613,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
-	color: #6b7280;
+	color: var(--text-secondary);
 }
 
 .hours-row

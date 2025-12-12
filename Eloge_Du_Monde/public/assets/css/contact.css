@@ -1,0 +1,40 @@
+:root {
+	--primary: #c9a96e;
+	--primary-dark: #b48741;
+	--primary-soft: #e6d6b0;
+}
+
+.contact-container {
+	min-height: calc(100vh - 80px);
+}
+
+.contact-info-card {
+	background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+	color: #fff;
+}
+
+.contact-info-card p {
+	color: #f6f0e1;
+}
+
+.contact-icon {
+	background: rgba(255, 255, 255, 0.18);
+}
+
+.contact-divider {
+	border-color: rgba(255, 255, 255, 0.4);
+}
+
+.contact-input:focus {
+	outline: none;
+	border-color: var(--primary);
+	box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.35);
+}
+
+.contact-button {
+	background: var(--primary);
+}
+
+.contact-button:hover {
+	background: var(--primary-dark);
+}

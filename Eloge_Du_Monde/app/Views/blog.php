@@ -1,5 +1,7 @@
 <?= $this->extend('layouts/default') ?>
 
+<?= $this->section('title') ?>Blog<?= $this->endSection() ?>
+
 <?= $this->section('styles') ?>
 <link rel="stylesheet" href="<?= base_url('assets/css/blog.css') ?>">
 <?= $this->endSection() ?>
@@ -66,23 +68,16 @@
 								<span class="post-tag"><?= $posts[$i]['type'] ?></span>
 							</div>
 
-							<span class="ml-10 text-gray-400"><?= $users[$i]['firstName'] ?> <?= $users[$i]['lastName'] ?></span>
-							
-							<h2 class="post-title playfair"><?= $posts[$i]['title'] ?></h2>
-							
-							<div class="post-image">
-								<img src="<?= base_url($posts[$i]['image']) ?>" alt="Maldives">
-							</div>
-							
-							<div class="post-content">
-								<p class="post-excerpt"><?= $posts[$i]['content'] ?></p>
-								<div class="post-full-content" style="display: none;">
-									<p>Tout d'abord, le choix de la période est crucial. La meilleure saison s'étend de novembre à avril, pendant la saison sèche. Les températures sont idéales (28-30°C) et les conditions de plongée optimales. Évitez la mousson de mai à octobre si possible.</p>
-									<p>Concernant l'hébergement, les Maldives offrent un large éventail d'options. Les resorts sur îles privées garantissent intimité et exclusivité, avec des villas sur pilotis directement au-dessus de l'eau. Pour les budgets plus modestes, les guest houses sur îles locales permettent une immersion culturelle authentique tout en restant abordables.</p>
-									<p>Ne négligez pas les formalités : visa gratuit à l'arrivée pour 30 jours, passeport valide 6 mois, et vaccination contre l'hépatite A recommandée. Prévoyez également un budget pour les transferts en hydravion ou speedboat, souvent nécessaires pour rejoindre votre resort.</p>
-									<p>Enfin, côté activités : la plongée et le snorkeling sont incontournables pour admirer la vie marine exceptionnelle (raies mantas, requins-baleines, tortues). Pensez à réserver vos excursions à l'avance, surtout en haute saison.</p>
-								</div>
-								<button class="read-more-btn" data-post="1">Lire la suite</button>
+					<span class="ml-10 text-gray-400"><?= $users[$i]['firstName'] ?> <?= $users[$i]['lastName'] ?></span>
+					
+				<h2 class="post-title playfair"><?= $posts[$i]['title'] ?></h2>
+
+				<?php if (!empty($posts[$i]['image'])): ?>
+					<div class="post-image">
+						<img src="<?= base_url('assets/images/' . $posts[$i]['image']) ?>" alt="image de l'article" class="clickable-image" style="cursor: pointer;">
+					</div>
+				<?php endif; ?>					<div class="post-content">
+						<p class="post-excerpt"><?= $posts[$i]['content'] ?></p>
 							</div>
 						</article>
 					<?php endfor; ?>
@@ -91,6 +86,12 @@
 		</div>
 	</div>
 </section>
+
+<!-- Image Modal -->
+<div id="imageModal" class="image-modal" style="display: none;">
+	<span class="modal-close">&times;</span>
+	<img class="modal-content" id="modalImage" src="" alt="image agrandie">
+</div>
 
 <?= $this->endSection() ?>
 

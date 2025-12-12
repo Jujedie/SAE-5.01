@@ -3,15 +3,8 @@
 <?= $this->section('title') ?>Destinations - <?= esc($country['name']) ?><?= $this->endSection() ?>
 
 <?= $this->section('styles') ?>
-<style>
-	.destination-card {
-		transition: all 0.3s ease;
-	}
-	.destination-card:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	}
-</style>
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/common.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/admin/countries/destinations.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -147,26 +140,13 @@
 						</div>
 					<?php endif; ?>
 				</div>
-			<?php endforeach; ?>
-		</div>
+		<?php endforeach; ?>
+	</div>
 	<?php endif; ?>
 </div>
 
-<script>
-	function filterDestinations() {
-		const searchInput = document.getElementById('searchInput').value.toLowerCase();
-		const cards = document.querySelectorAll('.destination-card');
-		
-		cards.forEach(card => {
-			const name = card.getAttribute('data-name') || '';
-			
-			if (name.includes(searchInput)) {
-				card.style.display = 'block';
-			} else {
-				card.style.display = 'none';
-			}
-		});
-	}
-</script>
+<?= $this->section('scripts') ?>
+<script src="<?= base_url('assets/js/admin/countries/destinations.js') ?>"></script>
+<?= $this->endSection() ?>
 
 <?= $this->endSection() ?>

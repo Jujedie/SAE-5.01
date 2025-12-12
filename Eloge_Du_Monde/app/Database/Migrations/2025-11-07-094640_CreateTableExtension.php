@@ -15,7 +15,8 @@ class CreateTableExtension extends Migration
 			(
 				title       TEXT NOT NULL,
 				amount      INT  NOT NULL,
-				attachment  TEXT
+				attachment  TEXT,
+				PRIMARY KEY (\"idTrip\")
 			) INHERITS (trip);");
 	}
 

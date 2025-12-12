@@ -12,7 +12,7 @@ class BlogPostModel extends Model
 	protected $returnType       = 'array';
 	protected $useSoftDeletes   = false;
 	protected $protectFields    = true;
-	protected $allowedFields    = ['title', 'type', 'content', 'image', 'idUser'];
+	protected $allowedFields    = ['title', 'type', 'date', 'content', 'image', 'idUser'];
 
 	protected bool $allowEmptyInserts = false;
 	protected bool $updateOnlyChanged = true;
@@ -46,7 +46,7 @@ class BlogPostModel extends Model
 
 	public function getAllPosts()
 	{
-		return $this->findAll();
+		return $this->orderBy('date', 'DESC')->findAll();
 	}
 
 	public function getPostById($idBlogPost)
@@ -56,7 +56,7 @@ class BlogPostModel extends Model
 
 	public function getPostsByUser($idUser)
 	{
-		return $this->where('idUser', $idUser)->findAll();
+		return $this->where('idUser', $idUser)->orderBy('date', 'DESC')->findAll();
 	}
 
 	public function getPostCount()
@@ -65,12 +65,13 @@ class BlogPostModel extends Model
 	}
 
 
-	public function addPost($title, $type, $content, $image, $idUser)
+	public function addPost($title, $type, $date, $content, $image, $idUser)
 	{
 		$data =
 		[
 			'title'   => $title,
 			'type'    => $type,
+			'date'    => $date,
 			'content' => $content,
 			'image'   => $image,
 			'idUser'  => $idUser
