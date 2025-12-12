@@ -16,7 +16,7 @@ SAE 5.01 Développement avancé
 
 [**4\. Exécution du script de démarrage	6**](#4.-exécution-du-script-de-démarrage)
 
-# 1\. Téléchargement du Projet {#1.-téléchargement-du-projet}
+# 1\. Téléchargement du Projet
 
 Vous aurez besoin de l’archive de l’application trouvable sur le GitHub officiel ou que l’on vous a envoyée par mail.
 
@@ -27,7 +27,7 @@ Figure 1 : Page GitHub officielle du projet
 
 # 
 
-# 2\. Configuration de l'environnement (fichier `.env`) {#2.-configuration-de-l'environnement-(fichier-.env)}
+# 2\. Configuration de l'environnement (fichier `.env`)
 
 Une fois le projet téléchargé, le fichier de configuration de l'environnement doit être préparé.
 
@@ -36,7 +36,7 @@ Une fois le projet téléchargé, le fichier de configuration de l'environnement
   * Décommenter les variables d'environnement sur la figure ci-dessous, vous aurez besoin de modifier les variables suivantes :  
   * `CI_ENVIRONMENT`, `DB_HOSTNAME`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD,DB_DRIVER`, `DB_PORT`.
 
-# 3\. Configuration des e-mails {#3.-configuration-des-e-mails}
+# 3\. Configuration des e-mails
 
 Si vous souhaitez utiliser la fonctionnalité d'envoi d'e-mails de l'application, une étape de renommage et de configuration supplémentaire est nécessaire.
 
@@ -45,7 +45,7 @@ Si vous souhaitez utiliser la fonctionnalité d'envoi d'e-mails de l'application
 
 Figure 3 : Contenu du fichier Email.php avec les paramètres de serveur de messagerie
 
-# 4\. Exécution du script de démarrage {#4.-exécution-du-script-de-démarrage}
+# 4\. Exécution du script de démarrage
 
 La dernière étape consiste à exécuter le script de démarrage `setup.sh`.
 
